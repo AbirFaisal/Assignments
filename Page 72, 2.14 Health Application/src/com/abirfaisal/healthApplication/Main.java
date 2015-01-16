@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Enter your weight in Pounds (LB)"); // Prompt user for pounds
+        System.out.println("Enter your weight in pounds (LB)"); // Prompt user for pounds
         Scanner pounds = new Scanner(System.in);
         double lbs = pounds.nextDouble();
 
@@ -22,10 +22,12 @@ public class Main {
         Scanner inches = new Scanner(System.in);
         double in = inches.nextDouble();
 
-        double BMI = Convert.tokg(lbs) / ((Convert.tometers(in) * (Convert.tometers(in)))); //Calculate BMI
+        double BMI = Convert.toKg(lbs) / ((Convert.toMeters(in) * (Convert.toMeters(in)))); //Calculate BMI
 
         //(float) BMI //reduce precision a bit
-        System.out.println("Your Body Mass Index (BMI) is: " + (long) BMI);
+        System.out.println("Your Body Mass Index (BMI) is: " + (short) BMI); //convert to short because we don't need so much precision.
+
+        System.exit(0);
 
 
     }
