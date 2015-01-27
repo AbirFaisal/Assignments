@@ -24,7 +24,7 @@ public class Main {
 
         double BMI = Convert.toKg(lbs) / ((Convert.toMeters(in) * (Convert.toMeters(in)))); //Calculate BMI
 
-        //(float) BMI //reduce precision a bit
+        //(short) BMI //reduce precision a bit
         System.out.println("Your Body Mass Index (BMI) is: " + (short) BMI); //convert to short because we don't need so much precision.
 
         System.exit(0);
