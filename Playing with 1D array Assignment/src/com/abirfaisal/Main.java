@@ -32,6 +32,7 @@ public class Main {
 		//Generate the amount of random values the user wants
 		int numbersArray[] = new int[amountOfRandomNumbers];
 
+		//Loop to generate and store array values
 		for (int i = 0; i < amountOfRandomNumbers; i++) {
 			//Random is in for loop so we re-seed every time the loop starts
 			Random number = new Random();
@@ -48,6 +49,27 @@ public class Main {
 		for (int i = 0; i < amountOfRandomNumbers; i++) {
 			System.out.print("\n" + numbersArray[i]);
 		}
+
+		//Search the array for a number between 1 and 100…display found or not found
+
+		//Display number of times each number occurred
+		//Numbers to match array
+		int oneHundred = 99
+		int numbersToMatch = new int[oneHundred];
+		//Occurrences array
+		int matches = new int[oneHundred];
+
+		//For loop to find and store occurences
+		for (int i = 0; i < amountOfRandomNumbers; i++) {
+			for (int j = 0; j < oneHundred; j++) {
+				if (numbersArray[i] == numbersToMatch[j]) {
+					matches[j] = matches[j] + 1;
+				}
+			}
+		}
+
+
+
 
     }
 }
