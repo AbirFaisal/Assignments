@@ -19,6 +19,7 @@ Write a program that does the following:
 
 import java.util.Scanner;
 import java.util.Random;
+import java.util.Arrays;
 
 public class Main {
 
@@ -41,8 +42,12 @@ public class Main {
 		}
 
 		//Sort array
+		Arrays.sort(numbersArray);
 
 		//Print out sorted array
+		for (int i = 0; i < amountOfRandomNumbers; i++) {
+			System.out.print("\n" + numbersArray[i]);
+		}
 
     }
 }
