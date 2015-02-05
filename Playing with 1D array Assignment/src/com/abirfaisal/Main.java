@@ -51,13 +51,28 @@ public class Main {
 		}
 
 		//Search the array for a number between 1 and 100…display found or not found
+		for (int i = 0; i < amountOfRandomNumbers; i++) {
+			if (numbersArray[i] >= 1 || numbersArray[i] <=100 ) {
+				System.out.print("found or not found \n");
+			}
+		}
+
 
 		//Display number of times each number occurred
 		//Numbers to match array
-		int oneHundred = 99
-		int numbersToMatch = new int[oneHundred];
+		int oneHundred = 99;
+		int[] numbersToMatch = new int[oneHundred];
+
+
 		//Occurrences array
-		int matches = new int[oneHundred];
+		int[] matches = new int[oneHundred];
+
+		//We can initialize both arrays at the same time since
+		//both arrays are the same size
+		for (int i = 0; i < oneHundred; i++) {
+			numbersToMatch[i] = (i+1);
+			matches[i] = 0;
+		}
 
 		//For loop to find and store occurences
 		for (int i = 0; i < amountOfRandomNumbers; i++) {
@@ -69,7 +84,11 @@ public class Main {
 		}
 
 
-
-
-    }
+		//Display highest number in array
+		//Since array[] was sorted from least to greatest
+		//numbersArray[0] should be the lowest
+		//numbersArray[amountOfRandomNumbers should be the highest
+		System.out.print(numbersArray[amountOfRandomNumbers-1] + "\n");
+		System.out.print(numbersArray[0] + "\n");
+	}
 }

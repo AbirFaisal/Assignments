@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f34a9b2a-5647-4d60-bad9-264421b376c3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/abirfaisal/Main.java" afterPath="$PROJECT_DIR$/src/com/abirfaisal/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../The Three Dice guessing game program/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../The Three Dice guessing game program/.idea/workspace.xml" />
     </list>
     <ignored path="Playing with 1D array Assignment.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +32,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/abirfaisal/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6357143" vertical-offset="335" max-vertical-offset="1215">
-              <caret line="52" column="84" selection-start-line="52" selection-start-column="84" selection-end-line="52" selection-end-column="84" />
+            <state vertical-scroll-proportion="0.34285715" vertical-offset="0" max-vertical-offset="1500">
+              <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -85,7 +86,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -125,6 +125,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,11 +395,12 @@
       <updated>1422922252152</updated>
       <workItem from="1422922254261" duration="4208000" />
       <workItem from="1422927632250" duration="1379000" />
+      <workItem from="1423175915715" duration="1697000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5587000" />
+    <option name="totallyTimeSpent" value="7284000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
@@ -461,6 +463,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/abirfaisal/Main.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/abirfaisal/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
@@ -471,8 +483,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/abirfaisal/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6357143" vertical-offset="335" max-vertical-offset="1215">
-          <caret line="52" column="84" selection-start-line="52" selection-start-column="84" selection-end-line="52" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.34285715" vertical-offset="0" max-vertical-offset="1500">
+          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
