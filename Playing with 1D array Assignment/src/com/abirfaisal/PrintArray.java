@@ -45,11 +45,11 @@ public class PrintArray {
         }
 
         for (int i = 0; i < amountOfRandomNumbers; i++) {
-            System.out.print("Number: " + numbersArray[i] + " Occurrences: " + matches[i] + "\n");
+            System.out.print("Number: " + numbersArray[i] + " Occurrences: 1" + "\n");
         }
     }
 
-    private static void highestLowest(int amountOfRandomNumbers, int numbersArray[]){
+    public static void highestLowest(int amountOfRandomNumbers, int numbersArray[]){
         //Display highest number in
         //Since array[] was sorted from least to greatest
         //numbersArray[0] should be the lowest

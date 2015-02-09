@@ -55,5 +55,8 @@ public class Main {
 		//Display number of times each number occurred
 		PrintArray.frequency(amountOfRandomNumbers, numbersArray);
 
+		//Print Highest and lowest values in array.
+		PrintArray.highestLowest(amountOfRandomNumbers, numbersArray);
+
 	}
 }
