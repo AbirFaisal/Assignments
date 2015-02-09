@@ -6,6 +6,7 @@ package com.abirfaisal;
 public class PrintArray {
 
     public static void printArray(int amountOfRandomNumbers, int numbersArray[]) {
+        System.out.print("Print Array: \n");
         for (int i = 0; i < amountOfRandomNumbers; i++) {
             System.out.print(numbersArray[i] + "\n");
         }
@@ -23,7 +24,6 @@ public class PrintArray {
         //Numbers to match array
         int oneHundred = 99;
         int[] numbersToMatch = new int[oneHundred];
-
 
         //Occurrences array
         int[] matches = new int[oneHundred];
@@ -44,12 +44,17 @@ public class PrintArray {
             }
         }
 
+        for (int i = 0; i < amountOfRandomNumbers; i++) {
+            System.out.print("Number: " + numbersArray[i] + " Occurrences: " + matches[i] + "\n");
+        }
+    }
 
+    private static void highestLowest(int amountOfRandomNumbers, int numbersArray[]){
         //Display highest number in
         //Since array[] was sorted from least to greatest
         //numbersArray[0] should be the lowest
         //numbersArray[amountOfRandomNumbers] should be the highest
-        System.out.print(numbersArray["Highest: " + amountOfRandomNumbers - 1] + "\n");
+        System.out.print("Highest: " + numbersArray[amountOfRandomNumbers - 1] + "\n");
         System.out.print("Lowest: " + numbersArray[0] + "\n");
     }
 }
