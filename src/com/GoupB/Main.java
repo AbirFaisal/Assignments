@@ -11,7 +11,7 @@ public class Main {
 
         // Somone put this in a class like mainSwitch.selection(selection)
         // send selection to the switch
-        switch (selectiodfbgbrgtn){
+        switch (selection){
             case 1:
                 //call method
                 break;
