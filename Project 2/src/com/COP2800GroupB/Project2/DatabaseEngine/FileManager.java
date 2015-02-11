@@ -74,7 +74,7 @@ class FileManager {
     }
 
     //writes given array to specified file
-    public void writeDB(String fileName, String[] data) {
+    public void writeDBFromArray(String fileName, String[] data) {
         //write database from memory to file
 
         String stream = new String[];
