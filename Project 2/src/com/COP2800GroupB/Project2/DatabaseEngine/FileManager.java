@@ -14,20 +14,22 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileReader;
 
-public class FileManager {
+//No class modifier we want only class and package access
+//Which is the default
+class FileManager {
 
-    //check if initialized
+    //check if initialized was run at least once.
     private static boolean FMinit = false;
 
-    public static void initalize(String fileName) {
-        //Extention: .gbdb means Group B Data Base
-        //Employee.gbdb
-        //Manager.gbdb
-        //check if file exists
-        // else create files
+
+    //Create File
+    public static void createFile(String fileName) {
+        //declare new file and name
         File file = new File(fileName);
 
+        //if file does not exist create it or else do nothing.
         try {
             file.createNewFile();
             //If somthing goes wrong throw exception;
@@ -37,13 +39,36 @@ public class FileManager {
         FMinit = true;
     }
 
-    public void loadDB(char selectFile) {
-        //load database to memory from file
 
-        //return array
+
+    //load database
+    public static String loadDBAsArray(String fileName) {
+        //load file database to memory from file
+
+        //check file existence
+        File file = new File(fileName);
+        if (file.exists() == false){
+            System.out.print("Error: File Does not exist");
+            System.exit(0);
+        }
+
+        //open file
+
+
+        //read file
+
+
+        //return as array
+
+
+        int arraySize // = number of records found
+        int array[];
+
+        return array;
     }
 
-    public void writeDB(char array[], char selectFile) {
+
+    public void writeDB(String fileName, char array[]) {
         //write database from memory to file
 
         //switch case

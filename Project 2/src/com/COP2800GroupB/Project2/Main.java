@@ -9,9 +9,9 @@ public class Main {
 
         //Initlaize the databases we want (name.extension, size)
         //Put this in a class later
-        Database.initalize("Manager.gbdb", 20);
-        Database.initalize("Employees.gbdb", 100);
-        Database.initalize("People.gbdb", 500);
+        int Manager[] = Database.createDB("Manager.gbdb", 20);
+        int Employees[] = Database.createDB("Employees.gbdb", 100);
+        int People[] = Database.createDB("People.gbdb", 500);
 
 
 

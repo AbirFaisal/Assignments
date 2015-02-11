@@ -10,21 +10,27 @@ public class Database {
 
     //databases
     //manager array
-    private char Employee[100];
-    private char Manager[20];
-    private char Person[500];
 
     //check if initalized
     private static boolean init = false;
 
-    public static void initalize(String DatabaseName , int DBsize){
+    public static int createDB(String DatabaseName , int DBsize){
         //Initlize file manager
 
         FileManager.initalize(DatabaseName);
+        int array[] = new FileManager.loadDBAsArray();
+
+
+        //for each database create new array
 
         //Initalize arrays
 
         init = true;
+        return array;
+
+    }
+
+    private static void database() {
 
     }
 
