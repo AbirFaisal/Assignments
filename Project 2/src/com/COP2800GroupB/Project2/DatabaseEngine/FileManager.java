@@ -12,9 +12,8 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
  * record changes from memory to database files
  */
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileReader;
+import java.io.*;
+import java.util.ArrayList;
 
 //No class modifier we want only class and package access
 //Which is the default
@@ -41,39 +40,63 @@ class FileManager {
 
 
 
-    //load database
+    //returns file as an array
     public static String loadDBAsArray(String fileName) {
-        //load file database to memory from file
+        //load file database to memory from
 
-        //check file existence
-        File file = new File(fileName);
-        if (file.exists() == false){
-            System.out.print("Error: File Does not exist");
-            System.exit(0);
+        String currentLine = "";
+        ArrayList tempArray = new ArrayList();
+        int ArraySize = 0;
+        String[] array;
+
+        try {
+            FileReader file = new FileReader(fileName);
+            BufferedReader buffer = new BufferedReader(file);
+
+            try {
+                while ((currentLine = buffer.readLine()) != null){
+                    tempArray.add(currentLine);
+                    ArraySize = ArraySize + 1;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
-        //open file
 
-
-        //read file
-
-
-        //return as array
-
-
-        int arraySize // = number of records found
-        int array[];
+        //Load tempArray into array
+        for (int i = 0; i < ArraySize; i++) {
+            array[i] = tempArray[i];
+        }
 
         return array;
     }
 
-
-    public void writeDB(String fileName, char array[]) {
+    //writes given array to specified file
+    public void writeDB(String fileName, String[] data) {
         //write database from memory to file
 
-        //switch case
-        //
-        //
-        //
+        String stream = new String[];
+
+        try {
+            FileWriter file = new FileWriter(fileName);
+            BufferedWriter buffer = new BufferedWriter(file);
+            PrintWriter output = new PrintWriter(buffer);
+
+            for (int i = 0; i < stream.length(); i++) {
+                if (data != null) {
+                    output.write(data[i]);
+                    output.newLine();
+                }
+            }
+            output.flush();
+            output.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
