@@ -11,13 +11,9 @@ public class Employee {
     private String hourlyRate;
     private String position;
 
-    public String getDateHired() {
-        return dateHired;
-    }
+    public String getDateHired() { return dateHired; }
 
-    public void setDateHired(String dateHired) {
-        this.dateHired = dateHired;
-    }
+    public void setDateHired(String dateHired) { this.dateHired = dateHired; }
 
     public String getHourlyRate() {
         return hourlyRate;

@@ -8,16 +8,20 @@ import java.lang.String;
 
 public class Database {
 
-    //database Array
+    //database data type////////////////////////////
+    private String database;
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+    ////////////////////////////////////////////////
 
 
-
-
-
-    //check if initalized
-    private static boolean init = false;
-
-    public static int createDB(String DatabaseName , int DBsize){
+    public static int initalizeDB(String DatabaseName , int DBsize){
         //Initlize file manager
 
         FileManager.initalize(DatabaseName);
@@ -28,7 +32,6 @@ public class Database {
 
         //Initalize arrays
 
-        init = true;
         return array;
 
     }
@@ -45,7 +48,4 @@ public class Database {
 
     }
 
-    public static search(char search[]){
-
-    }
 }
