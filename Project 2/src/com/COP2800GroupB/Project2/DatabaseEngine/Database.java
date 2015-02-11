@@ -8,8 +8,11 @@ import java.lang.String;
 
 public class Database {
 
-    //databases
-    //manager array
+    //database Array
+
+
+
+
 
     //check if initalized
     private static boolean init = false;
@@ -34,11 +37,11 @@ public class Database {
 
     }
 
-    public static seet(){
+    public static void seet(){
 
     }
 
-    public static get(){
+    public static void get(){
 
     }
 
