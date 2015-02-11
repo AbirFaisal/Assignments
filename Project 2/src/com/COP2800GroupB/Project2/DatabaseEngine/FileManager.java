@@ -17,33 +17,34 @@ import java.io.IOException;
 
 public class FileManager {
 
-    public static void initalize() {
+    //check if initialized
+    private static boolean FMinit = false;
+
+    public static void initalize(String fileName) {
         //Extention: .gbdb means Group B Data Base
         //Employee.gbdb
         //Manager.gbdb
         //check if file exists
         // else create files
-        File Employee = new File("Employee.gbdb");
-        File Manager = new File("Manager.gbdb");
-        File Person = new File("Person.gbdb");
+        File file = new File(fileName);
 
         try {
-            Employee.createNewFile();
-            Manager.createNewFile();
-            Person.createNewFile();
+            file.createNewFile();
             //If somthing goes wrong throw exception;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        FMinit = true;
     }
 
-    public void loadDB() {
-        //load database to memory
+    public void loadDB(char selectFile) {
+        //load database to memory from file
 
+        //return array
     }
 
-    public void writeDB(char array[], char str) {
-        //write database from memory
+    public void writeDB(char array[], char selectFile) {
+        //write database from memory to file
 
         //switch case
         //
