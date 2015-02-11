@@ -38,8 +38,6 @@ class FileManager {
         FMinit = true;
     }
 
-
-
     //returns file as an array
     public static String loadDBAsArray(String fileName) {
         //load file database to memory from
@@ -47,7 +45,7 @@ class FileManager {
         String currentLine = "";
         ArrayList tempArray = new ArrayList();
         int ArraySize = 0;
-        String[] array;
+        String[] array = { "0" };
 
         try {
             FileReader file = new FileReader(fileName);
@@ -69,7 +67,7 @@ class FileManager {
 
         //Load tempArray into array
         for (int i = 0; i < ArraySize; i++) {
-            array[i] = tempArray[i];
+            array[i] = tempArray.get(i);
         }
 
         return array;
@@ -92,6 +90,7 @@ class FileManager {
                     output.newLine();
                 }
             }
+
             output.flush();
             output.close();
 
