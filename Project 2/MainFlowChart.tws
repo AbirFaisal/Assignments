@@ -27,8 +27,8 @@ I00
 sS'pos'
 p15
 (lp16
-F1270.0
-aF850.0
+F1410.0
+aF1130.0
 asS'passage'
 p17
 (itiddlywiki
@@ -87,8 +87,8 @@ g14
 I00
 sg15
 (lp40
-F1550.0
-aF850.0
+F1690.0
+aF1130.0
 asg17
 (itiddlywiki
 Tiddler
@@ -137,8 +137,8 @@ g14
 I00
 sg15
 (lp55
-F1550.0
-aF1130.0
+F1690.0
+aF1410.0
 asg17
 (itiddlywiki
 Tiddler
@@ -187,8 +187,8 @@ g14
 I00
 sg15
 (lp70
-F1550.0
-aF990.0
+F1690.0
+aF1270.0
 asg17
 (itiddlywiki
 Tiddler
@@ -237,8 +237,8 @@ g14
 I00
 sg15
 (lp85
-F1550.0
-aF710.0
+F1690.0
+aF990.0
 asg17
 (itiddlywiki
 Tiddler
@@ -287,7 +287,7 @@ g14
 I00
 sg15
 (lp100
-F1270.0
+F1410.0
 aF150.0
 asg17
 (itiddlywiki
@@ -339,7 +339,7 @@ g14
 I00
 sg15
 (lp116
-F1550.0
+F1690.0
 aF150.0
 asg17
 (itiddlywiki
@@ -389,7 +389,7 @@ g14
 I00
 sg15
 (lp131
-F1550.0
+F1690.0
 aF10.0
 asg17
 (itiddlywiki
@@ -439,7 +439,7 @@ g14
 I00
 sg15
 (lp146
-F1550.0
+F1690.0
 aF290.0
 asg17
 (itiddlywiki
@@ -489,8 +489,8 @@ g14
 I00
 sg15
 (lp161
-F1270.0
-aF430.0
+F1410.0
+aF570.0
 asg17
 (itiddlywiki
 Tiddler
@@ -541,8 +541,8 @@ g14
 I00
 sg15
 (lp177
-F1550.0
-aF430.0
+F1690.0
+aF570.0
 asg17
 (itiddlywiki
 Tiddler
@@ -591,8 +591,8 @@ g14
 I00
 sg15
 (lp192
-F1550.0
-aF570.0
+F1690.0
+aF710.0
 asg17
 (itiddlywiki
 Tiddler
@@ -1622,7 +1622,7 @@ I00
 sg15
 (lp507
 F1130.0
-aF710.0
+aF570.0
 asg17
 (itiddlywiki
 Tiddler
@@ -1673,7 +1673,7 @@ g14
 I00
 sg15
 (lp523
-F1830.0
+F1970.0
 aF10.0
 asg17
 (itiddlywiki
@@ -1723,7 +1723,7 @@ g14
 I00
 sg15
 (lp538
-F1970.0
+F2110.0
 aF150.0
 asg17
 (itiddlywiki
@@ -1772,7 +1772,7 @@ g14
 I00
 sg15
 (lp552
-F1830.0
+F1970.0
 aF150.0
 asg17
 (itiddlywiki
@@ -1821,8 +1821,8 @@ g14
 I00
 sg15
 (lp566
-F1970.0
-aF570.0
+F2110.0
+aF710.0
 asg17
 (itiddlywiki
 Tiddler
@@ -1873,8 +1873,8 @@ g14
 I00
 sg15
 (lp582
-F2110.0
-aF430.0
+F2250.0
+aF570.0
 asg17
 (itiddlywiki
 Tiddler
@@ -1925,8 +1925,8 @@ g14
 I00
 sg15
 (lp598
-F2110.0
-aF710.0
+F2250.0
+aF850.0
 asg17
 (itiddlywiki
 Tiddler
@@ -1977,8 +1977,8 @@ g14
 I00
 sg15
 (lp614
-F2250.0
-aF570.0
+F2390.0
+aF710.0
 asg17
 (itiddlywiki
 Tiddler
@@ -2026,7 +2026,7 @@ tp627
 Rp628
 sbsasS'scale'
 p629
-F1.0
+F0.6000000000000001
 sS'snapping'
 p630
 I01
