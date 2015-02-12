@@ -15,13 +15,10 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
 import java.io.*;
 import java.util.ArrayList;
 
+
 //No class modifier we want only class and package access
 //Which is the default
 class FileManager {
-
-    //check if initialized was run at least once.
-    private static boolean FMinit = false;
-
 
     //Create File
     public static void createFile(String fileName) {
@@ -35,67 +32,84 @@ class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        FMinit = true;
     }
 
-    //returns file as an array
-    public static String loadDBAsArray(String fileName) {
+    //returns file as an array given dabase file name
+    public static Database[] loadDBAsArray(String fileName) {
         //load file database to memory from
-
+        // string to hold current line
         String currentLine = "";
+        //array list because array lists can get bigger on demand
         ArrayList tempArray = new ArrayList();
+        //Inital array size for later when we convert ArrayList to array
         int ArraySize = 0;
-        String[] array = { "0" };
+        //Declare array we don't know what the size we need should be yet that will occur later
+        Database[] array;
 
         try {
+            //open the file
             FileReader file = new FileReader(fileName);
+            //buffer the file line by line into memory
             BufferedReader buffer = new BufferedReader(file);
 
             try {
-                while ((currentLine = buffer.readLine()) != null){
+                // if null char is not reached run this loop
+                while ((currentLine = buffer.readLine()) != null) {
+                    //add the current buffered line into the ArrayList element
                     tempArray.add(currentLine);
+                    //increase size of array
                     ArraySize = ArraySize + 1;
                 }
+                //incase somthing goes wrong
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            //incase somthing goes wrong
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-
-        //Load tempArray into array
+        //Declare array size
+        array = new Database[ArraySize];
+        //Load ArrayList Objects into Database[]
         for (int i = 0; i < ArraySize; i++) {
-            array[i] = tempArray.get(i);
+            //create empty object for use
+            array[i] = new Database();
+            //take current ArrayList element and put it into the array.
+            array[i].setDatabase(tempArray.get(i));
         }
 
+        //return the entire array with stuff from selected file
         return array;
     }
 
-    //writes given array to specified file
-    public void writeDBFromArray(String fileName, String[] data) {
-        //write database from memory to file
 
-        String stream = new String[];
+
+    //writes to file given database, to the specified file
+    public static Database writeDBFromArray(String fileName, Database[] data) {
 
         try {
-            FileWriter file = new FileWriter(fileName);
-            BufferedWriter buffer = new BufferedWriter(file);
-            PrintWriter output = new PrintWriter(buffer);
-
-            for (int i = 0; i < stream.length(); i++) {
-                if (data != null) {
-                    output.write(data[i]);
-                    output.newLine();
-                }
-            }
-
-            output.flush();
-            output.close();
-
+            //Create new FileWriter in memory
+            FileOutputStream file = new FileOutputStream(fileName);
+            //Buffer array into print writer
+            ObjectOutputStream buffer = new ObjectOutputStream(file);
+            //Writes to disk when
+            buffer.writeObject(data);
+            //Flush Cache from memory to disk
+            buffer.flush();
+            //Close the file
+            buffer.close();
+            //error handling stuff
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+
+    //Checks if file exists
+    public static boolean doesFileExist(String fileName) {
+        return new File(fileName).isFile();
     }
 }

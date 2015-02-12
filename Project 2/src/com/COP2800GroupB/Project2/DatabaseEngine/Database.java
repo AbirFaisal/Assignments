@@ -4,48 +4,39 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
  * Created by abirfaisal on 2/10/15.
  */
 
-import java.lang.String;
-
-public class Database {
+public class Database implements java.io.Serializable {
 
     //database data type////////////////////////////
-    private String database;
+    private Object database;
 
-    public String getDatabase() {
+    public Object getDatabase() {
         return database;
     }
 
-    public void setDatabase(String database) {
+    public void setDatabase(Object database) {
         this.database = database;
     }
-    ////////////////////////////////////////////////
 
+    public static void createDatabaseFile(String fileName) {
 
-    public static int initalizeDB(String DatabaseName , int DBsize){
-        //Initlize file manager
-
-        FileManager.initalize(DatabaseName);
-        int array[] = new FileManager.loadDBAsArray();
-
-
-        //for each database create new array
-
-        //Initalize arrays
-
-        return array;
-
+        //If file does not exsist on disk go ahead and create the file
+        if (doesExistOnDisk(fileName) == false){
+            FileManager.createFile(fileName);
+        }else { System.out.print("ERROR: File Already Exist");}
     }
 
-    private static void database() {
-
+    public static Database[] loadDatabase(String fileName) {
+        return FileManager.loadDBAsArray(fileName);
     }
 
-    public static void seet(){
 
+
+    public static boolean doesExistOnDisk(String fileName) {
+        return FileManager.doesFileExist(fileName); // returns true/false
     }
 
-    public static void get(){
-
+    public static void saveDatabaseToDisk(String fileNameOnDisk, String[] array) {
+        FileManager.writeDBFromArray(fileNameOnDisk, array);
     }
 
 }

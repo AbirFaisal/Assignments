@@ -17,13 +17,12 @@ public class Initalize {
         final int MAX_EMPLOYEES = 100;
         final int MAX_PERSONS = 500;
 
-        //Create database refrences
+        //Create database refrences for ea
         Database[] managers = new Database[MAX_MANAGERS - 1];
         Database[] employee = new Database[MAX_EMPLOYEES - 1];
         Database[] person = new Database[MAX_PERSONS - 1];
 
-
-        // Create database objects
+        // Create empty database objects for use
         for (int i = 0; i < (MAX_MANAGERS-1); i++) {
             managers[i] = new Database();
         }
@@ -34,6 +33,22 @@ public class Initalize {
         for (int i = 0; i < (MAX_PERSONS-1); i++) {
             person[i] = new Database();
         }
+
+
+        //check if database exists on disk
+
+        if(Database.doesExistOnDisk("Manager.gbdb") == true){
+            //load database
+            managers = Database.loadDatabase("Manager.gbdb");
+        }
+        else {
+            //Create database if does not exsist
+            Database.createDatabaseFile("Manager.gbdb");
+        }
+
+
+
+
 
         //example usage:
         //
