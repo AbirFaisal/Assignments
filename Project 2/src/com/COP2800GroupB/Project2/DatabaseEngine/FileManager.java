@@ -13,7 +13,6 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
  */
 
 import java.io.*;
-import java.util.ArrayList;
 
 
 //No class modifier we want only class and package access
@@ -39,13 +38,12 @@ class FileManager {
 
         //Read from disk
         try {
+            //Open File for reading
             FileInputStream file = new FileInputStream(fileName);
-
+            //
             ObjectInputStream buffer = new ObjectInputStream(file);
-
-            Object object = buffer.readObject();
-
-            return object;
+            //return the object
+            return buffer.readObject();
 
 
             //FileInputStream error handling stuff
@@ -62,7 +60,7 @@ class FileManager {
     }
 
     //writes to file given database, to the specified file
-    public static Database writeDBFromArray(String fileName, Database[] data) {
+    public static void writeDBFromArray(String fileName, Database[] data) {
 
         try {
             //Create new object to store file in Memory
@@ -83,11 +81,12 @@ class FileManager {
 
     //Checks if file exists
     public static boolean doesFileExist(String fileName) {
+        //Returns true or false
         return new File(fileName).isFile();
     }
 
-    //
+    //Returns String array of specified files.
     public static void findDatabasesOnDisk(String DBFileExtension) {
-
+        System.out.print("Work In Progress");
     }
 }

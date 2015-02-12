@@ -10,17 +10,26 @@ import com.COP2800GroupB.Project2.DatabaseEngine.Database;
 
 public class Initalize {
 
+    //Create a constant size for each database we want to create.
+    static final int MAX_MANAGERS = 20;
+    static final String MANAGER_FILE_NAME = "Manager.gbdb";
+
+    static final int MAX_EMPLOYEES = 100;
+    static final String EMPLOYEE_FILE_NAME = "Employee.gbdb"
+
+    static final int MAX_PERSONS = 500;
+    static final String PERSON_FILE_NAME = "Person.gbdb"
+
+    //Create database refrences for ea
+    static Database[] managers = new Database[MAX_MANAGERS - 1];
+    static Database[] employee = new Database[MAX_EMPLOYEES - 1];
+    static Database[] person = new Database[MAX_PERSONS - 1];
+
+
+
     public static void init() {
 
-        //Create a constant size for each database we want to create.
-        final int MAX_MANAGERS = 20;
-        final int MAX_EMPLOYEES = 100;
-        final int MAX_PERSONS = 500;
 
-        //Create database refrences for ea
-        Database[] managers = new Database[MAX_MANAGERS - 1];
-        Database[] employee = new Database[MAX_EMPLOYEES - 1];
-        Database[] person = new Database[MAX_PERSONS - 1];
 
         // Create empty database objects for use
         for (int i = 0; i < (MAX_MANAGERS-1); i++) {
@@ -35,24 +44,21 @@ public class Initalize {
         }
 
 
-        //check if database exists on disk
+        // check if database exists
+        // if exists then load into specified array
+        // if does not exist create it
+        checkAndCreate(managers, MANAGER_FILE_NAME);
+        checkAndCreate(employee, EMPLOYEE_FILE_NAME);
+        checkAndCreate(person, PERSON_FILE_NAME);
+    }
 
-        if(Database.doesExistOnDisk("Manager.gbdb") == true){
-            //load database
-            managers = Database.loadDatabase("Manager.gbdb");
-        }
-        else {
+    //check create or load database.
+    private static void checkAndCreate(Database[] DBName, String fileName){
+        if(Database.doesExistOnDisk(fileName) == true){
+            DBName = Database.loadDatabase(fileName);
+        } else {
             //Create database if does not exsist
-            Database.createDatabaseFile("Manager.gbdb");
+            Database.createDatabaseFile(fileName);
         }
-
-
-
-
-
-        //example usage:
-        //
-        //person[34].setDatabase(); = some object you want to store
-
     }
 }
