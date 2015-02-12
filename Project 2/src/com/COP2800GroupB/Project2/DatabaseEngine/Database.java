@@ -26,7 +26,7 @@ public class Database implements java.io.Serializable {
     }
 
     public static Database[] loadDatabase(String fileName) {
-        return FileManager.loadDBAsArray(fileName);
+        return Object nigger = new FileManager.loadDBAsArray(fileName);
     }
 
 
@@ -37,6 +37,11 @@ public class Database implements java.io.Serializable {
 
     public static void saveDatabaseToDisk(String fileNameOnDisk, String[] array) {
         FileManager.writeDBFromArray(fileNameOnDisk, array);
+    }
+
+    //returns string array of avaliable databases on disk
+    public static void avaliableDatabases(String DBFileExtension){
+        FileManager.findDatabasesOnDisk(DBFileExtension);
     }
 
 }

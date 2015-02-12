@@ -35,65 +35,41 @@ class FileManager {
     }
 
     //returns file as an array given dabase file name
-    public static Database[] loadDBAsArray(String fileName) {
-        //load file database to memory from
-        // string to hold current line
-        String currentLine = "";
-        //array list because array lists can get bigger on demand
-        ArrayList tempArray = new ArrayList();
-        //Inital array size for later when we convert ArrayList to array
-        int ArraySize = 0;
-        //Declare array we don't know what the size we need should be yet that will occur later
-        Database[] array;
+    public static Object loadDBAsArray(String fileName) {
 
+        //Read from disk
         try {
-            //open the file
-            FileReader file = new FileReader(fileName);
-            //buffer the file line by line into memory
-            BufferedReader buffer = new BufferedReader(file);
+            FileInputStream file = new FileInputStream(fileName);
 
-            try {
-                // if null char is not reached run this loop
-                while ((currentLine = buffer.readLine()) != null) {
-                    //add the current buffered line into the ArrayList element
-                    tempArray.add(currentLine);
-                    //increase size of array
-                    ArraySize = ArraySize + 1;
-                }
-                //incase somthing goes wrong
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //incase somthing goes wrong
+            ObjectInputStream buffer = new ObjectInputStream(file);
+
+            Object object = buffer.readObject();
+
+            return object;
+
+
+            //FileInputStream error handling stuff
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            //ObjectInputStream error handing stuff
+        } catch (IOException e) {
+            e.printStackTrace();
+            //Object error handling stuff
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-
-        //Declare array size
-        array = new Database[ArraySize];
-        //Load ArrayList Objects into Database[]
-        for (int i = 0; i < ArraySize; i++) {
-            //create empty object for use
-            array[i] = new Database();
-            //take current ArrayList element and put it into the array.
-            array[i].setDatabase(tempArray.get(i));
-        }
-
-        //return the entire array with stuff from selected file
-        return array;
+        return null;
     }
-
-
 
     //writes to file given database, to the specified file
     public static Database writeDBFromArray(String fileName, Database[] data) {
 
         try {
-            //Create new FileWriter in memory
+            //Create new object to store file in Memory
             FileOutputStream file = new FileOutputStream(fileName);
-            //Buffer array into print writer
+            //Buffer writes
             ObjectOutputStream buffer = new ObjectOutputStream(file);
-            //Writes to disk when
+            //Write Object to disk
             buffer.writeObject(data);
             //Flush Cache from memory to disk
             buffer.flush();
@@ -105,11 +81,13 @@ class FileManager {
         }
     }
 
-
-
-
     //Checks if file exists
     public static boolean doesFileExist(String fileName) {
         return new File(fileName).isFile();
+    }
+
+    //
+    public static void findDatabasesOnDisk(String DBFileExtension) {
+
     }
 }

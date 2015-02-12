@@ -4,8 +4,6 @@
     <list default="true" id="049b1db4-1344-44ff-b90a-7d4d5ce5c4bc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/FileManager.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/FileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project 2.iws" />
@@ -61,15 +59,15 @@
       <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
-              <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
+              <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
               <folding>
                 <element signature="e#270#271#0" expanded="true" />
                 <element signature="e#301#302#0" expanded="true" />
                 <element signature="e#349#350#0" expanded="true" />
                 <element signature="e#389#390#0" expanded="true" />
-                <element signature="e#750#751#0" expanded="true" />
-                <element signature="e#808#809#0" expanded="true" />
+                <element signature="e#1249#1250#0" expanded="true" />
+                <element signature="e#1313#1314#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,12 +76,13 @@
       <file leaf-file-name="FileManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/FileManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.55464256" vertical-offset="0" max-vertical-offset="1217">
-              <caret line="102" column="33" selection-start-line="102" selection-start-column="33" selection-end-line="102" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.6302383" vertical-offset="103" max-vertical-offset="1320">
+              <caret line="69" column="27" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#createFile#0;class#FileManager#0" expanded="false" />
-                <element signature="method#loadDBAsArray#0;class#FileManager#0" expanded="false" />
+                <element signature="e#2405#2406#0" expanded="true" />
+                <element signature="e#2455#2456#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,9 +101,9 @@
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Employee.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/SQLiteJDBC.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java" />
-        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/DatabaseImpl.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/FileManager.java" />
       </list>
     </option>
@@ -521,12 +520,12 @@
       <workItem from="1423628462128" duration="20851000" />
       <workItem from="1423694128830" duration="206000" />
       <workItem from="1423721407999" duration="22000" />
-      <workItem from="1423721457784" duration="7451000" />
+      <workItem from="1423721457784" duration="9608000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28956000" />
+    <option name="totallyTimeSpent" value="31113000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1322" height="1337" extended-state="6" />
@@ -608,7 +607,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -642,8 +641,8 @@
             <element signature="e#301#302#0" expanded="true" />
             <element signature="e#349#350#0" expanded="true" />
             <element signature="e#389#390#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#1249#1250#0" expanded="true" />
+            <element signature="e#1313#1314#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -655,7 +654,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#createFile#0;class#FileManager#0" expanded="false" />
-            <element signature="method#loadDBAsArray#0;class#FileManager#0" expanded="false" />
+            <element signature="e#2405#2406#0" expanded="true" />
+            <element signature="e#2455#2456#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -685,8 +685,8 @@
             <element signature="e#301#302#0" expanded="true" />
             <element signature="e#349#350#0" expanded="true" />
             <element signature="e#389#390#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#1249#1250#0" expanded="true" />
+            <element signature="e#1313#1314#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -698,7 +698,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#createFile#0;class#FileManager#0" expanded="false" />
-            <element signature="method#loadDBAsArray#0;class#FileManager#0" expanded="false" />
+            <element signature="e#2405#2406#0" expanded="true" />
+            <element signature="e#2455#2456#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -728,8 +729,8 @@
             <element signature="e#301#302#0" expanded="true" />
             <element signature="e#349#350#0" expanded="true" />
             <element signature="e#389#390#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#1249#1250#0" expanded="true" />
+            <element signature="e#1313#1314#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -741,7 +742,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#createFile#0;class#FileManager#0" expanded="false" />
-            <element signature="method#loadDBAsArray#0;class#FileManager#0" expanded="false" />
+            <element signature="e#2405#2406#0" expanded="true" />
+            <element signature="e#2455#2456#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -813,6 +815,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="960">
@@ -823,35 +833,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
           <folding>
             <element signature="e#270#271#0" expanded="true" />
             <element signature="e#301#302#0" expanded="true" />
             <element signature="e#349#350#0" expanded="true" />
             <element signature="e#389#390#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#1249#1250#0" expanded="true" />
+            <element signature="e#1313#1314#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/FileManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55464256" vertical-offset="0" max-vertical-offset="1217">
-          <caret line="102" column="33" selection-start-line="102" selection-start-column="33" selection-end-line="102" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.6302383" vertical-offset="103" max-vertical-offset="1320">
+          <caret line="69" column="27" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#createFile#0;class#FileManager#0" expanded="false" />
-            <element signature="method#loadDBAsArray#0;class#FileManager#0" expanded="false" />
+            <element signature="e#2405#2406#0" expanded="true" />
+            <element signature="e#2455#2456#0" expanded="true" />
           </folding>
         </state>
       </provider>
