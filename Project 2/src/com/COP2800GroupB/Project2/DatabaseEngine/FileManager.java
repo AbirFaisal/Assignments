@@ -19,7 +19,19 @@ import java.io.*;
 //Which is the default
 class FileManager {
 
-    //Create File
+
+    private Object file;
+
+
+    public Object getFile() {
+        return file;
+    }
+
+    public void setFile(Object file) {
+        this.file = file;
+    }
+
+    //Create File works dont touch
     public static void createFile(String fileName) {
         //declare new file and name
         File file = new File(fileName);
@@ -33,7 +45,7 @@ class FileManager {
         }
     }
 
-    //returns file as an array given dabase file name
+    //returns file as an object array given dabase file name
     public static Object loadDBAsArray(String fileName) {
 
         //Read from disk
@@ -43,6 +55,8 @@ class FileManager {
             //
             ObjectInputStream buffer = new ObjectInputStream(file);
             //return the object
+
+
             return buffer.readObject();
 
 

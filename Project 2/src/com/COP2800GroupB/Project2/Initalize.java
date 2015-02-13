@@ -55,7 +55,7 @@ public class Initalize {
     //check create or load database.
     private static void checkAndCreate(Database[] DBName, String fileName){
         if(Database.doesExistOnDisk(fileName) == true){
-            DBName = Database.loadDatabase(fileName);
+            DBName = (Database[]) Database.loadDatabase(fileName);
         } else {
             //Create database if does not exsist
             Database.createDatabaseFile(fileName);

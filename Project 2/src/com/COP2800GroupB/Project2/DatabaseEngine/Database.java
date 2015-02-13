@@ -6,16 +6,6 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
 
 public class Database implements java.io.Serializable {
 
-    //database data type////////////////////////////
-    private Object database;
-
-    public Object getDatabase() {
-        return database;
-    }
-
-    public void setDatabase(Object database) {
-        this.database = database;
-    }
 
     public static void createDatabaseFile(String fileName) {
 
@@ -25,19 +15,19 @@ public class Database implements java.io.Serializable {
         }else { System.out.print("ERROR: File Already Exist");}
     }
 
-    public static Database[] loadDatabase(String fileName) {
+    public static Object[] loadDatabase(String fileName) {
 
-        return new Database[0];
+        return new Object[] = FileManager.loadDBAsArray(fileName);
     }
-
 
 
     public static boolean doesExistOnDisk(String fileName) {
         return FileManager.doesFileExist(fileName); // returns true/false
     }
 
-    public static void saveDatabaseToDisk(String fileNameOnDisk, Database[] array) {
-        FileManager.writeDBFromArray(fileNameOnDisk, array);
+    //Save array database to disk
+    public static void saveDatabaseToDisk(String fileName, Database[] array) {
+        FileManager.writeDBFromArray(fileName, array);
     }
 
     //returns string array of avaliable databases on disk
