@@ -17,7 +17,7 @@ public class Database implements java.io.Serializable {
 
     public static Object[] loadDatabase(String fileName) {
 
-        return new Object[] = FileManager.loadDBAsArray(fileName);
+        return (Object[]) FileManager.loadDBAsArray(fileName);
     }
 
 
@@ -31,8 +31,14 @@ public class Database implements java.io.Serializable {
     }
 
     //returns string array of avaliable databases on disk
-    public static void avaliableDatabases(String DBFileExtension){
+    public static void avaliableDatabases(String DBFileExtension) {
         FileManager.findDatabasesOnDisk(DBFileExtension);
     }
+
+    public static void deleteDatabase(String databaseName){
+        //delete database function
+    }
+
+    
 
 }

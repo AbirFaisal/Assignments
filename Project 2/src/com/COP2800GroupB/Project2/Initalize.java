@@ -10,15 +10,20 @@ import com.COP2800GroupB.Project2.DatabaseEngine.Database;
 
 public class Initalize {
 
+
+    ///// I THINK WE SHOULD SEPERATE THIS INTO ITS OWN METHODS // ITS WORKS FOR NOW.
+
+
+
     //Create a constant size for each database we want to create.
     static final int MAX_MANAGERS = 20;
     static final String MANAGER_FILE_NAME = "Manager.gbdb";
 
     static final int MAX_EMPLOYEES = 100;
-    static final String EMPLOYEE_FILE_NAME = "Employee.gbdb"
+    static final String EMPLOYEE_FILE_NAME = "Employee.gbdb";
 
     static final int MAX_PERSONS = 500;
-    static final String PERSON_FILE_NAME = "Person.gbdb"
+    static final String PERSON_FILE_NAME = "Person.gbdb";
 
     //Create database refrences for ea
     static Database[] managers = new Database[MAX_MANAGERS - 1];
@@ -28,7 +33,6 @@ public class Initalize {
 
 
     public static void init() {
-
 
 
         // Create empty database objects for use

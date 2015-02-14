@@ -103,4 +103,8 @@ class FileManager {
     public static void findDatabasesOnDisk(String DBFileExtension) {
         System.out.print("Work In Progress");
     }
+
+    public static void deleteFile(String fileName){
+
+    }
 }
