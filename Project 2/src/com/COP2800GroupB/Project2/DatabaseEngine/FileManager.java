@@ -19,7 +19,7 @@ import java.io.*;
 //Which is the default
 class FileManager {
 
-
+    /*
     private Object file;
 
 
@@ -30,9 +30,14 @@ class FileManager {
     public void setFile(Object file) {
         this.file = file;
     }
+    */
 
     //Create File works dont touch
     public static void createFile(String fileName) {
+
+        //add file extension
+        fileName = fileName.concat(".gbdb");
+
         //declare new file and name
         File file = new File(fileName);
 
@@ -47,6 +52,9 @@ class FileManager {
 
     //returns file as an object array given dabase file name
     public static Object loadDBAsArray(String fileName) {
+
+        //add file extension
+        fileName = fileName.concat(".gbdb");
 
         //Read from disk
         try {
@@ -76,6 +84,10 @@ class FileManager {
     //writes to file given database, to the specified file
     public static void writeDBFromArray(String fileName, Database[] data) {
 
+
+        //add file extension
+        fileName = fileName.concat(".gbdb");
+
         try {
             //Create new object to store file in Memory
             FileOutputStream file = new FileOutputStream(fileName);
@@ -95,16 +107,22 @@ class FileManager {
 
     //Checks if file exists
     public static boolean doesFileExist(String fileName) {
+
+        //add file extension
+        fileName = fileName.concat(".gbdb");
+
         //Returns true or false
         return new File(fileName).isFile();
     }
 
     //Returns String array of specified files.
-    public static void findDatabasesOnDisk(String DBFileExtension) {
+    public static void findDatabasesOnDisk() {
         System.out.print("Work In Progress");
     }
 
     public static void deleteFile(String fileName){
+        //add file extension
+        fileName = fileName.concat(".gbdb");
 
     }
 }

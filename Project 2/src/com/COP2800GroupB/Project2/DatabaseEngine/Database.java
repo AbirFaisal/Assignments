@@ -31,14 +31,12 @@ public class Database implements java.io.Serializable {
     }
 
     //returns string array of avaliable databases on disk
-    public static void avaliableDatabases(String DBFileExtension) {
-        FileManager.findDatabasesOnDisk(DBFileExtension);
+    public static void avaliableDatabases() {
+        FileManager.findDatabasesOnDisk();
     }
 
     public static void deleteDatabase(String databaseName){
         //delete database function
     }
-
-    
 
 }
