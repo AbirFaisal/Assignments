@@ -11,24 +11,25 @@ import com.COP2800GroupB.Project2.DatabaseEngine.Database;
 public class Initalize {
 
 
-    ///// I THINK WE SHOULD SEPERATE THIS INTO ITS OWN METHODS // ITS WORKS FOR NOW.
+    ///// I THINK WE SHOULD SEPERATE THIS INTO ITS OWN METHODS OR A CONSTRUCTOR // ITS WORKS FOR NOW.
 
 
 
     //Create a constant size for each database we want to create.
     static final int MAX_MANAGERS = 20;
-    static final String MANAGER_FILE_NAME = "Manager.gbdb";
+    static final String MANAGER_FILE_NAME = "Manager";
 
     static final int MAX_EMPLOYEES = 100;
-    static final String EMPLOYEE_FILE_NAME = "Employee.gbdb";
+    static final String EMPLOYEE_FILE_NAME = "Employee";
 
     static final int MAX_PERSONS = 500;
-    static final String PERSON_FILE_NAME = "Person.gbdb";
+    static final String PERSON_FILE_NAME = "Person";
 
     //Create database refrences for ea
     static Database[] managers = new Database[MAX_MANAGERS - 1];
     static Database[] employee = new Database[MAX_EMPLOYEES - 1];
     static Database[] person = new Database[MAX_PERSONS - 1];
+
 
 
 
@@ -54,7 +55,14 @@ public class Initalize {
         checkAndCreate(managers, MANAGER_FILE_NAME);
         checkAndCreate(employee, EMPLOYEE_FILE_NAME);
         checkAndCreate(person, PERSON_FILE_NAME);
+
+
+
     }
+
+
+
+
 
     //check create or load database.
     private static void checkAndCreate(Database[] DBName, String fileName){

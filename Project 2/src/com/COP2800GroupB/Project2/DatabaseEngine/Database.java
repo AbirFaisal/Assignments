@@ -7,6 +7,18 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
 public class Database implements java.io.Serializable {
 
 
+
+
+    int databaseSize;
+    String databaseFileName;
+
+
+    //CONSTRUCTOR
+    public Database() {
+
+
+    }
+
     public static void createDatabaseFile(String fileName) {
 
         //If file does not exsist on disk go ahead and create the file
