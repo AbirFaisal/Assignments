@@ -8,7 +8,7 @@ public class Database implements java.io.Serializable {
 
 
 
-
+    Object database;
     int databaseSize;
     String databaseFileName;
 
@@ -17,6 +17,31 @@ public class Database implements java.io.Serializable {
     public Database() {
 
 
+    }
+
+
+    public Object getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Object database) {
+        this.database = database;
+    }
+
+    public int getDatabaseSize() {
+        return databaseSize;
+    }
+
+    public void setDatabaseSize(int databaseSize) {
+        this.databaseSize = databaseSize;
+    }
+
+    public String getDatabaseFileName() {
+        return databaseFileName;
+    }
+
+    public void setDatabaseFileName(String databaseFileName) {
+        this.databaseFileName = databaseFileName;
     }
 
     public static void createDatabaseFile(String fileName) {

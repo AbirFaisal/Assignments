@@ -64,8 +64,8 @@ class FileManager {
             ObjectInputStream buffer = new ObjectInputStream(file);
             //return the object
 
-
             return buffer.readObject();
+
 
 
             //FileInputStream error handling stuff

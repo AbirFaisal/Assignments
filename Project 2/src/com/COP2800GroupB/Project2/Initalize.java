@@ -57,8 +57,24 @@ public class Initalize {
         checkAndCreate(person, PERSON_FILE_NAME);
 
 
+        //TEST//
+
+        //store value
+        person[5].setDatabase(54);
+
+        //save database
+        Database.saveDatabaseToDisk(PERSON_FILE_NAME, person);
+
+        //read database
+        person = (Database[]) Database.loadDatabase(PERSON_FILE_NAME);
+
+        //display value
+        System.out.print(person[5]);
+
 
     }
+
+
 
 
 
