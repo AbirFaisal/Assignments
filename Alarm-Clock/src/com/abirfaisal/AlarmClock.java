@@ -18,9 +18,7 @@ public class AlarmClock {
 
 
     // Constructor
-    // Timer on or not
-
-    public AlarmClock(int seconds, int minutes, int hours, boolean timerOn) {
+    public AlarmClock(boolean timerOn) {
 
         Calendar temp = new GregorianCalendar();    // Create new calendar
 
@@ -29,7 +27,6 @@ public class AlarmClock {
         Hours = temp.get(Calendar.HOUR_OF_DAY) + 1; // Set alarm 1 hour ahead upon creation
         this.timerOn = true;                        // Turn on alarm
     }
-
 
     // Getters and Setters
 
@@ -41,15 +38,14 @@ public class AlarmClock {
 
         //Make sure Second is not less than 0 or greater than 60
         try {
-            if ((seconds < 0) || (seconds > 60)) {
+            if ((seconds < 0) || (seconds >= 60)) {
                 throw new RuntimeException();
             } else {
                 Seconds = seconds;
             }
         } catch (RuntimeException e){
-            System.out.print("Seconds is less than 0 or greater than 60");
+            System.out.print("Seconds is less than 0 or greater than or equal to 60");
         }
-
     }
 
     public int getMinutes() {
@@ -58,15 +54,15 @@ public class AlarmClock {
 
     public void setMinutes(int minutes) {
 
-        //Make sure hour is not less than 0 or greater than 60
+        //Make sure minute is not less than 0 or greater than 60
         try {
-            if ((minutes < 0) || (minutes > 60)) {
+            if ((minutes < 0) || (minutes >= 60)) {
                 throw new RuntimeException();
             } else {
                 Minutes = minutes;
             }
         } catch (RuntimeException e){
-            System.out.print("Minutes is less than 0 or greater than 24");
+            System.out.print("Minutes is less than 0 or greater than or equal to 60");
         }
     }
 
@@ -75,8 +71,6 @@ public class AlarmClock {
     }
 
     public void setHours(int hours) {
-
-        Calendar temp = new GregorianCalendar();
 
         //Make sure hour is not less than 0 or greater than 24
         try {
