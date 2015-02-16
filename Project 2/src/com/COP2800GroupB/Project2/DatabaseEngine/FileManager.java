@@ -64,7 +64,13 @@ class FileManager {
             ObjectInputStream buffer = new ObjectInputStream(file);
             //return the object
 
-            return buffer.readObject();
+            Object temp = buffer.readObject();
+
+            buffer.close();
+
+            return temp;
+
+
 
 
 
