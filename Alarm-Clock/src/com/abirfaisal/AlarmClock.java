@@ -47,7 +47,7 @@ public class AlarmClock {
                 Seconds = seconds;
             }
         } catch (RuntimeException e){
-            System.out.print("Seconds is less than 0 or greater than 24");
+            System.out.print("Seconds is less than 0 or greater than 60");
         }
 
     }
@@ -61,7 +61,7 @@ public class AlarmClock {
         //Make sure hour is not less than 0 or greater than 60
         try {
             if ((minutes < 0) || (minutes > 60)) {
-
+                throw new RuntimeException();
             } else {
                 Minutes = minutes;
             }
@@ -81,7 +81,7 @@ public class AlarmClock {
         //Make sure hour is not less than 0 or greater than 24
         try {
             if ((hours < 0) || (hours > 24)) {
-
+                throw new RuntimeException();
             } else {
                 Hours = hours;
             }
