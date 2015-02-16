@@ -18,15 +18,16 @@ public class AlarmClock {
 
 
     // Constructor
+    // Timer on or not
 
     public AlarmClock(int seconds, int minutes, int hours, boolean timerOn) {
 
-        //Create calendar object
-        Calendar time = new GregorianCalendar();
-        Seconds = time.get(time.SECOND);
-        Minutes = time.get(time.MINUTE);
-        Hours = time.get(time.HOUR_OF_DAY);
-        this.timerOn = true;
+        Calendar temp = new GregorianCalendar();    // Create new calendar
+
+        Seconds = temp.get(Calendar.SECOND);
+        Minutes = temp.get(Calendar.MINUTE);
+        Hours = temp.get(Calendar.HOUR_OF_DAY) + 1; // Set alarm 1 hour ahead automatically
+        this.timerOn = true;                        // Turn on alarm
     }
 
 
@@ -37,6 +38,18 @@ public class AlarmClock {
     }
 
     public void setSeconds(int seconds) {
+
+        //Make sure Second is not less than 0 or greater than 59
+        try {
+            if ((seconds < 0) || (seconds > 24)) {
+
+            } else {
+                Hours = seconds;
+            }
+        } catch (RuntimeException e){
+            System.out.print("Seconds is less than 0 or greater than 24");
+        }
+
         Seconds = seconds;
     }
 
@@ -45,6 +58,18 @@ public class AlarmClock {
     }
 
     public void setMinutes(int minutes) {
+
+        //Make sure hour is not less than 0 or greater than 24
+        try {
+            if ((minutes < 0) || (minutes > 24)) {
+
+            } else {
+                Minutes = minutes;
+            }
+        } catch (RuntimeException e){
+            System.out.print("Minutes is less than 0 or greater than 24");
+        }
+
         Minutes = minutes;
     }
 
@@ -53,7 +78,20 @@ public class AlarmClock {
     }
 
     public void setHours(int hours) {
-        Hours = hours;
+
+        Calendar temp = new GregorianCalendar();
+
+        //Make sure hour is not less than 0 or greater than 24
+        try {
+            if ((hours < 0) || (hours > 24)) {
+
+            } else {
+                Hours = hours;
+            }
+        } catch (RuntimeException e){
+            System.out.print("Hour is less than 0 or greater than 24");
+        }
+
     }
 
     public boolean isTimerOn() {
@@ -65,8 +103,5 @@ public class AlarmClock {
     }
 
 
-    public static void setAlarmForOneHour(AlarmClock){
-
-    }
 
 }
