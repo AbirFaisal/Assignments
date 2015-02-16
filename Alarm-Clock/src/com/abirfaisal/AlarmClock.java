@@ -11,10 +11,10 @@ import java.util.GregorianCalendar;
 
 public class AlarmClock {
 
-    int Seconds;
-    int Minutes;
-    int Hours;
-    boolean timerOn;
+    int Seconds;    //Store second
+    int Minutes;    //Store Minute
+    int Hours;      //Store Hour
+    boolean timerOn;//Set alarm status to on or off
 
 
     // Constructor
@@ -24,9 +24,9 @@ public class AlarmClock {
 
         Calendar temp = new GregorianCalendar();    // Create new calendar
 
-        Seconds = temp.get(Calendar.SECOND);
-        Minutes = temp.get(Calendar.MINUTE);
-        Hours = temp.get(Calendar.HOUR_OF_DAY) + 1; // Set alarm 1 hour ahead automatically
+        Seconds = temp.get(Calendar.SECOND);        // Set Second to current second upon creation
+        Minutes = temp.get(Calendar.MINUTE);        // Set Minute to current minute upon creation
+        Hours = temp.get(Calendar.HOUR_OF_DAY) + 1; // Set alarm 1 hour ahead upon creation
         this.timerOn = true;                        // Turn on alarm
     }
 
@@ -39,18 +39,17 @@ public class AlarmClock {
 
     public void setSeconds(int seconds) {
 
-        //Make sure Second is not less than 0 or greater than 59
+        //Make sure Second is not less than 0 or greater than 60
         try {
-            if ((seconds < 0) || (seconds > 24)) {
-
+            if ((seconds < 0) || (seconds > 60)) {
+                throw new RuntimeException();
             } else {
-                Hours = seconds;
+                Seconds = seconds;
             }
         } catch (RuntimeException e){
             System.out.print("Seconds is less than 0 or greater than 24");
         }
 
-        Seconds = seconds;
     }
 
     public int getMinutes() {
@@ -59,9 +58,9 @@ public class AlarmClock {
 
     public void setMinutes(int minutes) {
 
-        //Make sure hour is not less than 0 or greater than 24
+        //Make sure hour is not less than 0 or greater than 60
         try {
-            if ((minutes < 0) || (minutes > 24)) {
+            if ((minutes < 0) || (minutes > 60)) {
 
             } else {
                 Minutes = minutes;
@@ -69,8 +68,6 @@ public class AlarmClock {
         } catch (RuntimeException e){
             System.out.print("Minutes is less than 0 or greater than 24");
         }
-
-        Minutes = minutes;
     }
 
     public int getHours() {
