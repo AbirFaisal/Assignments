@@ -8,9 +8,9 @@ public class Database implements java.io.Serializable {
 
 
 
-    Object database;
-    int databaseSize;
-    String databaseFileName;
+    private Object database;
+    private int databaseSize;
+    private String databaseFileName;
 
 
     //CONSTRUCTOR

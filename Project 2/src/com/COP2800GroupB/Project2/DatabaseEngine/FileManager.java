@@ -71,9 +71,6 @@ class FileManager {
             return temp;
 
 
-
-
-
             //FileInputStream error handling stuff
         } catch (FileNotFoundException e) {
             e.printStackTrace();

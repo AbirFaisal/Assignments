@@ -48,6 +48,10 @@ public class Initalize {
             person[i] = new Database();
         }
 
+        initalizeDatabase(managers, MANAGER_FILE_NAME, MAX_MANAGERS);
+        initalizeDatabase(employee, EMPLOYEE_FILE_NAME, MAX_EMPLOYEES);
+        initalizeDatabase(person, PERSON_FILE_NAME, MAX_PERSONS);
+
 
         // check if database exists
         // if exists then load into specified array
@@ -86,7 +90,15 @@ public class Initalize {
             DBName = (Database[]) Database.loadDatabase(fileName);
         } else {
             //Create database if does not exsist
-            Database.createDatabaseFile(fileName);
+            //Database.createDatabaseFile(fileName);
+        }
+    }
+
+    public static void initalizeDatabase(Database[] DBName, String fineName, int maxSize) {
+
+
+        for (int i = 0; i < (maxSize-1); i++) {
+            DBName[i] = new Database();
         }
     }
 }
