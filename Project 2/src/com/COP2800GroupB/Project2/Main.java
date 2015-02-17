@@ -3,6 +3,10 @@ package com.COP2800GroupB.Project2;
 //
 
 
+import com.COP2800GroupB.Project2.Company.Address;
+import com.COP2800GroupB.Project2.Company.Employee;
+import com.COP2800GroupB.Project2.Company.Name;
+import com.COP2800GroupB.Project2.Company.Person;
 
 public class Main {
 
@@ -21,8 +25,14 @@ public class Main {
         //Initalize databases
         Initalize.init();
 
+        Name nameTest = new Name("first" , "Middle", "Last");
+
+        Employee employeeTest = new Employee();
+
+        Address addressTest = new Address("1","2","city","state","zip","country");
 
 
+        Person test = new Person(nameTest , "email", "phone", employeeTest, addressTest );
 
 
 

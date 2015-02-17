@@ -13,4 +13,19 @@ public class Person {
     Address address;
 
 
+    //Constructor
+    public Person(Name name, String email, String phone, Employee employee, Address address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.employee = employee;
+        this.address = address;
+    }
+
+
+    //Set Get
+
+
+
+
 }

@@ -9,5 +9,10 @@ public class Name {
     String middle;
     String last;
 
-
+    //Constructor
+    public Name(String first, String middle, String last) {
+        this.first = first;
+        this.middle = middle;
+        this.last = last;
+    }
 }

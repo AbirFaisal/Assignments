@@ -1,10 +1,13 @@
 package com.COP2800GroupB.Project2.DatabaseEngine;
 
-import java.io.*;
-
 /**
  * Created by abirfaisal on 2/10/15.
  */
+
+    //TEMPORARILY DISABLED
+
+
+/*
 
 public class Database implements Serializable {
 
@@ -93,3 +96,5 @@ public class Database implements Serializable {
         //delete database function
     }
 }
+
+*/
