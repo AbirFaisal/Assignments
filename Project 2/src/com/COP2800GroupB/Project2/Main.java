@@ -3,10 +3,7 @@ package com.COP2800GroupB.Project2;
 //
 
 
-import com.COP2800GroupB.Project2.Company.Address;
-import com.COP2800GroupB.Project2.Company.Employee;
-import com.COP2800GroupB.Project2.Company.Name;
-import com.COP2800GroupB.Project2.Company.Person;
+import com.COP2800GroupB.Project2.Company.*;
 
 public class Main {
 
@@ -23,21 +20,38 @@ public class Main {
     public static void main(String[] args) {
 
         //Initalize databases
-        Initalize.init();
+        //Initalize.init();
 
+
+        //Person Class test
+
+        //create new name of Name type
         Name nameTest = new Name("first" , "Middle", "Last");
 
-        Employee employeeTest = new Employee();
+        //create new manager of Manager type
+        Manager testManager = new Manager("title", "department");
 
+        //create new employee of employe type
+        Employee employeeTest = new Employee("positon", "title", testManager);
+
+        //create new address of address type
         Address addressTest = new Address("1","2","city","state","zip","country");
 
+        //create new person of Person type
 
+        //                       NAME OBJ   STRING   STRING   EMPLOYEE OBJ  ADDRESS OBJ
         Person test = new Person(nameTest , "email", "phone", employeeTest, addressTest );
 
 
-
-
+        Print("test");
 
 
     }
+
+
+    //so we don't have to type so much
+    public static void Print(String string){
+        System.out.print(string);
+    }
+
 }

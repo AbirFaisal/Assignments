@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="049b1db4-1344-44ff-b90a-7d4d5ce5c4bc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Address.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Address.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Employee.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Employee.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Manager.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Manager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Name.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Name.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Person.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Person.java" />
     </list>
     <ignored path="Project 2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,54 +39,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
-              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.17924528" vertical-offset="265" max-vertical-offset="930">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1267#1268#0" expanded="true" />
+                <element signature="e#1307#1308#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Name.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Name.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-              <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Person.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Person.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Address.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Address.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
-              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11221945" vertical-offset="0" max-vertical-offset="1575">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -100,15 +62,15 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/SQLiteJDBC.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/DatabaseImpl.java" />
-        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/FileManager.java" />
+        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Person.java" />
+        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java" />
+        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Manager.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Employee.java" />
-        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Address.java" />
-        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Person.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Name.java" />
         <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java" />
+        <option value="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Address.java" />
       </list>
     </option>
   </component>
@@ -567,12 +529,12 @@
       <workItem from="1424134372696" duration="422000" />
       <workItem from="1424136648585" duration="1456000" />
       <workItem from="1424207922524" duration="2447000" />
-      <workItem from="1424213139360" duration="887000" />
+      <workItem from="1424213139360" duration="1805000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61450000" />
+    <option name="totallyTimeSpent" value="62368000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -586,24 +548,24 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12947068" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329653" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2987952" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32761088" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32771084" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2987952" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1006,69 +968,130 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java">
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21641791" vertical-offset="546" max-vertical-offset="1350">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07462686" vertical-offset="0" max-vertical-offset="804">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Employee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14925373" vertical-offset="0" max-vertical-offset="804">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1575">
+          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Person.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
+        <state vertical-scroll-proportion="0.50498754" vertical-offset="0" max-vertical-offset="802">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Name.java">
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Initalize.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.27075812" vertical-offset="0" max-vertical-offset="1410">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#332#333#0" expanded="true" />
+            <element signature="e#360#361#0" expanded="true" />
+            <element signature="e#402#403#0" expanded="true" />
+            <element signature="e#436#437#0" expanded="true" />
+            <element signature="e#473#474#0" expanded="true" />
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#602#603#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4245283" vertical-offset="0" max-vertical-offset="735">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+          <folding>
+            <element signature="e#443#444#0" expanded="true" />
+            <element signature="e#474#475#0" expanded="true" />
+            <element signature="e#522#523#0" expanded="true" />
+            <element signature="e#562#563#0" expanded="true" />
+            <element signature="e#599#600#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#684#685#0" expanded="true" />
+            <element signature="e#728#729#0" expanded="true" />
+            <element signature="e#763#764#0" expanded="true" />
+            <element signature="e#793#794#0" expanded="true" />
+            <element signature="e#840#841#0" expanded="true" />
+            <element signature="e#878#879#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Name.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12264151" vertical-offset="220" max-vertical-offset="750">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+          <folding>
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#419#420#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+            <element signature="e#495#496#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+            <element signature="e#557#558#0" expanded="true" />
+            <element signature="e#601#602#0" expanded="true" />
+            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#668#669#0" expanded="true" />
+            <element signature="e#695#696#0" expanded="true" />
+            <element signature="e#735#736#0" expanded="true" />
+            <element signature="e#767#768#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Company/Address.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-          <folding />
+        <state vertical-scroll-proportion="-0.254717" vertical-offset="495" max-vertical-offset="1185">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding>
+            <element signature="e#635#636#0" expanded="true" />
+            <element signature="e#670#671#0" expanded="true" />
+            <element signature="e#726#727#0" expanded="true" />
+            <element signature="e#774#775#0" expanded="true" />
+            <element signature="e#813#814#0" expanded="true" />
+            <element signature="e#848#849#0" expanded="true" />
+            <element signature="e#904#905#0" expanded="true" />
+            <element signature="e#952#953#0" expanded="true" />
+            <element signature="e#983#984#0" expanded="true" />
+            <element signature="e#1010#1011#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1082#1083#0" expanded="true" />
+            <element signature="e#1114#1115#0" expanded="true" />
+            <element signature="e#1142#1143#0" expanded="true" />
+            <element signature="e#1184#1185#0" expanded="true" />
+            <element signature="e#1218#1219#0" expanded="true" />
+            <element signature="e#1248#1249#0" expanded="true" />
+            <element signature="e#1274#1275#0" expanded="true" />
+            <element signature="e#1312#1313#0" expanded="true" />
+            <element signature="e#1342#1343#0" expanded="true" />
+            <element signature="e#1376#1377#0" expanded="true" />
+            <element signature="e#1406#1407#0" expanded="true" />
+            <element signature="e#1452#1453#0" expanded="true" />
+            <element signature="e#1490#1491#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/DatabaseEngine/Database.java">
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11221945" vertical-offset="0" max-vertical-offset="1575">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding />
+        <state vertical-scroll-proportion="0.17924528" vertical-offset="265" max-vertical-offset="930">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#1267#1268#0" expanded="true" />
+            <element signature="e#1307#1308#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

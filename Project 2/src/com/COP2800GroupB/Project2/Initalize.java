@@ -1,11 +1,14 @@
 package com.COP2800GroupB.Project2;
-
+/*
 import com.COP2800GroupB.Project2.DatabaseEngine.Database;
 
 
 /**
  * Created by abirfaisal on 2/11/15.
- */
+ /
+
+
+ //Temporarily Disabled
 
 
 public class Initalize {
@@ -82,3 +85,5 @@ public class Initalize {
         }
     }
 }
+
+*/
