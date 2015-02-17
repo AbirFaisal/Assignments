@@ -5,6 +5,12 @@ package com.COP2800GroupB.Project2.Company;
  */
 public class Person {
 
-    //generate and assign a UUID
+    //generate and assign a UUID maybe? or nah?
+    Name name;
+    String email;
+    String phone;
+    Employee employee;
+    Address address;
+
 
 }
