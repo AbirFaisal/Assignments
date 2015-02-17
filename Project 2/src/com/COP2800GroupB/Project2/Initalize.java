@@ -11,7 +11,7 @@ import com.COP2800GroupB.Project2.DatabaseEngine.Database;
 public class Initalize {
 
 
-    ///// I THINK WE SHOULD SEPERATE THIS INTO ITS OWN METHODS OR A CONSTRUCTOR // ITS WORKS FOR NOW.
+    ///// I THINK WE SHOULD SEPARATE THIS INTO ITS OWN METHODS OR A CONSTRUCTOR // ITS WORKS FOR NOW.
 
 
 
@@ -64,7 +64,7 @@ public class Initalize {
         //TEST//
 
         //store value
-        person[5].setDatabase(54);
+        person[10].setDatabase("test");
 
         //save database
         Database.saveDatabaseToDisk(PERSON_FILE_NAME, person);
@@ -73,7 +73,7 @@ public class Initalize {
         person = (Database[]) Database.loadDatabase(PERSON_FILE_NAME);
 
         //display value
-        System.out.print(person[5]);
+        System.out.print(person[2].getDatabase());
 
 
     }

@@ -44,13 +44,6 @@ public class Database implements java.io.Serializable {
         this.databaseFileName = databaseFileName;
     }
 
-    public static void createDatabaseFile(String fileName) {
-
-        //If file does not exsist on disk go ahead and create the file
-        if (doesExistOnDisk(fileName) == false){
-            FileManager.createFile(fileName);
-        }else { System.out.print("ERROR: File Already Exist");}
-    }
 
     public static Object[] loadDatabase(String fileName) {
 

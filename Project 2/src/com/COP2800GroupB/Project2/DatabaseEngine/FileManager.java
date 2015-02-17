@@ -32,23 +32,6 @@ class FileManager {
     }
     */
 
-    //Create File works dont touch
-    public static void createFile(String fileName) {
-
-        //add file extension
-        fileName = fileName.concat(".gbdb");
-
-        //declare new file and name
-        File file = new File(fileName);
-
-        //if file does not exist create it or else do nothing.
-        try {
-            file.createNewFile();
-            //If somthing goes wrong throw exception;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     //returns file as an object array given dabase file name
     public static Object loadDBAsArray(String fileName) {
