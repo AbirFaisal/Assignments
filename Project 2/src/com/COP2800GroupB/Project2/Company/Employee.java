@@ -5,6 +5,10 @@ package com.COP2800GroupB.Project2.Company;
  */
 public class Employee {
 
+    String position;
+    String hourlyRate;
+    Manager manager;
+
 
 
 }
