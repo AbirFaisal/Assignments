@@ -68,5 +68,4 @@ public class Database implements java.io.Serializable {
     public static void deleteDatabase(String databaseName){
         //delete database function
     }
-
 }

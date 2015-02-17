@@ -17,7 +17,7 @@ import java.io.*;
 
 //No class modifier we want only class and package access
 //Which is the default
-class FileManager {
+class FileManager implements Serializable {
 
     /*
     private Object file;
@@ -43,7 +43,7 @@ class FileManager {
         try {
             //Open File for reading
             FileInputStream file = new FileInputStream(fileName);
-            //
+            //Convert Binary file stream to object
             ObjectInputStream buffer = new ObjectInputStream(file);
             //return the object
 
@@ -73,6 +73,7 @@ class FileManager {
 
         //add file extension
         fileName = fileName.concat(".gbdb");
+
 
         try {
             //Create new object to store file in Memory
