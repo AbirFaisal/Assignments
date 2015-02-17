@@ -1074,7 +1074,7 @@ Tiddler
 p338
 (dp339
 g21
-V[[databaseObjects]]\u000a\u000a[[createDatabase]]\u000a[[saveDatabaseToDisk]]\u000a[[deleteDatabase]]\u000a[[loadDatabase]]\u000a[[doesExsistOnDisk]]\u000a
+V[[databaseObjects]]\u000a\u000a[[saveDatabaseToDisk]]\u000a[[deleteDatabase]]\u000a[[loadDatabase]]\u000a[[doesExsistOnDisk]]\u000a
 p340
 sg23
 VDatabase
@@ -1083,12 +1083,12 @@ sg25
 g26
 ((I2015
 I2
-I13
-I20
-I9
-I9
-I4
-I44
+I17
+I14
+I51
+I21
+I1
+I48
 I0
 tp342
 (dp343
