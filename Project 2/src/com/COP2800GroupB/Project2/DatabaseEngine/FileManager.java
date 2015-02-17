@@ -17,9 +17,9 @@ import java.io.*;
 
 //No class modifier we want only class and package access
 //Which is the default
-class FileManager implements Serializable {
+class FileManager {
 
-
+    /*
     private Object file;
 
 
@@ -30,6 +30,7 @@ class FileManager implements Serializable {
     public void setFile(Object file) {
         this.file = file;
     }
+    */
 
 
     //returns file as an object array given dabase file name
@@ -67,7 +68,7 @@ class FileManager implements Serializable {
     }
 
     //writes to file given database, to the specified file
-    public static void writeDBFromArray(String fileName, FileManager[] data) {
+    public static void writeDBFromArray(String fileName, Database[] data) {
 
 
         //add file extension

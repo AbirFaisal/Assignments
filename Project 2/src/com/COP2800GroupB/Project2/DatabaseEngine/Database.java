@@ -4,7 +4,7 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
  * Created by abirfaisal on 2/10/15.
  */
 
-public class Database {
+public class Database implements java.io.Serializable {
 
 
 
@@ -46,11 +46,6 @@ public class Database {
 
 
     public static Object[] loadDatabase(String fileName) {
-
-
-        Database[] temp = new Database[]
-
-
 
         return (Object[]) FileManager.loadDBAsArray(fileName);
     }
