@@ -46,16 +46,14 @@ public class Initalize {
         //TEST//
 
         //store value
-        person[10].setDatabase("test");
 
         //save database
-        Database.saveDatabaseToDisk(PERSON_FILE_NAME, person);
+        Database.saveDatabase(PERSON_FILE_NAME, person);
 
         //read database
         person = (Database[]) Database.loadDatabase(PERSON_FILE_NAME);
 
         //display value
-        System.out.print(person[2].getDatabase());
 
 
     }

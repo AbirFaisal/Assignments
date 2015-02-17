@@ -10,7 +10,10 @@ package com.COP2800GroupB.Project2.DatabaseEngine;
  * if files exsist load into memory
  * <p/>
  * record changes from memory to database files
- */
+ *
+
+    //DEPRECIATED BRIAN DOESNT LIKE THIS IDEA
+
 
 import java.io.*;
 
@@ -30,66 +33,18 @@ class FileManager implements Serializable {
     public void setFile(Object file) {
         this.file = file;
     }
-    */
+
 
 
     //returns file as an object array given dabase file name
-    public static Object loadDBAsArray(String fileName) {
-
-        //add file extension
-        fileName = fileName.concat(".gbdb");
-
-        //Read from disk
-        try {
-            //Open File for reading
-            FileInputStream file = new FileInputStream(fileName);
-            //Convert Binary file stream to object
-            ObjectInputStream buffer = new ObjectInputStream(file);
-            //return the object
-
-            Object temp = buffer.readObject();
-
-            buffer.close();
-
-            return temp;
+    public static void loadDBAsArray(String fileName) {
 
 
-            //FileInputStream error handling stuff
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            //ObjectInputStream error handing stuff
-        } catch (IOException e) {
-            e.printStackTrace();
-            //Object error handling stuff
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     //writes to file given database, to the specified file
     public static void writeDBFromArray(String fileName, Database[] data) {
 
-
-        //add file extension
-        fileName = fileName.concat(".gbdb");
-
-
-        try {
-            //Create new object to store file in Memory
-            FileOutputStream file = new FileOutputStream(fileName);
-            //Buffer writes
-            ObjectOutputStream buffer = new ObjectOutputStream(file);
-            //Write Object to disk
-            buffer.writeObject(data);
-            //Flush Cache from memory to disk
-            buffer.flush();
-            //Close the file
-            buffer.close();
-            //error handling stuff
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     //Checks if file exists
@@ -113,3 +68,5 @@ class FileManager implements Serializable {
 
     }
 }
+
+ */
