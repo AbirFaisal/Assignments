@@ -1,7 +1,6 @@
 package com.COP2800GroupB.Project2.Tools;
 
 import com.COP2800GroupB.Project2.Company.Person;
-import com.COP2800GroupB.Project2.Main;
 
 import javax.swing.*;
 
@@ -22,6 +21,9 @@ public class Add {
                 "Add Manager",
                 "Add Person"};
 
+
+
+
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
                 "Select a Tool",
@@ -37,43 +39,96 @@ public class Add {
         System.out.print("Selection = " + selection + "\n");
 
         //Call selection method with selection value
-        selection(selection, array);
+        //selection(selection, array);
     }
 
-    //Call selected tool
-    public static void selection(int selection, Person[] array) {
-
-        switch (selection) {
-            case 0:
-                //Exit Program
-                Main.confirmExit(array);
-                break;
-            case 1:
-                //Call Edit Menu
-                //MainMenu.displayMenu(array);
-                break;
-            case 2:
-                //Call Add Menu
-                Add.displayMenu(array);
-                break;
-            case 3:
-                //Call Display Menu
-                //Display.displayMenu(array);
-                break;
-        }
-    }
 
 
     public static void addPerson(int index, Person[] array){
 
 
-    }
+        //Buttons to display
+        String[] buttons = {
+                "Cancel",
+                "Discard & Return",
+                "Save"};
 
-    public static void addEmployee(){
+        
+        //Create new form panel with Box Layout along y axis
+        JPanel form = new JPanel();
+        form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
-    }
 
-    public static void addManager(){
+        //First Name Label and field
+        JLabel firstNameLabel = new JLabel("First Name: ", JLabel.TRAILING);
+        form.add(firstNameLabel);
+
+        JTextField firstNameField  = new JTextField();
+        firstNameLabel.setLabelFor(firstNameField);
+        form.add(firstNameField);
+
+        //Middle Name Label and field
+        JLabel middleNameLabel = new JLabel("Middle Name: ", JLabel.TRAILING);
+        form.add(middleNameLabel);
+
+        JTextField middleNameField  = new JTextField();
+        firstNameLabel.setLabelFor(middleNameField);
+        form.add(middleNameField);
+
+        //First Name Label and field
+        JLabel lastNameLabel = new JLabel("Last Name: ", JLabel.TRAILING);
+        form.add(lastNameLabel);
+
+        JTextField lastNameField  = new JTextField();
+        lastNameLabel.setLabelFor(lastNameField);
+        form.add(lastNameField);
+
+
+        //Phone Number Label and field
+        JLabel phoneLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(phoneLabel);
+
+        //Phone Number Field
+        JTextField phoneField  = new JTextField();
+        phoneLabel.setLabelFor(phoneField);
+        form.add(phoneField);
+
+        //Phone Number Label and field
+        JLabel phoneLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(phoneLabel);
+
+        //Phone Number Field
+        JTextField phoneField  = new JTextField();
+        phoneLabel.setLabelFor(phoneField);
+        form.add(phoneField);
+
+
+
+
+
+
+
+
+
+
+        //display buttons and prompt
+        int selection = JOptionPane.showOptionDialog(null,
+                form,
+                "Add Record",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                buttons,
+                buttons[0]);
+
+        ////////////////////////////
+
+        //for debugging purposes
+        System.out.print("Selection = " + selection + "\n");
+
+        //Call selection method with selection value
+        //selection(selection, array);
+
 
     }
 

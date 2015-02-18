@@ -18,16 +18,21 @@ public class Display {
                 "View"};
 
 
+        //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
 
+        //loop to initalize tempStrArray
         for (int i = 0; i < array.length; i++) {
 
+            //create string to temporarily store string
             String tempStr = new String();
 
+            //temp string = first middle and last name combined
             tempStr = array[i].getName().getFirst() + " " +
                     array[i].getName().getMiddle() + " " +
                     array[i].getName().getLast();
 
+            //assignd concat'd name to array
             tempStrArray[i] = tempStr;
         }
 
@@ -211,8 +216,6 @@ public class Display {
                 Edit.editRecord(index, array);
                 break;
         }
-
-
     }
 
 
