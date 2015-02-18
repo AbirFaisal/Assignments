@@ -1,5 +1,6 @@
 package com.COP2800GroupB.Project2.Tools;
 
+import com.COP2800GroupB.Project2.Main;
 import com.COP2800GroupB.Project2.MainMenu;
 
 import javax.swing.*;
@@ -27,15 +28,18 @@ public class Display {
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
                 "Select a Tool",
-                "programTitle",
+                "Display Records",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 buttons,
                 buttons[0]);
         ////////////////////////////
+
+        //for debugging purposes
         System.out.print("Selection = " + selection + "\n");
 
+        //Call selection method with selection value
         selection(selection);
 
     }
@@ -45,24 +49,51 @@ public class Display {
 
         switch (selection){
             case 0:
-                System.exit(0);
+                //Exit Program
+                Main.confirmExit();
                 break;
             case 1:
-                MainMenu.mainMenu();
+                //Return to Main Menu
+                MainMenu.displayMenu();
                 break;
             case 2:
-                System.exit(0);
+                Display.displayOneManager();
                 break;
             case 3:
-                System.exit(0);
+                Display.displayOneEmployee();
                 break;
             case 4:
-                System.exit(0);
+                Display.displayOnePerson();
                 break;
             case 5:
-                System.exit(0);
+                Display.displayAllManagers();
                 break;
-
+            case 6:
+                Display.displayAllEmployees();
+                break;
+            case 7:
+                Display.displayAllPeople();
+                break;
         }
     }
+
+    private static void displayAllPeople(){
+    }
+
+    private static void displayAllEmployees() {
+    }
+
+    private static void displayAllManagers() {
+    }
+
+    private static void displayOnePerson() {
+    }
+
+    private static void displayOneEmployee() {
+    }
+
+    private static void displayOneManager() {
+    }
+
+
 }

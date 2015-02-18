@@ -13,7 +13,7 @@ public class MainMenu {
 
 
     //Display tools
-    public static void mainMenu(){
+    public static void displayMenu(){
 
         //Buttons to display
         String[] buttons = {"Cancel", "Edit", "Add", "Display"};
@@ -28,8 +28,11 @@ public class MainMenu {
                 buttons,
                 buttons[0]);
         ////////////////////////////
+
+        //for debugging purposes
         System.out.print("Selection = " + selection + "\n");
 
+        //Call selection method with selection value
         selection(selection);
     }
 
@@ -38,15 +41,19 @@ public class MainMenu {
 
         switch (selection){
             case 0:
-                System.exit(0);
+                //Exit Program
+                Main.confirmExit();
                 break;
             case 1:
+                //Call Edit Menu
                 Edit.displayMenu();
                 break;
             case 2:
+                //Call Add Menu
                 Add.displayMenu();
                 break;
             case 3:
+                //Call Display Menu
                 Display.displayMenu();
                 break;
         }

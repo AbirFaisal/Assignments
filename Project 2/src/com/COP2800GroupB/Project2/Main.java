@@ -5,6 +5,8 @@ package com.COP2800GroupB.Project2;
 
 import com.COP2800GroupB.Project2.Company.*;
 
+import javax.swing.*;
+
 public class Main {
 
 
@@ -24,7 +26,7 @@ public class Main {
 
         //Display mainMenu
 
-        MainMenu.mainMenu();
+        MainMenu.displayMenu();
 
 
         //Person Class test
@@ -42,22 +44,49 @@ public class Main {
 
         //create new person of Person type
 
-        //                       NAME OBJ   STRING   STRING   EMPLOYEE OBJ  ADDRESS OBJ
-        Person test = new Person(nameTest , "email", "phone", employeeTest, addressTest );
+        //                      (NAME OBJ   STRING   STRING   EMPLOYEE OBJ  ADDRESS OBJ)
+        Person test = new Person(nameTest , "email", "phone", employeeTest, addressTest);
 
 
 
         //get first name test
 
         // test object, get name, get first name
-        Print(test.getName().getFirst());
 
     }
 
 
     //so we don't have to type so much
-    public static void Print(String string){
-        System.out.print(string);
+
+    public static void confirmExit(){
+
+        //Buttons to display
+        String[] buttons = {"Return", "Exit"};
+
+        //display buttons and prompt
+        int selection = JOptionPane.showOptionDialog(null,
+                "Are you sure you want to exit?",
+                "Exit?",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                buttons,
+                buttons[0]);
+        ////////////////////////////
+
+        //print selection value
+        System.out.print(selection);
+
+        //Exit or return
+        switch (selection){
+            case 0:
+                MainMenu.displayMenu();
+                break;
+            case 1:
+                System.exit(0);
+                break;
+        }
     }
+
 
 }
