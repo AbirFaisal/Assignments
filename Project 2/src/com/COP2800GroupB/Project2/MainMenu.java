@@ -21,7 +21,7 @@ public class MainMenu {
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
                 "Select a Tool",
-                "programTitle",
+                "Group B Project 2",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
@@ -39,6 +39,7 @@ public class MainMenu {
     //Call selected tool
     public static void selection(int selection){
 
+        //switch statement to call methods
         switch (selection){
             case 0:
                 //Exit Program

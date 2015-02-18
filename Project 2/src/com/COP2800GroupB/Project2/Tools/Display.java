@@ -1,5 +1,6 @@
 package com.COP2800GroupB.Project2.Tools;
 
+import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
 import com.COP2800GroupB.Project2.MainMenu;
 
@@ -72,27 +73,49 @@ public class Display {
                 Display.displayAllEmployees();
                 break;
             case 7:
-                Display.displayAllPeople();
+                Display.displayAllPeople(null);
                 break;
         }
     }
 
-    private static void displayAllPeople(){
+    public static void displayAllPeople(Person[] personDatabase){
+        //Buttons to display
+        String[] buttons = {
+                "Cancel",
+                "Return",
+                "Add",
+                "Edit"};
+
+        //display buttons and prompt
+        int selection = JOptionPane.showOptionDialog(null,
+                new JScrollPane(),
+                "People",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                buttons,
+                buttons[0]);
+
     }
 
-    private static void displayAllEmployees() {
+    public static void displayAllEmployees() {
     }
 
-    private static void displayAllManagers() {
+    public static void displayAllManagers() {
     }
 
-    private static void displayOnePerson() {
+    public static void displayOnePerson() {
     }
 
-    private static void displayOneEmployee() {
+    public static void displayOneEmployee() {
     }
 
-    private static void displayOneManager() {
+    public static void displayOneManager() {
+    }
+
+    //sort in alphabetical order.
+    public static void sortAZ(){
+
     }
 
 

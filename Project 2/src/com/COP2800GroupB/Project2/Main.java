@@ -4,6 +4,7 @@ package com.COP2800GroupB.Project2;
 
 
 import com.COP2800GroupB.Project2.Company.*;
+import com.COP2800GroupB.Project2.Tools.Display;
 
 import javax.swing.*;
 
@@ -21,12 +22,35 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Initalize databases
+        //Initialize database
+        Person[] personDatabase = new Person[500-1];
+
+        //Initialize objects in personDatabase array
+        for (int i = 0; i < personDatabase.length ; i++) {
+
+            Name tempName = new Name("First","Middle","Last");
+
+            Manager tempManager = new Manager(false, "title", "department");
+
+            Employee tempEmployee = new Employee("Position", "Rate", tempManager);
+
+            Address tempAddress = new Address("line1", "line2", "city", "state", "zip", "country");
+
+            personDatabase[i] = new Person(tempName, "Email", "Phone", tempEmployee, tempAddress);
+        }
+
+
+
+
+
+
         //Initalize.init();
 
         //Display mainMenu
 
-        MainMenu.displayMenu();
+        Display.displayAllPeople(personDatabase);
+
+        //MainMenu.displayMenu();
 
 
         //Person Class test
@@ -49,12 +73,8 @@ public class Main {
 
 
 
-        //get first name test
-
-        // test object, get name, get first name
 
     }
-
 
     //so we don't have to type so much
 
