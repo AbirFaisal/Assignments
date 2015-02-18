@@ -51,7 +51,7 @@ public class Edit {
                 break;
             case 2:
                 //Call Add Menu
-                Add.displayMenu(array);
+                //Add.displayMenu(array);
                 break;
             case 3:
                 //Call Display Menu

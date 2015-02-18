@@ -22,31 +22,27 @@ public class Main {
         //Initialize database
         Person[] personDatabase = new Person[500-1];
         //Initialize objects in personDatabase array
-
         for (int i = 0; i < personDatabase.length; i++) {
 
             //sample data
             //create new name of Name type
-            Name tempName = new Name("John","Doe","Smith");
+            Name tempName = new Name("EMPTY","-","RECORD");
 
             //create new manager of Manager type
-            Manager tempManager = new Manager(true, "title", "department");
+            Manager tempManager = new Manager(false, "", "");
 
             //create new employee of employe type
-            Employee tempEmployee = new Employee(true,"Janitor", "$500", tempManager);
+            Employee tempEmployee = new Employee(false,"", "", tempManager);
 
             //create new address of address type
-            Address tempAddress = new Address("701 N Econlockhatchee Trail", "", "Orlando", "FL", "32825", "USA");
+            Address tempAddress = new Address("", "", "", "", "", "");
 
             //create new person of Person type
-            personDatabase[i] = new Person(tempName, "mail@valenciacollege.edu", "407-299-5000", tempEmployee, tempAddress);
+            personDatabase[i] = new Person(tempName, "", "", tempEmployee, tempAddress);
         }
 
-
-        //Display All People
+        //Display All People sent the method the database
         Display.displayAllPeople(personDatabase);
-
-
     }
     //Exit Confirmation
     public static void confirmExit(Person[] array){
@@ -66,7 +62,7 @@ public class Main {
         ////////////////////////////
 
         //print selection value
-        System.out.print(selection);
+        System.out.print(selection + "\n");
 
         //Exit or return
         switch (selection){
