@@ -86,16 +86,37 @@ public class Display {
                 "Add",
                 "Edit"};
 
+        String[] tempStrArray = new String[personDatabase.length];
+
+        for (int i = 0; i < personDatabase.length; i++) {
+
+            String tempStr = new String();
+
+            tempStr = personDatabase[i].getName().getFirst();
+
+            tempStr = tempStr.concat(personDatabase[i].getName().getMiddle());
+
+            tempStr = tempStr.concat(personDatabase[i].getName().getLast());
+
+
+            tempStrArray[i] = tempStr;
+
+
+        }
+
+
+        JList list = new JList(tempStrArray);
+
+
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
-                new JScrollPane(),
+                new JScrollPane(list),
                 "People",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 buttons,
                 buttons[0]);
-
     }
 
     public static void displayAllEmployees() {
