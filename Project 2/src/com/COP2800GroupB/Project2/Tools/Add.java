@@ -1,5 +1,6 @@
 package com.COP2800GroupB.Project2.Tools;
 
+import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
 import com.COP2800GroupB.Project2.MainMenu;
 
@@ -12,7 +13,7 @@ public class Add {
 
 
     //Display tools
-    public static void displayMenu(){
+    public static void displayMenu(Person[] array){
 
         //Buttons to display
         String[] buttons = {
@@ -37,28 +38,28 @@ public class Add {
         System.out.print("Selection = " + selection + "\n");
 
         //Call selection method with selection value
-        selection(selection);
+        selection(selection, array);
     }
 
     //Call selected tool
-    public static void selection(int selection) {
+    public static void selection(int selection, Person[] array) {
 
         switch (selection) {
             case 0:
                 //Exit Program
-                Main.confirmExit();
+                Main.confirmExit(array);
                 break;
             case 1:
                 //Call Edit Menu
-                MainMenu.displayMenu();
+                MainMenu.displayMenu(array);
                 break;
             case 2:
                 //Call Add Menu
-                Add.displayMenu();
+                Add.displayMenu(array);
                 break;
             case 3:
                 //Call Display Menu
-                Display.displayMenu();
+                Display.displayMenu(array);
                 break;
         }
     }

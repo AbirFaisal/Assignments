@@ -4,7 +4,6 @@ package com.COP2800GroupB.Project2;
 
 
 import com.COP2800GroupB.Project2.Company.*;
-import com.COP2800GroupB.Project2.Tools.Display;
 
 import javax.swing.*;
 
@@ -28,14 +27,19 @@ public class Main {
         //Initialize objects in personDatabase array
         for (int i = 0; i < personDatabase.length ; i++) {
 
+            //create new name of Name type
             Name tempName = new Name("First","Middle","Last");
 
+            //create new manager of Manager type
             Manager tempManager = new Manager(false, "title", "department");
 
+            //create new employee of employe type
             Employee tempEmployee = new Employee("Position", "Rate", tempManager);
 
+            //create new address of address type
             Address tempAddress = new Address("line1", "line2", "city", "state", "zip", "country");
 
+            //create new person of Person type
             personDatabase[i] = new Person(tempName, "Email", "Phone", tempEmployee, tempAddress);
         }
 
@@ -47,29 +51,7 @@ public class Main {
         //Initalize.init();
 
         //Display mainMenu
-
-        Display.displayAllPeople(personDatabase);
-
-        //MainMenu.displayMenu();
-
-
-        //Person Class test
-        //create new name of Name type
-        Name nameTest = new Name("first" , "Middle", "Last");
-
-        //create new manager of Manager type
-        Manager testManager = new Manager(true, "title", "department");
-
-        //create new employee of employe type
-        Employee employeeTest = new Employee("positon", "title", testManager);
-
-        //create new address of address type
-        Address addressTest = new Address("1","2","city","state","zip","country");
-
-        //create new person of Person type
-
-        //                      (NAME OBJ   STRING   STRING   EMPLOYEE OBJ  ADDRESS OBJ)
-        Person test = new Person(nameTest , "email", "phone", employeeTest, addressTest);
+        MainMenu.displayMenu(personDatabase);
 
 
 
@@ -78,7 +60,7 @@ public class Main {
 
     //so we don't have to type so much
 
-    public static void confirmExit(){
+    public static void confirmExit(Person[] array){
 
         //Buttons to display
         String[] buttons = {"Return", "Exit"};
@@ -100,7 +82,7 @@ public class Main {
         //Exit or return
         switch (selection){
             case 0:
-                MainMenu.displayMenu();
+                MainMenu.displayMenu(array);
                 break;
             case 1:
                 System.exit(0);

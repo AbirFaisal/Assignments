@@ -12,7 +12,7 @@ import javax.swing.*;
 public class Display {
 
 
-    public static void displayMenu() {
+    public static void displayMenu(Person[] array) {
 
 
         //Buttons to display
@@ -41,21 +41,21 @@ public class Display {
         System.out.print("Selection = " + selection + "\n");
 
         //Call selection method with selection value
-        selection(selection);
+        selection(selection, array);
 
     }
 
     //Call selected tool
-    public static void selection(int selection){
+    public static void selection(int selection, Person[] array){
 
         switch (selection){
             case 0:
                 //Exit Program
-                Main.confirmExit();
+                Main.confirmExit(array);
                 break;
             case 1:
                 //Return to Main Menu
-                MainMenu.displayMenu();
+                MainMenu.displayMenu(array);
                 break;
             case 2:
                 Display.displayOneManager();
@@ -64,7 +64,7 @@ public class Display {
                 Display.displayOneEmployee();
                 break;
             case 4:
-                Display.displayOnePerson();
+                //Display.displayOnePerson(0);
                 break;
             case 5:
                 Display.displayAllManagers();
@@ -73,50 +73,55 @@ public class Display {
                 Display.displayAllEmployees();
                 break;
             case 7:
-                Display.displayAllPeople(null);
+                Display.displayAllPeople(array);
                 break;
         }
     }
 
-    public static void displayAllPeople(Person[] personDatabase){
+    public static void displayAllPeople(Person[] array){
         //Buttons to display
         String[] buttons = {
                 "Cancel",
                 "Return",
-                "Add",
-                "Edit"};
+                "View"};
 
-        String[] tempStrArray = new String[personDatabase.length];
 
-        for (int i = 0; i < personDatabase.length; i++) {
+        String[] tempStrArray = new String[array.length];
+
+        for (int i = 0; i < array.length; i++) {
 
             String tempStr = new String();
 
-            tempStr = personDatabase[i].getName().getFirst();
-
-            tempStr = tempStr.concat(personDatabase[i].getName().getMiddle());
-
-            tempStr = tempStr.concat(personDatabase[i].getName().getLast());
-
+            tempStr = array[i].getName().getFirst() + " " +
+                    array[i].getName().getMiddle() + " " +
+                    array[i].getName().getLast();
 
             tempStrArray[i] = tempStr;
-
-
         }
 
-
+        // Create JList with string array
         JList list = new JList(tempStrArray);
+
+        JScrollPane scrollPane = new JScrollPane(list);
 
 
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
-                new JScrollPane(list),
+                scrollPane,
                 "People",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 buttons,
                 buttons[0]);
+
+        int index = list.getSelectedIndex();
+
+        System.out.print("Index: " + index);
+
+        displayOnePerson(index, array);
+
+
     }
 
     public static void displayAllEmployees() {
@@ -125,7 +130,90 @@ public class Display {
     public static void displayAllManagers() {
     }
 
-    public static void displayOnePerson() {
+    public static void displayOnePerson(int index, Person[] array) {
+
+
+        //Buttons to display
+        String[] buttons = {
+                "Cancel",
+                "Return",
+                "Add",
+                "Edit"};
+
+        String windowTitle = array[index].getName().getFirst() + " " +
+                array[index].getName().getMiddle() + " " +
+                array[index].getName().getLast();
+
+        String firstName = array[index].getName().getFirst();
+        String middleName = array[index].getName().getMiddle();
+        String lastName = array[index].getName().getLast();
+
+        String email = array[index].getEmail();
+        String phone = array[index].getPhone();
+
+        String payRate = array[index].getEmployee().getHourlyRate();
+        String position = array[index].getEmployee().getPosition();
+
+        String department = array[index].getEmployee().getManager().getDepartment();
+        String title = array[index].getEmployee().getManager().getTitle();
+
+        String line1 = array[index].getAddress().getAddressLine1();
+        String line2 = array[index].getAddress().getAddressLine2();
+        String city = array[index].getAddress().getCity();
+        String state = array[index].getAddress().getState();
+        String zip = array[index].getAddress().getZip();
+        String country = array[index].getAddress().getCountry();
+
+
+
+        String address ="\n" +
+                line1 + "\n" +
+                        line2 + "\n" +
+                        city + ", " +
+                        state + " " +
+                        zip + "\n" +
+                        country;
+
+
+
+
+
+
+        String details =
+                "First Name: " + firstName + "\n" +
+                "Middle Name: " + middleName + "\n" +
+                "Last Name: " + lastName + "\n" +
+
+                "Phone: " + phone + "\n" +
+                "Email: " + email + "\n" +
+
+                "Hourly Pay Rate: " + payRate + "\n" +
+
+                "Position: " + position + "\n" +
+
+                "Title: " + title + "\n" +
+
+                "Department: " + department + "\n" +
+
+
+                "Address: " + address + "\n";
+
+
+
+
+
+        JOptionPane.showOptionDialog(null,
+                details + details,
+                windowTitle,
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                buttons,
+                buttons[0]);
+
+
+
+
     }
 
     public static void displayOneEmployee() {

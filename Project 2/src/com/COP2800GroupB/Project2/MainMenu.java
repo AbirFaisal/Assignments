@@ -1,5 +1,6 @@
 package com.COP2800GroupB.Project2;
 
+import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Tools.Add;
 import com.COP2800GroupB.Project2.Tools.Display;
 import com.COP2800GroupB.Project2.Tools.Edit;
@@ -13,7 +14,7 @@ public class MainMenu {
 
 
     //Display tools
-    public static void displayMenu(){
+    public static void displayMenu(Person[] array){
 
         //Buttons to display
         String[] buttons = {"Cancel", "Edit", "Add", "Display"};
@@ -33,29 +34,29 @@ public class MainMenu {
         System.out.print("Selection = " + selection + "\n");
 
         //Call selection method with selection value
-        selection(selection);
+        selection(selection, array);
     }
 
     //Call selected tool
-    public static void selection(int selection){
+    public static void selection(int selection, Person[] array){
 
         //switch statement to call methods
         switch (selection){
             case 0:
                 //Exit Program
-                Main.confirmExit();
+                Main.confirmExit(array);
                 break;
             case 1:
                 //Call Edit Menu
-                Edit.displayMenu();
+                Edit.displayMenu(array);
                 break;
             case 2:
                 //Call Add Menu
-                Add.displayMenu();
+                Add.displayMenu(array);
                 break;
             case 3:
                 //Call Display Menu
-                Display.displayMenu();
+                Display.displayMenu(array);
                 break;
         }
     }
