@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="049b1db4-1344-44ff-b90a-7d4d5ce5c4bc" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/MainMenu.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/MainMenu.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/Tools/Add.class" afterPath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/Tools/Add.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/Tools/Display.class" afterPath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/Tools/Display.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/Tools/Edit.class" afterPath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/Tools/Edit.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/Main.class" afterPath="$PROJECT_DIR$/out/production/Project 2/com/COP2800GroupB/Project2/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Add.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Add.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Display.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Display.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Edit.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Edit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java" afterPath="$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project 2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,8 +49,22 @@
       <file leaf-file-name="Display.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Display.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6304985" vertical-offset="1620" max-vertical-offset="3525">
-              <caret line="151" column="30" selection-start-line="151" selection-start-column="30" selection-end-line="151" selection-end-column="30" />
+            <state vertical-scroll-proportion="-0.15835777" vertical-offset="1872" max-vertical-offset="3570">
+              <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#displayOneEmployee#0;class#Display#0" expanded="false" />
+                <element signature="method#displayOneManager#0;class#Display#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Edit.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Edit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
+              <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -576,12 +580,12 @@
       <workItem from="1424136648585" duration="1456000" />
       <workItem from="1424207922524" duration="2447000" />
       <workItem from="1424213139360" duration="5817000" />
-      <workItem from="1424220029334" duration="16559000" />
+      <workItem from="1424220029334" duration="16829000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82939000" />
+    <option name="totallyTimeSpent" value="83209000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1355" height="1337" extended-state="6" />
@@ -637,7 +641,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="10" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1046,16 +1050,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Edit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71847504" vertical-offset="0" max-vertical-offset="1023">
-          <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="1440">
@@ -1066,12 +1060,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Display.java">
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Edit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6304985" vertical-offset="1620" max-vertical-offset="3525">
-          <caret line="151" column="30" selection-start-line="151" selection-start-column="30" selection-end-line="151" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
+          <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/COP2800GroupB/Project2/Tools/Display.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.15835777" vertical-offset="1872" max-vertical-offset="3570">
+          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#displayOneEmployee#0;class#Display#0" expanded="false" />
+            <element signature="method#displayOneManager#0;class#Display#0" expanded="false" />
           </folding>
         </state>
       </provider>
