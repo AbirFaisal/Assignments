@@ -40,7 +40,8 @@ public class Display {
         //Create new JScrollPane with JList list
         JScrollPane scrollPane = new JScrollPane(list);
 
-        scrollPane.setPreferredSize(new Dimension(800,600));
+        //Dimension the scroll pane praportional to
+        scrollPane.setPreferredSize(new Dimension((array.length*2/3),array.length));
 
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
@@ -84,10 +85,10 @@ public class Display {
                 //MainMenu.displayMenu(array);
                 break;
             case 2:
-                Display.displayOneManager(index, array);
+                //Display.displayOneManager(index, array);
                 break;
             case 3:
-                Display.displayOneEmployee(index, array);
+                //Display.displayOneEmployee(index, array);
                 break;
             case 4:
                 Display.displayOnePerson(index, array);
@@ -184,7 +185,7 @@ public class Display {
                         address + "\n";
 
 
-
+        //display data and get selection if button press
         int selection = JOptionPane.showOptionDialog(null,
                 details,
                 windowTitle,
@@ -204,217 +205,15 @@ public class Display {
                 Display.displayAllPeople(array);
                 break;
             case 2:
-                Add.addPerson();
+                Add.addPerson(index, array);
                 break;
             case 4:
-                //Edit.editPerson();
+                Edit.editRecord(index, array);
                 break;
         }
 
 
     }
-
-
-    public static void displayOneEmployee(int index, Person[] array) {
-
-
-        //Buttons to display
-        String[] buttons = {
-                "Cancel",
-                "Return",
-                "Clear / Add",
-                "Edit"};
-
-        //Window Title as name of person
-        String windowTitle = array[index].getName().getFirst() + " " +
-                array[index].getName().getMiddle() + " " +
-                array[index].getName().getLast();
-
-        //first middle and last name as name
-        String name = array[index].getName().getFirst() + " " +
-                array[index].getName().getMiddle() + " " +
-                array[index].getName().getLast();
-
-        String email = array[index].getEmail();
-        String phone = array[index].getPhone();
-
-        String payRate = array[index].getEmployee().getHourlyRate();
-        String position = array[index].getEmployee().getPosition();
-
-        String department = array[index].getEmployee().getManager().getDepartment();
-        String title = array[index].getEmployee().getManager().getTitle();
-
-        String line1 = array[index].getAddress().getAddressLine1();
-        String line2 = array[index].getAddress().getAddressLine2();
-        String city = array[index].getAddress().getCity();
-        String state = array[index].getAddress().getState();
-        String zip = array[index].getAddress().getZip();
-        String country = array[index].getAddress().getCountry();
-
-        //address formatted
-        String address ="\n" +
-                line1 + "\n" +
-                line2 + "\n" +
-                city + ", " +
-                state + " " +
-                zip + "\n" +
-                country;
-
-
-        //Details formatted from strings created earlier
-        String details =
-                "Name: " + "\n" +
-                        name + "\n \n" +
-
-                        "Phone: " + "\n" +
-                        phone + "\n \n" +
-                        "Email: " + "\n" +
-                        email + "\n \n" +
-
-                        "Hourly Pay Rate: " + "\n" +
-                        payRate + "\n \n" +
-
-                        "Position: " + "\n" +
-                        position + "\n \n" +
-
-                        "Address: " +
-                        address + "\n";
-
-
-
-        int selection = JOptionPane.showOptionDialog(null,
-                details,
-                windowTitle,
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                buttons,
-                buttons[0]);
-
-        switch (selection){
-            case 0:
-                //cancel
-                Main.confirmExit(array);
-                break;
-            case 1:
-                //return
-                Display.displayAllPeople(array);
-                break;
-            case 2:
-                Add.addPerson();
-                break;
-            case 4:
-                //Edit.editPerson();
-                break;
-        }
-
-
-    }
-
-
-    public static void displayOneManager(int index, Person[] array) {
-
-
-        //Buttons to display
-        String[] buttons = {
-                "Cancel",
-                "Return",
-                "Clear / Add",
-                "Edit"};
-
-        //Window Title as name of person
-        String windowTitle = array[index].getName().getFirst() + " " +
-                array[index].getName().getMiddle() + " " +
-                array[index].getName().getLast();
-
-        //first middle and last name as name
-        String name = array[index].getName().getFirst() + " " +
-                array[index].getName().getMiddle() + " " +
-                array[index].getName().getLast();
-
-        String email = array[index].getEmail();
-        String phone = array[index].getPhone();
-
-        String payRate = array[index].getEmployee().getHourlyRate();
-        String position = array[index].getEmployee().getPosition();
-
-        String department = array[index].getEmployee().getManager().getDepartment();
-        String title = array[index].getEmployee().getManager().getTitle();
-
-        String line1 = array[index].getAddress().getAddressLine1();
-        String line2 = array[index].getAddress().getAddressLine2();
-        String city = array[index].getAddress().getCity();
-        String state = array[index].getAddress().getState();
-        String zip = array[index].getAddress().getZip();
-        String country = array[index].getAddress().getCountry();
-
-        //address formatted
-        String address ="\n" +
-                line1 + "\n" +
-                line2 + "\n" +
-                city + ", " +
-                state + " " +
-                zip + "\n" +
-                country;
-
-
-        //Details formatted from strings created earlier
-        String details =
-                "Name: " + "\n" +
-                        name + "\n \n" +
-
-                        "Phone: " + "\n" +
-                        phone + "\n \n" +
-                        "Email: " + "\n" +
-                        email + "\n \n" +
-
-                        "Hourly Pay Rate: " + "\n" +
-                        payRate + "\n \n" +
-
-                        "Position: " + "\n" +
-                        position + "\n \n" +
-
-                        "Title: " + "\n" +
-                        title + "\n \n" +
-
-                        "Department: " + "\n" +
-                        department + "\n \n" +
-
-                        "Address: " +
-                        address + "\n";
-
-
-
-        int selection = JOptionPane.showOptionDialog(null,
-                details,
-                windowTitle,
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                buttons,
-                buttons[0]);
-
-        switch (selection){
-            case 0:
-                //cancel
-                Main.confirmExit(array);
-                break;
-            case 1:
-                //return
-                Display.displayAllPeople(array);
-                break;
-            case 2:
-                Add.addPerson();
-                break;
-            case 4:
-                //Edit.editPerson();
-                break;
-        }
-
-
-    }
-
-
 
 
     //sort in alphabetical order.

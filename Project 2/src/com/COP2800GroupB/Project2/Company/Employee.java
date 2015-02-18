@@ -5,18 +5,31 @@ package com.COP2800GroupB.Project2.Company;
  */
 public class Employee {
 
+    boolean employee;   //is employee?
     String position;    //Employee Position
     String hourlyRate;  //Hourly Pay Rate
     Manager manager;    //Manager Object
 
     //Constructor
-    public Employee(String position, String hourlyRate, Manager manager) {
+
+    public Employee(boolean employee, String position, String hourlyRate, Manager manager) {
+        this.employee = employee;
         this.position = position;
         this.hourlyRate = hourlyRate;
         this.manager = manager;
     }
 
+
     //Setters and getters
+
+    public boolean isEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(boolean employee) {
+        this.employee = employee;
+    }
+
     public String getPosition() {
         return position;
     }

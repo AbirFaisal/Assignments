@@ -9,7 +9,7 @@ import javax.swing.*;
  */
 public class Edit {
     //Display tools
-    public static void displayMenu(Person[] array){
+    public static void editRecord(int index, Person[] array){
 
         //Buttons to display
         String[] buttons = {

@@ -191,7 +191,7 @@ g14
 I00
 sg15
 (lp72
-F430.0
+F710.0
 aF1410.0
 asg17
 (itiddlywiki
@@ -199,7 +199,7 @@ Tiddler
 p73
 (dp74
 g21
-VUnsorted\u000a[[DisplayOnePerson]]
+VUnsorted\u000a[[DisplayOnePerson]]\u000a[[Edit]]\u000a[[Add]]
 p75
 sg23
 VDisplayAllPeople
@@ -209,9 +209,9 @@ g26
 ((I2015
 I2
 I17
-I20
-I36
-I33
+I21
+I39
+I31
 I1
 I48
 I0
@@ -347,7 +347,7 @@ g14
 I00
 sg15
 (lp120
-F430.0
+F710.0
 aF1690.0
 asg17
 (itiddlywiki
@@ -553,8 +553,8 @@ g14
 I00
 sg15
 (lp183
-F1270.0
-aF1410.0
+F990.0
+aF1130.0
 asg17
 (itiddlywiki
 Tiddler
@@ -605,8 +605,8 @@ g14
 I00
 sg15
 (lp199
-F1830.0
-aF1130.0
+F1270.0
+aF1550.0
 asg17
 (itiddlywiki
 Tiddler
@@ -657,8 +657,8 @@ g14
 I00
 sg15
 (lp215
-F1970.0
-aF1550.0
+F1410.0
+aF1970.0
 asg17
 (itiddlywiki
 Tiddler
@@ -709,8 +709,8 @@ g14
 I00
 sg15
 (lp231
-F1830.0
-aF1550.0
+F1270.0
+aF1970.0
 asg17
 (itiddlywiki
 Tiddler
@@ -760,8 +760,8 @@ g14
 I00
 sg15
 (lp246
-F1690.0
-aF1550.0
+F1130.0
+aF1970.0
 asg17
 (itiddlywiki
 Tiddler
@@ -861,8 +861,8 @@ g14
 I00
 sg15
 (lp276
-F1410.0
-aF1830.0
+F1130.0
+aF1130.0
 asg17
 (itiddlywiki
 Tiddler
@@ -913,7 +913,7 @@ I00
 sg15
 (lp291
 F1130.0
-aF1830.0
+aF1410.0
 asg17
 (itiddlywiki
 Tiddler
@@ -963,8 +963,8 @@ g14
 I00
 sg15
 (lp306
-F1270.0
-aF1830.0
+F1130.0
+aF1270.0
 asg17
 (itiddlywiki
 Tiddler

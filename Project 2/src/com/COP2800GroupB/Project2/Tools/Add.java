@@ -64,7 +64,7 @@ public class Add {
     }
 
 
-    public static void addPerson(){
+    public static void addPerson(int index, Person[] array){
 
 
     }

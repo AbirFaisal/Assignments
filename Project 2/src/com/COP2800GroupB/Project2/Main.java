@@ -11,9 +11,6 @@ import javax.swing.*;
 public class Main {
 
 
-
-
-
     //change these to definitions and make it accessable
     //from the entire program
     public final int MAX_MANAGERS = 20;
@@ -24,19 +21,19 @@ public class Main {
 
         //Initialize database
         Person[] personDatabase = new Person[500-1];
-
         //Initialize objects in personDatabase array
-        for (int i = 0; i < personDatabase.length ; i++) {
+
+        for (int i = 0; i < personDatabase.length; i++) {
 
             //sample data
             //create new name of Name type
             Name tempName = new Name("John","Doe","Smith");
 
             //create new manager of Manager type
-            Manager tempManager = new Manager(false, "title", "department");
+            Manager tempManager = new Manager(true, "title", "department");
 
             //create new employee of employe type
-            Employee tempEmployee = new Employee("Janitor", "$500", tempManager);
+            Employee tempEmployee = new Employee(true,"Janitor", "$500", tempManager);
 
             //create new address of address type
             Address tempAddress = new Address("701 N Econlockhatchee Trail", "", "Orlando", "FL", "32825", "USA");
@@ -46,17 +43,12 @@ public class Main {
         }
 
 
-
         //Display All People
         Display.displayAllPeople(personDatabase);
 
 
-
-
     }
-
-    //so we don't have to type so much
-
+    //Exit Confirmation
     public static void confirmExit(Person[] array){
 
         //Buttons to display

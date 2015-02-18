@@ -5,9 +5,9 @@ package com.COP2800GroupB.Project2.Company;
  */
 public class Manager {
 
-    private boolean manager;
-    private String title;
-    private String department;
+    private boolean manager;    //isManager?
+    private String title;       //Title
+    private String department;  //Department
 
     //Constructor
     public Manager(boolean manager, String title, String department) {
