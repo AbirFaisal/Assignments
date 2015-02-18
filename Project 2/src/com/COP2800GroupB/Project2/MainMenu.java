@@ -46,7 +46,7 @@ public class MainMenu {
             case 2:
                 Add.displayMenu();
                 break;
-            case 4:
+            case 3:
                 Display.displayMenu();
                 break;
         }
