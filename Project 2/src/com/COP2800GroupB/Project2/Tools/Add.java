@@ -2,7 +2,6 @@ package com.COP2800GroupB.Project2.Tools;
 
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
-import com.COP2800GroupB.Project2.MainMenu;
 
 import javax.swing.*;
 
@@ -51,7 +50,7 @@ public class Add {
                 break;
             case 1:
                 //Call Edit Menu
-                MainMenu.displayMenu(array);
+                //MainMenu.displayMenu(array);
                 break;
             case 2:
                 //Call Add Menu
@@ -59,7 +58,7 @@ public class Add {
                 break;
             case 3:
                 //Call Display Menu
-                Display.displayMenu(array);
+                //Display.displayMenu(array);
                 break;
         }
     }

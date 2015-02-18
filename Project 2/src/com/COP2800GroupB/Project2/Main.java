@@ -4,6 +4,7 @@ package com.COP2800GroupB.Project2;
 
 
 import com.COP2800GroupB.Project2.Company.*;
+import com.COP2800GroupB.Project2.Tools.Display;
 
 import javax.swing.*;
 
@@ -27,31 +28,27 @@ public class Main {
         //Initialize objects in personDatabase array
         for (int i = 0; i < personDatabase.length ; i++) {
 
+            //sample data
             //create new name of Name type
-            Name tempName = new Name("First","Middle","Last");
+            Name tempName = new Name("John","Doe","Smith");
 
             //create new manager of Manager type
             Manager tempManager = new Manager(false, "title", "department");
 
             //create new employee of employe type
-            Employee tempEmployee = new Employee("Position", "Rate", tempManager);
+            Employee tempEmployee = new Employee("Janitor", "$500", tempManager);
 
             //create new address of address type
-            Address tempAddress = new Address("line1", "line2", "city", "state", "zip", "country");
+            Address tempAddress = new Address("701 N Econlockhatchee Trail", "", "Orlando", "FL", "32825", "USA");
 
             //create new person of Person type
-            personDatabase[i] = new Person(tempName, "Email", "Phone", tempEmployee, tempAddress);
+            personDatabase[i] = new Person(tempName, "mail@valenciacollege.edu", "407-299-5000", tempEmployee, tempAddress);
         }
 
 
 
-
-
-
-        //Initalize.init();
-
-        //Display mainMenu
-        MainMenu.displayMenu(personDatabase);
+        //Display All People
+        Display.displayAllPeople(personDatabase);
 
 
 
@@ -82,7 +79,7 @@ public class Main {
         //Exit or return
         switch (selection){
             case 0:
-                MainMenu.displayMenu(array);
+                Display.displayAllPeople(array);
                 break;
             case 1:
                 System.exit(0);

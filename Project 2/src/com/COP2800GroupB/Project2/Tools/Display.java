@@ -2,87 +2,19 @@ package com.COP2800GroupB.Project2.Tools;
 
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
-import com.COP2800GroupB.Project2.MainMenu;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by abirfaisal on 2/13/15.
  */
 public class Display {
 
-
-    public static void displayMenu(Person[] array) {
-
-
-        //Buttons to display
-        String[] buttons = {
-                "Cancel",
-                "Return",
-                "Display One Manager",
-                "Display One Employee",
-                "Display One Person",
-                "Display All Managers",
-                "Display All Employees",
-                "Display All People"};
-
-        //display buttons and prompt
-        int selection = JOptionPane.showOptionDialog(null,
-                "Select a Tool",
-                "Display Records",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                buttons,
-                buttons[0]);
-        ////////////////////////////
-
-        //for debugging purposes
-        System.out.print("Selection = " + selection + "\n");
-
-        //Call selection method with selection value
-        selection(selection, array);
-
-    }
-
-    //Call selected tool
-    public static void selection(int selection, Person[] array){
-
-        switch (selection){
-            case 0:
-                //Exit Program
-                Main.confirmExit(array);
-                break;
-            case 1:
-                //Return to Main Menu
-                MainMenu.displayMenu(array);
-                break;
-            case 2:
-                Display.displayOneManager();
-                break;
-            case 3:
-                Display.displayOneEmployee();
-                break;
-            case 4:
-                //Display.displayOnePerson(0);
-                break;
-            case 5:
-                Display.displayAllManagers();
-                break;
-            case 6:
-                Display.displayAllEmployees();
-                break;
-            case 7:
-                Display.displayAllPeople(array);
-                break;
-        }
-    }
-
     public static void displayAllPeople(Person[] array){
         //Buttons to display
         String[] buttons = {
                 "Cancel",
-                "Return",
                 "View"};
 
 
@@ -102,8 +34,13 @@ public class Display {
         // Create JList with string array
         JList list = new JList(tempStrArray);
 
+        //Auto select first record
+        list.setSelectedIndex(0);
+
+        //Create new JScrollPane with JList list
         JScrollPane scrollPane = new JScrollPane(list);
 
+        scrollPane.setPreferredSize(new Dimension(800,600));
 
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
@@ -115,14 +52,59 @@ public class Display {
                 buttons,
                 buttons[0]);
 
+        //set index to current List selection
         int index = list.getSelectedIndex();
 
+        System.out.print("Selection: " + selection);
         System.out.print("Index: " + index);
 
-        displayOnePerson(index, array);
 
+
+        switch (selection){
+            case 0:
+                Main.confirmExit(array);
+                break;
+            case 1:
+                Display.displayOnePerson(index, array);
+                break;
+        }
 
     }
+
+    //Call selected tool remove this later
+    public static void selection(int selection, Person[] array, int index){
+
+        switch (selection){
+            case 0:
+                //Exit Program
+                Main.confirmExit(array);
+                break;
+            case 1:
+                //Return to Main Menu
+                //MainMenu.displayMenu(array);
+                break;
+            case 2:
+                Display.displayOneManager();
+                break;
+            case 3:
+                Display.displayOneEmployee();
+                break;
+            case 4:
+                Display.displayOnePerson(index, array);
+                break;
+            case 5:
+                Display.displayAllManagers();
+                break;
+            case 6:
+                Display.displayAllEmployees();
+                break;
+            case 7:
+                Display.displayAllPeople(array);
+                break;
+        }
+    }
+
+
 
     public static void displayAllEmployees() {
     }
@@ -137,16 +119,18 @@ public class Display {
         String[] buttons = {
                 "Cancel",
                 "Return",
-                "Add",
+                "Clear / Add",
                 "Edit"};
 
+        //Window Title as name of person
         String windowTitle = array[index].getName().getFirst() + " " +
                 array[index].getName().getMiddle() + " " +
                 array[index].getName().getLast();
 
-        String firstName = array[index].getName().getFirst();
-        String middleName = array[index].getName().getMiddle();
-        String lastName = array[index].getName().getLast();
+        //first middle and last name as name
+        String name = array[index].getName().getFirst() + " " +
+                array[index].getName().getMiddle() + " " +
+                array[index].getName().getLast();
 
         String email = array[index].getEmail();
         String phone = array[index].getPhone();
@@ -164,10 +148,9 @@ public class Display {
         String zip = array[index].getAddress().getZip();
         String country = array[index].getAddress().getCountry();
 
-
-
+        //address formatted
         String address ="\n" +
-                line1 + "\n" +
+                        line1 + "\n" +
                         line2 + "\n" +
                         city + ", " +
                         state + " " +
@@ -175,35 +158,35 @@ public class Display {
                         country;
 
 
-
-
-
-
+        //Details formatted from strings created earlier
         String details =
-                "First Name: " + firstName + "\n" +
-                "Middle Name: " + middleName + "\n" +
-                "Last Name: " + lastName + "\n" +
+                "Name: " + "\n" +
+                        name + "\n \n" +
 
-                "Phone: " + phone + "\n" +
-                "Email: " + email + "\n" +
+                "Phone: " + "\n" +
+                        phone + "\n \n" +
+                "Email: " + "\n" +
+                        email + "\n \n" +
 
-                "Hourly Pay Rate: " + payRate + "\n" +
+                "Hourly Pay Rate: " + "\n" +
+                        payRate + "\n \n" +
 
-                "Position: " + position + "\n" +
+                "Position: " + "\n" +
+                        position + "\n \n" +
 
-                "Title: " + title + "\n" +
+                "Title: " + "\n" +
+                        title + "\n \n" +
 
-                "Department: " + department + "\n" +
+                "Department: " + "\n" +
+                        department + "\n \n" +
+
+                "Address: " +
+                        address + "\n";
 
 
-                "Address: " + address + "\n";
 
-
-
-
-
-        JOptionPane.showOptionDialog(null,
-                details + details,
+        int selection = JOptionPane.showOptionDialog(null,
+                details,
                 windowTitle,
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -211,7 +194,22 @@ public class Display {
                 buttons,
                 buttons[0]);
 
-
+        switch (selection){
+            case 0:
+                //cancel
+                Main.confirmExit(array);
+                break;
+            case 1:
+                //return
+                Display.displayAllPeople(array);
+                break;
+            case 2:
+                Add.addPerson();
+                break;
+            case 4:
+                //Edit.editPerson();
+                break;
+        }
 
 
     }
