@@ -59,55 +59,142 @@ public class Add {
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
 
-        //First Name Label and field
+        //First Name Label
         JLabel firstNameLabel = new JLabel("First Name: ", JLabel.TRAILING);
         form.add(firstNameLabel);
-
+        //First Name Field
         JTextField firstNameField  = new JTextField();
         firstNameLabel.setLabelFor(firstNameField);
         form.add(firstNameField);
 
-        //Middle Name Label and field
+        //Middle Name Label
         JLabel middleNameLabel = new JLabel("Middle Name: ", JLabel.TRAILING);
         form.add(middleNameLabel);
-
+        //Middle Name Field
         JTextField middleNameField  = new JTextField();
         firstNameLabel.setLabelFor(middleNameField);
         form.add(middleNameField);
 
-        //First Name Label and field
+        //First Name Label
         JLabel lastNameLabel = new JLabel("Last Name: ", JLabel.TRAILING);
         form.add(lastNameLabel);
-
+        //Middle Name Field
         JTextField lastNameField  = new JTextField();
         lastNameLabel.setLabelFor(lastNameField);
         form.add(lastNameField);
 
 
-        //Phone Number Label and field
+        //Phone Number Label
         JLabel phoneLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
         form.add(phoneLabel);
-
         //Phone Number Field
         JTextField phoneField  = new JTextField();
         phoneLabel.setLabelFor(phoneField);
         form.add(phoneField);
 
-        //Phone Number Label and field
-        JLabel phoneLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
-        form.add(phoneLabel);
+        //Email Label
+        JLabel emailLabel = new JLabel("E-Mail: ", JLabel.TRAILING);
+        form.add(emailLabel);
+        //Email Field
+        JTextField emailField  = new JTextField();
+        emailLabel.setLabelFor(emailField);
+        form.add(emailField);
 
-        //Phone Number Field
-        JTextField phoneField  = new JTextField();
-        phoneLabel.setLabelFor(phoneField);
-        form.add(phoneField);
+        //Hourly Pay Rate Label
+        JLabel hrPayRateLabel = new JLabel("Hourly Pay Rate: ", JLabel.TRAILING);
+        form.add(hrPayRateLabel);
+        //Hourly Pay Rate Field
+        JTextField hrPayRateField  = new JTextField();
+        hrPayRateLabel.setLabelFor(hrPayRateField);
+        form.add(hrPayRateField);
+
+        //Position Label
+        JLabel positionLabel = new JLabel("Position: ", JLabel.TRAILING);
+        form.add(positionLabel);
+        //Position Field
+        JTextField positionField  = new JTextField();
+        positionLabel.setLabelFor(positionField);
+        form.add(positionField);
+
+
+        //Title Label
+        JLabel titleLabel = new JLabel("Title: ", JLabel.TRAILING);
+        form.add(titleLabel);
+        //Title Field
+        JTextField titleField  = new JTextField();
+        titleLabel.setLabelFor(titleField);
+        form.add(titleField);
+
+
+        //Department Label
+        JLabel departmentLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(departmentLabel);
+        //Department Field
+        JTextField departmentField  = new JTextField();
+        departmentLabel.setLabelFor(departmentField);
+        form.add(departmentField);
+
+        //////////////////////// Address Label ////////////////////////////////
+
+        //Address Line 1 Label
+        JLabel line1Label = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(line1Label);
+        //Address Line 2 Field
+        JTextField line1Field  = new JTextField();
+        line1Label.setLabelFor(line1Field);
+        form.add(line1Field);
+
+
+        //Address Line 2 Label
+        JLabel line2Label = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(line2Label);
+        //Address Line 2 Field
+        JTextField line2Field  = new JTextField();
+        line2Label.setLabelFor(line2Field);
+        form.add(line2Field);
+
+
+        //City Label
+        JLabel cityLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(cityLabel);
+        //City Field
+        JTextField cityField  = new JTextField();
+        cityLabel.setLabelFor(cityField);
+        form.add(cityField);
+
+
+        //State Label
+        JLabel stateLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(stateLabel);
+        //State Field
+        JTextField stateField  = new JTextField();
+        stateLabel.setLabelFor(stateField);
+        form.add(stateField);
+
+
+
+        //Zip Label
+        JLabel zipLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(zipLabel);
+        //Department Field
+        JTextField zipField  = new JTextField();
+        zipLabel.setLabelFor(zipField);
+        form.add(zipField);
+
+
+
+        //Country Label
+        JLabel countryLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
+        form.add(countryLabel);
+        //Department Field
+        JTextField countryField  = new JTextField();
+        countryLabel.setLabelFor(countryField);
+        form.add(countryField);
 
 
 
 
-
-
-
+        
 
 
 
