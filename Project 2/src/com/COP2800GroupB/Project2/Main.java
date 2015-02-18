@@ -22,14 +22,17 @@ public class Main {
         //Initalize databases
         //Initalize.init();
 
+        //Display mainMenu
+
+        MainMenu.mainMenu();
+
 
         //Person Class test
-
         //create new name of Name type
         Name nameTest = new Name("first" , "Middle", "Last");
 
         //create new manager of Manager type
-        Manager testManager = new Manager("title", "department");
+        Manager testManager = new Manager(true, "title", "department");
 
         //create new employee of employe type
         Employee employeeTest = new Employee("positon", "title", testManager);
@@ -43,8 +46,11 @@ public class Main {
         Person test = new Person(nameTest , "email", "phone", employeeTest, addressTest );
 
 
-        Print("test");
 
+        //get first name test
+
+        // test object, get name, get first name
+        Print(test.getName().getFirst());
 
     }
 

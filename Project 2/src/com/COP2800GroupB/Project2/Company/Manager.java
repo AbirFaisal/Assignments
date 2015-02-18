@@ -5,15 +5,24 @@ package com.COP2800GroupB.Project2.Company;
  */
 public class Manager {
 
-    String title;
-    String department;
+    private boolean manager;
+    private String title;
+    private String department;
 
     //Constructor
-
-
-    public Manager(String title, String department) {
+    public Manager(boolean manager, String title, String department) {
+        this.manager = manager;
         this.title = title;
         this.department = department;
+    }
+
+    //Setters and Getters
+    public boolean isManager() {
+        return manager;
+    }
+
+    public void setManager(boolean manager) {
+        this.manager = manager;
     }
 
     public String getTitle() {
