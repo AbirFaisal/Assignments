@@ -121,12 +121,6 @@ public class Display {
     public static void displayOnePerson(int index, Person[] array) {
 
 
-        //Buttons to display
-        String[] buttons = {
-                "Cancel",
-                "Return",
-                "Clear / Add",
-                "Edit"};
 
         //Window Title as name of person
         String windowTitle = array[index].getName().getFirst() + " " +
@@ -190,6 +184,14 @@ public class Display {
                         address + "\n";
 
 
+
+        //Buttons to display
+        String[] buttons = {
+                "Cancel",
+                "Return",
+                "Clear / Add",
+                "Edit"};
+
         //display data and get selection if button press
         int selection = JOptionPane.showOptionDialog(null,
                 details,
@@ -212,7 +214,7 @@ public class Display {
             case 2:
                 Add.addPerson(index, array);
                 break;
-            case 4:
+            case 3:
                 Edit.editRecord(index, array);
                 break;
         }
