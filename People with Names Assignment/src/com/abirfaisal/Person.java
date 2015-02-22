@@ -97,9 +97,10 @@ public class Person {
             //test if salary is less than 0
             double temp = Double.parseDouble(salary);
 
-            if (temp > 0){
+            if (temp < 0){
                 throw new RuntimeException("Salary is negative. Are you giving or earning money?");
             }else {
+                System.out.print(salary);
                 this.salary = salary;
             }
 

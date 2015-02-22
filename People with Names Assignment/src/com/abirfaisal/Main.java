@@ -31,21 +31,13 @@ public class Main {
     public static void main(String[] args) {
 
         //Create array of Person type
-        Person[] personArray = new Person[3];
+        Person[] personArray = new Person[500];
 
         //Initialize records
         initalizeRecords(personArray);
 
-        //Print out records to screen
-        PrintRecords.print(personArray);
-
-
+        //Start Editor
         Edit.editRecord(personArray);
-
-
-
-
-
 
     }
 
@@ -55,7 +47,7 @@ public class Main {
 
         for (int i = 0; i < personArray.length; i++) {
 
-            Name name = new Name("John", "Mochafrap", "Smith");
+            Name name = new Name("John", "Mochafrapachino", "Smith");
 
             boolean gender = Math.random() < 0.5;
 
