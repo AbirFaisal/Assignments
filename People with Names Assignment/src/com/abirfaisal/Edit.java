@@ -26,9 +26,7 @@ public class Edit {
             Scanner input = new Scanner(System.in);
             int i = input.nextInt();
 
-            //remove
-            System.out.print("\nlength= " + personArray.length + "\ni= " + i + "\n");
-
+            //process input
             if (i == 0){
                 //exit
                 System.out.print("Bye");

@@ -31,7 +31,7 @@ public class Main {
     public static void main(String[] args) {
 
         //Create array of Person type
-        Person[] personArray = new Person[500];
+        Person[] personArray = new Person[5];
 
         //Initialize records
         initalizeRecords(personArray);
