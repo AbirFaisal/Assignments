@@ -15,11 +15,6 @@ public class Display {
 
 
     public static void displayAllPeople(Person[] array){
-        //Buttons to display
-        String[] buttons = {
-                "Cancel",
-                "View"};
-
 
         //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
@@ -50,6 +45,13 @@ public class Display {
 
         //Dimension the scroll pane praportional to
         scrollPane.setPreferredSize(new Dimension((array.length*2/3),array.length));
+
+
+        //Buttons to display
+        String[] buttons = {
+                "Cancel",
+                "View"};
+
 
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
@@ -83,9 +85,13 @@ public class Display {
 
 
     public static void displayAllEmployees() {
+
+
     }
 
     public static void displayAllManagers() {
+
+
     }
 
     public static void displayOnePerson(int index, Person[] array) {
