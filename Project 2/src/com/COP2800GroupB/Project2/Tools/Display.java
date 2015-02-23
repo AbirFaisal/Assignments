@@ -120,8 +120,6 @@ public class Display {
 
     public static void displayOnePerson(int index, Person[] array) {
 
-
-
         //Window Title as name of person
         String windowTitle = array[index].getName().getFirst() + " " +
                 array[index].getName().getMiddle() + " " +
@@ -182,6 +180,9 @@ public class Display {
 
                 "Address: " +
                         address + "\n";
+
+
+        String detailsTemp = ;
 
 
 
