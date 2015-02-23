@@ -9,7 +9,10 @@ import java.awt.*;
 /**
  * Created by abirfaisal on 2/13/15.
  */
+
+
 public class Display {
+
 
     public static void displayAllPeople(Person[] array){
         //Buttons to display
@@ -77,39 +80,6 @@ public class Display {
 
     }
 
-    //Call selected tool remove this later
-    public static void selection(int selection, Person[] array, int index){
-
-        switch (selection){
-            case 0:
-                //Exit Program
-                Main.confirmExit(array);
-                break;
-            case 1:
-                //Return to Main Menu
-                //MainMenu.displayMenu(array);
-                break;
-            case 2:
-                //Display.displayOneManager(index, array);
-                break;
-            case 3:
-                //Display.displayOneEmployee(index, array);
-                break;
-            case 4:
-                Display.displayOnePerson(index, array);
-                break;
-            case 5:
-                Display.displayAllManagers();
-                break;
-            case 6:
-                Display.displayAllEmployees();
-                break;
-            case 7:
-                Display.displayAllPeople(array);
-                break;
-        }
-    }
-
 
 
     public static void displayAllEmployees() {
@@ -120,15 +90,11 @@ public class Display {
 
     public static void displayOnePerson(int index, Person[] array) {
 
-
-
+        //Get person details
         String details = StringFormatter.stringOnePerson(index, array);
 
+        //Create person details
         String windowTitle = StringFormatter.getWindowTitle(index, array);
-
-
-
-
 
         //Buttons to display
         String[] buttons = {
@@ -137,12 +103,13 @@ public class Display {
                 "Clear / Add",
                 "Edit"};
 
+
         //display data and get selection if button press
         int selection = JOptionPane.showOptionDialog(null,
                 details,
                 windowTitle,
                 JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.DEFAULT_OPTION,
                 null,
                 buttons,
                 buttons[0]);
