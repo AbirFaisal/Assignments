@@ -5,13 +5,13 @@ package com.COP2800GroupB.Project2.Company;
  */
 public class Date {
 
-   int Month;
-    int Day;
-    int Year;
+    String Month;
+    String Day;
+    String Year;
 
 
     //Constructor
-    public Date(int month, int day, int year) {
+    public Date(String month, String day, String year) {
         Month = month;
         Day = day;
         Year = year;
@@ -19,31 +19,27 @@ public class Date {
 
 
     //Setters Getters
-    public int getMonth() {
+    public String getMonth() {
         return Month;
     }
 
-    public void setMonth(int month) {
-
+    public void setMonth(String month) {
         Month = month;
     }
 
-    public int getDay() {
+    public String getDay() {
         return Day;
     }
 
-    public void setDay(int day) {
+    public void setDay(String day) {
         Day = day;
     }
 
-    public int getYear() {
+    public String getYear() {
         return Year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         Year = year;
     }
-
-
-
 }
