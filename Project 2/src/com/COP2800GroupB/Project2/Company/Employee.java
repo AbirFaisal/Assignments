@@ -13,7 +13,7 @@ public class Employee {
 
 
     //Constructor
-    public Employee(boolean employee, String position, String hourlyRate, Manager manager, Date dateHired) {
+    public Employee(boolean employee, String position, String hourlyRate, Manager manager) {
         this.employee = employee;
         this.position = position;
         this.hourlyRate = hourlyRate;
