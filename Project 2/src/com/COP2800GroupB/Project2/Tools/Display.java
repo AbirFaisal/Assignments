@@ -164,9 +164,6 @@ public class Display {
                 break;
         }
 
-
-
-
     }
 
     public static void displayAllManagers() {

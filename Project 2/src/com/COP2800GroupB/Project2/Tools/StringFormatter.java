@@ -8,6 +8,7 @@ import com.COP2800GroupB.Project2.Company.Person;
 public class StringFormatter {
 
 
+    //TODO Add boolean for isEmployee and isManager
     public static String OnePerson(int index, Person[] array){
 
         //Person Fields
@@ -32,7 +33,7 @@ public class StringFormatter {
         String zip = array[index].getAddress().getZip() + "\n";
         String country = array[index].getAddress().getCountry() + "\n";
 
-        //address Formatted
+        //Address formatted from related strings created earlier
         String address =
                 "Address: \n" +
                 line1 +
@@ -41,21 +42,24 @@ public class StringFormatter {
                 state +
                 zip +
                 country;
-        
+
         //Change to concat
         //Details formatted from strings created earlier
-        String details =
-                        name  +
-                        phone +
-                        email +
-                        payRate +
-                        position +
-                        title +
-                        department +
-                        address;
+        //TODO add manager and employee checking
+        String details;
 
+        details = name  +
+        payRate +
+        position +
+        title +
+        department +
+        "Contact Information: \n \n" +
+                phone +
+                email +
+                address;
+
+        //return formatted details
         return details;
-
     }
 
     public static String getCombinedName(int index, Person[] array){
