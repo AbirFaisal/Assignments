@@ -6,6 +6,7 @@ import com.COP2800GroupB.Project2.Main;
 import javax.swing.*;
 import java.awt.*;
 
+
 /**
  * Created by abirfaisal on 2/13/15.
  */
@@ -58,7 +59,7 @@ public class Display {
                 scrollPane,
                 "People",
                 JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.PLAIN_MESSAGE,
                 null,
                 buttons,
                 buttons[0]);
@@ -115,7 +116,7 @@ public class Display {
                 details,
                 windowTitle,
                 JOptionPane.DEFAULT_OPTION,
-                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
                 null,
                 buttons,
                 buttons[0]);

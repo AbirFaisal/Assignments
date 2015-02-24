@@ -27,6 +27,13 @@ public class Employee {
     }
 
     public void setEmployee(boolean employee) {
+
+        //If not employee then set manager to false
+
+        if (!employee){
+            this.manager.setManager(false);
+        }
+
         this.employee = employee;
     }
 
