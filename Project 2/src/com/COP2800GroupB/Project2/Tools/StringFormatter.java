@@ -7,13 +7,12 @@ import com.COP2800GroupB.Project2.Company.Person;
  */
 public class StringFormatter {
 
-
-    //TODO Add boolean for isEmployee and isManager
     public static String OnePerson(int index, Person[] array){
 
-        //Person Fields
-        //first middle and last name as name
+        //Person Fields**
+        //first middle and last name as name**/
         String name = "Name: \n" + getCombinedName(index, array) + "\n \n";
+
         String email = "Email: \n" + array[index].getEmail() + "\n \n";
         String phone = "Phone: \n" + array[index].getPhone() + "\n \n";
 
@@ -43,17 +42,29 @@ public class StringFormatter {
                 zip +
                 country;
 
-        //Change to concat
         //Details formatted from strings created earlier
-        //TODO add manager and employee checking
-        String details;
 
-        details = name  +
-        payRate +
-        position +
-        title +
-        department +
-        "Contact Information: \n \n" +
+        //Add name
+        String details = name;
+
+        //Check if Employee
+        if (array[index].getEmployee().isEmployee()) {
+            //Add Employee info
+            details = details +
+                    payRate + position;
+        }
+
+        //Check if manager
+        //Using else if here because if not Employee then it cant be Manager
+        else if (array[index].getEmployee().getManager().isManager()) {
+            //Add Manager info
+            details = details +
+                    title + department;
+        }
+
+        //Add contact info
+        details = details +
+        "Contact Information: \n \n \n" +
                 phone +
                 email +
                 address;

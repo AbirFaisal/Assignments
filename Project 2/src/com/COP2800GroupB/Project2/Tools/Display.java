@@ -12,7 +12,6 @@ import java.awt.*;
  */
 
 
-
 public class Display {
 
 
@@ -88,10 +87,8 @@ public class Display {
     }
 
 
-
+    //TODO add isEmployee Checking
     public static void displayAllEmployees(Person[] array) {
-
-
 
         //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
@@ -171,7 +168,6 @@ public class Display {
 
     }
 
-    //TODO add isEmployee and isManager
     public static void displayOnePerson(int index, Person[] array) {
 
         //Get person details

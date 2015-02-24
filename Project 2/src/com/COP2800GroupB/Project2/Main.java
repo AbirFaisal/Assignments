@@ -31,9 +31,10 @@ public class Main {
             //create new manager of Manager type
             Manager tempManager = new Manager(false, "", "");
 
+            //Create new a date of Date type
             Date tempDate = new Date("","","");
 
-            //create new employee of employe type
+            //create new employee of employee type
             Employee tempEmployee = new Employee(false,"", "", tempManager, tempDate);
 
             //create new address of address type

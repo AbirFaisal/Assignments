@@ -21,21 +21,14 @@ public class Employee {
         this.dateHired = dateHired;
     }
 
-
     //Setters and getters
+
 
     public boolean isEmployee() {
         return employee;
     }
 
     public void setEmployee(boolean employee) {
-
-        //If not employee then set manager to false
-
-        if (!employee){
-            this.manager.setManager(false);
-        }
-
         this.employee = employee;
     }
 
@@ -71,3 +64,5 @@ public class Employee {
         this.dateHired = dateHired;
     }
 }
+
+
