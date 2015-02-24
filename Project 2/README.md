@@ -1,9 +1,6 @@
 # COP2800GroupWork
 
-This is a group project repository for our COP2800 class
+This is a group project repository for our COP2800 class Exam 2
 
-Project 1
-- Not sure what this program does.
 
-Project 2
-- Contact Database Applicaton
+###Assignment can be found in Assignment.pdf
