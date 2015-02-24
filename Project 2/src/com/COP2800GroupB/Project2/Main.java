@@ -31,7 +31,7 @@ public class Main {
             //create new manager of Manager type
             Manager tempManager = new Manager(false, "", "");
 
-            //create new employee of employee type
+            //create new employee of employe type
             Employee tempEmployee = new Employee(false,"", "", tempManager);
 
             //create new address of address type
