@@ -21,6 +21,9 @@ public class Employee {
         this.dateHired = dateHired;
     }
 
+    public Employee(boolean b, String s, String s1, Manager tempManager) {
+    }
+
 
     //Setters and getters
 
