@@ -9,14 +9,16 @@ public class Employee {
     String position;    //Employee Position
     String hourlyRate;  //Hourly Pay Rate
     Manager manager;    //Manager Object
+    Date dateHired;     //Hold date hired
+
 
     //Constructor
-
-    public Employee(boolean employee, String position, String hourlyRate, Manager manager) {
+    public Employee(boolean employee, String position, String hourlyRate, Manager manager, Date dateHired) {
         this.employee = employee;
         this.position = position;
         this.hourlyRate = hourlyRate;
         this.manager = manager;
+        this.dateHired = dateHired;
     }
 
 
@@ -59,5 +61,13 @@ public class Employee {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public Date getDateHired() {
+        return dateHired;
+    }
+
+    public void setDateHired(Date dateHired) {
+        this.dateHired = dateHired;
     }
 }

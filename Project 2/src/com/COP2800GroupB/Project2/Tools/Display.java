@@ -12,13 +12,17 @@ import java.awt.*;
  */
 
 
+
 public class Display {
 
 
     public static void displayAllPeople(Person[] array){
 
+
+
         //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
+
 
         //loop to initalize tempStrArray
         for (int i = 0; i < array.length; i++) {
