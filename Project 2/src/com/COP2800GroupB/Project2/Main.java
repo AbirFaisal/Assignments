@@ -28,14 +28,11 @@ public class Main {
             //create new name of Name type
             Name tempName = new Name("EMPTY","-","RECORD");
 
-            //IMPORTANTLINE
-            Date tempDate = new Date("1","2","3");
-
             //create new manager of Manager type
             Manager tempManager = new Manager(false, "", "");
 
             //create new employee of employe type
-            Employee tempEmployee = new Employee(false,"", "", tempManager, tempDate);
+            Employee tempEmployee = new Employee(false,"", "", tempManager);
 
             //create new address of address type
             Address tempAddress = new Address("", "", "", "", "", "");
