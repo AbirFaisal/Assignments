@@ -7,80 +7,80 @@ import com.COP2800GroupB.Project2.Company.Person;
  */
 public class StringFormatter {
 
+    public static String OnePerson(int index, Person[] array){
 
-    public static String stringOnePerson(int index, Person[] array){
-        
-        //first middle and last name as name
-        String name = array[index].getName().getFirst() + " " +
-                array[index].getName().getMiddle() + " " +
-                array[index].getName().getLast();
+        //Person Fields**
+        //first middle and last name as name**/
+        String name = "Name: \n" + getCombinedName(index, array) + "\n \n";
 
-        String email = array[index].getEmail();
-        String phone = array[index].getPhone();
+        String email = "Email: \n" + array[index].getEmail() + "\n \n";
+        String phone = "Phone: \n" + array[index].getPhone() + "\n \n";
 
-        String payRate = array[index].getEmployee().getHourlyRate();
-        String position = array[index].getEmployee().getPosition();
+        //Employee Specific fields
+        String payRate = "Hourly Pay Rate: \n" + array[index].getEmployee().getHourlyRate() + "\n \n";
+        String position = "Position: \n" + array[index].getEmployee().getPosition() + "\n \n";
 
-        String department = array[index].getEmployee().getManager().getDepartment();
-        String title = array[index].getEmployee().getManager().getTitle();
+        //Manager Specific fields
+        String department = "Department: \n" + array[index].getEmployee().getManager().getDepartment() + "\n \n";
+        String title = "Title: \n" + array[index].getEmployee().getManager().getTitle() + "\n \n";
 
-        String line1 = array[index].getAddress().getAddressLine1();
-        String line2 = array[index].getAddress().getAddressLine2();
-        String city = array[index].getAddress().getCity();
-        String state = array[index].getAddress().getState();
-        String zip = array[index].getAddress().getZip();
-        String country = array[index].getAddress().getCountry();
+        //Address Fields
+        String line1 = array[index].getAddress().getAddressLine1() + "\n";
+        String line2 = array[index].getAddress().getAddressLine2() + "\n";
+        String city = array[index].getAddress().getCity() + ", ";
+        String state = array[index].getAddress().getState() + " ";
+        String zip = array[index].getAddress().getZip() + "\n";
+        String country = array[index].getAddress().getCountry() + "\n";
 
-        //address formatted
-        String address ="\n" +
-                line1 + "\n" +
-                line2 + "\n" +
-                city + ", " +
-                state + " " +
-                zip + "\n" +
+        //Address formatted from related strings created earlier
+        String address =
+                "Address: \n" +
+                line1 +
+                line2 +
+                city +
+                state +
+                zip +
                 country;
 
-
         //Details formatted from strings created earlier
-        String details =
-                "Name: " + "\n" +
-                        name + "\n \n" +
 
-                        "Phone: " + "\n" +
-                        phone + "\n \n" +
-                        "Email: " + "\n" +
-                        email + "\n \n" +
+        //Add name
+        String details = name;
 
-                        "Hourly Pay Rate: " + "\n" +
-                        payRate + "\n \n" +
+        //Check if Employee
+        if (array[index].getEmployee().isEmployee()) {
+            //Add Employee info
+            details = details +
+                    payRate + position;
+        }
 
-                        "Position: " + "\n" +
-                        position + "\n \n" +
+        //Check if manager
+        //Using else if here because if not Employee then it cant be Manager
+        else if (array[index].getEmployee().getManager().isManager()) {
+            //Add Manager info
+            details = details +
+                    title + department;
+        }
 
-                        "Title: " + "\n" +
-                        title + "\n \n" +
+        //Add contact info
+        details = details +
+        "Contact Information: \n \n \n" +
+                phone +
+                email +
+                address;
 
-                        "Department: " + "\n" +
-                        department + "\n \n" +
-
-                        "Address: " +
-                        address + "\n";
-
+        //return formatted details
         return details;
-
     }
 
-    public static String getWindowTitle(int index, Person[] array){
+    public static String getCombinedName(int index, Person[] array){
 
         //Window Title as name of person
-        String windowTitle =
+        String name =
                 array[index].getName().getFirst() + " " +
                 array[index].getName().getMiddle() + " " +
                 array[index].getName().getLast();
 
-        return windowTitle;
+        return name;
     }
-
-
-
 }

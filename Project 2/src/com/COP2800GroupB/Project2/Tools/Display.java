@@ -12,7 +12,6 @@ import java.awt.*;
  */
 
 
-
 public class Display {
 
 
@@ -88,9 +87,79 @@ public class Display {
     }
 
 
+    //TODO add isEmployee Checking
+    public static void displayAllEmployees(Person[] array) {
 
-    public static void displayAllEmployees() {
+        //String array to hold concat'd name string
+        String[] tempStrArray = new String[array.length];
 
+
+        //loop to initalize tempStrArray
+        for (int i = 0; i < array.length; i++) {
+
+            //create string to temporarily store string
+            String tempStr = new String();
+
+            //temp string = first middle and last name combined
+            tempStr =
+                    array[i].getName().getFirst() + " " +
+                    array[i].getName().getMiddle() + " " +
+                    array[i].getName().getLast();
+
+
+            //assignd concat'd name to array
+            tempStrArray[i] = tempStr;
+        }
+
+
+
+
+
+        // Create JList with string array
+        JList list = new JList(tempStrArray);
+
+        //Auto select first record
+        list.setSelectedIndex(0);
+
+        //Create new JScrollPane with JList list
+        JScrollPane scrollPane = new JScrollPane(list);
+
+        //Dimension the scroll pane praportional to
+        scrollPane.setPreferredSize(new Dimension((array.length*2/3),array.length));
+
+
+        //Buttons to display
+        String[] buttons = {
+                "Cancel",
+                "View"};
+
+
+        //display buttons and prompt
+        int selection = JOptionPane.showOptionDialog(null,
+                scrollPane,
+                "People",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                buttons,
+                buttons[0]);
+
+        //set index to current List selection
+        int index = list.getSelectedIndex();
+
+        System.out.print("Selection: " + selection);
+        System.out.print("Index: " + index);
+
+
+
+        switch (selection){
+            case 0:
+                Main.confirmExit(array);
+                break;
+            case 1:
+                Display.displayOnePerson(index, array);
+                break;
+        }
 
     }
 
@@ -102,10 +171,10 @@ public class Display {
     public static void displayOnePerson(int index, Person[] array) {
 
         //Get person details
-        String details = StringFormatter.stringOnePerson(index, array);
+        String details = StringFormatter.OnePerson(index, array);
 
         //Create person details
-        String windowTitle = StringFormatter.getWindowTitle(index, array);
+        String windowTitle = StringFormatter.getCombinedName(index, array);
 
         //Buttons to display
         String[] buttons = {
