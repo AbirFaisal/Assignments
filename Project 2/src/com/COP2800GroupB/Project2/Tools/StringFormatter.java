@@ -56,7 +56,7 @@ public class StringFormatter {
 
         //Check if manager
         //Using else if here because if not Employee then it cant be Manager
-        else if (array[index].getEmployee().getManager().isManager()) {
+        if (array[index].getEmployee().getManager().isManager()) {
             //Add Manager info
             details = details +
                     title + department;
@@ -64,7 +64,7 @@ public class StringFormatter {
 
         //Add contact info
         details = details +
-        "Contact Information: \n \n \n" +
+        "Contact Information: \n \n" +
                 phone +
                 email +
                 address;
