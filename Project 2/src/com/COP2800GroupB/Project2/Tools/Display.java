@@ -102,23 +102,25 @@ public class Display {
         //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
 
-
-        //loop to initalize tempStrArray
-        for (int i = 0; i < array.length; i++) {
-
             //create string to temporarily store string
-            String tempStr = new String();
+            String tempStr;
 
-            //temp string = first middle and last name combined
-            tempStr =
-                    array[i].getName().getFirst() + " " +
-                    array[i].getName().getMiddle() + " " +
-                    array[i].getName().getLast();
+            //loop to initalize tempStrArray
+            for (int i = 0; i < array.length; i++) {
+                if (array[i].getEmployee().getManager().isManager()) {
+                    //temp string = first middle and last name combined
+                    tempStr =
+                            array[i].getName().getFirst() + " " +
+                                    array[i].getName().getMiddle() + " " +
+                                    array[i].getName().getLast();
 
 
-            //assignd concat'd name to array
-            tempStrArray[i] = tempStr;
-        }
+                    //assignd concat'd name to array
+                    tempStrArray[i] = tempStr;
+                }//end of if
+
+
+            }//end of for
 
 
 
@@ -180,23 +182,28 @@ public class Display {
         //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
 
+        //create string to temporarily store string
+        String tempStr;
+
 
         //loop to initalize tempStrArray
         for (int i = 0; i < array.length; i++) {
 
-            //create string to temporarily store string
-            String tempStr = new String();
 
-            //temp string = first middle and last name combined
-            tempStr =
-                    array[i].getName().getFirst() + " " +
-                            array[i].getName().getMiddle() + " " +
-                            array[i].getName().getLast();
+            if (array[i].getEmployee().getManager().isManager()) {
+                //temp string = first middle and last name combined
+                tempStr =
+                        array[i].getName().getFirst() + " " +
+                                array[i].getName().getMiddle() + " " +
+                                array[i].getName().getLast();
 
 
-            //assignd concat'd name to array
-            tempStrArray[i] = tempStr;
-        }
+                //assignd concat'd name to array
+                tempStrArray[i] = tempStr;
+            }//end of if
+
+
+        }//end of for
 
 
 
@@ -212,7 +219,11 @@ public class Display {
         JScrollPane scrollPane = new JScrollPane(list);
 
         //Dimension the scroll pane praportional to
-        scrollPane.setPreferredSize(new Dimension((array.length*2/3),array.length));
+        scrollPane.setPreferredSize(
+                new Dimension(
+                        (array.length*2/3),
+                        array.length)
+        );
 
 
         //Buttons to display
