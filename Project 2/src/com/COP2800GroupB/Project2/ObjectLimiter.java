@@ -11,8 +11,6 @@ import javax.swing.*;
 public class ObjectLimiter {
 
 
-
-
     //Checks to make sure that Employees and managers are within bounds
     public static void limitObject(boolean isEmployeeRadioYes, boolean isManagerRadioYes, Person[] array, int index) {
 
@@ -60,17 +58,16 @@ public class ObjectLimiter {
             }
         }
         //Check if employee is not selected
-        else if (!isEmployeeRadioYes){
+        else if (!isEmployeeRadioYes) {
 
             //Set both employee and manager to false since
             //Manager cant be true unless employee is true
             array[index].getEmployee().setEmployee(false);
             array[index].getEmployee().getManager().setManager(false);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Programmer Retardation");
         }
     }
-
 
 
     //return false if managers is more than 20
@@ -100,13 +97,11 @@ public class ObjectLimiter {
     }
 
 
-
-
     //returns false if employees is more than 100
     private static boolean checkEmployee(Person[] array) {
 
         //Hold number of Managers
-        int count=0;
+        int count = 0;
 
         //Loop through array
         for (int i = 0; i < array.length; i++) {

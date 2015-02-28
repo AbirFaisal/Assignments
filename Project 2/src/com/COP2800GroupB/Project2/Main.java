@@ -1,19 +1,13 @@
 package com.COP2800GroupB.Project2;
 
 
-
-
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Tools.Display;
 
 import javax.swing.*;
 
 
-
-
-
 public class Main {
-
 
 
     protected static final int MAX_MANAGERS = 20;
@@ -33,11 +27,8 @@ public class Main {
     }
 
 
-
-
-
     //Exit Confirmation
-    public static void confirmExit(Person[] array){
+    public static void confirmExit(Person[] array) {
 
         //Buttons to display
         String[] buttons = {
@@ -58,7 +49,7 @@ public class Main {
 
 
         //Exit or return
-        switch (selection){
+        switch (selection) {
             case 0:
                 //Return
                 //Pass array back

@@ -1,14 +1,13 @@
 package com.COP2800GroupB.Project2.Tools;
 
-
-
 import com.COP2800GroupB.Project2.Company.Person;
 
 
 public class StringFormatter {
 
+
     //Format String for displaying one record given the index and the array
-    public static String OnePerson(int index, Person[] array){
+    public static String OnePerson(int index, Person[] array) {
 
 
         //Person Fields
@@ -27,8 +26,6 @@ public class StringFormatter {
         String dateHired = "Hired: " + getDateHired(array, index) + "\n \n";
 
 
-
-
         //Get Pay Rate
         String payRate = "Hourly Pay Rate: \n" + array[index].getEmployee().getHourlyRate() + "\n \n";
         //Get Position
@@ -40,7 +37,6 @@ public class StringFormatter {
         String department = "Department: \n" + array[index].getEmployee().getManager().getDepartment() + "\n \n";
         //Get Title
         String title = "Title: \n" + array[index].getEmployee().getManager().getTitle() + "\n \n";
-
 
 
         //Address Fields
@@ -61,12 +57,12 @@ public class StringFormatter {
         //Address formatted from related strings created earlier
         String address =
                 "Address: \n" +
-                line1 +
-                line2 +
-                city +
-                state +
-                zip +
-                country;
+                        line1 +
+                        line2 +
+                        city +
+                        state +
+                        zip +
+                        country;
 
 
         //Get record modify date
@@ -77,6 +73,7 @@ public class StringFormatter {
         //Add name
         String details = name;
 
+
         //Check if isEmployee
         if (array[index].getEmployee().isEmployee()) {
             //Add Employee info
@@ -86,6 +83,7 @@ public class StringFormatter {
                     position;
         }
 
+
         //Check if isManager
         if (array[index].getEmployee().getManager().isManager()) {
             //Add Manager info
@@ -94,14 +92,14 @@ public class StringFormatter {
                     department;
         }
 
+
         //Add contact info
         details = details +
-        "Contact Information: \n \n" +
+                "Contact Information: \n \n" +
                 phone +
                 email +
                 address +
                 modfied;
-
 
 
         //return formatted details
@@ -110,7 +108,8 @@ public class StringFormatter {
 
 
     //Gets First Middle and Last and returns them as one string
-    public static String getCombinedName(int index, Person[] array){
+    public static String getCombinedName(int index, Person[] array) {
+
 
         //Combine strings
         String name =
@@ -118,12 +117,16 @@ public class StringFormatter {
                 array[index].getName().getMiddle() + " " +  //Get Middle Name + Space
                 array[index].getName().getLast();           //Get Last Name
 
+
         //Return Combined Strings
         return name;
     }
 
 
-    public static String getDateHired(Person[] array, int index){
+    //Get date hired
+    public static String getDateHired(Person[] array, int index) {
+
+        //Month array
         String[] month = {
                 "January",  //0
                 "February", //1
@@ -139,22 +142,29 @@ public class StringFormatter {
                 "December"};//11
 
 
+        //Get day
         String day = String.valueOf(
                 array[index].getEmployee().getDateHired().getDay() + 1);
 
+
+        //Get Year
         String year = String.valueOf(
                 array[index].getEmployee().getDateHired().getYear());
 
+
+        //Get month and assign to hiredDate string
         String hiredDate = month[array[index].getEmployee().getDateHired().getMonth()] + " " +
                 day + ", " +
                 year;
 
+
+        //Return Hired date string
         return hiredDate;
     }
 
 
-
-    public static String getModifiedDate(Person[] array, int index){
+    //Get date modified
+    public static String getModifiedDate(Person[] array, int index) {
         String[] month = {
                 "January",  //0
                 "February", //1
@@ -170,17 +180,21 @@ public class StringFormatter {
                 "December"};//11
 
 
+        //Get Day
         String day = String.valueOf(
                 array[index].getDate().getDay());
 
+        //Get Year
         String year = String.valueOf(
                 array[index].getDate().getYear());
 
+        //Get month and assign to hiredDate string
         String hiredDate = month[array[index].getDate().getMonth()] + " " +
                 day + ", " +
                 year;
 
-        return hiredDate;
 
+        //Return hiredDate
+        return hiredDate;
     }
 }

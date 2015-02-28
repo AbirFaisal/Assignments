@@ -26,9 +26,8 @@ public class Edit {
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
 
-        //Create
+        //Create JPanel
         JPanel firstName = new JPanel();
-
         firstName.setLayout(new FlowLayout());
 
         JLabel firstNameLabel = new JLabel("First Name: ", JLabel.TRAILING);
@@ -47,7 +46,7 @@ public class Edit {
         form.add(firstName);
 
 
-        //middle name JPanel
+        //Create JPanel
         JPanel middleName = new JPanel();
         middleName.setLayout(new FlowLayout());
 
@@ -63,7 +62,7 @@ public class Edit {
         form.add(middleName);
 
 
-        //last name JPanel
+        //Create JPanel
         JPanel lastName = new JPanel();
         lastName.setLayout(new FlowLayout());
 
@@ -79,7 +78,7 @@ public class Edit {
         form.add(lastName);
 
 
-        //phone name JPanel
+        //Create JPanel
         JPanel phone = new JPanel();
         phone.setLayout(new FlowLayout());
 
@@ -95,7 +94,7 @@ public class Edit {
         form.add(phone);
 
 
-        //email name JPanel
+        //Create JPanel
         JPanel email = new JPanel();
         email.setLayout(new FlowLayout());
 
@@ -114,7 +113,7 @@ public class Edit {
         ///////////Employee radio jpanel///////////////
 
 
-        //add radio button JPanel
+        //Create JPanel
         JPanel employeeRadio = new JPanel();
         employeeRadio.setLayout(new FlowLayout());
 
@@ -169,6 +168,8 @@ public class Edit {
 
 
         //date selection date panel//////////////////////////////////////////////////////////
+        //Create JPanel
+
         JPanel dateHired = new JPanel();
         dateHired.setLayout(new FlowLayout());
 
@@ -191,19 +192,22 @@ public class Edit {
                 "December"};//11
 
 
+        //Create month combo box
         JComboBox month = new JComboBox();
+        //Create combo box entries
         for (int i = 0; i < monthChoice.length; i++) {
             month.addItem(monthChoice[i]);
         }
         //Get and set month
         month.setSelectedIndex(array[index].getEmployee().getDateHired().getMonth());
-
+        //Add Combobox to JPanel
         dateHired.add(month);
 
 
-        //Dropdown menu for day hired
+        //Create month combo box
         JLabel dayLabel = new JLabel("Day: ", JLabel.TRAILING);
         dateHired.add(dayLabel);
+        //Create combo box entries
         JComboBox day = new JComboBox();
         for (int i = 1; i <= 31; i++) {
             day.addItem(i);
@@ -211,6 +215,7 @@ public class Edit {
         //Get and set day
         day.setSelectedIndex(array[index].getEmployee().getDateHired().getDay());
 
+        //Add Combobox to JPanel
         dateHired.add(day);
 
 
@@ -231,10 +236,10 @@ public class Edit {
         //Get and set year
         year.setSelectedIndex(array[index].getEmployee().getDateHired().getYear() - min_year);
 
-        //add year dropdown to dateHired JPanel
+        //Add Combobox to JPanel
         dateHired.add(year);
 
-
+        //Add JPanel to JPanel
         form.add(dateHired);
 
         ///////////////////////////////////////////////////////////////////////////////////////
@@ -252,6 +257,7 @@ public class Edit {
         hrPayRateLabel.setLabelFor(hrPayRateField);
         hourlyPay.add(hrPayRateField);
 
+        //Add JPanel to JPanel
         form.add(hourlyPay);
 
 
@@ -268,6 +274,7 @@ public class Edit {
         positionLabel.setLabelFor(positionField);
         postion.add(positionField);
 
+        //Add JPanel to JPanel
         form.add(postion);
 
 
@@ -330,7 +337,7 @@ public class Edit {
         titleLabel.setLabelFor(titleField);
         title.add(titleField);
 
-
+        //Add JPanel to JPanel
         form.add(title);
 
 
@@ -346,7 +353,7 @@ public class Edit {
         departmentLabel.setLabelFor(departmentField);
         department.add(departmentField);
 
-
+        //Add JPanel to JPanel
         form.add(department);
 
 
@@ -366,6 +373,7 @@ public class Edit {
         line1Label.setLabelFor(line1Field);
         line1.add(line1Field);
 
+        //Add JPanel to JPanel
         form.add(line1);
 
 
@@ -381,6 +389,7 @@ public class Edit {
         line2Label.setLabelFor(line2Field);
         line2.add(line2Field);
 
+        //Add JPanel to JPanel
         form.add(line2);
 
 
@@ -396,6 +405,7 @@ public class Edit {
         cityLabel.setLabelFor(cityField);
         city.add(cityField);
 
+        //Add JPanel to JPanel
         form.add(city);
 
 
@@ -411,6 +421,7 @@ public class Edit {
         stateLabel.setLabelFor(stateField);
         state.add(stateField);
 
+        //Add JPanel to JPanel
         form.add(state);
 
 
@@ -426,6 +437,7 @@ public class Edit {
         zipLabel.setLabelFor(zipField);
         zip.add(zipField);
 
+        //Add JPanel to JPanel
         form.add(zip);
 
 
@@ -441,6 +453,7 @@ public class Edit {
         countryLabel.setLabelFor(countryField);
         country.add(countryField);
 
+        //Add JPanel to JPanel
         form.add(country);
 
 

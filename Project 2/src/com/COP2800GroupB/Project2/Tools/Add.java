@@ -2,141 +2,456 @@ package com.COP2800GroupB.Project2.Tools;
 
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
+import com.COP2800GroupB.Project2.ObjectLimiter;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Calendar;
 
 /**
  * Created by abirfaisal on 2/13/15.
  */
 public class Add {
 
-    public static void addPerson(int index, Person[] array){
-        
+    public static void addPerson(int index, Person[] array) {
+
+
+        //Text field dimensions
+        Dimension fieldDimensions = new Dimension(250, 24);
+
+
         //Create new form panel with Box Layout along y axis
+        //This will store the window contents
         JPanel form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
-        //First Name Label
+
+        //Create JPanel
+        JPanel firstName = new JPanel();
+        firstName.setLayout(new FlowLayout());
+
         JLabel firstNameLabel = new JLabel("First Name: ", JLabel.TRAILING);
-        form.add(firstNameLabel);
-        //First Name Field
-        JTextField firstNameField  = new JTextField();
+
+        firstName.add(firstNameLabel);
+
+        //First Name Field and set text
+        JTextField firstNameField = new JTextField();
+
+        firstNameField.setPreferredSize(fieldDimensions);
+
         firstNameLabel.setLabelFor(firstNameField);
-        form.add(firstNameField);
+
+        firstName.add(firstNameField);
+
+        form.add(firstName);
+
+
+        //Create JPanel
+        JPanel middleName = new JPanel();
+        middleName.setLayout(new FlowLayout());
 
         //Middle Name Label
         JLabel middleNameLabel = new JLabel("Middle Name: ", JLabel.TRAILING);
-        form.add(middleNameLabel);
-        //Middle Name Field
-        JTextField middleNameField  = new JTextField();
-        firstNameLabel.setLabelFor(middleNameField);
-        form.add(middleNameField);
+        middleName.add(middleNameLabel);
+        //Middle Name Field and set text
+        JTextField middleNameField = new JTextField();
+        middleNameField.setPreferredSize(fieldDimensions);
+        middleNameLabel.setLabelFor(middleNameField);
+        middleName.add(middleNameField);
+        //add middleName JPanel to form JPanel
+        form.add(middleName);
+
+
+        //Create JPanel
+        JPanel lastName = new JPanel();
+        lastName.setLayout(new FlowLayout());
 
         //First Name Label
         JLabel lastNameLabel = new JLabel("Last Name: ", JLabel.TRAILING);
-        form.add(lastNameLabel);
-        //Middle Name Field
-        JTextField lastNameField  = new JTextField();
+        lastName.add(lastNameLabel);
+        //Middle Name Field and set text
+        JTextField lastNameField = new JTextField();
+        lastNameField.setPreferredSize(fieldDimensions);
         lastNameLabel.setLabelFor(lastNameField);
-        form.add(lastNameField);
+        lastName.add(lastNameField);
+
+        form.add(lastName);
+
+
+        //Create JPanel
+        JPanel phone = new JPanel();
+        phone.setLayout(new FlowLayout());
 
         //Phone Number Label
         JLabel phoneLabel = new JLabel("Phone Number: ", JLabel.TRAILING);
-        form.add(phoneLabel);
-        //Phone Number Field
-        JTextField phoneField  = new JTextField();
+        phone.add(phoneLabel);
+        //Phone Number Field and set text
+        JTextField phoneField = new JTextField();
+        phoneField.setPreferredSize(fieldDimensions);
         phoneLabel.setLabelFor(phoneField);
-        form.add(phoneField);
+        phone.add(phoneField);
+
+        form.add(phone);
+
+
+        //Create JPanel
+        JPanel email = new JPanel();
+        email.setLayout(new FlowLayout());
 
         //Email Label
         JLabel emailLabel = new JLabel("E-Mail: ", JLabel.TRAILING);
-        form.add(emailLabel);
-        //Email Field
-        JTextField emailField  = new JTextField();
+        email.add(emailLabel);
+        //Email Field and set text
+        JTextField emailField = new JTextField();
+        emailField.setPreferredSize(fieldDimensions);
         emailLabel.setLabelFor(emailField);
-        form.add(emailField);
+        email.add(emailField);
+
+        form.add(email);
+
+
+        ///////////Employee radio jpanel///////////////
+
+
+        //Create JPanel
+        JPanel employeeRadio = new JPanel();
+        employeeRadio.setLayout(new FlowLayout());
+
+        //is employee label
+        JLabel isEmployeeLabel = new JLabel("Employee", JLabel.TRAILING);
+        employeeRadio.add(isEmployeeLabel);
+
+
+        //yes radio button
+        final JRadioButton isEmployeeRadioYes = new JRadioButton("yes");
+        isEmployeeLabel.setLabelFor(isEmployeeRadioYes);
+        employeeRadio.add(isEmployeeRadioYes);
+
+        //no radio button
+        final JRadioButton isEmployeeRadioNo = new JRadioButton("No", true);
+        isEmployeeLabel.setLabelFor(isEmployeeRadioNo);
+        employeeRadio.add(isEmployeeRadioNo);
+
+
+        isEmployeeRadioYes.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    isEmployeeRadioNo.setSelected(false);
+                } else if (e.getStateChange() == ItemEvent.DESELECTED) {
+                    isEmployeeRadioNo.setSelected(true);
+                }
+            }
+        });
+
+        isEmployeeRadioNo.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    isEmployeeRadioYes.setSelected(false);
+                } else if (e.getStateChange() == ItemEvent.DESELECTED) {
+                    isEmployeeRadioYes.setSelected(true);
+                }
+            }
+        });
+
+
+        //Date hired label
+        JLabel dateLabel = new JLabel("as of:", JLabel.TRAILING);
+
+        employeeRadio.add(dateLabel);
+
+        //add jpanel employee radio to
+        form.add(employeeRadio);
+
+        //Employee radio jpanel /////////////////
+
+
+        //date selection date panel//////////////////////////////////////////////////////////
+        //Create JPanel
+
+        JPanel dateHired = new JPanel();
+        dateHired.setLayout(new FlowLayout());
+
+
+        //Dropdown menu for month hired
+        JLabel monthLabel = new JLabel("Month: ", JLabel.TRAILING);
+        dateHired.add(monthLabel);
+        String[] monthChoice = {
+                "January",  //0
+                "February", //1
+                "March",    //2
+                "April",    //3
+                "May",      //4
+                "June",     //5
+                "July",     //6
+                "August",   //7
+                "September",//8
+                "October",  //9
+                "November", //10
+                "December"};//11
+
+
+        //Create month combo box
+        JComboBox month = new JComboBox();
+        //Create combo box entries
+        for (int i = 0; i < monthChoice.length; i++) {
+            month.addItem(monthChoice[i]);
+        }
+        //Add Combobox to JPanel
+        dateHired.add(month);
+
+
+        //Create month combo box
+        JLabel dayLabel = new JLabel("Day: ", JLabel.TRAILING);
+        dateHired.add(dayLabel);
+        //Create combo box entries
+        JComboBox day = new JComboBox();
+        for (int i = 1; i <= 31; i++) {
+            day.addItem(i);
+        }
+
+        //Add Combobox to JPanel
+        dateHired.add(day);
+
+
+        //Dropdown menu for year hired
+        JLabel yearLabel = new JLabel("Year: ", JLabel.TRAILING);
+        dateHired.add(yearLabel);
+        JComboBox year = new JComboBox();
+
+        Calendar tempDate = Calendar.getInstance();
+
+        int min_year = 1970;
+        int max_year = tempDate.get(Calendar.YEAR);
+
+        for (int i = min_year; i <= max_year; i++) {
+            year.addItem(i);
+        }
+
+
+        //Add Combo Box to JPanel
+        dateHired.add(year);
+
+        //Add JPanel to JPanel
+        form.add(dateHired);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+
+        //hourly Pay name JPanel
+        JPanel hourlyPay = new JPanel();
+        hourlyPay.setLayout(new FlowLayout());
 
         //Hourly Pay Rate Label
         JLabel hrPayRateLabel = new JLabel("Hourly Pay Rate: ", JLabel.TRAILING);
-        form.add(hrPayRateLabel);
-        //Hourly Pay Rate Field
-        JTextField hrPayRateField  = new JTextField();
+        hourlyPay.add(hrPayRateLabel);
+        //Hourly Pay Rate Field and set text
+        JTextField hrPayRateField = new JTextField();
+        hrPayRateField.setPreferredSize(fieldDimensions);
         hrPayRateLabel.setLabelFor(hrPayRateField);
-        form.add(hrPayRateField);
+        hourlyPay.add(hrPayRateField);
+
+        //Add JPanel to JPanel
+        form.add(hourlyPay);
+
+
+        //middle name JPanel
+        JPanel postion = new JPanel();
+        postion.setLayout(new FlowLayout());
 
         //Position Label
         JLabel positionLabel = new JLabel("Position: ", JLabel.TRAILING);
-        form.add(positionLabel);
-        //Position Field
-        JTextField positionField  = new JTextField();
+        postion.add(positionLabel);
+        //Position Field and set text
+        JTextField positionField = new JTextField();
+        positionField.setPreferredSize(fieldDimensions);
         positionLabel.setLabelFor(positionField);
-        form.add(positionField);
+        postion.add(positionField);
+
+        //Add JPanel to JPanel
+        form.add(postion);
+
+
+        //Add manager radio
+
+        //add radio button
+
+        JPanel managerRadio = new JPanel();
+        managerRadio.setLayout(new FlowLayout());
+
+        JLabel isManagerLabel = new JLabel("Manager", JLabel.TRAILING);
+        managerRadio.add(isManagerLabel);
+
+
+        final JRadioButton isManagerRadioYes = new JRadioButton("yes");
+        isManagerLabel.setLabelFor(isManagerRadioYes);
+        managerRadio.add(isManagerRadioYes);
+
+
+        final JRadioButton isManagerRadioNo = new JRadioButton("No", true);
+        isManagerLabel.setLabelFor(isManagerRadioNo);
+        managerRadio.add(isManagerRadioNo);
+
+
+        isManagerRadioYes.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    isManagerRadioNo.setSelected(false);
+                } else if (e.getStateChange() == ItemEvent.DESELECTED) {
+                    isManagerRadioNo.setSelected(true);
+                }
+            }
+        });
+
+        isManagerRadioNo.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    isManagerRadioYes.setSelected(false);
+                } else if (e.getStateChange() == ItemEvent.DESELECTED) {
+                    isManagerRadioYes.setSelected(true);
+                }
+            }
+        });
+
+
+        //add
+        form.add(managerRadio);
+
+        JPanel title = new JPanel();
+        title.setLayout(new FlowLayout());
 
         //Title Label
         JLabel titleLabel = new JLabel("Title: ", JLabel.TRAILING);
-        form.add(titleLabel);
-        //Title Field
-        JTextField titleField  = new JTextField();
+        title.add(titleLabel);
+        //Title Field and set text
+        JTextField titleField = new JTextField();
+        titleField.setPreferredSize(fieldDimensions);
         titleLabel.setLabelFor(titleField);
-        form.add(titleField);
+        title.add(titleField);
+
+        //Add JPanel to JPanel
+        form.add(title);
+
+
+        JPanel department = new JPanel();
+        department.setLayout(new FlowLayout());
 
         //Department Label
         JLabel departmentLabel = new JLabel("Department: ", JLabel.TRAILING);
-        form.add(departmentLabel);
-        //Department Field
-        JTextField departmentField  = new JTextField();
+        department.add(departmentLabel);
+        //Department Field and set text
+        JTextField departmentField = new JTextField();
+        departmentField.setPreferredSize(fieldDimensions);
         departmentLabel.setLabelFor(departmentField);
-        form.add(departmentField);
+        department.add(departmentField);
+
+        //Add JPanel to JPanel
+        form.add(department);
+
 
         //////////////////////// Address Label ////////////////////////////////
 
+
+        JPanel line1 = new JPanel();
+        line1.setLayout(new FlowLayout());
+
+
         //Address Line 1 Label
         JLabel line1Label = new JLabel("Address Line 1: ", JLabel.TRAILING);
-        form.add(line1Label);
-        //Address Line 2 Field
-        JTextField line1Field  = new JTextField();
+        line1.add(line1Label);
+        //Address Line 2 Field and set text
+        JTextField line1Field = new JTextField();
+        line1Field.setPreferredSize(fieldDimensions);
         line1Label.setLabelFor(line1Field);
-        form.add(line1Field);
+        line1.add(line1Field);
+
+        //Add JPanel to JPanel
+        form.add(line1);
+
+
+        JPanel line2 = new JPanel();
+        line2.setLayout(new FlowLayout());
 
         //Address Line 2 Label
         JLabel line2Label = new JLabel("Address Line 2: ", JLabel.TRAILING);
-        form.add(line2Label);
-        //Address Line 2 Field
-        JTextField line2Field  = new JTextField();
+        line2.add(line2Label);
+        //Address Line 2 Field and set text
+        JTextField line2Field = new JTextField();
+        line2Field.setPreferredSize(fieldDimensions);
         line2Label.setLabelFor(line2Field);
-        form.add(line2Field);
+        line2.add(line2Field);
+
+        //Add JPanel to JPanel
+        form.add(line2);
+
+
+        JPanel city = new JPanel();
+        city.setLayout(new FlowLayout());
 
         //City Label
         JLabel cityLabel = new JLabel("City: ", JLabel.TRAILING);
-        form.add(cityLabel);
-        //City Field
-        JTextField cityField  = new JTextField();
+        city.add(cityLabel);
+        //City Field and set text
+        JTextField cityField = new JTextField();
+        cityField.setPreferredSize(fieldDimensions);
         cityLabel.setLabelFor(cityField);
-        form.add(cityField);
+        city.add(cityField);
+
+        //Add JPanel to JPanel
+        form.add(city);
+
+
+        JPanel state = new JPanel();
+        state.setLayout(new FlowLayout());
 
         //State Label
         JLabel stateLabel = new JLabel("State: ", JLabel.TRAILING);
-        form.add(stateLabel);
-        //State Field
-        JTextField stateField  = new JTextField();
+        state.add(stateLabel);
+        //State Field and set text
+        JTextField stateField = new JTextField();
+        stateField.setPreferredSize(fieldDimensions);
         stateLabel.setLabelFor(stateField);
-        form.add(stateField);
+        state.add(stateField);
+
+        //Add JPanel to JPanel
+        form.add(state);
+
+
+        JPanel zip = new JPanel();
+        zip.setLayout(new FlowLayout());
 
         //Zip Label
         JLabel zipLabel = new JLabel("Zip: ", JLabel.TRAILING);
-        form.add(zipLabel);
-        //Department Field
-        JTextField zipField  = new JTextField();
+        zip.add(zipLabel);
+        //Department Field and set text
+        JTextField zipField = new JTextField();
+        zipField.setPreferredSize(fieldDimensions);
         zipLabel.setLabelFor(zipField);
-        form.add(zipField);
+        zip.add(zipField);
+
+        //Add JPanel to JPanel
+        form.add(zip);
+
+
+        JPanel country = new JPanel();
+        country.setLayout(new FlowLayout());
 
         //Country Label
         JLabel countryLabel = new JLabel("Country: ", JLabel.TRAILING);
-        form.add(countryLabel);
-        //Department Field
-        JTextField countryField  = new JTextField();
+        country.add(countryLabel);
+        //Department Field and set text
+        JTextField countryField = new JTextField();
+        countryField.setPreferredSize(fieldDimensions);
         countryLabel.setLabelFor(countryField);
-        form.add(countryField);
+        country.add(countryField);
+
+        //Add JPanel to JPanel
+        form.add(country);
+
 
         //Buttons to display
         String[] buttons = {
@@ -144,10 +459,14 @@ public class Add {
                 "Discard & Return",
                 "Save"};
 
+        //Create window title
+        String windowTitle = "Editing: " + StringFormatter.getCombinedName(index, array);
+
         //display buttons and prompt
-        int selection = JOptionPane.showOptionDialog(null,
+        int selection = JOptionPane.showOptionDialog(
+                null,
                 form,
-                "Add Record",
+                windowTitle,
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
@@ -163,7 +482,10 @@ public class Add {
         //selection(selection, array);
 
 
-        switch (selection){
+        //radio buttons to true false
+
+
+        switch (selection) {
             case 0:
                 //Cancel
                 Main.confirmExit(array);
@@ -173,11 +495,33 @@ public class Add {
                 Display.displayAllPeople(array);
                 break;
             case 2:
-                //Save and return
+                //check and set radio buttons
+                ObjectLimiter.limitObject(
+                        isEmployeeRadioYes.isSelected(),
+                        isManagerRadioYes.isSelected(),
+                        array,
+                        index);
+
+                //set date Hired
+                //set month
+                array[index].getEmployee().getDateHired().setMonth(
+                        month.getSelectedIndex());
+                //set day
+                array[index].getEmployee().getDateHired().setDay(
+                        day.getSelectedIndex());
+                //set year
+                array[index].getEmployee().getDateHired().setYear(
+                        year.getSelectedIndex() + min_year);
+
+
                 //Set Name in persondatabase
-                array[index].getName().setFirst(firstNameField.getText());
-                array[index].getName().setMiddle(middleNameField.getText());
-                array[index].getName().setLast(lastNameField.getText());
+                //set
+                array[index].getName().setFirst(
+                        firstNameField.getText());
+                array[index].getName().setMiddle(
+                        middleNameField.getText());
+                array[index].getName().setLast(
+                        lastNameField.getText());
 
                 //set phone
                 array[index].setPhone(
@@ -188,6 +532,7 @@ public class Add {
                 array[index].setEmail(
                         //get email field text
                         emailField.getText());
+
 
                 //set pay rate
                 array[index].getEmployee().setHourlyRate(
@@ -238,7 +583,12 @@ public class Add {
                         //get country field text
                         countryField.getText());
 
+                //set date record
+                //array[index].getDat
+
+                //Go back to display all people
                 Display.displayAllPeople(array);
+
                 break;
         }
     }

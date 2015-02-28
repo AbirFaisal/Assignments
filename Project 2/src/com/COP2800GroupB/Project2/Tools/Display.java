@@ -15,8 +15,8 @@ import java.awt.*;
 public class Display {
 
 
-    public static void displayAllPeople(Person[] array){
-
+    //Display all people
+    public static void displayAllPeople(Person[] array) {
 
 
         //String array to hold concat'd name string
@@ -30,7 +30,7 @@ public class Display {
             String tempStr;
 
             //temp string = first middle and last name combined
-            tempStr = StringFormatter.getCombinedName(i,array);
+            tempStr = StringFormatter.getCombinedName(i, array);
 
 
             //assignd concat'd name to array
@@ -47,15 +47,15 @@ public class Display {
         JScrollPane scrollPane = new JScrollPane(list);
 
         //Dimension the scroll pane praportional to
-        scrollPane.setPreferredSize(new Dimension((array.length*2/3),array.length));
+        scrollPane.setPreferredSize(new Dimension((array.length * 2 / 3), array.length));
 
 
         //Buttons to display
         String[] buttons = {
                 "Cancel",
                 "View Record",
-        "View Employees",
-        "View Managers"};
+                "View Employees",
+                "View Managers"};
 
 
         //display buttons and prompt
@@ -71,12 +71,9 @@ public class Display {
         //set index to current List selection
         int index = list.getSelectedIndex();
 
-        System.out.print("Selection: " + selection);
-        System.out.print("Index: " + index);
 
 
-
-        switch (selection){
+        switch (selection) {
             case 0:
                 Main.confirmExit(array);
                 break;
@@ -89,43 +86,44 @@ public class Display {
             case 3:
                 Display.displayAllManagers(array);
                 break;
-
         }
+    }
 
-    }//end of displayAllPeople
 
-
+    //Display only Employees
     public static void displayAllEmployees(Person[] array) {
+
 
         //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
 
-            //create string to temporarily store string
-            String tempStr;
+
+        //create string to temporarily store string
+        String tempStr;
 
 
+        //Compensate for difference between array size and EmployeesF.
         int arrayCompensator = 0;
 
 
-
-            //loop to initialize tempStrArray
-
+        //loop to initialize tempStrArray
         for (int i = 0; i < array.length; i++) {
+
+            //Test if isEmployee
             if (array[i].getEmployee().isEmployee()) {
 
                 //temp string = first middle and last name combined
-                tempStr = StringFormatter.getCombinedName(i,array);
+                tempStr = StringFormatter.getCombinedName(i, array);
 
                 //assignd concat'd name to array
                 tempStrArray[i] = tempStr;
-            }else{
+            } else {
                 arrayCompensator++;
             }
         }//end of for
 
-        //sort ZA
-        sortZA(tempStrArray);
-
+        //TODO sort ZA
+        //sortZA(tempStrArray);
 
 
         // Create JList with string array
@@ -138,14 +136,14 @@ public class Display {
         JScrollPane scrollPane = new JScrollPane(list);
 
         //Dimension the scroll pane praportional to
-        scrollPane.setPreferredSize(new Dimension((array.length*2/3),array.length));
+        scrollPane.setPreferredSize(new Dimension((array.length * 2 / 3), array.length));
 
 
         //Buttons to display
         String[] buttons = {
                 "Cancel",
                 "View",
-            "Return"};
+                "Return"};
 
 
         //display buttons and prompt
@@ -161,12 +159,8 @@ public class Display {
         //set index to current List selection
         int index = list.getSelectedIndex();
 
-        System.out.print("Selection: " + selection);
-        System.out.print("Index: " + index);
 
-
-
-        switch (selection){
+        switch (selection) {
             case 0:
                 Main.confirmExit(array);
                 break;
@@ -174,45 +168,47 @@ public class Display {
                 Display.displayOnePerson(index + arrayCompensator, array);
                 break;
             case 2:
-            Display.displayAllPeople(array);
-            break;
-        }//end of switch
+                Display.displayAllPeople(array);
+                break;
+        }
 
-    }//end of displayAllEmployees
+    }
 
-    public static void displayAllManagers(Person[] array ) {
+
+    //Display All Managers
+    public static void displayAllManagers(Person[] array) {
         //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
 
         //create string to temporarily store string
         String tempStr;
 
-        int arrayComphensator = 0;
+        //Compensate for difference between array size and Employees.
+        int arrayCompensator = 0;
 
 
         //loop to initalize tempStrArray
         for (int i = 0; i < array.length; i++) {
 
 
+            //Test if isManager
             if (array[i].getEmployee().getManager().isManager()) {
 
                 //temp string = first middle and last name combined
-                tempStr = StringFormatter.getCombinedName(i,array);
+                tempStr = StringFormatter.getCombinedName(i, array);
 
                 //assignd concat'd name to array
                 tempStrArray[i] = tempStr;
-            }else{
-                arrayComphensator++;
+            } else {
+                arrayCompensator++;
             }
 
 
         }//end of for
 
 
-
-        //sort A-Z
-        sortAZ(tempStrArray);
-
+        //TODO sort A-Z
+        //sortAZ(tempStrArray);
 
 
         // Create JList with string array
@@ -227,7 +223,7 @@ public class Display {
         //Dimension the scroll pane praportional to
         scrollPane.setPreferredSize(
                 new Dimension(
-                        (array.length*2/3),
+                        (array.length * 2 / 3),
                         array.length)
         );
 
@@ -256,13 +252,12 @@ public class Display {
         System.out.print("Index: " + index);
 
 
-
-        switch (selection){
+        switch (selection) {
             case 0:
                 Main.confirmExit(array);
                 break;
             case 1:
-                Display.displayOnePerson(index+arrayComphensator, array);
+                Display.displayOnePerson(index + arrayCompensator, array);
                 break;
             case 2:
                 Display.displayAllPeople(array);
@@ -298,7 +293,7 @@ public class Display {
                 buttons,
                 buttons[0]);
 
-        switch (selection){
+        switch (selection) {
             case 0:
                 //cancel
                 Main.confirmExit(array);
@@ -318,20 +313,26 @@ public class Display {
 
 
     //Bubble sort in alphabetical order.
+    //TODO returns null pointer exception
+    //TODO add comments
     public static void sortAZ(String[] array) {
 
+        //Hold temp string
         String temp;
 
-        for (int i = 0; i < (array.length-1); i++) {
+        //Times to run through array
+        for (int i = 0; i < (array.length - 1); i++) {
 
-            for (int j = 1; j < (array.length-1); j++) {
+            //Run through array
+            for (int j = 1; j < (array.length - 1); j++) {
 
-                char a = array[j-1].charAt(1);
+                //TODO problem is with charAt any other way to assign a and b
+                char a = array[j - 1].charAt(1);
                 char b = array[j].charAt(1);
 
                 if (a > b) {
-                    temp = array[j-1];
-                    array[j-1] = array[j];
+                    temp = array[j - 1];
+                    array[j - 1] = array[j];
                     array[j] = temp;
                 }
             }
@@ -340,7 +341,8 @@ public class Display {
 
 
     //Bubble sort in alphabetical order. Descending
-    public static void sortZA(String[] array){
+    //TODO copy and paste working AZ method and switch sign for J loop
+    public static void sortZA(String[] array) {
 
 
     }
