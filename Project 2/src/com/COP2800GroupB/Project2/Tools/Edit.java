@@ -532,11 +532,6 @@ public class Edit {
                 }
 
 
-
-
-
-
-
                 //Save and return
                 //Set Name in persondatabase
                 array[index].getName().setFirst(firstNameField.getText());

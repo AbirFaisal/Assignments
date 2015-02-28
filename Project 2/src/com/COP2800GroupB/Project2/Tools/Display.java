@@ -105,25 +105,29 @@ public class Display {
             //create string to temporarily store string
             String tempStr;
 
+
+        int arrayComphensator = 0;
+
+
+
             //loop to initalize tempStrArray
-            for (int i = 0; i < array.length; i++) {
-                if (array[i].getEmployee().getManager().isManager()) {
-                    //temp string = first middle and last name combined
-                    tempStr =
-                            array[i].getName().getFirst() + " " +
-                                    array[i].getName().getMiddle() + " " +
-                                    array[i].getName().getLast();
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].getEmployee().getManager().isManager()) {
+                //temp string = first middle and last name combined
+                tempStr =
+                        array[i].getName().getFirst() + " " +
+                                array[i].getName().getMiddle() + " " +
+                                array[i].getName().getLast();
 
 
-                    //assignd concat'd name to array
-                    tempStrArray[i] = tempStr;
-                }//end of if
-
-
-            }//end of for
-
-
-
+                //assignd concat'd name to array
+                tempStrArray[i] = tempStr;
+            }else{
+                arrayComphensator++;
+            }
+        }//end of for
+        
 
 
         // Create JList with string array
@@ -169,7 +173,7 @@ public class Display {
                 Main.confirmExit(array);
                 break;
             case 1:
-                Display.displayOnePerson(index, array);
+                Display.displayOnePerson(index+arrayComphensator-1, array);
                 break;
             case 2:
             Display.displayAllPeople(array);
@@ -184,6 +188,8 @@ public class Display {
 
         //create string to temporarily store string
         String tempStr;
+
+        int arrayComphensator = 0;
 
 
         //loop to initalize tempStrArray
@@ -200,7 +206,9 @@ public class Display {
 
                 //assignd concat'd name to array
                 tempStrArray[i] = tempStr;
-            }//end of if
+            }else{
+                arrayComphensator++;
+            }
 
 
         }//end of for
@@ -256,7 +264,7 @@ public class Display {
                 Main.confirmExit(array);
                 break;
             case 1:
-                Display.displayOnePerson(index, array);
+                Display.displayOnePerson(index+arrayComphensator-1, array);
                 break;
             case 2:
                 Display.displayAllPeople(array);
