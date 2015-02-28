@@ -1,7 +1,6 @@
 package com.COP2800GroupB.Project2.Company;
 
 
-
 public class Employee {
 
 

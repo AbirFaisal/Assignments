@@ -8,7 +8,7 @@ import java.util.Calendar;
 public class Initalize {
 
     //Initializes the personDatabase[] array
-    public static void initalizeRecords(Person[] array){
+    public static void initalizeRecords(Person[] array) {
 
         //Initialize objects in personDatabase array
         for (int i = 0; i < array.length; i++) {
@@ -33,7 +33,7 @@ public class Initalize {
 
 
             //Create new a date Object and add calendar values
-            Date dateHired= new Date(
+            Date dateHired = new Date(
                     calendar.get(Calendar.MONTH),       //Month
                     calendar.get(Calendar.DAY_OF_MONTH),//Day
                     calendar.get(Calendar.YEAR));       //Year
@@ -59,7 +59,7 @@ public class Initalize {
 
 
             //Create new a date Object and add calendar values
-            Date dateCreated= new Date(
+            Date dateCreated = new Date(
                     calendar.get(Calendar.MONTH),       //Month
                     calendar.get(Calendar.DAY_OF_MONTH),//Day
                     calendar.get(Calendar.YEAR));       //Year
@@ -68,11 +68,11 @@ public class Initalize {
             //create new person of Person type
             array[i] = new Person(
                     name,                   //Name Object
-                    ""   ,                  //Email
-                    ""   ,                  //Phone
+                    "",                  //Email
+                    "",                  //Phone
                     tempEmployee,           //Employee Object
                     address,                //Address Object
-                    dateCreated   );        //Date Object(record create/modify date)
+                    dateCreated);        //Date Object(record create/modify date)
         }
     }
 }
