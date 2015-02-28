@@ -5,7 +5,7 @@ package com.COP2800GroupB.Project2.Company;
  */
 public class Employee {
 
-    static boolean employee;   //is employee?
+    boolean employee;   //is employee?
     String position;    //Employee Position
     String hourlyRate;  //Hourly Pay Rate
     Manager manager;    //Manager Object
@@ -24,12 +24,12 @@ public class Employee {
     //Setters and getters
 
 
-    public static boolean isEmployee() {
+    public boolean isEmployee() {
         return employee;
     }
 
-    public static void setEmployee(boolean employee) {
-        Employee.employee = employee;
+    public void setEmployee(boolean employee) {
+        this.employee = employee;
     }
 
     public String getPosition() {
@@ -64,5 +64,3 @@ public class Employee {
         this.dateHired = dateHired;
     }
 }
-
-

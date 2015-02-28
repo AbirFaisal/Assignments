@@ -135,6 +135,7 @@ public class Edit {
         JLabel isEmployeeLabel = new JLabel("Employee", JLabel.TRAILING);
         employeeRadio.add(isEmployeeLabel);
 
+
         //yes radio button
         final JRadioButton isEmployeeRadioYes = new JRadioButton("yes",array[index].getEmployee().isEmployee());
         isEmployeeLabel.setLabelFor(isEmployeeRadioYes);
@@ -144,8 +145,6 @@ public class Edit {
         final JRadioButton isEmployeeRadioNo = new JRadioButton("No",!array[index].getEmployee().isEmployee());
         isEmployeeLabel.setLabelFor(isEmployeeRadioNo);
         employeeRadio.add(isEmployeeRadioNo);
-
-
 
 
         isEmployeeRadioYes.addItemListener(new ItemListener() {
@@ -206,7 +205,6 @@ public class Edit {
 
 
 
-
         //Dropdown menu for day hired
         JLabel dayLabel = new JLabel("Day: ", JLabel.TRAILING);
         dateHired.add(dayLabel);
@@ -232,14 +230,6 @@ public class Edit {
 
 
         form.add(dateHired);
-
-
-
-
-
-
-
-
 
 
 
@@ -437,8 +427,6 @@ public class Edit {
         form.add(state);
 
 
-
-
         JPanel zip = new JPanel();
         zip.setLayout(new FlowLayout());
 
@@ -510,25 +498,14 @@ public class Edit {
                 Display.displayAllPeople(array);
                 break;
             case 2:
-                //Save and return
-                //Set Name in persondatabase
-                array[index].getName().setFirst(firstNameField.getText());
-                array[index].getName().setMiddle(middleNameField.getText());
-                array[index].getName().setLast(lastNameField.getText());
 
-                //set phone
-                array[index].setPhone(
-                        //get phone field text
-                        phoneField.getText());
 
-                //set email
-                array[index].setEmail(
-                        //get email field text
-                        emailField.getText());
 
                 //set isEmployee
                 //check if employee s
                 if (isEmployeeRadioYes.isSelected()) {
+
+                    
 
                     //set employee to true
                     array[index].getEmployee().setEmployee(true);
@@ -553,6 +530,28 @@ public class Edit {
                     array[index].getEmployee().setEmployee(false);
                     array[index].getEmployee().getManager().setManager(false);
                 }
+
+
+
+
+
+
+
+                //Save and return
+                //Set Name in persondatabase
+                array[index].getName().setFirst(firstNameField.getText());
+                array[index].getName().setMiddle(middleNameField.getText());
+                array[index].getName().setLast(lastNameField.getText());
+
+                //set phone
+                array[index].setPhone(
+                        //get phone field text
+                        phoneField.getText());
+
+                //set email
+                array[index].setEmail(
+                        //get email field text
+                        emailField.getText());
 
 
                 //set pay rate

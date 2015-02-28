@@ -1,7 +1,5 @@
 package com.COP2800GroupB.Project2;
 
-import com.COP2800GroupB.Project2.Company.Employee;
-import com.COP2800GroupB.Project2.Company.Manager;
 import com.COP2800GroupB.Project2.Company.Person;
 
 /**
@@ -12,10 +10,10 @@ public class ObjectLimiter {
 
     public static void checkManager(Person[] array) {
         for (int i = 0; i < array.length; i++) {
-            if (Manager.isManager()) {
+            if (array[i].getEmployee().getManager().isManager()) {
                 count++;
                 if (count > 20) {
-                    Manager.setManager(false);
+                    System.out.print("Employees is greater than 100");
                 }//end of inner if
             }//end of outer if
         }//end of for
@@ -23,10 +21,12 @@ public class ObjectLimiter {
 
     public static void checkEmployee(Person[] array) {
         for (int i = 0; i < array.length; i++) {
-            if (Employee.isEmployee()) {
+            if (array[i].getEmployee().isEmployee()) {
                 count++;
                 if (count > 20) {
-                    Employee.setEmployee(false);
+
+                    System.out.print("Employees is greater than 100");
+
                 }//end of inner if
             }//end of outer if
         }//end of for
