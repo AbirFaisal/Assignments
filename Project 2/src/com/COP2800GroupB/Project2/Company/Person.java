@@ -11,15 +11,17 @@ public class Person {
     String phone;
     Employee employee;
     Address address;
+    Date date;
 
 
     //Constructor
-    public Person(Name name, String email, String phone, Employee employee, Address address) {
+    public Person(Name name, String email, String phone, Employee employee, Address address, Date date) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.employee = employee;
         this.address = address;
+        this.date = date;
     }
 
     //Setters and Getters
@@ -62,6 +64,12 @@ public class Person {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
-
-

@@ -1,17 +1,18 @@
 package com.COP2800GroupB.Project2;
 
-//
+
 
 
 import com.COP2800GroupB.Project2.Company.*;
 import com.COP2800GroupB.Project2.Tools.Display;
 
 import javax.swing.*;
+import java.util.Calendar;
 
 public class Main {
 
 
-    //change these to definitions and make it accessable
+    //change these to definitions and make it accessible
     //from the entire program
     protected final int MAX_MANAGERS = 20;
     protected final int MAX_EMPLOYEES = 100;
@@ -26,22 +27,30 @@ public class Main {
 
             //sample data
             //create new name of Name type
-            Name tempName = new Name("EMPTY","-","RECORD");
+            Name tempName = new Name("Abir","Ahmed","Faisal");
 
             //create new manager of Manager type
-            Manager tempManager = new Manager(false, "", "");
+            Manager tempManager = new Manager(true, "manager", "title");
+
+            Calendar tempCalendar = Calendar.getInstance();
+
+            //tempCalendar
 
             //Create new a date of Date type
-            Date tempDate = new Date("","","");
+            Date tempDateHired = new Date(tempCalendar.get(Calendar.MONTH),tempCalendar.get(Calendar.DAY_OF_MONTH),tempCalendar.get(Calendar.YEAR));
 
             //create new employee of employee type
-            Employee tempEmployee = new Employee(false,"", "", tempManager, tempDate);
+            Employee tempEmployee = new Employee(true,"position", "$15", tempManager, tempDateHired);
 
             //create new address of address type
-            Address tempAddress = new Address("", "", "", "", "", "");
+            Address tempAddress = new Address("1234 street", "Line2", "Orlando", "FL", "23121", "USA");
+
+            //add record creation date
+
+            Date tempDate = new Date(tempCalendar.get(Calendar.MONTH),tempCalendar.get(Calendar.DAY_OF_MONTH),tempCalendar.get(Calendar.YEAR));
 
             //create new person of Person type
-            personDatabase[i] = new Person(tempName, "", "", tempEmployee, tempAddress);
+            personDatabase[i] = new Person(tempName, "abir@gmail.com", "561-232-3122", tempEmployee, tempAddress, tempDate);
         }
 
         //Display All People sent the method the database
