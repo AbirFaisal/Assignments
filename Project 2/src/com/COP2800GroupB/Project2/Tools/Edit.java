@@ -2,6 +2,7 @@ package com.COP2800GroupB.Project2.Tools;
 
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
+import com.COP2800GroupB.Project2.ObjectLimiter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -135,6 +136,7 @@ public class Edit {
         JLabel isEmployeeLabel = new JLabel("Employee", JLabel.TRAILING);
         employeeRadio.add(isEmployeeLabel);
 
+
         //yes radio button
         final JRadioButton isEmployeeRadioYes = new JRadioButton("yes",array[index].getEmployee().isEmployee());
         isEmployeeLabel.setLabelFor(isEmployeeRadioYes);
@@ -144,8 +146,6 @@ public class Edit {
         final JRadioButton isEmployeeRadioNo = new JRadioButton("No",!array[index].getEmployee().isEmployee());
         isEmployeeLabel.setLabelFor(isEmployeeRadioNo);
         employeeRadio.add(isEmployeeRadioNo);
-
-
 
 
         isEmployeeRadioYes.addItemListener(new ItemListener() {
@@ -206,7 +206,6 @@ public class Edit {
 
 
 
-
         //Dropdown menu for day hired
         JLabel dayLabel = new JLabel("Day: ", JLabel.TRAILING);
         dateHired.add(dayLabel);
@@ -232,14 +231,6 @@ public class Edit {
 
 
         form.add(dateHired);
-
-
-
-
-
-
-
-
 
 
 
@@ -437,8 +428,6 @@ public class Edit {
         form.add(state);
 
 
-
-
         JPanel zip = new JPanel();
         zip.setLayout(new FlowLayout());
 
@@ -510,6 +499,16 @@ public class Edit {
                 Display.displayAllPeople(array);
                 break;
             case 2:
+                //check and set radio buttons
+                ObjectLimiter.limitObject(
+                        isEmployeeRadioYes.isSelected(),
+                        isManagerRadioYes.isSelected(),
+                        array,
+                        index);
+
+
+                }
+
                 //Save and return
                 //Set Name in persondatabase
                 array[index].getName().setFirst(firstNameField.getText());
@@ -525,34 +524,6 @@ public class Edit {
                 array[index].setEmail(
                         //get email field text
                         emailField.getText());
-
-                //set isEmployee
-                //check if employee s
-                if (isEmployeeRadioYes.isSelected()) {
-
-                    //set employee to true
-                    array[index].getEmployee().setEmployee(true);
-
-                    //check if manager is selected
-                    if (isManagerRadioYes.isSelected()) {
-                        //set manager to true
-                        array[index].getEmployee().getManager().setManager(true);
-
-
-                        //check if manager is not selected
-                    } else if (!isManagerRadioYes.isSelected()){
-                        //set manager to false
-                        array[index].getEmployee().getManager().setManager(false);
-                    }
-
-                    //check if employee is not selected
-                }else if (!isEmployeeRadioYes.isSelected()){
-
-                    //set both employee and manager to false since
-                    // manager cant be true unless employee is true
-                    array[index].getEmployee().setEmployee(false);
-                    array[index].getEmployee().getManager().setManager(false);
-                }
 
 
                 //set pay rate
@@ -608,10 +579,6 @@ public class Edit {
                 //array[index].getDat
 
                 Display.displayAllPeople(array);
-                break;
+
         }
     }
-
-
-
-}

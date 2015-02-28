@@ -17,6 +17,8 @@ public class Manager {
     }
 
     //Setters and Getters
+
+
     public boolean isManager() {
         return manager;
     }
@@ -24,6 +26,7 @@ public class Manager {
     public void setManager(boolean manager) {
         this.manager = manager;
     }
+
     public String getTitle() {
         return title;
     }
