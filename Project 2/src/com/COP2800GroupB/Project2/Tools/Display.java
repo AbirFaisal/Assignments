@@ -27,7 +27,7 @@ public class Display {
         for (int i = 0; i < array.length; i++) {
 
             //create string to temporarily store string
-            String tempStr = new String();
+            String tempStr;
 
             //temp string = first middle and last name combined
             tempStr = array[i].getName().getFirst() + " " +
