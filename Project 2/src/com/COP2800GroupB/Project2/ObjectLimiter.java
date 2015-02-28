@@ -12,14 +12,14 @@ public class ObjectLimiter {
 
 
 
+
+    //Checks to make sure that Employees and managers are within bounds
     public static void limitObject(boolean isEmployeeRadioYes, boolean isManagerRadioYes, Person[] array, int index) {
-
-
         //set isEmployee
         //check if employee s
         if (isEmployeeRadioYes) {
 
-            if (ObjectLimiter.checkEmployee(array)) {
+            if (checkEmployee(array)) {
 
                 //set employee to true
                 array[index].getEmployee().setEmployee(true);
@@ -27,7 +27,7 @@ public class ObjectLimiter {
                 //check if manager is selected
                 if (isManagerRadioYes) {
 
-                    if (ObjectLimiter.checkManager(array)) {
+                    if (checkManager(array)) {
 
                         //set manager to true
                         array[index].getEmployee().getManager().setManager(true);
@@ -66,16 +66,15 @@ public class ObjectLimiter {
 
 
     //return false if managers is more than 20
-    public static boolean checkManager(Person[] array) {
+    private static boolean checkManager(Person[] array) {
 
         int count = 0;
-
 
 
         for (int i = 0; i < array.length; i++) {
             if (array[i].getEmployee().getManager().isManager()) {
                 count++;
-                if (count > 20) {
+                if (count > Main.MAX_MANAGERS) {
                     return false;
                 }//end of inner if
             }//end of outer if
@@ -87,7 +86,7 @@ public class ObjectLimiter {
 
 
     //returns false if employees is more than 100
-    public static boolean checkEmployee(Person[] array) {
+    private static boolean checkEmployee(Person[] array) {
 
         int count=0;
 
@@ -95,7 +94,7 @@ public class ObjectLimiter {
         for (int i = 0; i < array.length; i++) {
             if (array[i].getEmployee().isEmployee()) {
                 count++;
-                if (count > 100) {
+                if (count > Main.MAX_EMPLOYEES) {
                     return false;
                 }//end of inner if
             }//end of outer if

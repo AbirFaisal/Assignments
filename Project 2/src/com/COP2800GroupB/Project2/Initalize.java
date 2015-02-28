@@ -1,89 +1,79 @@
 package com.COP2800GroupB.Project2;
-/*
-import com.COP2800GroupB.Project2.DatabaseEngine.Database;
 
 
-/**
- * Created by abirfaisal on 2/11/15.
- /
+import com.COP2800GroupB.Project2.Company.*;
 
-
- //Temporarily Disabled
-
+import java.util.Calendar;
 
 public class Initalize {
 
+    //Initializes the personDatabase[] array
+    public static void initalizeRecords(Person[] array){
 
-    ///// I THINK WE SHOULD SEPARATE THIS INTO ITS OWN METHODS OR A CONSTRUCTOR // ITS WORKS FOR NOW.
-
-
-
-    //Create a constant size for each database we want to create.
-    static final int MAX_PERSONS = 500;
-    static final String PERSON_FILE_NAME = "Person";
-
-    //Create database refrences for ea
-    static Database[] person = new Database[MAX_PERSONS - 1];
+        //Initialize objects in personDatabase array
+        for (int i = 0; i < array.length; i++) {
 
 
+            //create new name Object
+            Name name = new Name(
+                    "Empty",    //First
+                    "-",        //Middle
+                    "Record");  //Last
 
 
-    public static void init() {
+            //create new manager of Manager type
+            Manager tempManager = new Manager(
+                    false,  //isManager (true/false)
+                    "",     //Title
+                    "");    //Department
 
 
-        // Create empty database objects for use
-        for (int i = 0; i < (MAX_PERSONS-1); i++) {
-            person[i] = new Database();
-        }
-
-        initalizeDatabase(person, PERSON_FILE_NAME, MAX_PERSONS);
+            //Create calendar to get current date
+            Calendar calendar = Calendar.getInstance();
 
 
-        // check if database exists
-        // if exists then load into specified array
-        // if does not exist create it
-
-        checkAndCreate(person, PERSON_FILE_NAME);
-
-
-        //TEST//
-
-        //store value
-
-        //save database
-        Database.saveDatabase(PERSON_FILE_NAME, person);
-
-        //read database
-        person = (Database[]) Database.loadDatabase(PERSON_FILE_NAME);
-
-        //display value
+            //Create new a date Object and add calendar values
+            Date dateHired= new Date(
+                    calendar.get(Calendar.MONTH),       //Month
+                    calendar.get(Calendar.DAY_OF_MONTH),//Day
+                    calendar.get(Calendar.YEAR));       //Year
 
 
-    }
+            //create new employee of employee type
+            Employee tempEmployee = new Employee(
+                    false,      //isEmployee (true/false)
+                    "",         //Portion
+                    "",         //Pay Rate
+                    tempManager,//Manager Object
+                    dateHired); //Date Object (date hired)
 
 
+            //create new address of address type
+            Address address = new Address(
+                    "",     //Line 1
+                    "",     //Line 2
+                    "",     //City
+                    "",     //State
+                    "",     //Zip
+                    "");    //Country
 
 
+            //Create new a date Object and add calendar values
+            Date dateCreated= new Date(
+                    calendar.get(Calendar.MONTH),       //Month
+                    calendar.get(Calendar.DAY_OF_MONTH),//Day
+                    calendar.get(Calendar.YEAR));       //Year
 
 
-
-    //check create or load database.
-    private static void checkAndCreate(Database[] DBName, String fileName){
-        if(Database.doesExistOnDisk(fileName) == true){
-            DBName = (Database[]) Database.loadDatabase(fileName);
-        } else {
-            //Create database if does not exsist
-            //Database.createDatabaseFile(fileName);
-        }
-    }
-
-    public static void initalizeDatabase(Database[] DBName, String fineName, int maxSize) {
-
-
-        for (int i = 0; i < (maxSize-1); i++) {
-            DBName[i] = new Database();
+            //create new person of Person type
+            array[i] = new Person(
+                    name,                   //Name Object
+                    ""   ,                  //Email
+                    ""   ,                  //Phone
+                    tempEmployee,           //Employee Object
+                    address,                //Address Object
+                    dateCreated   );        //Date Object(record create/modify date)
         }
     }
 }
 
-*/
