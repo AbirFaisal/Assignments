@@ -9,36 +9,37 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-/**
- * Created by abirfaisal on 2/13/15.
- */
+
 public class Edit {
 
     public static void editRecord(int index, Person[] array){
 
 
 
-        //Text field dimentions
-        Dimension fieldDimentions = new Dimension(250,24);
+        //Text field dimensions
+        Dimension fieldDimensions = new Dimension(250,24);
 
 
         //Create new form panel with Box Layout along y axis
+        //This will store the window contents
         JPanel form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
 
 
-
-        //First Name Label
+        //Create
         JPanel firstName = new JPanel();
+
         firstName.setLayout(new FlowLayout());
 
         JLabel firstNameLabel = new JLabel("First Name: ", JLabel.TRAILING);
+
         firstName.add(firstNameLabel);
+
         //First Name Field and set text
         JTextField firstNameField = new JTextField(array[index].getName().getFirst());
 
-        firstNameField.setPreferredSize(fieldDimentions);
+        firstNameField.setPreferredSize(fieldDimensions);
 
         firstNameLabel.setLabelFor(firstNameField);
 
@@ -58,7 +59,7 @@ public class Edit {
         middleName.add(middleNameLabel);
         //Middle Name Field and set text
         JTextField middleNameField  = new JTextField(array[index].getName().getMiddle());
-        middleNameField.setPreferredSize(fieldDimentions);
+        middleNameField.setPreferredSize(fieldDimensions);
         middleNameLabel.setLabelFor(middleNameField);
         middleName.add(middleNameField);
         //add middleName JPanel to form JPanel
@@ -78,7 +79,7 @@ public class Edit {
         lastName.add(lastNameLabel);
         //Middle Name Field and set text
         JTextField lastNameField  = new JTextField(array[index].getName().getLast());
-        lastNameField.setPreferredSize(fieldDimentions);
+        lastNameField.setPreferredSize(fieldDimensions);
         lastNameLabel.setLabelFor(lastNameField);
         lastName.add(lastNameField);
 
@@ -99,7 +100,7 @@ public class Edit {
         phone.add(phoneLabel);
         //Phone Number Field and set text
         JTextField phoneField  = new JTextField(array[index].getPhone());
-        phoneField.setPreferredSize(fieldDimentions);
+        phoneField.setPreferredSize(fieldDimensions);
         phoneLabel.setLabelFor(phoneField);
         phone.add(phoneField);
 
@@ -117,7 +118,7 @@ public class Edit {
         email.add(emailLabel);
         //Email Field and set text
         JTextField emailField  = new JTextField(array[index].getEmail());
-        emailField.setPreferredSize(fieldDimentions);
+        emailField.setPreferredSize(fieldDimensions);
         emailLabel.setLabelFor(emailField);
         email.add(emailField);
 
@@ -246,7 +247,7 @@ public class Edit {
         hourlyPay.add(hrPayRateLabel);
         //Hourly Pay Rate Field and set text
         JTextField hrPayRateField  = new JTextField(array[index].getEmployee().getHourlyRate());
-        hrPayRateField.setPreferredSize(fieldDimentions);
+        hrPayRateField.setPreferredSize(fieldDimensions);
         hrPayRateLabel.setLabelFor(hrPayRateField);
         hourlyPay.add(hrPayRateField);
 
@@ -264,7 +265,7 @@ public class Edit {
         postion.add(positionLabel);
         //Position Field and set text
         JTextField positionField  = new JTextField(array[index].getEmployee().getPosition());
-        positionField.setPreferredSize(fieldDimentions);
+        positionField.setPreferredSize(fieldDimensions);
         positionLabel.setLabelFor(positionField);
         postion.add(positionField);
 
@@ -330,7 +331,7 @@ public class Edit {
         title.add(titleLabel);
         //Title Field and set text
         JTextField titleField  = new JTextField(array[index].getEmployee().getManager().getTitle());
-        titleField.setPreferredSize(fieldDimentions);
+        titleField.setPreferredSize(fieldDimensions);
         titleLabel.setLabelFor(titleField);
         title.add(titleField);
 
@@ -348,7 +349,7 @@ public class Edit {
         department.add(departmentLabel);
         //Department Field and set text
         JTextField departmentField  = new JTextField(array[index].getEmployee().getManager().getDepartment());
-        departmentField.setPreferredSize(fieldDimentions);
+        departmentField.setPreferredSize(fieldDimensions);
         departmentLabel.setLabelFor(departmentField);
         department.add(departmentField);
 
@@ -369,7 +370,7 @@ public class Edit {
         line1.add(line1Label);
         //Address Line 2 Field and set text
         JTextField line1Field  = new JTextField(array[index].getAddress().getAddressLine1());
-        line1Field.setPreferredSize(fieldDimentions);
+        line1Field.setPreferredSize(fieldDimensions);
         line1Label.setLabelFor(line1Field);
         line1.add(line1Field);
 
@@ -386,7 +387,7 @@ public class Edit {
         line2.add(line2Label);
         //Address Line 2 Field and set text
         JTextField line2Field  = new JTextField(array[index].getAddress().getAddressLine2());
-        line2Field.setPreferredSize(fieldDimentions);
+        line2Field.setPreferredSize(fieldDimensions);
         line2Label.setLabelFor(line2Field);
         line2.add(line2Field);
 
@@ -403,7 +404,7 @@ public class Edit {
         city.add(cityLabel);
         //City Field and set text
         JTextField cityField  = new JTextField(array[index].getAddress().getCity());
-        cityField.setPreferredSize(fieldDimentions);
+        cityField.setPreferredSize(fieldDimensions);
         cityLabel.setLabelFor(cityField);
         city.add(cityField);
 
@@ -421,7 +422,7 @@ public class Edit {
         state.add(stateLabel);
         //State Field and set text
         JTextField stateField  = new JTextField(array[index].getAddress().getState());
-        stateField.setPreferredSize(fieldDimentions);
+        stateField.setPreferredSize(fieldDimensions);
         stateLabel.setLabelFor(stateField);
         state.add(stateField);
 
@@ -436,7 +437,7 @@ public class Edit {
         zip.add(zipLabel);
         //Department Field and set text
         JTextField zipField  = new JTextField(array[index].getAddress().getZip());
-        zipField.setPreferredSize(fieldDimentions);
+        zipField.setPreferredSize(fieldDimensions);
         zipLabel.setLabelFor(zipField);
         zip.add(zipField);
 
@@ -451,7 +452,7 @@ public class Edit {
         country.add(countryLabel);
         //Department Field and set text
         JTextField countryField  = new JTextField(array[index].getAddress().getCountry());
-        countryField.setPreferredSize(fieldDimentions);
+        countryField.setPreferredSize(fieldDimensions);
         countryLabel.setLabelFor(countryField);
         country.add(countryField);
 
@@ -466,10 +467,14 @@ public class Edit {
                 "Discard & Return",
                 "Save"};
 
+        //Create window title
+        String windowTitle = "Editing: " + StringFormatter.getCombinedName(index,array);
+
         //display buttons and prompt
-        int selection = JOptionPane.showOptionDialog(null,
+        int selection = JOptionPane.showOptionDialog(
+                null,
                 form,
-                "Add Record",
+                windowTitle,
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,

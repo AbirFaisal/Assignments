@@ -15,51 +15,58 @@ public class ObjectLimiter {
 
     //Checks to make sure that Employees and managers are within bounds
     public static void limitObject(boolean isEmployeeRadioYes, boolean isManagerRadioYes, Person[] array, int index) {
-        //set isEmployee
-        //check if employee s
+
+        //Check if Employee selected
         if (isEmployeeRadioYes) {
 
+            //Check if there are already 100 Employees
             if (checkEmployee(array)) {
 
-                //set employee to true
+                //Set employee to true
                 array[index].getEmployee().setEmployee(true);
 
-                //check if manager is selected
+                //Check if Manager is selected
                 if (isManagerRadioYes) {
 
+                    //Check if there are already 20 Managers
                     if (checkManager(array)) {
 
-                        //set manager to true
+                        //Set manager to true
                         array[index].getEmployee().getManager().setManager(true);
 
                     } else {
-                        //error
+
+                        //Error
                         JOptionPane.showMessageDialog(null, "You can't have more than 20 managers");
-                        //return to view all
+
+                        //Return to view all
                         Display.displayAllPeople(array);
                     }
 
-                    //check if manager is not selected
+                    //Check if manager is not selected
                 } else if (!isManagerRadioYes) {
-                    //set manager to false
+
+                    //Set manager to false
                     array[index].getEmployee().getManager().setManager(false);
+
                 }
             } else {
-                //error
+
+                //Error
                 JOptionPane.showMessageDialog(null, "You can't have more than 100 employees");
-                //return to view all
+
+                //Return to view all
                 Display.displayAllPeople(array);
             }
 
-            //check if employee is not selected
+            //Check if employee is not selected
             if (!isEmployeeRadioYes){
 
-                //set both employee and manager to false since
-                // manager cant be true unless employee is true
+                //Set both employee and manager to false since
+                //Manager cant be true unless employee is true
                 array[index].getEmployee().setEmployee(false);
                 array[index].getEmployee().getManager().setManager(false);
             }
-
         }
     }
 
@@ -68,19 +75,28 @@ public class ObjectLimiter {
     //return false if managers is more than 20
     private static boolean checkManager(Person[] array) {
 
+        //Hold number of Managers
         int count = 0;
 
-
+        //Loop through array
         for (int i = 0; i < array.length; i++) {
+
+            //Check if Manager
             if (array[i].getEmployee().getManager().isManager()) {
+
+                //Add 1 to count
                 count++;
+
+                //Check if count is greater than MAX_MANAGERS
                 if (count > Main.MAX_MANAGERS) {
                     return false;
-                }//end of inner if
-            }//end of outer if
-        }//end of for
+                }
+            }
+        }
+
+        //Return true if less than MAX_MANAGERS
         return true;
-    }//end of checkManager
+    }
 
 
 
@@ -88,18 +104,27 @@ public class ObjectLimiter {
     //returns false if employees is more than 100
     private static boolean checkEmployee(Person[] array) {
 
+        //Hold number of Managers
         int count=0;
 
-
+        //Loop through array
         for (int i = 0; i < array.length; i++) {
+
+            //Check if Manager
             if (array[i].getEmployee().isEmployee()) {
+
+                //Add 1 to count
                 count++;
+
+                //Check if count is greater than MAX_MANAGERS
                 if (count > Main.MAX_EMPLOYEES) {
                     return false;
-                }//end of inner if
-            }//end of outer if
-        }//end of for
-        return true;
-    }//end of checkManager
+                }
+            }
+        }
 
-}// end of ObjectLimiter
+        //Return true if less than MAX_MANAGERS
+        return true;
+    }
+
+}
