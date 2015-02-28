@@ -34,6 +34,8 @@ public class Main {
 
             Calendar tempCalendar = Calendar.getInstance();
 
+            //tempCalendar
+
             //Create new a date of Date type
             Date tempDateHired = new Date(tempCalendar.get(Calendar.MONTH),tempCalendar.get(Calendar.DAY_OF_MONTH),tempCalendar.get(Calendar.YEAR));
 
