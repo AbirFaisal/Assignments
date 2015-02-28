@@ -5,7 +5,7 @@ package com.COP2800GroupB.Project2.Company;
  */
 public class Manager {
 
-    private boolean manager;    //isManager?
+    private static boolean manager;    //isManager?
     private String title;       //Title
     private String department;  //Department
 
@@ -17,12 +17,12 @@ public class Manager {
     }
 
     //Setters and Getters
-    public boolean isManager() {
+    public static boolean isManager() {
         return manager;
     }
 
-    public void setManager(boolean manager) {
-        this.manager = manager;
+    public static void setManager(boolean manager) {
+        Manager.manager = manager;
     }
     public String getTitle() {
         return title;
