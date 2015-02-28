@@ -2,6 +2,7 @@ package com.COP2800GroupB.Project2.Tools;
 
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
+import com.COP2800GroupB.Project2.ObjectLimiter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -498,39 +499,15 @@ public class Edit {
                 Display.displayAllPeople(array);
                 break;
             case 2:
+                //check and set radio buttons
+                ObjectLimiter.limitObject(
+                        isEmployeeRadioYes.isSelected(),
+                        isManagerRadioYes.isSelected(),
+                        array,
+                        index);
 
 
-
-                //set isEmployee
-                //check if employee s
-                if (isEmployeeRadioYes.isSelected()) {
-
-                    
-
-                    //set employee to true
-                    array[index].getEmployee().setEmployee(true);
-
-                    //check if manager is selected
-                    if (isManagerRadioYes.isSelected()) {
-                        //set manager to true
-                        array[index].getEmployee().getManager().setManager(true);
-
-
-                        //check if manager is not selected
-                    } else if (!isManagerRadioYes.isSelected()){
-                        //set manager to false
-                        array[index].getEmployee().getManager().setManager(false);
-                    }
-
-                    //check if employee is not selected
-                }else if (!isEmployeeRadioYes.isSelected()){
-
-                    //set both employee and manager to false since
-                    // manager cant be true unless employee is true
-                    array[index].getEmployee().setEmployee(false);
-                    array[index].getEmployee().getManager().setManager(false);
                 }
-
 
                 //Save and return
                 //Set Name in persondatabase
@@ -602,10 +579,6 @@ public class Edit {
                 //array[index].getDat
 
                 Display.displayAllPeople(array);
-                break;
+
         }
     }
-
-
-
-}

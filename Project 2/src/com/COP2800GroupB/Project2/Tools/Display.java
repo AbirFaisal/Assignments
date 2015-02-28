@@ -127,7 +127,7 @@ public class Display {
                 arrayComphensator++;
             }
         }//end of for
-        
+
 
 
         // Create JList with string array
