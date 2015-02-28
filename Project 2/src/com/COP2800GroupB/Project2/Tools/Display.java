@@ -27,7 +27,7 @@ public class Display {
         for (int i = 0; i < array.length; i++) {
 
             //create string to temporarily store string
-            String tempStr = new String();
+            String tempStr;
 
             //temp string = first middle and last name combined
             tempStr = array[i].getName().getFirst() + " " +
@@ -54,13 +54,15 @@ public class Display {
         //Buttons to display
         String[] buttons = {
                 "Cancel",
-                "View"};
+                "View Record",
+        "View Employees",
+        "View Managers"};
 
 
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
                 scrollPane,
-                "People",
+                "All Records",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.PLAIN_MESSAGE,
                 null,
@@ -82,9 +84,16 @@ public class Display {
             case 1:
                 Display.displayOnePerson(index, array);
                 break;
+            case 2:
+                Display.displayAllEmployees(array);
+                break;
+            case 3:
+                Display.displayAllManagers(array);
+                break;
+
         }
 
-    }
+    }//end of displayAllPeople
 
 
     //TODO add isEmployee Checking
@@ -93,23 +102,25 @@ public class Display {
         //String array to hold concat'd name string
         String[] tempStrArray = new String[array.length];
 
-
-        //loop to initalize tempStrArray
-        for (int i = 0; i < array.length; i++) {
-
             //create string to temporarily store string
-            String tempStr = new String();
+            String tempStr;
 
-            //temp string = first middle and last name combined
-            tempStr =
-                    array[i].getName().getFirst() + " " +
-                    array[i].getName().getMiddle() + " " +
-                    array[i].getName().getLast();
+            //loop to initalize tempStrArray
+            for (int i = 0; i < array.length; i++) {
+                if (array[i].getEmployee().getManager().isManager()) {
+                    //temp string = first middle and last name combined
+                    tempStr =
+                            array[i].getName().getFirst() + " " +
+                                    array[i].getName().getMiddle() + " " +
+                                    array[i].getName().getLast();
 
 
-            //assignd concat'd name to array
-            tempStrArray[i] = tempStr;
-        }
+                    //assignd concat'd name to array
+                    tempStrArray[i] = tempStr;
+                }//end of if
+
+
+            }//end of for
 
 
 
@@ -131,13 +142,14 @@ public class Display {
         //Buttons to display
         String[] buttons = {
                 "Cancel",
-                "View"};
+                "View",
+            "Return"};
 
 
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
                 scrollPane,
-                "People",
+                "Employee Records",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.PLAIN_MESSAGE,
                 null,
@@ -159,14 +171,99 @@ public class Display {
             case 1:
                 Display.displayOnePerson(index, array);
                 break;
-        }
+            case 2:
+            Display.displayAllPeople(array);
+            break;
+        }//end of switch
 
-    }
+    }//end of displayAllEmployees
 
-    public static void displayAllManagers() {
+    public static void displayAllManagers(Person[] array ) {
+        //String array to hold concat'd name string
+        String[] tempStrArray = new String[array.length];
+
+        //create string to temporarily store string
+        String tempStr;
 
 
-    }
+        //loop to initalize tempStrArray
+        for (int i = 0; i < array.length; i++) {
+
+
+            if (array[i].getEmployee().getManager().isManager()) {
+                //temp string = first middle and last name combined
+                tempStr =
+                        array[i].getName().getFirst() + " " +
+                                array[i].getName().getMiddle() + " " +
+                                array[i].getName().getLast();
+
+
+                //assignd concat'd name to array
+                tempStrArray[i] = tempStr;
+            }//end of if
+
+
+        }//end of for
+
+
+
+
+
+        // Create JList with string array
+        JList list = new JList(tempStrArray);
+
+        //Auto select first record
+        list.setSelectedIndex(0);
+
+        //Create new JScrollPane with JList list
+        JScrollPane scrollPane = new JScrollPane(list);
+
+        //Dimension the scroll pane praportional to
+        scrollPane.setPreferredSize(
+                new Dimension(
+                        (array.length*2/3),
+                        array.length)
+        );
+
+
+        //Buttons to display
+        String[] buttons = {
+                "Cancel",
+                "View",
+                "Return"};
+
+
+        //display buttons and prompt
+        int selection = JOptionPane.showOptionDialog(null,
+                scrollPane,
+                "Manager Records",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                buttons,
+                buttons[0]);
+
+        //set index to current List selection
+        int index = list.getSelectedIndex();
+
+        System.out.print("Selection: " + selection);
+        System.out.print("Index: " + index);
+
+
+
+        switch (selection){
+            case 0:
+                Main.confirmExit(array);
+                break;
+            case 1:
+                Display.displayOnePerson(index, array);
+                break;
+            case 2:
+                Display.displayAllPeople(array);
+                break;
+        }//end of switch
+
+    }//end of displayAllManagers
 
     public static void displayOnePerson(int index, Person[] array) {
 
@@ -219,4 +316,4 @@ public class Display {
     }
 
 
-}
+}//end of Display class
