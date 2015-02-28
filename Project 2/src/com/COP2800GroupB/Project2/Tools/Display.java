@@ -30,9 +30,8 @@ public class Display {
             String tempStr;
 
             //temp string = first middle and last name combined
-            tempStr = array[i].getName().getFirst() + " " +
-                    array[i].getName().getMiddle() + " " +
-                    array[i].getName().getLast();
+            tempStr = StringFormatter.getCombinedName(i,array);
+
 
             //assignd concat'd name to array
             tempStrArray[i] = tempStr;
@@ -96,7 +95,6 @@ public class Display {
     }//end of displayAllPeople
 
 
-    //TODO add isEmployee Checking
     public static void displayAllEmployees(Person[] array) {
 
         //String array to hold concat'd name string
@@ -113,13 +111,10 @@ public class Display {
             //loop to initialize tempStrArray
 
         for (int i = 0; i < array.length; i++) {
-            if (array[i].getEmployee().getManager().isManager()) {
-                //temp string = first middle and last name combined
-                tempStr =
-                        array[i].getName().getFirst() + " " +
-                                array[i].getName().getMiddle() + " " +
-                                array[i].getName().getLast();
+            if (array[i].getEmployee().isEmployee()) {
 
+                //temp string = first middle and last name combined
+                tempStr = StringFormatter.getCombinedName(i,array);
 
                 //assignd concat'd name to array
                 tempStrArray[i] = tempStr;
@@ -127,6 +122,9 @@ public class Display {
                 arrayCompensator++;
             }
         }//end of for
+
+        //sort ZA
+        sortZA(tempStrArray);
 
 
 
@@ -197,12 +195,9 @@ public class Display {
 
 
             if (array[i].getEmployee().getManager().isManager()) {
-                //temp string = first middle and last name combined
-                tempStr =
-                        array[i].getName().getFirst() + " " +
-                                array[i].getName().getMiddle() + " " +
-                                array[i].getName().getLast();
 
+                //temp string = first middle and last name combined
+                tempStr = StringFormatter.getCombinedName(i,array);
 
                 //assignd concat'd name to array
                 tempStrArray[i] = tempStr;
@@ -214,6 +209,9 @@ public class Display {
         }//end of for
 
 
+
+        //sort A-Z
+        sortAZ(tempStrArray);
 
 
 
@@ -319,8 +317,31 @@ public class Display {
     }
 
 
-    //sort in alphabetical order.
-    public static void sortAZ(){
+    //Bubble sort in alphabetical order.
+    public static void sortAZ(String[] array) {
+
+        String temp;
+
+        for (int i = 0; i < (array.length-1); i++) {
+
+            for (int j = 1; j < (array.length-1); j++) {
+
+                char a = array[j-1].charAt(1);
+                char b = array[j].charAt(1);
+
+                if (a > b) {
+                    temp = array[j-1];
+                    array[j-1] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+    }
+
+
+    //Bubble sort in alphabetical order. Descending
+    public static void sortZA(String[] array){
+
 
     }
 

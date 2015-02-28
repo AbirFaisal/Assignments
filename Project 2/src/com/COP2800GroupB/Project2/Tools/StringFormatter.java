@@ -23,6 +23,12 @@ public class StringFormatter {
 
 
         //Employee object Specific fields
+        //Get date hired
+        String dateHired = "Hired: " + getDateHired(array, index) + "\n \n";
+
+
+
+
         //Get Pay Rate
         String payRate = "Hourly Pay Rate: \n" + array[index].getEmployee().getHourlyRate() + "\n \n";
         //Get Position
@@ -34,6 +40,7 @@ public class StringFormatter {
         String department = "Department: \n" + array[index].getEmployee().getManager().getDepartment() + "\n \n";
         //Get Title
         String title = "Title: \n" + array[index].getEmployee().getManager().getTitle() + "\n \n";
+
 
 
         //Address Fields
@@ -61,6 +68,11 @@ public class StringFormatter {
                 zip +
                 country;
 
+
+        //Get record modify date
+        String modfied = "Modified: " + getModifiedDate(array, index);
+
+
         //Details formatted using strings created earlier
         //Add name
         String details = name;
@@ -69,6 +81,7 @@ public class StringFormatter {
         if (array[index].getEmployee().isEmployee()) {
             //Add Employee info
             details = details +
+                    dateHired +
                     payRate +
                     position;
         }
@@ -86,7 +99,10 @@ public class StringFormatter {
         "Contact Information: \n \n" +
                 phone +
                 email +
-                address;
+                address +
+                modfied;
+
+
 
         //return formatted details
         return details;
@@ -104,5 +120,67 @@ public class StringFormatter {
 
         //Return Combined Strings
         return name;
+    }
+
+
+    public static String getDateHired(Person[] array, int index){
+        String[] month = {
+                "January",  //0
+                "February", //1
+                "March",    //2
+                "April",    //3
+                "May",      //4
+                "June",     //5
+                "July",     //6
+                "August",   //7
+                "September",//8
+                "October",  //9
+                "November", //10
+                "December"};//11
+
+
+        String day = String.valueOf(
+                array[index].getEmployee().getDateHired().getDay() + 1);
+
+        String year = String.valueOf(
+                array[index].getEmployee().getDateHired().getYear());
+
+        String hiredDate = month[array[index].getEmployee().getDateHired().getMonth()] + " " +
+                day + ", " +
+                year;
+
+        return hiredDate;
+    }
+
+
+
+    public static String getModifiedDate(Person[] array, int index){
+        String[] month = {
+                "January",  //0
+                "February", //1
+                "March",    //2
+                "April",    //3
+                "May",      //4
+                "June",     //5
+                "July",     //6
+                "August",   //7
+                "September",//8
+                "October",  //9
+                "November", //10
+                "December"};//11
+
+
+        String day = String.valueOf(
+                array[index].getDate().getDay());
+
+        String year = String.valueOf(
+                array[index].getDate().getYear());
+
+        String hiredDate = month[array[index].getDate().getMonth()] + " " +
+                day + ", " +
+                year;
+
+        return hiredDate;
+
     }
 }

@@ -58,15 +58,16 @@ public class ObjectLimiter {
                 //Return to view all
                 Display.displayAllPeople(array);
             }
+        }
+        //Check if employee is not selected
+        else if (!isEmployeeRadioYes){
 
-            //Check if employee is not selected
-            if (!isEmployeeRadioYes){
-
-                //Set both employee and manager to false since
-                //Manager cant be true unless employee is true
-                array[index].getEmployee().setEmployee(false);
-                array[index].getEmployee().getManager().setManager(false);
-            }
+            //Set both employee and manager to false since
+            //Manager cant be true unless employee is true
+            array[index].getEmployee().setEmployee(false);
+            array[index].getEmployee().getManager().setManager(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Programmer Retardation");
         }
     }
 
