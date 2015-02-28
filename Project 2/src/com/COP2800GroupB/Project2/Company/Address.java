@@ -1,16 +1,18 @@
 package com.COP2800GroupB.Project2.Company;
 
-/**
- * Created by abirfaisal on 2/16/15.
- */
+
+
 public class Address {
 
+
+    //Fields
     String addressLine1;
     String addressLine2;
     String city;
     String state;
     String zip;
     String country;
+
 
     //Constructor
     public Address(String addressLine1, String addressLine2, String city, String state, String zip, String country) {
@@ -21,6 +23,7 @@ public class Address {
         this.zip = zip;
         this.country = country;
     }
+
 
     //Setters and Getters
     public String getAddressLine1() {

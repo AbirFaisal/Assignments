@@ -106,11 +106,11 @@ public class Display {
             String tempStr;
 
 
-        int arrayComphensator = 0;
+        int arrayCompensator = 0;
 
 
 
-            //loop to initalize tempStrArray
+            //loop to initialize tempStrArray
 
         for (int i = 0; i < array.length; i++) {
             if (array[i].getEmployee().getManager().isManager()) {
@@ -124,7 +124,7 @@ public class Display {
                 //assignd concat'd name to array
                 tempStrArray[i] = tempStr;
             }else{
-                arrayComphensator++;
+                arrayCompensator++;
             }
         }//end of for
 
@@ -173,7 +173,7 @@ public class Display {
                 Main.confirmExit(array);
                 break;
             case 1:
-                Display.displayOnePerson(index+arrayComphensator-1, array);
+                Display.displayOnePerson(index + arrayCompensator, array);
                 break;
             case 2:
             Display.displayAllPeople(array);
@@ -264,7 +264,7 @@ public class Display {
                 Main.confirmExit(array);
                 break;
             case 1:
-                Display.displayOnePerson(index+arrayComphensator-1, array);
+                Display.displayOnePerson(index+arrayComphensator, array);
                 break;
             case 2:
                 Display.displayAllPeople(array);
@@ -290,7 +290,8 @@ public class Display {
 
 
         //display data and get selection if button press
-        int selection = JOptionPane.showOptionDialog(null,
+        int selection = JOptionPane.showOptionDialog(
+                null,
                 details,
                 windowTitle,
                 JOptionPane.DEFAULT_OPTION,

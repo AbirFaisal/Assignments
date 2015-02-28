@@ -1,13 +1,15 @@
 package com.COP2800GroupB.Project2.Company;
 
-/**
- * Created by abirfaisal on 2/16/15.
- */
+
+
 public class Manager {
 
-    private boolean manager;    //isManager?
-    private String title;       //Title
-    private String department;  //Department
+
+    //Fields
+    private boolean manager;
+    private String title;
+    private String department;
+
 
     //Constructor
     public Manager(boolean manager, String title, String department) {
@@ -16,9 +18,8 @@ public class Manager {
         this.department = department;
     }
 
+
     //Setters and Getters
-
-
     public boolean isManager() {
         return manager;
     }

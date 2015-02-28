@@ -1,28 +1,29 @@
 package com.COP2800GroupB.Project2.Company;
 
-/**
- * Created by abirfaisal on 2/16/15.
- */
+
+
 public class Person {
 
-    //generate and assign a UUID maybe? or nah?
+
+    //Fields
     Name name;
     String email;
     String phone;
     Employee employee;
     Address address;
-    Date date;
+    Date dateCreated;
 
 
     //Constructor
-    public Person(Name name, String email, String phone, Employee employee, Address address, Date date) {
+    public Person(Name name, String email, String phone, Employee employee, Address address, Date dateCreated) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.employee = employee;
         this.address = address;
-        this.date = date;
+        this.dateCreated = dateCreated;
     }
+
 
     //Setters and Getters
     public Name getName() {
@@ -66,10 +67,10 @@ public class Person {
     }
 
     public Date getDate() {
-        return date;
+        return dateCreated;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.dateCreated = date;
     }
 }
