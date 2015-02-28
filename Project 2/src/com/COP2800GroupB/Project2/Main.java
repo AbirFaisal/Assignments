@@ -13,14 +13,14 @@ public class Main {
 
     //change these to definitions and make it accessable
     //from the entire program
-    protected final int MAX_MANAGERS = 20;
-    protected final int MAX_EMPLOYEES = 100;
-    protected final int MAX_PERSONS = 500;
+    protected static final int MAX_MANAGERS = 20;
+    protected static  final int MAX_EMPLOYEES = 100;
+    protected  static final int MAX_PERSONS = 500;
 
     public static void main(String[] args) {
 
         //Initialize database
-        Person[] personDatabase = new Person[500-1];
+        Person[] personDatabase = new Person[MAX_PERSONS - 1];
         //Initialize objects in personDatabase array
         for (int i = 0; i < personDatabase.length; i++) {
 
