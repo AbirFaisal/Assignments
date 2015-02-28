@@ -1,15 +1,16 @@
 package com.COP2800GroupB.Project2.Company;
 
-/**
- * Created by abirfaisal on 2/16/15.
- */
+
+
 public class Employee {
 
-    boolean employee;   //is employee?
-    String position;    //Employee Position
-    String hourlyRate;  //Hourly Pay Rate
-    Manager manager;    //Manager Object
-    Date dateHired;     //Hold date hired
+
+    //Fields
+    boolean employee;
+    String position;
+    String hourlyRate;
+    Manager manager;
+    Date dateHired;
 
 
     //Constructor
@@ -21,9 +22,8 @@ public class Employee {
         this.dateHired = dateHired;
     }
 
+
     //Setters and getters
-
-
     public boolean isEmployee() {
         return employee;
     }

@@ -1,10 +1,11 @@
 package com.COP2800GroupB.Project2.Company;
 
-/**
- * Created by abirfaisal on 2/23/15.
- */
+
+
 public class Date {
 
+
+    //Fields
     int Month;
     int Day;
     int Year;
@@ -16,6 +17,7 @@ public class Date {
         Day = day;
         Year = year;
     }
+
 
     //Setters Getters
     public int getMonth() {
