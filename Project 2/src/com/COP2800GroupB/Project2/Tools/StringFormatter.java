@@ -3,7 +3,7 @@ package com.COP2800GroupB.Project2.Tools;
 import com.COP2800GroupB.Project2.Company.Person;
 
 
-public class StringFormatter {
+class StringFormatter {
 
 
     //Format String for displaying one record given the index and the array
@@ -114,8 +114,8 @@ public class StringFormatter {
         //Combine strings
         String name =
                 array[index].getName().getFirst() + " " +   //Get First Name + Space
-                array[index].getName().getMiddle() + " " +  //Get Middle Name + Space
-                array[index].getName().getLast();           //Get Last Name
+                        array[index].getName().getMiddle() + " " +  //Get Middle Name + Space
+                        array[index].getName().getLast();           //Get Last Name
 
 
         //Return Combined Strings
@@ -124,7 +124,7 @@ public class StringFormatter {
 
 
     //Get date hired
-    public static String getDateHired(Person[] array, int index) {
+    private static String getDateHired(Person[] array, int index) {
 
         //Month array
         String[] month = {
@@ -164,7 +164,7 @@ public class StringFormatter {
 
 
     //Get date modified
-    public static String getModifiedDate(Person[] array, int index) {
+    private static String getModifiedDate(Person[] array, int index) {
         String[] month = {
                 "January",  //0
                 "February", //1

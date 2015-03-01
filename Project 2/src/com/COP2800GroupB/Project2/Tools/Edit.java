@@ -1,5 +1,7 @@
 package com.COP2800GroupB.Project2.Tools;
 
+
+
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
 import com.COP2800GroupB.Project2.ObjectLimiter;
@@ -10,8 +12,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
 
-
-public class Edit {
+class Edit {
 
     public static void editRecord(int index, Person[] array) {
 
@@ -133,6 +134,7 @@ public class Edit {
         employeeRadio.add(isEmployeeRadioNo);
 
 
+        //Employee radio button logic
         isEmployeeRadioYes.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -195,8 +197,8 @@ public class Edit {
         //Create month combo box
         JComboBox month = new JComboBox();
         //Create combo box entries
-        for (int i = 0; i < monthChoice.length; i++) {
-            month.addItem(monthChoice[i]);
+        for (String aMonthChoice : monthChoice) {
+            month.addItem(aMonthChoice);
         }
         //Get and set month
         month.setSelectedIndex(array[index].getEmployee().getDateHired().getMonth());
@@ -299,11 +301,13 @@ public class Edit {
         managerRadio.add(isManagerRadioNo);
 
 
+        //Manager radio button logic
         isManagerRadioYes.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     isManagerRadioNo.setSelected(false);
+                    isEmployeeRadioYes.setSelected(true);
                 } else if (e.getStateChange() == ItemEvent.DESELECTED) {
                     isManagerRadioNo.setSelected(true);
                 }
@@ -479,11 +483,6 @@ public class Edit {
 
         ////////////////////////////
 
-        //for debugging purposes
-        System.out.print("Selection = " + selection + "\n");
-
-        //Call selection method with selection value
-        //selection(selection, array);
 
 
         //radio buttons to true false
@@ -587,8 +586,12 @@ public class Edit {
                         //get country field text
                         countryField.getText());
 
-                //set date record
-                //array[index].getDat
+
+                //set date modified
+                array[index].getDate().setMonth(Calendar.MONTH);
+                array[index].getDate().setDay(Calendar.DAY_OF_MONTH);
+                array[index].getDate().setYear(Calendar.YEAR);
+
 
                 //Go back to display all people
                 Display.displayAllPeople(array);

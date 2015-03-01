@@ -5,9 +5,9 @@ public class Date {
 
 
     //Fields
-    int Month;
-    int Day;
-    int Year;
+    private int Month;
+    private int Day;
+    private int Year;
 
 
     //Constructor

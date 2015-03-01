@@ -1,21 +1,17 @@
 package com.COP2800GroupB.Project2.Tools;
 
+
+
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
 
 import javax.swing.*;
 import java.awt.*;
 
-
-/**
- * Created by abirfaisal on 2/13/15.
- */
-
-
 public class Display {
 
 
-    //Display all people
+    //Display all people unsorted
     public static void displayAllPeople(Person[] array) {
 
 
@@ -72,38 +68,40 @@ public class Display {
         int index = list.getSelectedIndex();
 
 
-
         switch (selection) {
             case 0:
+                //Cancel
                 Main.confirmExit(array);
                 break;
             case 1:
+                //View Record
                 Display.displayOnePerson(index, array);
                 break;
             case 2:
+                //View Employees
                 Display.displayAllEmployees(array);
                 break;
             case 3:
+                //View Managers sorted Z-A
                 Display.displayAllManagers(array);
                 break;
         }
     }
 
 
-    //Display only Employees
-    public static void displayAllEmployees(Person[] array) {
-
+    //Display all Employees
+    private static void displayAllEmployees(Person[] array) {
 
         //String array to hold concat'd name string
-        String[] tempStrArray = new String[array.length];
+        String[] strArray = new String[array.length];
 
 
         //create string to temporarily store string
         String tempStr;
 
 
-        //Compensate for difference between array size and EmployeesF.
-        int arrayCompensator = 0;
+        //Sort A-Z
+        sortAZ(array);
 
 
         //loop to initialize tempStrArray
@@ -116,18 +114,13 @@ public class Display {
                 tempStr = StringFormatter.getCombinedName(i, array);
 
                 //assignd concat'd name to array
-                tempStrArray[i] = tempStr;
-            } else {
-                arrayCompensator++;
+                strArray[i] = tempStr;
             }
-        }//end of for
-
-        //TODO sort ZA
-        //sortZA(tempStrArray);
+        }
 
 
         // Create JList with string array
-        JList list = new JList(tempStrArray);
+        JList list = new JList(strArray);
 
         //Auto select first record
         list.setSelectedIndex(0);
@@ -136,14 +129,13 @@ public class Display {
         JScrollPane scrollPane = new JScrollPane(list);
 
         //Dimension the scroll pane praportional to
-        scrollPane.setPreferredSize(new Dimension((array.length * 2 / 3), array.length));
+        scrollPane.setPreferredSize(new Dimension(strArray.length, strArray.length));
 
 
         //Buttons to display
         String[] buttons = {
                 "Cancel",
-                "View",
-                "Return"};
+                "View"};
 
 
         //display buttons and prompt
@@ -162,29 +154,27 @@ public class Display {
 
         switch (selection) {
             case 0:
-                Main.confirmExit(array);
-                break;
-            case 1:
-                Display.displayOnePerson(index + arrayCompensator, array);
-                break;
-            case 2:
+                //Cancel
                 Display.displayAllPeople(array);
                 break;
+            case 1:
+                //View Record
+                Display.displayOnePerson(index, array); //+ arrayCompensator
+                break;
         }
-
     }
 
 
     //Display All Managers
-    public static void displayAllManagers(Person[] array) {
+    private static void displayAllManagers(Person[] array) {
         //String array to hold concat'd name string
-        String[] tempStrArray = new String[array.length];
+        String[] strArray = new String[array.length];
 
         //create string to temporarily store string
         String tempStr;
 
-        //Compensate for difference between array size and Employees.
-        int arrayCompensator = 0;
+        //Sort Z-A
+        sortZA(array);
 
 
         //loop to initalize tempStrArray
@@ -198,21 +188,13 @@ public class Display {
                 tempStr = StringFormatter.getCombinedName(i, array);
 
                 //assignd concat'd name to array
-                tempStrArray[i] = tempStr;
-            } else {
-                arrayCompensator++;
+                strArray[i] = tempStr;
             }
-
-
-        }//end of for
-
-
-        //TODO sort A-Z
-        //sortAZ(tempStrArray);
+        }
 
 
         // Create JList with string array
-        JList list = new JList(tempStrArray);
+        JList list = new JList(strArray);
 
         //Auto select first record
         list.setSelectedIndex(0);
@@ -220,19 +202,15 @@ public class Display {
         //Create new JScrollPane with JList list
         JScrollPane scrollPane = new JScrollPane(list);
 
-        //Dimension the scroll pane praportional to
+        //Dimension the scroll pane proportional to array
         scrollPane.setPreferredSize(
-                new Dimension(
-                        (array.length * 2 / 3),
-                        array.length)
-        );
+                new Dimension(array.length, array.length));
 
 
         //Buttons to display
         String[] buttons = {
                 "Cancel",
-                "View",
-                "Return"};
+                "View",};
 
 
         //display buttons and prompt
@@ -248,25 +226,21 @@ public class Display {
         //set index to current List selection
         int index = list.getSelectedIndex();
 
-        System.out.print("Selection: " + selection);
-        System.out.print("Index: " + index);
-
 
         switch (selection) {
             case 0:
-                Main.confirmExit(array);
-                break;
-            case 1:
-                Display.displayOnePerson(index + arrayCompensator, array);
-                break;
-            case 2:
+                //Cancel
                 Display.displayAllPeople(array);
                 break;
-        }//end of switch
+            case 1:
+                //View Record
+                Display.displayOnePerson(index, array);
+                break;
 
-    }//end of displayAllManagers
+        }
+    }
 
-    public static void displayOnePerson(int index, Person[] array) {
+    private static void displayOnePerson(int index, Person[] array) {
 
         //Get person details
         String details = StringFormatter.OnePerson(index, array);
@@ -277,7 +251,6 @@ public class Display {
         //Buttons to display
         String[] buttons = {
                 "Cancel",
-                "Return",
                 "Clear / Add",
                 "Edit"};
 
@@ -296,16 +269,12 @@ public class Display {
         switch (selection) {
             case 0:
                 //cancel
-                Main.confirmExit(array);
-                break;
-            case 1:
-                //return
                 Display.displayAllPeople(array);
                 break;
-            case 2:
+            case 1:
                 Add.addPerson(index, array);
                 break;
-            case 3:
+            case 2:
                 Edit.editRecord(index, array);
                 break;
         }
@@ -313,24 +282,165 @@ public class Display {
 
 
     //Bubble sort in alphabetical order.
-    //TODO returns null pointer exception
-    //TODO add comments
-    public static void sortAZ(String[] array) {
+    private static void sortAZ(Person[] array) {
+
 
         //Hold temp string
-        String temp;
+        Person temp;
 
+
+        //Move empty records to bottom
+        sortEmpty(array);
+
+
+        // Counter j here because if we put a deceleration
+        // in a loop it wil create a new variable every time
+        // it runs so to save memory we declare it once here.
+        // Java garbage collection takes care of it anyways
+        // but that is unnecessarily expensive.
+        int j;
+
+
+        //Holds Previous element
+        String elementA;
+        char a;
+
+
+        //Holds current element
+        String elementB;
+        char b;
+
+
+        //Sort A-Z
         //Times to run through array
         for (int i = 0; i < (array.length - 1); i++) {
 
             //Run through array
-            for (int j = 1; j < (array.length - 1); j++) {
+            for (j = 1; j < (array.length - 1); j++) {
 
-                //TODO problem is with charAt any other way to assign a and b
-                char a = array[j - 1].charAt(1);
-                char b = array[j].charAt(1);
+                //Previous Element
+                elementA = array[j - 1].getName().getFirst();
+                a = elementA.charAt(0);
 
+                //Current Element
+                elementB = array[j].getName().getFirst();
+                b = elementB.charAt(0);
+
+
+                //Test if char A is greater than char B
                 if (a > b) {
+                    //Swap elements
+                    temp = array[j - 1];
+                    array[j - 1] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+
+
+        //Move empty records to bottom
+        sortEmpty(array);
+    }
+
+
+    //Bubble sort in alphabetical order. Descending
+    private static void sortZA(Person[] array) {
+
+
+        //Hold temp string
+        Person temp;
+
+
+        //Move empty records to bottom
+        sortEmpty(array);
+
+
+        // Counter j here because if we put a deceleration
+        // in a loop it wil create a new variable every time
+        // it runs so to save memory we declare it once here.
+        // Java garbage collection takes care of it anyways
+        // but that is unnecessarily expensive.
+        int j;
+
+
+        //Holds Previous element
+        String elementA;
+        char a;
+
+
+        //Holds current element
+        String elementB;
+        char b;
+
+
+        //Sort A-Z
+        //Times to run through array
+        for (int i = 0; i < (array.length - 1); i++) {
+
+            //Run through array
+            for (j = 1; j < (array.length - 1); j++) {
+
+
+                //Previous Element
+                elementA = array[j - 1].getName().getFirst();
+                a = elementA.charAt(0);
+
+                //Current Element
+                elementB = array[j].getName().getFirst();
+                b = elementB.charAt(0);
+
+
+                //Test if char A is less than char B
+                if (a < b) {
+                    //Swap elements
+                    temp = array[j - 1];
+                    array[j - 1] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+
+        //Move empty records to bottom
+        sortEmpty(array);
+    }
+
+
+    //Moves empty records to bottom
+    private static void sortEmpty(Person[] array) {
+
+
+        //Hold temp string
+        Person temp;
+
+
+        //hold element
+        String element;
+
+
+        // Counter j here because if we put a deceleration
+        // in a loop it wil create a new variable every time
+        // it runs so to save memory we declare it once here.
+        // Java garbage collection takes care of it anyways
+        // but that is unnecessarily expensive.
+        int j;
+
+
+        //Move empty records to bottom
+        //Times to run through array
+        for (int i = 0; i < (array.length - 1); i++) {
+
+
+            //Run through array
+            for (j = 1; j < (array.length - 1); j++) {
+
+                //Get Previous Element
+                element = array[j - 1].getName().getFirst();
+
+
+                //Test if element equals "Empty" or ""
+                if (element.equals("Empty") || element.equals("")) {
+
+                    //Swap previous array element with current element
                     temp = array[j - 1];
                     array[j - 1] = array[j];
                     array[j] = temp;
@@ -338,14 +448,4 @@ public class Display {
             }
         }
     }
-
-
-    //Bubble sort in alphabetical order. Descending
-    //TODO copy and paste working AZ method and switch sign for J loop
-    public static void sortZA(String[] array) {
-
-
-    }
-
-
-}//end of Display class
+}

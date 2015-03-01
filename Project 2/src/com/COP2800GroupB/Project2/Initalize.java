@@ -5,7 +5,7 @@ import com.COP2800GroupB.Project2.Company.*;
 
 import java.util.Calendar;
 
-public class Initalize {
+class Initalize {
 
     //Initializes the personDatabase[] array
     public static void initalizeRecords(Person[] array) {

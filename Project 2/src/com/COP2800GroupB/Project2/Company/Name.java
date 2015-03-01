@@ -5,9 +5,9 @@ public class Name {
 
 
     //Fields
-    String first;
-    String middle;
-    String last;
+    private String first;
+    private String middle;
+    private String last;
 
 
     //Constructor
