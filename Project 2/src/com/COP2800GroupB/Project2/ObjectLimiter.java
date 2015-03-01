@@ -1,13 +1,13 @@
 package com.COP2800GroupB.Project2;
 
+
+
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Tools.Display;
 
 import javax.swing.*;
 
-/**
- * Created by David on 2/27/2015.
- */
+
 public class ObjectLimiter {
 
 
@@ -77,10 +77,10 @@ public class ObjectLimiter {
         int count = 0;
 
         //Loop through array
-        for (int i = 0; i < array.length; i++) {
+        for (Person anArray : array) {
 
             //Check if Manager
-            if (array[i].getEmployee().getManager().isManager()) {
+            if (anArray.getEmployee().getManager().isManager()) {
 
                 //Add 1 to count
                 count++;
@@ -104,10 +104,10 @@ public class ObjectLimiter {
         int count = 0;
 
         //Loop through array
-        for (int i = 0; i < array.length; i++) {
+        for (Person anArray : array) {
 
             //Check if Manager
-            if (array[i].getEmployee().isEmployee()) {
+            if (anArray.getEmployee().isEmployee()) {
 
                 //Add 1 to count
                 count++;

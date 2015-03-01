@@ -5,11 +5,11 @@ public class Employee {
 
 
     //Fields
-    boolean employee;
-    String position;
-    String hourlyRate;
-    Manager manager;
-    Date dateHired;
+    private boolean employee;
+    private String position;
+    private String hourlyRate;
+    private Manager manager;
+    private Date dateHired;
 
 
     //Constructor

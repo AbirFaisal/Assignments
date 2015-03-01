@@ -1,5 +1,7 @@
 package com.COP2800GroupB.Project2.Tools;
 
+
+
 import com.COP2800GroupB.Project2.Company.Person;
 import com.COP2800GroupB.Project2.Main;
 import com.COP2800GroupB.Project2.ObjectLimiter;
@@ -10,10 +12,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
 
-/**
- * Created by abirfaisal on 2/13/15.
- */
-public class Add {
+
+class Add {
 
     public static void addPerson(int index, Person[] array) {
 
@@ -135,6 +135,7 @@ public class Add {
         employeeRadio.add(isEmployeeRadioNo);
 
 
+        //Employee radio button logic
         isEmployeeRadioYes.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -197,8 +198,8 @@ public class Add {
         //Create month combo box
         JComboBox month = new JComboBox();
         //Create combo box entries
-        for (int i = 0; i < monthChoice.length; i++) {
-            month.addItem(monthChoice[i]);
+        for (String aMonthChoice : monthChoice) {
+            month.addItem(aMonthChoice);
         }
         //Add Combobox to JPanel
         dateHired.add(month);
@@ -295,16 +296,19 @@ public class Add {
         managerRadio.add(isManagerRadioNo);
 
 
+        //Manager radio button logic
         isManagerRadioYes.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     isManagerRadioNo.setSelected(false);
+                    isEmployeeRadioYes.setSelected(true);
                 } else if (e.getStateChange() == ItemEvent.DESELECTED) {
                     isManagerRadioNo.setSelected(true);
                 }
             }
         });
+
 
         isManagerRadioNo.addItemListener(new ItemListener() {
             @Override
@@ -475,11 +479,7 @@ public class Add {
 
         ////////////////////////////
 
-        //for debugging purposes
-        System.out.print("Selection = " + selection + "\n");
 
-        //Call selection method with selection value
-        //selection(selection, array);
 
 
         //radio buttons to true false

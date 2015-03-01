@@ -5,12 +5,12 @@ public class Person {
 
 
     //Fields
-    Name name;
-    String email;
-    String phone;
-    Employee employee;
-    Address address;
-    Date dateCreated;
+    private Name name;
+    private String email;
+    private String phone;
+    private Employee employee;
+    private Address address;
+    private Date dateCreated;
 
 
     //Constructor
