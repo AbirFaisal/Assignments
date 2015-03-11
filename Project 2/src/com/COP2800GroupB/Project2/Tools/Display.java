@@ -1,3 +1,12 @@
+/*
+ * *
+ *  * Project Name: Project 2
+ *  * Class Name: Display
+ *  *
+ *  * Created by David, Nicholas, Abir, Will, Brian on 3/1/15 10:48 PM
+ *
+ */
+
 package com.COP2800GroupB.Project2.Tools;
 
 
@@ -16,25 +25,19 @@ public class Display {
 
 
         //String array to hold concat'd name string
-        String[] tempStrArray = new String[array.length];
+        String[] strArray = new String[array.length];
 
 
-        //loop to initalize tempStrArray
+        //loop to initialize tempStrArray
         for (int i = 0; i < array.length; i++) {
 
-            //create string to temporarily store string
-            String tempStr;
+            //assigned concat'd name to array
+            strArray[i] = StringFormatter.getCombinedName(i, array);
 
-            //temp string = first middle and last name combined
-            tempStr = StringFormatter.getCombinedName(i, array);
-
-
-            //assignd concat'd name to array
-            tempStrArray[i] = tempStr;
         }
 
         // Create JList with string array
-        JList list = new JList(tempStrArray);
+        JList list = new JList(strArray);
 
         //Auto select first record
         list.setSelectedIndex(0);
@@ -43,24 +46,24 @@ public class Display {
         JScrollPane scrollPane = new JScrollPane(list);
 
         //Dimension the scroll pane praportional to
-        scrollPane.setPreferredSize(new Dimension((array.length * 2 / 3), array.length));
+        scrollPane.setPreferredSize(new Dimension((Main.MAX_PERSONS * 2 / 3), Main.MAX_PERSONS));
 
 
         //Buttons to display
         String[] buttons = {
-                "Cancel",
-                "View Record",
-                "View Employees",
-                "View Managers"};
+                "Cancel",           //0
+                "View Record",      //1
+                "View Employees",   //2
+                "View Managers"};   //3
 
 
         //display buttons and prompt
         int selection = JOptionPane.showOptionDialog(null,
-                scrollPane,
-                "All Records",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE,
-                null,
+                scrollPane,                 //Object
+                "All Records",              //Window Title
+                JOptionPane.DEFAULT_OPTION, //Message?
+                JOptionPane.PLAIN_MESSAGE,  //Message Type
+                null,                       //No idea
                 buttons,
                 buttons[0]);
 
@@ -100,8 +103,8 @@ public class Display {
         String tempStr;
 
 
-        //Sort A-Z
-        sortAZ(array);
+        //Sort Z-A
+        sortZA(array);
 
 
         //loop to initialize tempStrArray
@@ -134,8 +137,8 @@ public class Display {
 
         //Buttons to display
         String[] buttons = {
-                "Cancel",
-                "View"};
+                "Cancel",   //0
+                "View"};    //1
 
 
         //display buttons and prompt
@@ -159,7 +162,7 @@ public class Display {
                 break;
             case 1:
                 //View Record
-                Display.displayOnePerson(index, array); //+ arrayCompensator
+                Display.displayOnePerson(index, array);
                 break;
         }
     }
@@ -173,8 +176,8 @@ public class Display {
         //create string to temporarily store string
         String tempStr;
 
-        //Sort Z-A
-        sortZA(array);
+        //Sort A-Z
+        sortAZ(array);
 
 
         //loop to initalize tempStrArray
@@ -449,3 +452,4 @@ public class Display {
         }
     }
 }
+

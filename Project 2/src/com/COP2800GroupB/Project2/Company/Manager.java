@@ -1,3 +1,12 @@
+/*
+ * *
+ *  * Project Name: Project 2
+ *  * Class Name: Manager
+ *  *
+ *  * Created by David, Nicholas, Abir, Will, Brian on 3/1/15 10:48 PM
+ *
+ */
+
 package com.COP2800GroupB.Project2.Company;
 
 

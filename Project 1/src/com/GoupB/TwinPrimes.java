@@ -4,6 +4,7 @@ public class TwinPrimes {
 	public static void main(String[] args) {
 		printPrimeNumbers(35);	
 	}
+	
 	public static void printPrimeNumbers(int numberOfPrimes) {
 		//the constant and initializations are find for the functions
 		final int NUMBER_OF_PRIMES_PER_LINE = 2;
@@ -27,6 +28,9 @@ public class TwinPrimes {
 			numberOne++;
 		}
 	}
+	
+	
+	
 	// Evaluates for each prime number so that the prime number will be displayed
 	//to the user correctly
 	public static boolean isPrime(int number) {
@@ -37,6 +41,9 @@ public class TwinPrimes {
 		}
 		return true;
 	}
+	
+	
+	
 	public static boolean isPrime1(int numberOne) {
 
 		for ( int divisorOne = 2; divisorOne <=numberOne / 2; divisorOne++){
