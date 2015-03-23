@@ -1,55 +1,76 @@
+/*
+ * *
+ *  * Project Name: Project 2
+ *  * Class Name: Initalize
+ *  *
+ *  * Created by David, Nicholas, Abir, Will, Brian on 3/1/15 10:48 PM
+ *
+ */
+
 package com.COP2800GroupB.Project2;
+
 
 
 import com.COP2800GroupB.Project2.Company.*;
 
 import java.util.Calendar;
 
-class Initalize {
+class Initialize {
 
     //Initializes the personDatabase[] array
-    public static void initalizeRecords(Person[] array) {
+    public static void initializeRecords(Person[] array) {
+
+
+        //Declare variables
+        Name name;
+        Manager tempManager;
+        Calendar calendar;
+        Date dateHired;
+        Employee tempEmployee;
+        Address address;
+        Date dateCreated;
+
 
         //Initialize objects in personDatabase array
         for (int i = 0; i < array.length; i++) {
 
 
             //create new name Object
-            Name name = new Name(
+            name = new Name(
                     "Empty",    //First
                     "-",        //Middle
                     "Record");  //Last
 
 
             //create new manager of Manager type
-            Manager tempManager = new Manager(
+            tempManager = new Manager(
                     false,  //isManager (true/false)
                     "",     //Title
                     "");    //Department
 
 
             //Create calendar to get current date
-            Calendar calendar = Calendar.getInstance();
+            calendar= Calendar.getInstance();
 
 
             //Create new a date Object and add calendar values
-            Date dateHired = new Date(
+            dateHired = new Date(
                     calendar.get(Calendar.MONTH),       //Month
                     calendar.get(Calendar.DAY_OF_MONTH),//Day
                     calendar.get(Calendar.YEAR));       //Year
 
 
             //create new employee of employee type
-            Employee tempEmployee = new Employee(
+            tempEmployee = new Employee(
                     false,      //isEmployee (true/false)
-                    "",         //Portion
+                    "",         //Position
                     "",         //Pay Rate
                     tempManager,//Manager Object
                     dateHired); //Date Object (date hired)
 
 
             //create new address of address type
-            Address address = new Address(
+            address = new Address(
                     "",     //Line 1
                     "",     //Line 2
                     "",     //City
@@ -59,7 +80,7 @@ class Initalize {
 
 
             //Create new a date Object and add calendar values
-            Date dateCreated = new Date(
+            dateCreated = new Date(
                     calendar.get(Calendar.MONTH),       //Month
                     calendar.get(Calendar.DAY_OF_MONTH),//Day
                     calendar.get(Calendar.YEAR));       //Year
@@ -67,13 +88,13 @@ class Initalize {
 
             //create new person of Person type
             array[i] = new Person(
-                    name,                   //Name Object
+                    name,                //Name Object
                     "",                  //Email
                     "",                  //Phone
-                    tempEmployee,           //Employee Object
-                    address,                //Address Object
+                    tempEmployee,        //Employee Object
+                    address,             //Address Object
                     dateCreated);        //Date Object(record create/modify date)
         }
     }
-}
+}//
 

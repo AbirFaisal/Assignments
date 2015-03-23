@@ -1,3 +1,12 @@
+/*
+ * *
+ *  * Project Name: Project 2
+ *  * Class Name: StringFormatter
+ *  *
+ *  * Created by David, Nicholas, Abir, Will, Brian on 3/1/15 10:48 PM
+ *
+ */
+
 package com.COP2800GroupB.Project2.Tools;
 
 import com.COP2800GroupB.Project2.Company.Person;
@@ -110,16 +119,10 @@ class StringFormatter {
     //Gets First Middle and Last and returns them as one string
     public static String getCombinedName(int index, Person[] array) {
 
-
-        //Combine strings
-        String name =
-                array[index].getName().getFirst() + " " +   //Get First Name + Space
-                        array[index].getName().getMiddle() + " " +  //Get Middle Name + Space
-                        array[index].getName().getLast();           //Get Last Name
-
-
         //Return Combined Strings
-        return name;
+        return   array[index].getName().getFirst() + " " +   //Get First Name + Space
+                 array[index].getName().getMiddle() + " " +  //Get Middle Name + Space
+                 array[index].getName().getLast();
     }
 
 
