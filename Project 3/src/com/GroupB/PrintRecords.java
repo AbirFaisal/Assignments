@@ -5,7 +5,7 @@ package com.GroupB;
  */
 public class PrintRecords {
 
-    public static void print(Person[] personArray){
+    public static void print(Animal[] animalArray){
 
 
 
@@ -13,7 +13,7 @@ public class PrintRecords {
         //String to hold spaces
         String space = "";
         //Get number of spaces to generate
-        int spaceIterations = Name.getConcatNameLength(personArray);
+        int spaceIterations = Name.getConcatNameLength(animalArray);
         //Add spaces
         for (int i = 0; i < spaceIterations; i++) {
 
@@ -22,17 +22,11 @@ public class PrintRecords {
         }
 
 
-
-
-
-
-
-
         //Print Header
         System.out.print("# Name" + space + " Gender  " + "Salary \n");
 
         //Go through array and print each record
-        for (int i = 0; i < personArray.length; i++) {
+        for (int i = 0; i < animalArray.length; i++) {
 
             //Determine spacing for record based on record length
             //String to hold spaces
@@ -40,9 +34,9 @@ public class PrintRecords {
             //Get number of spaces to generate
 
             //store lengths
-            int tempfirst = personArray[i].getName().getFirstName().length();
-            int tempMiddle = personArray[i].getName().getMiddleName().length();
-            int tempLast = personArray[i].getName().getLastName().length();
+            int tempfirst = animalArray[i].getName().getFirstName().length();
+            int tempMiddle = animalArray[i].getName().getMiddleName().length();
+            int tempLast = animalArray[i].getName().getLastName().length();
 
             //record name length
             int recordLength = tempfirst + tempMiddle + tempLast;
@@ -56,11 +50,11 @@ public class PrintRecords {
             //Print out record
             System.out.printf("%d %s %s %s" + recordSpace + "%s  $%s \n",
                     (i+1),
-                    personArray[i].getName().getFirstName(),
-                    personArray[i].getName().getMiddleName(),
-                    personArray[i].getName().getLastName(),
-                    genderToMaleFemale(i, personArray),
-                    personArray[i].getSalary());
+                    animalArray[i].getName().getFirstName(),
+                    animalArray[i].getName().getMiddleName(),
+                    animalArray[i].getName().getLastName(),
+                    genderToMaleFemale(i, animalArray),
+                    animalArray[i].getSalary());
         }
     }
 
