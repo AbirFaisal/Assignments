@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class DisplayRecord {
 
-    public static void editRecord(Person[] personArray){
+    public static void editRecord(Animal[] animalArray){
 
         //ask user which record user wants to edit.
         // boolean to check if user wants to stop editing and end the program
@@ -16,7 +16,7 @@ public class DisplayRecord {
         do {
             //Print out records to screen
             clearScreen();
-            PrintRecords.print(personArray);
+            PrintRecords.print(animalArray);
 
             System.out.print("\n " +
                     "Which record do you want to edit? \n" +
@@ -32,10 +32,10 @@ public class DisplayRecord {
                 System.exit(0);
             }
             //array bounds checking
-            else if ((i < 0) || (i > personArray.length)) {
+            else if ((i < 0) || (i > animalArray.length)) {
                 System.out.print("\n Invalid Input \n");
                 clearScreen();
-                Edit.editRecord(personArray);
+                Edit.editRecord(animalArray);
             } else {
 
                 clearScreen();
@@ -43,11 +43,11 @@ public class DisplayRecord {
                 //Print record to be edited
                 System.out.print("You are editing record #: " + i + "\n");
                 System.out.printf("%s %s %s  %s  $%s \n",
-                        personArray[i - 1].getName().getFirstName(),
-                        personArray[i - 1].getName().getMiddleName(),
-                        personArray[i - 1].getName().getLastName(),
-                        PrintRecords.genderToMaleFemale((i - 1), personArray),
-                        personArray[i - 1].getSalary());
+                        animalArray[i - 1].getName().getFirstName(),
+                        animalArray[i - 1].getName().getMiddleName(),
+                        animalArray[i - 1].getName().getLastName(),
+                        PrintRecords.genderToMaleFemale((i - 1), animalArray),
+                        animalArray[i - 1].getSalary());
 
                 //Scanner
                 Scanner in = new Scanner(System.in);
@@ -55,18 +55,18 @@ public class DisplayRecord {
                 //Request input
                 System.out.print("Enter First Name \n");
                 //Get and process input
-                personArray[i-1].getName().setFirstName(in.next());
+                animalArray[i-1].getName().setFirstName(in.next());
 
                 //Request input
                 System.out.print("Enter Middle Name \n");
                 //Get and process input
-                personArray[i-1].getName().setMiddleName(in.next());
+                animalArray[i-1].getName().setMiddleName(in.next());
 
                 //Request input
                 System.out.print("Enter Last Name \n");
                 //Get and process input
 
-                personArray[i-1].getName().setLastName(in.next());
+                animalArray[i-1].getName().setLastName(in.next());
 
                 //Request input
                 System.out.print("Enter " +
@@ -78,23 +78,23 @@ public class DisplayRecord {
                 //Convert input to boolean
                 if (gender.equals("M")){
                     //true
-                    personArray[i-1].setGender(true);
+                    animalArray[i-1].setGender(true);
 
 
                 }else if (gender.equals("F")){
                     //false
-                    personArray[i-1].setGender(false);
+                    animalArray[i-1].setGender(false);
 
                 }else {
                     System.out.print("Invalid Input: \n");
                     clearScreen();
-                    Edit.editRecord(personArray);
+                    Edit.editRecord(animalArray);
                 }
 
                 //Request input
                 System.out.print("Enter Salary: \n");
                 //Get and process input
-                personArray[i-1].setSalary(in.next());
+                animalArray[i-1].setSalary(in.next());
             }
         }while (!stop);
 

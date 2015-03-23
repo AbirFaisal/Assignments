@@ -6,7 +6,7 @@ public class Main {
 
 
             //Create array of Animal type
-            Animal[] animalArray = new Animal[5];
+            Animal[] animalArray = new Animal[2];
 
             //Initialize records
             //initalizeRecords(animalArray);
