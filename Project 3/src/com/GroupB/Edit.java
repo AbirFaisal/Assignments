@@ -40,46 +40,46 @@ public class Edit {
 
                 clearScreen();
 
-                //Print record to be edited
-                System.out.print("You are editing record #: " + i + "\n");
-                System.out.printf("%s %s %s  %s  $%s \n",
-                        animalArray[i - 1].getName().getFirstName(),
-                        animalArray[i - 1].getName().getMiddleName(),
-                        animalArray[i - 1].getName().getLastName(),
-                        PrintRecords.genderToMaleFemale((i - 1), animalArray),
-                        animalArray[i - 1].getSalary());
-
-                //Scanner
-                Scanner in = new Scanner(System.in);
-
-                //Request input
-                System.out.print("Enter First Name \n");
-                //Get and process input
-                animalArray[i-1].getName().setFirstName(in.next());
-
-                //Request input
-                System.out.print("Enter Middle Name \n");
-                //Get and process input
-                animalArray[i-1].getName().setMiddleName(in.next());
-
-                //Request input
-                System.out.print("Enter Last Name \n");
-                //Get and process input
-
-                animalArray[i-1].getName().setLastName(in.next());
-
-                //Request input
-                System.out.print("Enter " +
-                        "M (M)ale  " +
-                        "F (F)emale \n");
-
-
-
-
-                //Request input
-                System.out.print("Enter Salary: \n");
-                //Get and process input
-                animalArray[i-1].setSalary(in.next());
+//                //Print record to be edited
+//                System.out.print("You are editing record #: " + i + "\n");
+//                System.out.printf("%s %s %s  %s  $%s \n",
+//                        animalArray[i - 1].getName().getFirstName(),
+//                        animalArray[i - 1].getName().getMiddleName(),
+//                        animalArray[i - 1].getName().getLastName(),
+//                        PrintRecords.genderToMaleFemale((i - 1), animalArray),
+//                        animalArray[i - 1].getSalary());
+//
+//                //Scanner
+//                Scanner in = new Scanner(System.in);
+//
+//                //Request input
+//                System.out.print("Enter First Name \n");
+//                //Get and process input
+//                animalArray[i-1].getName().setFirstName(in.next());
+//
+//                //Request input
+//                System.out.print("Enter Middle Name \n");
+//                //Get and process input
+//                animalArray[i-1].getName().setMiddleName(in.next());
+//
+//                //Request input
+//                System.out.print("Enter Last Name \n");
+//                //Get and process input
+//
+//                animalArray[i-1].getName().setLastName(in.next());
+//
+//                //Request input
+//                System.out.print("Enter " +
+//                        "M (M)ale  " +
+//                        "F (F)emale \n");
+//
+//
+//
+//
+//                //Request input
+//                System.out.print("Enter Salary: \n");
+//                //Get and process input
+//                animalArray[i-1].setSalary(in.next());
             }
         }while (!stop);
 
