@@ -27,7 +27,10 @@ public class Main {
         dogs = input.next();
 
 
+        //TODO error checking or some shit
 
+
+        //convert input to int values
         numBirds = Integer.parseInt(birds);
         numDogs = Integer.parseInt(dogs);
 
@@ -49,14 +52,10 @@ public class Main {
         }
 
 
-
+        //
         for (i = 0; i < (numBirds+numDogs); i++) {
             System.out.print(" \n " + animalArray[i] + "\n");
         }
-
-
-
-        //System.out.print(array[2]);
 
 
 
