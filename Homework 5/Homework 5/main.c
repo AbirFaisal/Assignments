@@ -65,6 +65,7 @@
 
 */
 #include <stdio.h>
+#include <string.h>
 
 
 	// Create a new structure that holds the following:
@@ -74,6 +75,7 @@
 	// Year Joined: Integer
 
 const int sizeOfName = 100;
+int i = 0;
 
 typedef struct {
 	unsigned int ID, year;
@@ -82,12 +84,37 @@ typedef struct {
 } Record;
 
 
+void clearScreen(int lines){
+	
+	char line[100] = " \n \n \n \n ";
+	
+	for (i = 0; i < lines; i++) {
+		strcpy (line," \n ");
+	}
+	
+	printf("%s", line);
+}
+
+
 
 int main(int argc, const char * argv[]) {
 	
 	
+		//Create an array of 6 of your new structure.
+		// Fill in your own values, this is test data.
 	
 	
+	
+		//	Print the following menu to the user:
+		// 	Search by ID.
+		// 	Search by Year Joined.
+		// 	Exit
+	
+	clearScreen(10);
+	
+	printf(" Search by ID \n Search by Year Joined \n Exit \n");
+	
+
 	
 
 	
