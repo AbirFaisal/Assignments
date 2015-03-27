@@ -6,11 +6,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String birds = "2";
-        String dogs = "2";
-        int numBirds = 0;
-        int numDogs = 0;
-        int i = 0;
+        String birds;
+        String dogs;
+        int numBirds;
+        int numDogs;
+        int i;
         Scanner input = new Scanner(System.in);
 
 
@@ -83,7 +83,7 @@ public class Main {
 
 
 
-
+System.out.println("");
 }//end of main
 
 
