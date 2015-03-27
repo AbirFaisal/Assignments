@@ -66,11 +66,46 @@
 */
 #include <stdio.h>
 
+
+	// Create a new structure that holds the following:
+	// ID number: unsigned integer
+	// Name: char[100]
+	// Account Balance: float
+	// Year Joined: Integer
+
+const int sizeOfName = 100;
+
+typedef struct {
+	unsigned int ID, year;
+	char name[sizeOfName];
+	float balance;
+} Record;
+
+
+
 int main(int argc, const char * argv[]) {
 	
 	
-		// insert code here...
-	printf("Hello, World!\n");
+	
+	
+	
+
+	
     return 0;
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
