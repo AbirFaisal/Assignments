@@ -1,7 +1,7 @@
 package com.GroupB;
 
 /**
- * Created by abirfaisal on 3/23/15.
+ * Created by Group B on 3/23/15.
  */
 public class Dog extends Animal{
 

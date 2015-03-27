@@ -4,7 +4,7 @@ import java.lang.Override;
 import java.lang.String;
 
 /**
- * Created by abirfaisal on 3/23/15.
+ * Created by Group B on 3/23/15.
  */
 public class Bird extends Animal{
 
