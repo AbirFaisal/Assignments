@@ -13,7 +13,18 @@ public class Bird extends Animal{
     public Bird(String weight, String name) {
         super(weight);
         this.name = name;
-    }
+    }//end of constructor
+
+    public boolean equals(Object obj){
+        if(!(obj instanceof Bird)){
+            return false;
+        }//end of if
+        boolean result = false;
+        if(this.getWeight() == ((Bird)obj).getWeight()){
+            result = true;
+        }//end of if
+        return result;
+    }//end of equals
 
     public String getName() {
         return name;
