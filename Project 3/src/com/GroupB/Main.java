@@ -39,22 +39,45 @@ public class Main {
         Animal[] animalArray = new Animal[numBirds+numDogs];
 
 
+        String weight;
+        String name;
+        String breed;
+
+        System.out.print("");
+        weight = input.nextLine();
 
         //initalize birds
         for (i = 0; i < numBirds; i++) {
-            animalArray[i] = new Bird("10", "Parrot");
+
+            System.out.println("Enter birds weight(lbs): ");
+            weight = input.nextLine();
+
+            System.out.println("Enter birds name: ");
+            name  = input.nextLine();
+
+                   animalArray[i] = new Bird(weight,name);
         }
+
 
 
         //initalize dogs
         for (i = numBirds; i < (numDogs+numBirds); i++) {
-            animalArray[i] = new Dog("30", "Pitbull");
+
+            System.out.println("Enter Dogs weight(lbs): ");
+            weight = input.nextLine();
+
+            System.out.println("Enter Dogs breed: ");
+            breed  = input.nextLine();
+
+
+            animalArray[i] = new Dog(weight, breed);
         }
 
 
         //
         for (i = 0; i < (numBirds+numDogs); i++) {
-            System.out.print(" \n " + animalArray[i] + "\n");
+            System.out.print( "\n\n\nRecord: " +  (1+i) + "\n_______________________\n");
+            System.out.print( animalArray[i]);
         }
 
 
