@@ -12,6 +12,17 @@ public class Dog extends Animal{
         this.breed = breed;
     }//end of constructor
 
+    public boolean equals(Object obj){
+        if(!(obj instanceof Dog)){
+            return false;
+        }//end of if
+        boolean result = false;
+        if(this.getWeight() == ((Dog)obj).getWeight()){
+            result = true;
+        }//end of if
+        return result;
+    }//end of equals
+
     public String getBreed() {
         return breed;
     }
