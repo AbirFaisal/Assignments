@@ -5,35 +5,26 @@ public class Main {
     public static void main(String[] args) {
 
 
-            //Create array of Animal type
-            Animal[] animalArray = new Animal[2];
+    //Create array of Animal type
+        Animal[2] dogArray;
+        dogArray[0] = new Dog;
+        dogArray[1] = new Dog;
 
-            //Initialize records
-            //initalizeRecords(animalArray);
+        Animal[2] birdArray;
+        birdArray[0] = new Bird;
+        birdArray[1] = new Bird;
 
-            //Start Editor
-            Edit.editRecord(animalArray);
+//        Animal dog = new Dog("15","Pitbull");
 
-    }
 
-//
-//    //Initialize records
-//    private static void initalizeRecords(Animal[] animalArray){
-//
-//        for (int i = 0; i < animalArray.length; i++) {
-//
-//            Name name = new Name("John", "Mochafrapachino", "Smith");
-//
-//            boolean gender = Math.random() < 0.5;
-//
-//            String salary = String.valueOf((int)(Math.random() * 100000));
-//
-//            String age = String.valueOf((int) (Math.random() * 100));
-//
-//            animalArray[i] = new Animal(name, gender, age, salary);
-//
-//
-//        }
-//    }
+  //      System.out.print(dogArray[0]);
 
-}
+
+
+
+
+}//end of main
+
+
+
+}//end of class Main
