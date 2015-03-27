@@ -6,18 +6,18 @@ public class Main {
 
 
     //Create array of Animal type
-        Animal[2] dogArray;
-        dogArray[0] = new Dog;
-        dogArray[1] = new Dog;
+        Animal[] array = new Animal[4];
 
-        Animal[2] birdArray;
-        birdArray[0] = new Bird;
-        birdArray[1] = new Bird;
-
-//        Animal dog = new Dog("15","Pitbull");
+        array[0] = new Dog("25", "Pitbull");
+        array[1] = new Dog("25", "Golden Retreaver");
+        array[2] = new Bird("400", "Penguin");
+        array[3] = new Bird("23221", "Crow");
 
 
-  //      System.out.print(dogArray[0]);
+        
+
+
+        System.out.print(array[2]);
 
 
 

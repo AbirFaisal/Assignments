@@ -36,8 +36,8 @@ public class Bird extends Animal{
 
     @Override
     public String toString() {
-        return "Bird{" +
-                "name='" + name + '\'' + super.toString() +
-                '}';
+        return "Bird: \n" +
+                " Name: " + name +
+                super.toString();
     }
 }//end of Bird

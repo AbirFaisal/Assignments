@@ -37,7 +37,7 @@ public class Animal {
     @Override
     public String toString() {
         String result;
-        result = "Animal Weight: " + weight;
+        result = " \n Animal Weight: " + weight;
         return result;
     }
 }
