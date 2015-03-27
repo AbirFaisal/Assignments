@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/COP2800GroupWork.iml" filepath="$PROJECT_DIR$/.idea/COP2800GroupWork.iml" />
       <module fileurl="file://$PROJECT_DIR$/COP2800GroupWork.iml" filepath="$PROJECT_DIR$/COP2800GroupWork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project 1/Project 1.iml" filepath="$PROJECT_DIR$/Project 1/Project 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project 2/Project 2.iml" filepath="$PROJECT_DIR$/Project 2/Project 2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project 3/Project 3.iml" filepath="$PROJECT_DIR$/Project 3/Project 3.iml" />
     </modules>
   </component>
 </project>
