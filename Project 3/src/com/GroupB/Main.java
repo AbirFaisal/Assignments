@@ -27,22 +27,32 @@ public class Main {
         dogs = input.next();
 
 
-        //Create array of Animal type
-        Animal[] array = new Animal[4];
-
 
         numBirds = Integer.parseInt(birds);
         numDogs = Integer.parseInt(dogs);
 
+
+        //Create array of Animal type
+        Animal[] animalArray = new Animal[numBirds+numDogs];
+
+
+
+        //initalize birds
         for (i = 0; i < numBirds; i++) {
-            System.out.println("Bird");
+            animalArray[i] = new Bird("10", "Parrot");
         }
 
 
+        //initalize dogs
         for (i = numBirds; i < (numDogs+numBirds); i++) {
-            System.out.println("Dog");
+            animalArray[i] = new Dog("30", "Pitbull");
         }
 
+
+
+        for (i = 0; i < (numBirds+numDogs); i++) {
+            System.out.print(" \n " + animalArray[i] + "\n");
+        }
 
 
 
