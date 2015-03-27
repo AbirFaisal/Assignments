@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8874fdb5-56f6-48c9-bd4b-7da64ed61704" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Project 3/com/GroupB/Edit.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project 3/com/GroupB/Animal.class" afterPath="$PROJECT_DIR$/out/production/Project 3/com/GroupB/Animal.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/GroupB/Animal.java" afterPath="$PROJECT_DIR$/src/com/GroupB/Animal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/GroupB/Bird.java" afterPath="$PROJECT_DIR$/src/com/GroupB/Bird.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/GroupB/DisplayRecord.java" afterPath="$PROJECT_DIR$/src/com/GroupB/DisplayRecord.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/GroupB/Dog.java" afterPath="$PROJECT_DIR$/src/com/GroupB/Dog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/GroupB/Edit.java" afterPath="$PROJECT_DIR$/src/com/GroupB/Edit.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/GroupB/Main.java" afterPath="$PROJECT_DIR$/src/com/GroupB/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/GroupB/PrintRecords.java" afterPath="$PROJECT_DIR$/src/com/GroupB/PrintRecords.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project 3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,8 +31,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/GroupB/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53932583" vertical-offset="0" max-vertical-offset="540">
-              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.44494382" vertical-offset="282" max-vertical-offset="975">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -474,12 +464,12 @@
       <workItem from="1427149432738" duration="1516000" />
       <workItem from="1427234651956" duration="140000" />
       <workItem from="1427485947904" duration="415000" />
-      <workItem from="1427492274815" duration="896000" />
+      <workItem from="1427492274815" duration="2165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6943000" />
+    <option name="totallyTimeSpent" value="8212000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
@@ -891,8 +881,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/GroupB/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53932583" vertical-offset="0" max-vertical-offset="540">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.44494382" vertical-offset="282" max-vertical-offset="975">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
