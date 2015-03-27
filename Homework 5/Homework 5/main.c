@@ -65,6 +65,7 @@
 
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 
@@ -84,14 +85,18 @@ typedef struct {
 } Record;
 
 
+
+	//clears screen using newline
 void clearScreen(int lines){
-	
-	char line[100] = " \n \n \n \n ";
-	
+		//String to hold \n
+	char line[100] = "";
+		//add newline characters
 	for (i = 0; i < lines; i++) {
-		strcpy (line," \n ");
+		line[i] = '\n';
 	}
-	
+		//add null terminator
+	line[i+1] = '\0';
+		//Single print statement ensures that this function is not expensive
 	printf("%s", line);
 }
 
@@ -99,9 +104,12 @@ void clearScreen(int lines){
 
 int main(int argc, const char * argv[]) {
 	
+	int input;
+	
 	
 		//Create an array of 6 of your new structure.
 		// Fill in your own values, this is test data.
+	Record records[6];
 	
 	
 	
@@ -110,10 +118,16 @@ int main(int argc, const char * argv[]) {
 		// 	Search by Year Joined.
 		// 	Exit
 	
-	clearScreen(10);
+	clearScreen(20);
 	
-	printf(" Search by ID \n Search by Year Joined \n Exit \n");
+	printf(" 1. Search by ID \n 2. Search by Year Joined \n 3. Exit \n");
 	
+	scanf("%i", &input);
+	
+	printf("\n input: %i", input);
+	
+	
+	clearScreen(5);
 
 	
 
