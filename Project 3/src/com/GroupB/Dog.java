@@ -12,6 +12,17 @@ public class Dog extends Animal{
         this.breed = breed;
     }//end of constructor
 
+    public boolean equals(Object obj){
+        if(!(obj instanceof Dog)){
+            return false;
+        }//end of if
+        boolean result = false;
+        if(this.getWeight() == ((Dog)obj).getWeight()){
+            result = true;
+        }//end of if
+        return result;
+    }//end of equals
+
     public String getBreed() {
         return breed;
     }
@@ -22,11 +33,10 @@ public class Dog extends Animal{
 
     @Override
     public String toString() {
-        return "Dog{" +
-                "breed: '" +
-                breed + '\'' +
-                super.toString() +
-                '}';
+        return "Dog: \n" +
+                " Breed: " +
+                breed +
+                super.toString();
     }//end of toString
 
 }//end of Dog

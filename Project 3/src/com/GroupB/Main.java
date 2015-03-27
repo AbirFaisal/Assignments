@@ -1,39 +1,69 @@
 package com.GroupB;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
+        String birds = "2";
+        String dogs = "2";
+        int numBirds = 0;
+        int numDogs = 0;
+        int i = 0;
+        Scanner input = new Scanner(System.in);
 
-            //Create array of Animal type
-            Animal[] animalArray = new Animal[2];
 
-            //Initialize records
-            //initalizeRecords(animalArray);
+        //prompt user
+        System.out.println("How many Birds do you want");
 
-            //Start Editor
-            Edit.editRecord(animalArray);
+        //get input
+        birds = input.next();
 
-    }
+        //prompt user
+        System.out.println("How many Dogs do you want");
 
-//
-//    //Initialize records
-//    private static void initalizeRecords(Animal[] animalArray){
-//
-//        for (int i = 0; i < animalArray.length; i++) {
-//
-//            Name name = new Name("John", "Mochafrapachino", "Smith");
-//
-//            boolean gender = Math.random() < 0.5;
-//
-//            String salary = String.valueOf((int)(Math.random() * 100000));
-//
-//            String age = String.valueOf((int) (Math.random() * 100));
-//
-//            animalArray[i] = new Animal(name, gender, age, salary);
-//
-//
-//        }
-//    }
+        //get input
+        dogs = input.next();
 
-}
+
+
+        numBirds = Integer.parseInt(birds);
+        numDogs = Integer.parseInt(dogs);
+
+
+        //Create array of Animal type
+        Animal[] animalArray = new Animal[numBirds+numDogs];
+
+
+
+        //initalize birds
+        for (i = 0; i < numBirds; i++) {
+            animalArray[i] = new Bird("10", "Parrot");
+        }
+
+
+        //initalize dogs
+        for (i = numBirds; i < (numDogs+numBirds); i++) {
+            animalArray[i] = new Dog("30", "Pitbull");
+        }
+
+
+
+        for (i = 0; i < (numBirds+numDogs); i++) {
+            System.out.print(" \n " + animalArray[i] + "\n");
+        }
+
+
+
+        //System.out.print(array[2]);
+
+
+
+
+
+}//end of main
+
+
+
+}//end of class Main

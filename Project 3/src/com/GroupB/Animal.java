@@ -13,6 +13,16 @@ public class Animal {
         this.weight = weight;
     }
 
+    public boolean equals(Object obj){
+        if(!(obj instanceof Animal)){
+            return false;
+        }//end of if
+        boolean result = false;
+        if(this.getWeight() == ((Animal)obj).getWeight()){
+            result = true;
+        }//end of if
+        return result;
+    }//end of equals
 
     public String getWeight() {
         return weight;
@@ -27,7 +37,7 @@ public class Animal {
     @Override
     public String toString() {
         String result;
-        result = "Animal Weight: " + weight;
+        result = " \n Animal Weight: " + weight;
         return result;
     }
 }
