@@ -17,7 +17,7 @@ public class Dog extends Animal{
             return false;
         }//end of if
         boolean result = false;
-        if(this.getWeight() == ((Dog)obj).getWeight()){
+        if(this.getBreed() == ((Dog)obj).getBreed()){
             result = true;
         }//end of if
         return result;

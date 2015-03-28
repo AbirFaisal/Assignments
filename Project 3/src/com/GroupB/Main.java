@@ -11,14 +11,16 @@ public class Main {
         int numBirds;
         int numDogs;
         int i;
+
         Scanner input = new Scanner(System.in);
 
 
         //prompt user
         System.out.println("How many Birds do you want");
-
-        //get input
+      //get input
         birds = input.next();
+
+
 
         //prompt user
         System.out.println("How many Dogs do you want");
@@ -34,6 +36,8 @@ public class Main {
         numBirds = Integer.parseInt(birds);
         numDogs = Integer.parseInt(dogs);
 
+//        numBirds = birds;
+//        numDogs = dogs;
 
         //Create array of Animal type
         Animal[] animalArray = new Animal[numBirds+numDogs];
@@ -80,6 +84,17 @@ public class Main {
             System.out.print( animalArray[i]);
         }
 
+        //TODO equals method not working properly
+        for (i = 0; i < (numBirds+numDogs); i++) {
+            System.out.print( "\n\n\nRecord: " +  (1+i) + "\n_______________________\n");
+
+            if (animalArray[i].equals(animalArray[i + 1])){
+                System.out.println("The animals are equal");
+            }else{
+                System.out.println("The animals are NOT equal");
+            }
+
+        }
 
 
 

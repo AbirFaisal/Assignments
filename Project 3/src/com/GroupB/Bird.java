@@ -20,7 +20,7 @@ public class Bird extends Animal{
             return false;
         }//end of if
         boolean result = false;
-        if(this.getWeight() == ((Bird)obj).getWeight()){
+        if(this.getName() == ((Bird)obj).getName()){
             result = true;
         }//end of if
         return result;
