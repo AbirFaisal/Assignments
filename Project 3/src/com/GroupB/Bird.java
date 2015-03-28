@@ -4,7 +4,7 @@ import java.lang.Override;
 import java.lang.String;
 
 /**
- * Created by abirfaisal on 3/23/15.
+ * Created by Group B on 3/23/15.
  */
 public class Bird extends Animal{
 
@@ -20,7 +20,7 @@ public class Bird extends Animal{
             return false;
         }//end of if
         boolean result = false;
-        if(this.getWeight() == ((Bird)obj).getWeight()){
+        if(this.getName() == ((Bird)obj).getName()){
             result = true;
         }//end of if
         return result;

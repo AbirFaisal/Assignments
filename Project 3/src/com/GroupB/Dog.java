@@ -1,7 +1,7 @@
 package com.GroupB;
 
 /**
- * Created by abirfaisal on 3/23/15.
+ * Created by Group B on 3/23/15.
  */
 public class Dog extends Animal{
 
@@ -17,7 +17,7 @@ public class Dog extends Animal{
             return false;
         }//end of if
         boolean result = false;
-        if(this.getWeight() == ((Dog)obj).getWeight()){
+        if(this.getBreed() == ((Dog)obj).getBreed()){
             result = true;
         }//end of if
         return result;
