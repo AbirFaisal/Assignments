@@ -33,10 +33,7 @@ public class Dog extends Animal{
 
     @Override
     public String toString() {
-        return "Dog: \n" +
-                " Breed: " +
-                breed +
-                super.toString();
-    }//end of toString
+        return "Dog \t" + super.toString() + "\t" + breed;
+    }
 
 }//end of Dog
