@@ -1,5 +1,6 @@
 package com.GroupB;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 
@@ -13,7 +14,6 @@ public class Main {
         int i;
         int size = 0;
         int numOfRecords = 0;
-        boolean exit = false;
 
         Scanner input = new Scanner(System.in);
 
@@ -27,13 +27,17 @@ public class Main {
 
         //make sure input is a numerical valued
         if (!isNumber(selection)){
-            System.out.println("Invalid input: Must be numerical value between 0 and 32767 \n");
+            JOptionPane.showMessageDialog(null,
+                    "Invalid input: Must be an integer between 0 and 32767 \n",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             main(args);
         }
 
         //make sure input is between 0 and 32767 and is positive
         if ((int)Double.parseDouble(selection) <= 0 || (int)Double.parseDouble(selection) >= 32767){
-            System.out.println("Invalid input: Must be numerical value between 0 and 32767 \n");
+            JOptionPane.showMessageDialog(null,
+                    "Invalid input: Must be an integer between 0 and 32767 \n",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             main(args);
         }
 
@@ -52,30 +56,32 @@ public class Main {
             printLines(20);
 
             //Print header
-            System.out.println("Animal \t Weight \t Name/Breed");
+            System.out.println("Animal\tWeight\tName/Breed");
 
 
             //display current records
             if (animalArray[0] == null) {
                 System.out.println("No Records \n");
             } else {
-                for (i = 0; i < numOfRecords; i++) {
-                    System.out.println(animalArray[i]);
+                for (i = 0; i < size; i++) {
+                    if (animalArray[i] != null) {
+                        System.out.println(animalArray[i]);
+                    }
                 }
             }
 
 
-            System.out.print(" 1. Add Bird \n 2. Add Dog \n q to quit \n");
+            System.out.print("\n 1. Add Bird \n 2. Add Dog \n q to quit \n");
             selection = input.next();
 
 
             //Using switch statement because its faster than if statements
-            switch (selection.indexOf(0)){
+            switch (selection.charAt(0)){
                 case '1':
-
+                    add(animalArray, 1);
                     break;
                 case '2':
-
+                    add(animalArray, 2);
                     break;
                 //quit
                 case 'q':
@@ -84,7 +90,12 @@ public class Main {
                     break;
 
                 //Print error and call main
-                default: System.out.println("Invalid input: Must be numerical value of 1 or 2 or q to quit \n"); main(args);
+                default:
+                    System.out.println(selection.charAt(0));
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input: Must be numerical value of 1 or 2 or q to quit \n",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    System.out.println(); main(args);
             }
         } while (true);
 
@@ -145,21 +156,56 @@ public class Main {
     }
 
 
-    public static void add(Animal[] array, int BirdorDog){
+    public static void add(Animal[] array, int birdOrDog){
         printLines(20);
 
-        //"switch()" is faster than "if()"
-        switch (BirdorDog){
-            case 1:
-                break;
-            case 2:
-                break;
+        int index = 0;
+        String weight = "";
+        String nameBreed = "";
+
+        Scanner input = new Scanner(System.in);
+
+
+        //get index
+        //make sure were working with an null(empty) element
+        while (index < array.length && array[index] != null) {
+            //if element is not null add 1 to index
+            //check if there are avaliable records
+            index++;
+        }
+
+        if (index > (array.length-1)){
+            JOptionPane.showMessageDialog(null, "No empty Records", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
 
+        //Parent class Animal has weight so its outside the switch statement
+        System.out.print("Enter Weight: \n");
+        weight = input.next();
+
+
+        //"switch()" is faster than "if()"
+        switch (birdOrDog){
+            case 1: //Add Bird
+                System.out.print("Enter Name: \n");
+                nameBreed = input.next();
+
+                array[index] = new Bird(weight, nameBreed);
+
+                break;
+
+            case 2: //Add Dog
+                System.out.print("Enter Breed: \n");
+                nameBreed = input.next();
+
+                array[index] = new Dog(weight, nameBreed);
+
+                break;
+
+            //Since this is a backend error throw an exception
+            default: throw new IllegalArgumentException("Programmer is dumb: can only be int 1(bird) or 2(dog)");
+        }
     }
-
-
-
 
 }//end of class Main
