@@ -69,27 +69,24 @@ public class Main {
             selection = input.next();
 
 
-            if (selection.charAt(0) == 'q'){
-                System.out.println("Bye - Team B: Will, Nick, David, Abir");
-                System.exit(0);
+            //Using switch statement because its faster than if statements
+            switch (selection.indexOf(0)){
+                case '1':
+
+                    break;
+                case '2':
+
+                    break;
+                //quit
+                case 'q':
+                    System.out.println("Bye - Team B: Will, Nick, David, Abir");
+                    System.exit(0);
+                    break;
+
+                //Print error and call main
+                default: System.out.println("Invalid input: Must be numerical value of 1 or 2 or q to quit \n"); main(args);
             }
-
-            //If selection = 1
-            if (selection.charAt(0) == 49){
-
-
-
-            }
-
-            //if selection = 2
-            else if (selection.charAt(0) == 50){
-
-
-            } else System.out.println("Invalid input: Must be numerical value of 1 or 2 or q to quit \n"); main(args);
         } while (true);
-
-
-
 
 
 
@@ -131,6 +128,8 @@ public class Main {
     }
 
     //Prints lines
+    //Using this method because System.out.print() is expensive
+    //Calling the print method once makes the program much faster
     public static void printLines(int lines){
 
         //Holds new lines
@@ -143,6 +142,21 @@ public class Main {
 
         //Prints lines
         System.out.print(line);
+    }
+
+
+    public static void add(Animal[] array, int BirdorDog){
+        printLines(20);
+
+        //"switch()" is faster than "if()"
+        switch (BirdorDog){
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+
+
     }
 
 
