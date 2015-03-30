@@ -13,16 +13,19 @@ public class Animal {
         this.weight = weight;
     }
 
+    @Override
     public boolean equals(Object obj){
-        if(!(obj instanceof Animal)){
+        if(obj == this){
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
             return false;
-        }//end of if
-        boolean result = false;
-        if(this.getWeight() == ((Animal)obj).getWeight()){
-            result = true;
-        }//end of if
-        return result;
-    }//end of equals
+        }
+
+        //Animal animal = (Animal)obj;
+
+        return Boolean.parseBoolean(null);
+    }
 
     public String getWeight() {
         return weight;
@@ -30,6 +33,21 @@ public class Animal {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+
+        result = prime * result
+                + ((weight == null) ? 0 : weight.hashCode());
+
+        result = prime * result + id;
+
+        result = prime * result
+                + ((weight == null) ? 0 : weight.hashCode());
+        return result;
     }
 
 

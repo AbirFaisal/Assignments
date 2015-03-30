@@ -15,15 +15,22 @@ public class Bird extends Animal{
         this.name = name;
     }//end of constructor
 
+    @Override
     public boolean equals(Object obj){
-        if(!(obj instanceof Bird)){
+
+        if(obj == this){
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
             return false;
-        }//end of if
-        boolean result = false;
-        if(this.getName() == ((Bird)obj).getName()){
-            result = true;
-        }//end of if
-        return result;
+        }
+
+        return Boolean.parseBoolean(null);
+    }
+
+    public String getWeight() {
+        return name;
+
     }//end of equals
 
     public String getName() {

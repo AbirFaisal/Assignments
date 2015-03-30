@@ -52,7 +52,6 @@ public class Main {
 
         //Do until user wants to exit
         do {
-
             printLines(20);
 
             //Print header
@@ -86,12 +85,28 @@ public class Main {
                 //quit
                 case 'q':
                     System.out.println("Bye - Team B: Will, Nick, David, Abir");
+
+                    //equals method
+                    for (i = 0; i < (size-1); i++) {
+                        System.out.print( "\n\n\nRecord: " +  (1+i) + "\n_______________________\n");
+
+                        if (animalArray[i].equals(animalArray[i + 1])){
+                            System.out.println("The animals are equal");
+                        }else{
+                            System.out.println("The animals are NOT equal");
+                        }
+                    }
+
+
                     System.exit(0);
                     break;
 
                 //Print error and call main
                 default:
-                    System.out.println(selection.charAt(0));
+
+
+
+
                     JOptionPane.showMessageDialog(null,
                             "Invalid input: Must be numerical value of 1 or 2 or q to quit \n",
                             "Error", JOptionPane.ERROR_MESSAGE);
@@ -101,19 +116,9 @@ public class Main {
 
 
 
-//
-//        //TODO equals method not working properly
-//        for (i = 0; i < (numBirds+numDogs); i++) {
-//            System.out.print( "\n\n\nRecord: " +  (1+i) + "\n_______________________\n");
-//
-//            if (animalArray[i].equals(animalArray[i + 1])){
-//                System.out.println("The animals are equal");
-//            }else{
-//                System.out.println("The animals are NOT equal");
-//            }
-//
-//        }
-    }//end of main
+
+
+    }
 
 
     //Test if string consists of only numbers
