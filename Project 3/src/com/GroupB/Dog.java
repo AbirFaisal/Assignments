@@ -12,15 +12,18 @@ public class Dog extends Animal{
         this.breed = breed;
     }//end of constructor
 
+    @Override
     public boolean equals(Object obj){
-        if(!(obj instanceof Dog)){
+
+        if(obj == this){
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
             return false;
-        }//end of if
-        boolean result = false;
-        if(this.getBreed() == ((Dog)obj).getBreed()){
-            result = true;
-        }//end of if
-        return result;
+        }
+
+        return Boolean.parseBoolean(null);
+
     }//end of equals
 
     public String getBreed() {
