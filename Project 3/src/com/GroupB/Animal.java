@@ -22,7 +22,6 @@ public class Animal {
             return false;
         }
 
-        //Animal animal = (Animal)obj;
 
         return Boolean.parseBoolean(null);
     }
@@ -39,11 +38,6 @@ public class Animal {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-
-        result = prime * result
-                + ((weight == null) ? 0 : weight.hashCode());
-
-        result = prime * result + id;
 
         result = prime * result
                 + ((weight == null) ? 0 : weight.hashCode());
