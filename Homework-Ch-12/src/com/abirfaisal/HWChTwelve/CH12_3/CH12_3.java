@@ -2,6 +2,7 @@ package com.abirfaisal.HWChTwelve.CH12_3;
 
 import com.abirfaisal.HWChTwelve.Main;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,7 +19,6 @@ public class CH12_3 {
 
     public static void start() {
 
-        Main.printLines(50);
         System.out.println("HW 12.3 Array Index Out Of Bounds Exception");
 
 
@@ -39,7 +39,23 @@ public class CH12_3 {
 
 
         System.out.println("Enter a number between 0 and 100:");
-        index = input.nextInt();
+
+
+        //get index
+        try {
+            index = input.nextInt();
+
+            //make sure index integer
+        }catch (InputMismatchException e){
+            Main.printLines(50);
+
+            //display exception
+            System.out.println(e + "\n");
+
+            start();
+        }
+
+
         // minus 1 because arrays start with 0
         index = index - 1;
 

@@ -6,8 +6,6 @@ package com.abirfaisal.HWChTwelve.CH12_14;
  Write a program that prompts the user to enter the file, reads the scores from the file, and displays their total and average.
  */
 
-import com.abirfaisal.HWChTwelve.Main;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -16,7 +14,6 @@ public class CH12_14 {
 
     public static void start() {
 
-        Main.printLines(50);
         System.out.println("HW 12.14 Process scores in a text file");
 
         String filename = "";
@@ -27,9 +24,8 @@ public class CH12_14 {
                 "You must include the extension if there is one" );
 
 
+        //get file name and/or path from user
         filename = input.next();
-
-
 
         try {
             int i = 1;
@@ -52,8 +48,6 @@ public class CH12_14 {
         } catch (FileNotFoundException e) {
             //e.printStackTrace();
             System.out.println("file:" +  e);
-
-
 
         }
     }

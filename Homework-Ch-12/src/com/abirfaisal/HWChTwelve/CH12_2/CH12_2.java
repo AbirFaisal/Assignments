@@ -2,6 +2,7 @@ package com.abirfaisal.HWChTwelve.CH12_2;
 
 import com.abirfaisal.HWChTwelve.Main;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -16,31 +17,45 @@ public class CH12_2 {
 
     public static void start(){
 
-        Main.printLines(50);
         System.out.println("HW 12.2 Input Mismatch Exception");
 
 
         Scanner input = new Scanner(System.in);
-        int inta;
-        int intb;
+        int intA = 0;
+        int intB = 0;
 
 
-        System.out.print("Enter a number: ");
-        inta = input.nextInt();
-        System.out.print("Enter another number: ");
-        intb = input.nextInt();
+        System.out.println("Enter a number: ");
+
+        //Get input A
+        try {
+            intA = input.nextInt();
+        }catch (InputMismatchException e){
+            Main.printLines(50);
+
+            //display exception
+            System.out.println(e + "\n");
+
+            start();
+        }
+
+        System.out.println("Enter another number: ");
 
 
-        validateInput();
+        //get input B
+        try {
+            intB = input.nextInt();
+        }catch (InputMismatchException e){
+            Main.printLines(50);
+
+            //display exception
+            System.out.println(e + "\n");
+
+            start();
+        }
 
 
-        System.out.println(inta + " + " + intb + " is " + (inta + intb));
-
-    }
-
-    private static void validateInput() {
-
-
+        System.out.println(intA + " + " + intB + " is " + (intA + intB));
 
     }
 }

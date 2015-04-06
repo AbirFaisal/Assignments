@@ -46,12 +46,15 @@ public class Main {
 
         switch (selection.charAt(0)){
             case '1':
+                Main.printLines(50);
                 CH12_2.start();
                 break;
             case '2':
+                Main.printLines(50);
                 CH12_3.start();
                 break;
             case '3':
+                Main.printLines(50);
                 CH12_14.start();
                 break;
             case ('q' | 'Q'):
