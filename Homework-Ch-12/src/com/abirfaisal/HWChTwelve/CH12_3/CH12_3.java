@@ -1,5 +1,7 @@
 package com.abirfaisal.HWChTwelve.CH12_3;
 
+import com.abirfaisal.HWChTwelve.Main;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,6 +18,7 @@ public class CH12_3 {
 
     public static void start() {
 
+        Main.printLines(50);
         System.out.println("HW 12.3 Array Index Out Of Bounds Exception");
 
 
@@ -35,15 +38,17 @@ public class CH12_3 {
         }
 
 
-        System.out.print("Enter a number between 0 and 100");
+        System.out.println("Enter a number between 0 and 100:");
         index = input.nextInt();
+        // minus 1 because arrays start with 0
+        index = index - 1;
 
 
         //validate input
         validateInput(index, integers);
 
 
-        System.out.println("Integer at " + index + "is" + integers[index]);
+        System.out.println("Integer at element " + (index+1) + " is " + integers[index]);
 
 
     }
@@ -52,7 +57,7 @@ public class CH12_3 {
     private static void validateInput(int index, int[] array) {
 
         try{
-            //make sure input is not out of array bounds
+            //make sure input is not out of bounds
             if (index > array.length){
                 throw new ArrayIndexOutOfBoundsException("out of bounds");
             }

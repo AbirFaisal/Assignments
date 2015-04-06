@@ -1,5 +1,7 @@
 package com.abirfaisal.HWChTwelve.CH12_2;
 
+import com.abirfaisal.HWChTwelve.Main;
+
 import java.util.Scanner;
 
 /**
@@ -14,6 +16,7 @@ public class CH12_2 {
 
     public static void start(){
 
+        Main.printLines(50);
         System.out.println("HW 12.2 Input Mismatch Exception");
 
 
