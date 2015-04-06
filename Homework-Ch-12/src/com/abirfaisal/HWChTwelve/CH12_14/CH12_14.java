@@ -22,7 +22,7 @@ public class CH12_14 {
         String filename = "";
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Please enter the filename");
+        System.out.print("Please enter the filename: ");
 
         filename = input.next();
 
