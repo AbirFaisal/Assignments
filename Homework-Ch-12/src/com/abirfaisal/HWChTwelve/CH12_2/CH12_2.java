@@ -14,13 +14,12 @@ public class CH12_2 {
 
     public static void start(){
 
+        System.out.println("HW 12.2 Input Mismatch Exception");
+
+
         Scanner input = new Scanner(System.in);
         int inta;
         int intb;
-
-
-        System.out.print("HW 12.2 Input Mismatch Exception \n");
-
 
 
         System.out.print("Enter a number: ");
@@ -29,21 +28,16 @@ public class CH12_2 {
         intb = input.nextInt();
 
 
+        validateInput();
 
 
         System.out.println(inta + " + " + intb + " is " + (inta + intb));
 
+    }
 
+    private static void validateInput() {
 
 
 
     }
-
-
-
-
-
-
-
-
 }

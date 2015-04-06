@@ -16,12 +16,15 @@ public class CH12_3 {
 
     public static void start() {
 
+        System.out.println("HW 12.3 Array Index Out Of Bounds Exception");
+
+
         Random rand = new Random();
         int min = 0;
         int max = 1000;
 
         Scanner input = new Scanner(System.in);
-        int selection = 0;
+        int index = 0;
         int i = 0;
 
         int[] integers = new int[100];
@@ -32,12 +35,31 @@ public class CH12_3 {
         }
 
 
-        System.out.print("HW 12.3 Array Index Out Of Bounds Exception \n");
-        
+        System.out.print("Enter a number between 0 and 100");
+        index = input.nextInt();
 
-        System.out.println("Integer at " + selection + "is" + integers[selection]);
+
+        //validate input
+        validateInput(index, integers);
+
+
+        System.out.println("Integer at " + index + "is" + integers[index]);
 
 
     }
 
+    //Make sure input is not out of bounds
+    private static void validateInput(int index, int[] array) {
+
+        try{
+            //make sure input is not out of array bounds
+            if (index > array.length){
+                throw new ArrayIndexOutOfBoundsException("out of bounds");
+            }
+
+        }catch (ArrayIndexOutOfBoundsException e){
+            //print error message
+            System.out.println(e);
+        }
+    }
 }
