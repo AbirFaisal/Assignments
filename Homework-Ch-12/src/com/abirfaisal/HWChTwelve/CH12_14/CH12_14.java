@@ -22,7 +22,10 @@ public class CH12_14 {
         String filename = "";
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Please enter the filename: ");
+        System.out.println("Please enter the filename \n" +
+                "You can enter a complete path, partial path or only the file name \n" +
+                "You must include the extension if there is one" );
+
 
         filename = input.next();
 
@@ -47,7 +50,11 @@ public class CH12_14 {
             }
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("file:" +  e);
+
+
+
         }
     }
 }
