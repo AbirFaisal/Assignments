@@ -17,13 +17,32 @@ public class CH12_2 {
         Scanner input = new Scanner(System.in);
         int inta;
         int intb;
-        
 
-        System.out.print("HW 12.2 Input Mismatch Exception");
+
+        System.out.print("HW 12.2 Input Mismatch Exception \n");
+
+
+
+        System.out.print("Enter a number: ");
+        inta = input.nextInt();
+        System.out.print("Enter another number: ");
+        intb = input.nextInt();
+
+
+
+
+        System.out.println(inta + " + " + intb + " is " + (inta + intb));
+
+
 
 
 
     }
+
+
+
+
+
 
 
 
