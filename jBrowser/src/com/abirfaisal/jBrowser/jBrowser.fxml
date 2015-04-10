@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -7,7 +8,6 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -19,18 +19,19 @@
                     <items>
                       <AnchorPane prefHeight="100.0" prefWidth="150.0">
                            <children>
-                              <FlowPane alignment="CENTER" hgap="3.0" layoutX="16.0" layoutY="23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <AnchorPane layoutX="3.0" layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="&lt;" textAlignment="CENTER" />
-                                    <Button mnemonicParsing="false" text="&gt;" textAlignment="CENTER" />
-                                    <TextField />
+                                    <Button mnemonicParsing="false" text="&lt;" textAlignment="CENTER" AnchorPane.leftAnchor="3.0" />
+                                    <Button layoutX="27.0" mnemonicParsing="false" text="&gt;" textAlignment="CENTER" AnchorPane.leftAnchor="30.0" />
+                                    <TextField layoutX="57.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="URL" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="2.0" />
                                  </children>
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                              </FlowPane>
-                              <ProgressBar layoutX="54.0" layoutY="92.0" prefHeight="20.0" prefWidth="163.0" progress="0.31" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                              <Text layoutX="90.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              </AnchorPane>
+                              <AnchorPane layoutX="16.0" layoutY="65.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="50%" textAlignment="CENTER" textOrigin="TOP" AnchorPane.leftAnchor="0.0" />
+                                    <ProgressBar progress="0.31" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="2.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
