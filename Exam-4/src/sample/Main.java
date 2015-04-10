@@ -1,23 +1,34 @@
 package sample;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import java.text.NumberFormat;
 
-public class Main extends Application {
+public class Main {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-    }
 
 
     public static void main(String[] args) {
-        launch(args);
+
+
+        Runtime runtime = Runtime.getRuntime();
+
+        NumberFormat format = NumberFormat.getInstance();
+
+        StringBuilder sb = new StringBuilder();
+        long maxMemory = runtime.maxMemory();
+        long allocatedMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+        int availableProcessors = runtime.availableProcessors();
+        long totalMemory = runtime.totalMemory();
+
+
+
+        System.out.println(availableProcessors);
+        System.out.println(totalMemory/1024/1024);
+        System.out.println(maxMemory/1024/1024);
+        System.out.println(allocatedMemory/1024/1024);
+        System.out.println(freeMemory/1024/1024);
+
+
+
     }
 }
