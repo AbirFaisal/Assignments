@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -29,23 +30,31 @@ public class Main extends Application {
         //Set Window Title
         stage.setTitle("jBrowser");
 
+
         Button back = new Button();
         back.setText("<");
+        back.setTextAlignment(TextAlignment.CENTER);
+        AnchorPane.setLeftAnchor(back,0.0);
+
 
         Button forward = new Button();
         forward.setText(">");
+        forward.setTextAlignment(TextAlignment.CENTER);
+        AnchorPane.setLeftAnchor(forward,0.0);
+
 
         TextField addressBar = new TextField();
-        AnchorPane.setTopAnchor(addressBar, 2.0);
+        addressBar.setPromptText("URL");
+        AnchorPane.setLeftAnchor(addressBar,60.0);
+        AnchorPane.setRightAnchor(addressBar, 0.0);
 
 
 
 
         AnchorPane addressBarAnchorPane = new AnchorPane();
         AnchorPane.setTopAnchor(addressBarAnchorPane,2.0);
-        AnchorPane.setBottomAnchor(addressBarAnchorPane,0.0);
         AnchorPane.setLeftAnchor(addressBarAnchorPane,0.0);
-        AnchorPane.setRightAnchor(addressBarAnchorPane,0.0);
+        AnchorPane.setRightAnchor(addressBarAnchorPane,2.0);
         addressBarAnchorPane.getChildren().addAll(back, forward, addressBar);
 
 

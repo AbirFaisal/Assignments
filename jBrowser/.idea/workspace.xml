@@ -34,8 +34,8 @@
             <file leaf-file-name="jBrowser.fxml" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/com/abirfaisal/jBrowser/jBrowser.fxml">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.4076087" vertical-offset="0" max-vertical-offset="920">
-                    <caret line="25" column="64" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="64" />
+                  <state vertical-scroll-proportion="0.8804348" vertical-offset="0" max-vertical-offset="920">
+                    <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
                     <folding />
                   </state>
                 </provider>
@@ -55,12 +55,12 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/abirfaisal/jBrowser/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7554348" vertical-offset="55" max-vertical-offset="2355">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.65217394" vertical-offset="30" max-vertical-offset="2490">
+              <caret line="42" column="46" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#502#503#0" expanded="true" />
-                <element signature="e#530#531#0" expanded="true" />
+                <element signature="e#542#543#0" expanded="true" />
+                <element signature="e#570#571#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -441,12 +441,12 @@
       <workItem from="1428652346191" duration="370000" />
       <workItem from="1428653075541" duration="4578000" />
       <workItem from="1428682050619" duration="1545000" />
-      <workItem from="1428707400392" duration="19316000" />
+      <workItem from="1428707400392" duration="19941000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25809000" />
+    <option name="totallyTimeSpent" value="26434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1080" y="23" width="1478" height="1337" extended-state="0" />
@@ -512,8 +512,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -524,8 +524,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -536,8 +536,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -570,20 +570,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/abirfaisal/jBrowser/jBrowser.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4076087" vertical-offset="0" max-vertical-offset="920">
-          <caret line="25" column="64" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.8804348" vertical-offset="0" max-vertical-offset="920">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/abirfaisal/jBrowser/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7554348" vertical-offset="55" max-vertical-offset="2355">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.65217394" vertical-offset="30" max-vertical-offset="2490">
+          <caret line="42" column="46" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
           </folding>
         </state>
       </provider>
