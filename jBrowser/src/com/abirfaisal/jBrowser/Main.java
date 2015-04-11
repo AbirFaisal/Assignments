@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -21,7 +20,6 @@ public class Main extends Application {
 
 
     WebView webView = new WebView();
-    WebEngine webEngine = webView.getEngine();
 
     //String defaultURL = "https://www.reddit.com/";
 
@@ -130,10 +128,6 @@ public class Main extends Application {
         tabArray[4] = new Tab();
 
 
-
-        webEngine.load("https://www.facebook.com/");
-
-
         tabArray[0].getWebEngine().load("http://www.google.com/");
 
         webView = tabArray[0].getWebView();
@@ -168,10 +162,21 @@ public class Main extends Application {
 
 
 
+        webView.getEngine().setOnStatusChanged(e -> {
+
+            System.out.println(webView.getEngine());
+
+        });
+
+
+
+
+
         //Handle Back Button event.
         back.setOnAction(e -> {
 
 
+            //TODO add go back code here
 
 
             System.out.println("Back Button Clicked");
@@ -179,8 +184,13 @@ public class Main extends Application {
 
 
 
-        //Handle Forward button event.
+        //Handle Forward Button event.
         forward.setOnAction(e -> {
+
+
+            //TODO add go forward code here
+
+
             webView = tabArray[3].getWebView();
 
             rightAnchorPane.getChildren().clear();
@@ -190,10 +200,15 @@ public class Main extends Application {
         });
 
 
-        //Handle Tab click
+        //Handle Tab Switch and new Tab
         tabList.setOnMouseClicked(e -> {
 
-            System.out.println("at Index: ");
+            int index = tabList.getFocusModel().getFocusedIndex();
+
+
+
+
+            System.out.println("list at Index: " + index);
 
             tab.add("New Tab");
         });

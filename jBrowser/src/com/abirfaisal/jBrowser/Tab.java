@@ -21,6 +21,10 @@ public class Tab {
 
     public Tab() {
 
+
+
+        //TODO history stuff
+
         this.webView = new WebView();
         zeroAnchor(this.webView);
         this.webEngine = this.webView.getEngine();
