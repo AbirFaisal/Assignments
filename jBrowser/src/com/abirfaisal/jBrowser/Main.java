@@ -97,10 +97,9 @@ public class Main extends Application {
         //TabList
         ObservableList<String> tab = FXCollections.observableArrayList();
         ListView tabList = new ListView<String>(tab);
-
         zeroAnchor(tabList);
 
-
+        //List AnchorPane
         AnchorPane listAnchorPane = new AnchorPane();
         listAnchorPane.getChildren().add(tabList);
 
@@ -169,14 +168,17 @@ public class Main extends Application {
     }
 
 
-    void setAnchor(Node child, double top, double bottom, double left, double right) {
-
-        AnchorPane.setTopAnchor(child, top);
-        AnchorPane.setBottomAnchor(child, bottom);
-        AnchorPane.setLeftAnchor(child, left);
-        AnchorPane.setRightAnchor(child, right);
-
-    }
+    //Not used
+//    void setAnchor(Node child, double[] TopBottomLeftRight) {
+//
+//
+//
+//        AnchorPane.setTopAnchor(child, top);
+//        AnchorPane.setBottomAnchor(child, bottom);
+//        AnchorPane.setLeftAnchor(child, left);
+//        AnchorPane.setRightAnchor(child, right);
+//
+//    }
 
     void zeroAnchor(Node child) {
         AnchorPane.setTopAnchor(child, 0.0);
