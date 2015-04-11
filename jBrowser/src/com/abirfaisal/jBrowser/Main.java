@@ -17,10 +17,13 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 
-
 public class Main extends Application {
 
-    String defaultURL = "https://www.google.com/";
+
+    WebView webView = new WebView();
+    WebEngine webEngine = webView.getEngine();
+
+    //String defaultURL = "https://www.reddit.com/";
 
 
     public static void main(String[] args) {
@@ -36,6 +39,9 @@ public class Main extends Application {
 
         //Back Button
         Button back = new Button();
+
+
+
         back.setMnemonicParsing(false);
         back.setText("<");
         back.setTextAlignment(TextAlignment.CENTER);
@@ -107,25 +113,101 @@ public class Main extends Application {
         AnchorPane leftAnchorPane = new AnchorPane();
         leftAnchorPane.getChildren().addAll(leftSplitPane);
 
-        //Create WebView with default settings
-        //TODO replace with tab
-        WebView webView = new WebView();
-        zeroAnchor(webView);
 
-        //Create WebView with default settings
-        WebEngine webEngine = webView.getEngine();
-        webEngine.load(defaultURL);
-        addressBar.setText(defaultURL);
 
-        //Add a tab
-        tab.add(webView.getEngine().getLocation());
 
-        //Add New tab button
+
+
+
+
+
+        Tab[] tabArray = new Tab[5];
+
+        tabArray[0] = new Tab();
+        tabArray[1] = new Tab();
+        tabArray[2] = new Tab();
+        tabArray[3] = new Tab();
+        tabArray[4] = new Tab();
+
+
+
+        webEngine.load("https://www.facebook.com/");
+
+
+        tabArray[0].getWebEngine().load("http://www.google.com/");
+
+        webView = tabArray[0].getWebView();
+
+
+        tabArray[1].getWebEngine().load("http://www.reddit.com/");
+        tabArray[2].getWebEngine().load("http://www.cnn.com/");
+
+
+
+
+//        for(tabArray::){
+//
+//
+//        }
+
+
+
         tab.add("New Tab");
+
 
         //Right Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane();
         rightAnchorPane.getChildren().add(webView);
+
+
+
+
+
+        /////////////EVENT HANDLERS
+
+
+
+
+        //Handle Back Button event.
+        back.setOnAction(e -> {
+
+
+
+
+            System.out.println("Back Button Clicked");
+        });
+
+
+
+        //Handle Forward button event.
+        forward.setOnAction(e -> {
+            webView = tabArray[3].getWebView();
+
+            rightAnchorPane.getChildren().clear();
+            rightAnchorPane.getChildren().add(webView);
+
+            System.out.println("Back Button Clicked");
+        });
+
+
+        //Handle Tab click
+        tabList.setOnMouseClicked(e -> {
+
+            System.out.println("at Index: ");
+
+            tab.add("New Tab");
+        });
+
+
+
+
+        /////////////EVENT HANDLERS
+
+
+
+
+
+
 
         //Main Split Pane
         SplitPane mainSplitPane = new SplitPane();
@@ -148,6 +230,13 @@ public class Main extends Application {
         //Display the window
         stage.show();
     }
+
+
+
+
+
+
+
 
     void zeroAnchor(Node child) {
         AnchorPane.setTopAnchor(child, 0.0);
