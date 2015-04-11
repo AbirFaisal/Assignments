@@ -33,6 +33,7 @@ public class Main extends Application {
         stage.setTitle("jBrowser");
 
 
+        //Back Button
         Button back = new Button();
         back.setMnemonicParsing(false);
         back.setText("<");
@@ -40,13 +41,14 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(back,0.0);
 
 
+        //Forward Button
         Button forward = new Button();
         forward.setText(">");
         back.setMnemonicParsing(false);
         forward.setTextAlignment(TextAlignment.CENTER);
         AnchorPane.setLeftAnchor(forward,30.0);
 
-
+        //AddressBar
         TextField addressBar = new TextField();
         addressBar.setPromptText("URL");
         AnchorPane.setLeftAnchor(addressBar,60.0);
@@ -63,14 +65,13 @@ public class Main extends Application {
         addressBarAnchorPane.getChildren().addAll(back, forward, addressBar);
 
 
+        //ProgressText
+        Text ProgressText = new Text("100%");
+        ProgressText.setTextOrigin(VPos.TOP);
+        ProgressText.setTextAlignment(TextAlignment.CENTER);
+        AnchorPane.setLeftAnchor(ProgressText, 0.0);
 
-        Text loadPercent = new Text("100%");
-        loadPercent.setTextOrigin(VPos.TOP);
-        loadPercent.setTextAlignment(TextAlignment.CENTER);
-        AnchorPane.setLeftAnchor(loadPercent,0.0);
-
-
-
+        //Progress Bar
         ProgressBar progressBar = new ProgressBar();
         progressBar.setProgress(100.0);
         AnchorPane.setLeftAnchor(progressBar,36.0);
@@ -84,8 +85,7 @@ public class Main extends Application {
         AnchorPane.setTopAnchor(progressAnchorPane,30.0);
         AnchorPane.setLeftAnchor(progressAnchorPane,0.0);
         AnchorPane.setRightAnchor(progressAnchorPane,0.0);
-
-        progressAnchorPane.getChildren().addAll(loadPercent, progressBar);
+        progressAnchorPane.getChildren().addAll(ProgressText, progressBar);
 
 
         //Top AnchorPane
@@ -101,7 +101,6 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(tabList,0.0);
         AnchorPane.setLeftAnchor(tabList,0.0);
         AnchorPane.setRightAnchor(tabList,0.0);
-
         AnchorPane listAnchorPane = new AnchorPane();
         listAnchorPane.getChildren().add(tabList);
 
@@ -110,15 +109,15 @@ public class Main extends Application {
         //Left Split Pane
         SplitPane leftSplitPane = new SplitPane();
         leftSplitPane.setDividerPositions(0.1);
-        AnchorPane.setTopAnchor(leftSplitPane,0.0);
-        AnchorPane.setBottomAnchor(leftSplitPane,0.0);
-        AnchorPane.setLeftAnchor(leftSplitPane,0.0);
-        AnchorPane.setRightAnchor(leftSplitPane,0.0);
-
         leftSplitPane.setOrientation(Orientation.VERTICAL);
+        AnchorPane.setTopAnchor(leftSplitPane, 0.0);
+        AnchorPane.setBottomAnchor(leftSplitPane, 0.0);
+        AnchorPane.setLeftAnchor(leftSplitPane, 0.0);
+        AnchorPane.setRightAnchor(leftSplitPane, 0.0);
         leftSplitPane.getItems().addAll(topAnchorPane, listAnchorPane);
 
 
+        //Left Anchor Pane
         AnchorPane leftAnchorPane = new AnchorPane();
         leftAnchorPane.getChildren().addAll(leftSplitPane);
 
@@ -134,23 +133,22 @@ public class Main extends Application {
         AnchorPane.setRightAnchor(webView,0.0);
 
         //Create WebView with default settings
-
         WebEngine webEngine = webView.getEngine();
         webEngine.load(defaultURL);
         addressBar.setText(defaultURL);
 
 
-
+        //Add a tab
         tab.add(webView.getEngine().getLocation());
 
+        //Add New tab button
         tab.add("New Tab");
 
-
-
+        //Right Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane();
         rightAnchorPane.getChildren().add(webView);
 
-
+        //Main Split Pane
         SplitPane mainSplitPane = new SplitPane();
         mainSplitPane.setDividerPositions(0.25);
         AnchorPane.setTopAnchor(mainSplitPane, 0.0);
