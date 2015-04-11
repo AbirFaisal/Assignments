@@ -2,6 +2,8 @@ package com.abirfaisal.jBrowser;
 
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
@@ -32,6 +34,7 @@ public class Main extends Application {
 
 
         Button back = new Button();
+        back.setMnemonicParsing(false);
         back.setText("<");
         back.setTextAlignment(TextAlignment.CENTER);
         AnchorPane.setLeftAnchor(back,0.0);
@@ -39,8 +42,9 @@ public class Main extends Application {
 
         Button forward = new Button();
         forward.setText(">");
+        back.setMnemonicParsing(false);
         forward.setTextAlignment(TextAlignment.CENTER);
-        AnchorPane.setLeftAnchor(forward,0.0);
+        AnchorPane.setLeftAnchor(forward,30.0);
 
 
         TextField addressBar = new TextField();
@@ -50,39 +54,49 @@ public class Main extends Application {
 
 
 
-
+        //Address Bar AnchorPane
         AnchorPane addressBarAnchorPane = new AnchorPane();
+        addressBarAnchorPane.setMinSize(0.0, 0.0);
         AnchorPane.setTopAnchor(addressBarAnchorPane,2.0);
-        AnchorPane.setLeftAnchor(addressBarAnchorPane,0.0);
+        AnchorPane.setLeftAnchor(addressBarAnchorPane,2.0);
         AnchorPane.setRightAnchor(addressBarAnchorPane,2.0);
         addressBarAnchorPane.getChildren().addAll(back, forward, addressBar);
 
 
 
-        Text loadPercent = new Text(null);
-        loadPercent.setTextOrigin(VPos.CENTER);
+        Text loadPercent = new Text("100%");
+        loadPercent.setTextOrigin(VPos.TOP);
+        loadPercent.setTextAlignment(TextAlignment.CENTER);
+        AnchorPane.setLeftAnchor(loadPercent,0.0);
+
 
 
         ProgressBar progressBar = new ProgressBar();
-        AnchorPane.setLeftAnchor(progressBar,32.0);
+        progressBar.setProgress(100.0);
+        AnchorPane.setLeftAnchor(progressBar,36.0);
         AnchorPane.setRightAnchor(progressBar,2.0);
 
 
 
+        //Progress Bar AnchorPane
         AnchorPane progressAnchorPane = new AnchorPane();
+        progressAnchorPane.setMinSize(0.0, 0.0);
         AnchorPane.setTopAnchor(progressAnchorPane,30.0);
-        AnchorPane.setBottomAnchor(progressAnchorPane,0.0);
         AnchorPane.setLeftAnchor(progressAnchorPane,0.0);
         AnchorPane.setRightAnchor(progressAnchorPane,0.0);
 
         progressAnchorPane.getChildren().addAll(loadPercent, progressBar);
 
 
+        //Top AnchorPane
         AnchorPane topAnchorPane = new AnchorPane();
-        //set min height
+        topAnchorPane.setMinSize(0.0, 60.0);
+        topAnchorPane.getChildren().addAll(addressBarAnchorPane, progressAnchorPane);
 
-        ListView tabList = new ListView();
 
+        //TabList
+        ObservableList<String> tab = FXCollections.observableArrayList();
+        ListView tabList = new ListView<String>(tab);
         AnchorPane.setTopAnchor(tabList,0.0);
         AnchorPane.setBottomAnchor(tabList,0.0);
         AnchorPane.setLeftAnchor(tabList,0.0);
@@ -93,7 +107,9 @@ public class Main extends Application {
 
 
 
+        //Left Split Pane
         SplitPane leftSplitPane = new SplitPane();
+        leftSplitPane.setDividerPositions(0.1);
         AnchorPane.setTopAnchor(leftSplitPane,0.0);
         AnchorPane.setBottomAnchor(leftSplitPane,0.0);
         AnchorPane.setLeftAnchor(leftSplitPane,0.0);
@@ -121,6 +137,14 @@ public class Main extends Application {
 
         WebEngine webEngine = webView.getEngine();
         webEngine.load(defaultURL);
+        addressBar.setText(defaultURL);
+
+
+
+        tab.add(webView.getEngine().getLocation());
+
+        tab.add("New Tab");
+
 
 
         AnchorPane rightAnchorPane = new AnchorPane();
@@ -138,18 +162,18 @@ public class Main extends Application {
 
 
 
-
-
+        //Main Window Anchor Pane
         AnchorPane mainWindow = new AnchorPane();
         mainWindow.setPrefSize(800, 600);
         mainWindow.getChildren().add(mainSplitPane);
 
-
+        //Scene
         Scene mainScene = new Scene(mainWindow);
 
+        //Stage
         stage.setScene(mainScene);
 
-        //Show the window
+        //Display the window
         stage.show();
     }
 
