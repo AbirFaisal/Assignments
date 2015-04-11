@@ -72,6 +72,16 @@ public class Main extends Application {
         AnchorPane.setRightAnchor(addressBarAnchorPane,2.0);
         addressBarAnchorPane.getChildren().addAll(back, forward, addressBar);
 
+
+
+
+
+
+
+
+
+
+
         //ProgressText
         Text ProgressText = new Text("100%");
         ProgressText.setTextOrigin(VPos.TOP);
@@ -101,6 +111,7 @@ public class Main extends Application {
         ObservableList<String> tab = FXCollections.observableArrayList();
         ListView tabList = new ListView<String>(tab);
         tab.add("New Tab");
+        tabList.getSelectionModel().select(0);
         zeroAnchor(tabList);
 
         //List AnchorPane
@@ -120,16 +131,12 @@ public class Main extends Application {
 
 
         //Add Inital Tab.
-
-
-
         tabArray.add(new Tab());
-
-
-
         tabArray.get(0).getWebEngine().load("http://www.google.com/");
         tab.add(tabArray.get(0).getWebEngine().getLocation());
         webView = tabArray.get(0).getWebView();
+
+
 
         //Right Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane();
@@ -263,19 +270,22 @@ public class Main extends Application {
                 tabArray.add(new Tab());
                 tabArray.get(tabArraySize).getWebEngine().load("http://www.google.com/");
 
+                //set tab as domain
                 tab.add(tabArray.get(tabArraySize).getWebEngine().getLocation());
+
 
                 webView = tabArray.get(tabArraySize).getWebView();
             }
 
             //Switch Tab
             else {
-                webView = tabArray.get(index-1).getWebView();
+                webView = tabArray.get(index - 1).getWebView();
 
                 rightAnchorPane.getChildren().clear();
                 rightAnchorPane.getChildren().add(webView);
             }
         });
+
 
 
 
