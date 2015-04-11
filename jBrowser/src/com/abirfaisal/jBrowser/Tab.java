@@ -28,6 +28,7 @@ public class Tab {
         this.webView = new WebView();
         zeroAnchor(this.webView);
         this.webEngine = this.webView.getEngine();
+        this.webEngine.setJavaScriptEnabled(false);
         this.webEngine.load("https://www.google.com/");
 
 

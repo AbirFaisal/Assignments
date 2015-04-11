@@ -161,15 +161,37 @@ public class Main extends Application {
 
 
 
+        //Address bar handler
+        //On Action
+        addressBar.setOnAction(e -> {
+            //get text
+            String search = "https://www.google.com/search?q=";
+            String URL = addressBar.getText();
 
-        webView.getEngine().setOnStatusChanged(e -> {
 
-            System.out.println(webView.getEngine());
+            //check for spaces
+            if (URL.contains(" ")){
+                System.out.println("Not URL");
+            }
+
+            if (!URL.contains("."))
+
+
+
+
+
+            tabArray[0].getWebEngine().load(URL);
+
+            search = search + URL;
+
+            tabArray[0].getWebEngine().load(search);
+
 
         });
 
 
-
+        //TODO change page accourdingly
+        //TODO change URL accourdingly
 
 
         //Handle Back Button event.
@@ -193,8 +215,7 @@ public class Main extends Application {
 
             webView = tabArray[3].getWebView();
 
-            rightAnchorPane.getChildren().clear();
-            rightAnchorPane.getChildren().add(webView);
+
 
             System.out.println("Back Button Clicked");
         });
@@ -206,6 +227,8 @@ public class Main extends Application {
             int index = tabList.getFocusModel().getFocusedIndex();
 
 
+            rightAnchorPane.getChildren().clear();
+            rightAnchorPane.getChildren().add(webView);
 
 
             System.out.println("list at Index: " + index);
@@ -245,6 +268,7 @@ public class Main extends Application {
         //Display the window
         stage.show();
     }
+
 
 
 
