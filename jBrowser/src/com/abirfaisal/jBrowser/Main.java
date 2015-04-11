@@ -15,6 +15,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 
 public class Main extends Application {
 
@@ -23,7 +25,10 @@ public class Main extends Application {
     WebView webView = new WebView();
 
     //Array of tabs
-    Tab[] tabArray = new Tab[500];
+    //Tab[] tabArray = new Tab[500];
+
+
+    ArrayList<Tab> tabArray = new ArrayList<Tab>();
 
     //String defaultURL = "https://www.reddit.com/";
 
@@ -115,10 +120,16 @@ public class Main extends Application {
 
 
         //Add Inital Tab.
-        tabArray[1] = new Tab();
-        tabArray[1].getWebEngine().load("http://www.google.com/");
-        tab.add(tabArray[1].getWebEngine().getLocation());
-        webView = tabArray[1].getWebView();
+
+
+
+        tabArray.add(new Tab());
+
+
+
+        tabArray.get(0).getWebEngine().load("http://www.google.com/");
+        tab.add(tabArray.get(0).getWebEngine().getLocation());
+        webView = tabArray.get(0).getWebView();
 
         //Right Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane();
@@ -135,6 +146,8 @@ public class Main extends Application {
         //Address bar handler
         //On Action
         addressBar.setOnAction(e -> {
+
+            int index = tabList.getFocusModel().getFocusedIndex();
 
             //Search query string
             String search = "https://www.google.com/search?q=";
@@ -159,7 +172,7 @@ public class Main extends Application {
 
                 //Send and display Google Search Query
                 search = search + URL;
-                tabArray[0].getWebEngine().load(search);
+                tabArray.get(index).getWebEngine().load(search);
 
             }else {
                 //check for TLD and add http scheme if needed
@@ -177,7 +190,7 @@ public class Main extends Application {
                         for (int j = 0; j < scheme.length; j++) {
 
                             if(URL.contains(scheme[j])) {
-                                tabArray[0].getWebEngine().load(URL);
+                                tabArray.get(index).getWebEngine().load(URL);
                                 break;
                             }
                         }
@@ -186,13 +199,13 @@ public class Main extends Application {
                         //apply default scheme
                         URL = "http://" + URL;
 
-                        tabArray[0].getWebEngine().load(URL);
+                        tabArray.get(index).getWebEngine().load(URL);
                         break;
                     }
                 }
                 //If all fails just search the string
                 search = search + URL;
-                tabArray[0].getWebEngine().load(search);
+                tabArray.get(index).getWebEngine().load(search);
             }
         });
 
@@ -221,7 +234,7 @@ public class Main extends Application {
             //TODO add go forward code here
 
 
-            webView = tabArray[3].getWebView();
+            webView = tabArray.get(1).getWebView();
 
 
 
@@ -233,35 +246,35 @@ public class Main extends Application {
         tabList.setOnMouseClicked(e -> {
 
             int index = tabList.getFocusModel().getFocusedIndex();
+            int tabArraySize = tabArray.size();
+
+
+            System.out.println("FocusedIndex: " + index);
+            System.out.println("tabArraySize: " + tabArraySize);
 
 
             String tabTrigger = "New Tab";
             String test = tab.get(index);
 
 
+            //New Tab
             if (test.contains(tabTrigger)) {
 
-                tabArray[index+1] = new Tab();
-                tabArray[index+1].getWebEngine().load("http://www.google.com/");
+                tabArray.add(new Tab());
+                tabArray.get(tabArraySize).getWebEngine().load("http://www.google.com/");
 
-                tab.add(tabArray[index+1].getWebEngine().getLocation());
+                tab.add(tabArray.get(tabArraySize).getWebEngine().getLocation());
 
-                webView = tabArray[index+1].getWebView();
-
-
+                webView = tabArray.get(tabArraySize).getWebView();
             }
 
+            //Switch Tab
+            else {
+                webView = tabArray.get(index-1).getWebView();
 
-
-            webView = tabArray[index].getWebView();
-
-            rightAnchorPane.getChildren().clear();
-            rightAnchorPane.getChildren().add(webView);
-
-
-
-            System.out.println("TabList Index: " + index);
-
+                rightAnchorPane.getChildren().clear();
+                rightAnchorPane.getChildren().add(webView);
+            }
         });
 
 
