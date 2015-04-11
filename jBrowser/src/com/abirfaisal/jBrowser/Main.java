@@ -115,10 +115,6 @@ public class Main extends Application {
 
 
 
-
-
-
-
         Tab[] tabArray = new Tab[5];
 
         tabArray[0] = new Tab();
@@ -164,29 +160,82 @@ public class Main extends Application {
         //Address bar handler
         //On Action
         addressBar.setOnAction(e -> {
-            //get text
+
+            //Search query string
             String search = "https://www.google.com/search?q=";
+            String[] scheme = {
+                    "http://",
+                    "https://",
+                    "ftp://",
+                    "mailto:",
+                    "nfs://",
+                    "sftp://",
+                    "file://"
+            };
+
+            String[] TLD = {
+                    ".com", ".org", ".edu", ".gov",
+                    ".uk",  ".ca",  ".de",  ".jp",
+                    ".fr",  ".au",  ".us",  ".ru",
+                    ".ch",  ".it",  ".nl",  ".se",
+                    ".no",  ".es",  ".mil", ".hk",
+                    ".in",
+            };
+
+
+            //get text
             String URL = addressBar.getText();
 
 
-            //check for spaces
+                //check for spaces
             if (URL.contains(" ")){
-                System.out.println("Not URL");
+                System.out.println("Not URL1");
+
+                //Send and display Google Search Query
+                search = search + URL;
+                tabArray[0].getWebEngine().load(search);
+
+            }else {
+                //check for TLD and add http scheme if needed
+                for (int i = 0; i < TLD.length; i++) {
+
+                    //Loop through and test TLD
+                    if (URL.contains(TLD[i])) {
+
+                        //add www if needed
+                        if(!URL.contains("www.")) {
+                            URL = "www." + URL;
+                        }
+
+                        //Check if URL has scheme
+                        for (int j = 0; j < scheme.length; j++) {
+
+                            if(URL.contains(scheme[j])) {
+                                tabArray[0].getWebEngine().load(URL);
+                                break;
+                            }
+                        }
+
+                        //loop didnt break so it doesnt have scheme
+                        //apply default scheme
+                        URL = "http://" + URL;
+
+                        tabArray[0].getWebEngine().load(URL);
+                        break;
+                    }
+                }
             }
 
-            if (!URL.contains("."))
 
 
+            //check for scheme
+//            if (!URL.contains(" ")){
+//                System.out.println("Not URL2");
+//            }
 
 
-
-            tabArray[0].getWebEngine().load(URL);
-
-            search = search + URL;
-
-            tabArray[0].getWebEngine().load(search);
-
-
+            //add http if missing
+            //tabArray[0].getWebEngine().load(URL);
         });
 
 
@@ -256,7 +305,7 @@ public class Main extends Application {
 
         //Main Window Anchor Pane
         AnchorPane mainWindow = new AnchorPane();
-        mainWindow.setPrefSize(800, 600);
+        mainWindow.setPrefSize(1024, 786);
         mainWindow.getChildren().add(mainSplitPane);
 
         //Scene
