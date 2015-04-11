@@ -29,7 +29,7 @@ public class Tab {
         zeroAnchor(this.webView);
         this.webEngine = this.webView.getEngine();
         this.webEngine.setJavaScriptEnabled(false);
-        this.webEngine.load("https://www.google.com/");
+        this.webEngine.load("https://www.reddit.com/");
 
 
 

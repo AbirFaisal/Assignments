@@ -19,7 +19,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 
+    //Main WebView
     WebView webView = new WebView();
+
+    //Array of tabs
+    Tab[] tabArray = new Tab[500];
 
     //String defaultURL = "https://www.reddit.com/";
 
@@ -37,9 +41,6 @@ public class Main extends Application {
 
         //Back Button
         Button back = new Button();
-
-
-
         back.setMnemonicParsing(false);
         back.setText("<");
         back.setTextAlignment(TextAlignment.CENTER);
@@ -94,6 +95,7 @@ public class Main extends Application {
         //TabList
         ObservableList<String> tab = FXCollections.observableArrayList();
         ListView tabList = new ListView<String>(tab);
+        tab.add("New Tab");
         zeroAnchor(tabList);
 
         //List AnchorPane
@@ -112,38 +114,11 @@ public class Main extends Application {
         leftAnchorPane.getChildren().addAll(leftSplitPane);
 
 
-
-
-
-        Tab[] tabArray = new Tab[5];
-
-        tabArray[0] = new Tab();
+        //Add Inital Tab.
         tabArray[1] = new Tab();
-        tabArray[2] = new Tab();
-        tabArray[3] = new Tab();
-        tabArray[4] = new Tab();
-
-
-        tabArray[0].getWebEngine().load("http://www.google.com/");
-
-        webView = tabArray[0].getWebView();
-
-
-        tabArray[1].getWebEngine().load("http://www.reddit.com/");
-        tabArray[2].getWebEngine().load("http://www.cnn.com/");
-
-
-
-
-//        for(tabArray::){
-//
-//
-//        }
-
-
-
-        tab.add("New Tab");
-
+        tabArray[1].getWebEngine().load("http://www.google.com/");
+        tab.add(tabArray[1].getWebEngine().getLocation());
+        webView = tabArray[1].getWebView();
 
         //Right Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane();
@@ -163,31 +138,22 @@ public class Main extends Application {
 
             //Search query string
             String search = "https://www.google.com/search?q=";
+            //Common Scheme List
             String[] scheme = {
-                    "http://",
-                    "https://",
-                    "ftp://",
-                    "mailto:",
-                    "nfs://",
-                    "sftp://",
-                    "file://"
+                    "http://", "https://", "ftp://", "mailto:",
+                    "nfs://", "sftp://", "file://"
             };
-
+            //Common TLD List
             String[] TLD = {
-                    ".com", ".org", ".edu", ".gov",
-                    ".uk",  ".ca",  ".de",  ".jp",
-                    ".fr",  ".au",  ".us",  ".ru",
-                    ".ch",  ".it",  ".nl",  ".se",
-                    ".no",  ".es",  ".mil", ".hk",
-                    ".in",
+                    ".com", ".org", ".edu", ".gov", ".uk",  ".ca",  ".de",  ".jp",
+                    ".fr",  ".au",  ".us",  ".ru", ".ch",  ".it",  ".nl",  ".se",
+                    ".no",  ".es",  ".mil", ".hk", ".in",
             };
 
-
-            //get text
+            //Get addressBar text
             String URL = addressBar.getText();
 
-
-                //check for spaces
+                //check for spaces URL's don't have spaces
             if (URL.contains(" ")){
                 System.out.println("Not URL1");
 
@@ -224,22 +190,15 @@ public class Main extends Application {
                         break;
                     }
                 }
+                //If all fails just search the string
+                search = search + URL;
+                tabArray[0].getWebEngine().load(search);
             }
-
-
-
-            //check for scheme
-//            if (!URL.contains(" ")){
-//                System.out.println("Not URL2");
-//            }
-
-
-            //add http if missing
-            //tabArray[0].getWebEngine().load(URL);
         });
 
 
         //TODO change page accourdingly
+
         //TODO change URL accourdingly
 
 
@@ -276,14 +235,35 @@ public class Main extends Application {
             int index = tabList.getFocusModel().getFocusedIndex();
 
 
+            String tabTrigger = "New Tab";
+            String test = tab.get(index);
+
+
+            if (test.contains(tabTrigger)) {
+
+                tabArray[index+1] = new Tab();
+                tabArray[index+1].getWebEngine().load("http://www.google.com/");
+
+                tab.add(tabArray[index+1].getWebEngine().getLocation());
+
+                webView = tabArray[index+1].getWebView();
+
+
+            }
+
+
+
+            webView = tabArray[index].getWebView();
+
             rightAnchorPane.getChildren().clear();
             rightAnchorPane.getChildren().add(webView);
 
 
-            System.out.println("list at Index: " + index);
 
-            tab.add("New Tab");
+            System.out.println("TabList Index: " + index);
+
         });
+
 
 
 
