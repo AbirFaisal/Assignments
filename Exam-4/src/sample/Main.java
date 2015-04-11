@@ -1,5 +1,11 @@
 package sample;
 
+import sun.plugin2.gluegen.runtime.CPU;
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryType;
+import java.lang.management.OperatingSystemMXBean;
 import java.text.NumberFormat;
 
 public class Main {
@@ -27,6 +33,28 @@ public class Main {
         System.out.println(maxMemory/1024/1024);
         System.out.println(allocatedMemory/1024/1024);
         System.out.println(freeMemory/1024/1024);
+
+
+        OperatingSystemMXBean beans = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
+
+
+
+        System.out.println(beans.getArch());
+        System.out.println(beans.getAvailableProcessors());
+        System.out.println(beans.getName());
+        System.out.println(beans.getSystemLoadAverage());
+        System.out.println(beans.getVersion() + "\n");
+
+        System.out.println(beans.getName() + " " + beans.getVersion());
+        System.out.println(beans.getAvailableProcessors() + " CPUs");
+
+
+
+
+
+
+
+        System.out.println(memory[1]);
 
 
 

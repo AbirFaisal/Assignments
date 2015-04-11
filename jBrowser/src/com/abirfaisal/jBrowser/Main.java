@@ -4,9 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.FontSmoothingType;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -20,28 +19,49 @@ public class Main extends Application {
         addressBar.setMinHeight(50);
 
 
-        stage.setTitle("HTML");
-        //stage.setWidth(800);
-        //stage.setHeight(600);
+        stage.setTitle("jBrowser");
+        stage.setWidth(800);
+        stage.setHeight(600);
         Scene scene = new Scene(new Group());
 
-        VBox root = new VBox();
 
         final WebView browser = new WebView();
-        final WebEngine webEngine = browser.getEngine();
+        browser.setFontSmoothingType(FontSmoothingType.LCD);
 
 
-        FlowPane pane = new FlowPane();
 
-        pane.getChildren().addAll(browser, addressBar);
+        //final WebEngine webEngine = browser.getEngine();
+        //webEngine.setJavaScriptEnabled(true);
+
+        Tab testTab = new Tab(browser.getEngine());
 
 
-        webEngine.load("https://www.google.com");
+
+        //testTab.setWebContents(new WebEngine());
+
+        testTab.webContents.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
+
+        testTab.webContents.load("https://www.google.com/");
+
+        testTab.webContents.setJavaScriptEnabled(true);
 
 
-        root.getChildren().addAll(pane);
 
-        scene.setRoot(root);
+
+        AnchorPane Apane = new AnchorPane();
+
+
+        Apane.getChildren().add(browser);
+
+
+        Apane.setLeftAnchor(browser, 0.0);
+        Apane.setRightAnchor(browser, 0.0);
+        Apane.setTopAnchor(browser, 0.0);
+        Apane.setBottomAnchor(browser, 0.0);
+
+
+
+        scene.setRoot(Apane);
 
         stage.setScene(scene);
         stage.show();
