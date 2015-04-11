@@ -1,15 +1,17 @@
 package com.abirfaisal.jBrowser;
 
 import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebHistory;
 
 /**
  * Created by abirfaisal on 4/10/15.
  */
 public class Tab {
 
-
-
+    String Website;
     WebEngine webContents;
+    WebHistory history;
+
 
     //Bool isJavaScriptEnabled
 
@@ -21,7 +23,6 @@ public class Tab {
 
     }
 
-
     public WebEngine getWebContents() {
         return webContents;
     }
@@ -29,6 +30,9 @@ public class Tab {
     public void setWebContents(WebEngine webContents) {
         this.webContents = webContents;
     }
+
+
+
 
 
 
