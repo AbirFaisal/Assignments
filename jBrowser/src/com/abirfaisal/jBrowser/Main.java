@@ -39,11 +39,12 @@ public class Main extends Application {
 
         //testTab.setWebContents(new WebEngine());
 
-        testTab.webContents.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
+        //testTab.webContents.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
 
         testTab.webContents.load("https://www.google.com/");
 
         testTab.webContents.setJavaScriptEnabled(true);
+
 
 
 
