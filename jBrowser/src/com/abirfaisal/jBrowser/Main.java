@@ -2,16 +2,13 @@ package com.abirfaisal.jBrowser;
 
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -45,84 +42,57 @@ public class Main extends Application {
         stage.setTitle("jBrowser");
 
         //Back Button
-        Button back = new Button();
-        back.setMnemonicParsing(false);
-        back.setText("<");
-        back.setTextAlignment(TextAlignment.CENTER);
-        AnchorPane.setLeftAnchor(back,0.0);
+        Button back = Browser.backButton();
 
         //Forward Button
-        Button forward = new Button();
-        forward.setText(">");
-        back.setMnemonicParsing(false);
-        forward.setTextAlignment(TextAlignment.CENTER);
-        AnchorPane.setLeftAnchor(forward,30.0);
+        Button forward = Browser.forwardButton();
 
         //AddressBar
-        TextField addressBar = new TextField();
-        addressBar.setPromptText("URL");
-        AnchorPane.setLeftAnchor(addressBar,60.0);
-        AnchorPane.setRightAnchor(addressBar, 0.0);
+        TextField addressField = Browser.addressField();
 
         //Address Bar AnchorPane
-        AnchorPane addressBarAnchorPane = new AnchorPane();
-        addressBarAnchorPane.setMinSize(0.0, 0.0);
-        AnchorPane.setTopAnchor(addressBarAnchorPane,2.0);
-        AnchorPane.setLeftAnchor(addressBarAnchorPane,2.0);
-        AnchorPane.setRightAnchor(addressBarAnchorPane,2.0);
-        addressBarAnchorPane.getChildren().addAll(back, forward, addressBar);
-
-
-
-
-
-
-
-
-
-
+        AnchorPane addressBarAnchorPane = Browser.addressBarAnchorPane();
+        //Add back forward buttons and address text field
+        addressBarAnchorPane.getChildren().addAll(back, forward, addressField);
 
         //ProgressText
-        Text ProgressText = new Text("100%");
-        ProgressText.setTextOrigin(VPos.TOP);
-        ProgressText.setTextAlignment(TextAlignment.CENTER);
-        AnchorPane.setLeftAnchor(ProgressText, 0.0);
+        Text progressText = Browser.progressText();
 
         //Progress Bar
-        ProgressBar progressBar = new ProgressBar();
-        progressBar.setProgress(100.0);
-        AnchorPane.setLeftAnchor(progressBar,36.0);
-        AnchorPane.setRightAnchor(progressBar,2.0);
+        ProgressBar progressBar = Browser.progressBar();
 
         //Progress Bar AnchorPane
-        AnchorPane progressAnchorPane = new AnchorPane();
-        progressAnchorPane.setMinSize(0.0, 0.0);
-        AnchorPane.setTopAnchor(progressAnchorPane,30.0);
-        AnchorPane.setLeftAnchor(progressAnchorPane,0.0);
-        AnchorPane.setRightAnchor(progressAnchorPane,0.0);
-        progressAnchorPane.getChildren().addAll(ProgressText, progressBar);
+        AnchorPane progressAnchorPane = Browser.progressBarAnchorPane(); //new AnchorPane();
+
+//        progressAnchorPane.setMinSize(0.0, 0.0);
+//        AnchorPane.setTopAnchor(progressAnchorPane,30.0);
+//        AnchorPane.setLeftAnchor(progressAnchorPane,0.0);
+//        AnchorPane.setRightAnchor(progressAnchorPane,0.0);
+
+
+        progressAnchorPane.getChildren().addAll(progressText, progressBar);
 
         //Top AnchorPane
-        AnchorPane topAnchorPane = new AnchorPane();
-        topAnchorPane.setMinSize(0.0, 60.0);
+        AnchorPane topAnchorPane = Browser.topAnchorPane();
         topAnchorPane.getChildren().addAll(addressBarAnchorPane, progressAnchorPane);
 
         //TabList
-        ObservableList<String> tab = FXCollections.observableArrayList();
-        ListView tabList = new ListView<String>(tab);
-        tab.add("New Tab");
-        tabList.getSelectionModel().select(0);
-        zeroAnchor(tabList);
+        ObservableList<String> tabList = Browser.tabList();
+
+        ListView tabListView = Browser.tabListView(tabList); //new ListView<String>(tabList);
+
+
 
         //List AnchorPane
-        AnchorPane listAnchorPane = new AnchorPane();
-        listAnchorPane.getChildren().add(tabList);
+        AnchorPane listAnchorPane = Browser.listAnchorPane(); //new AnchorPane();
+        listAnchorPane.getChildren().add(tabListView);
 
         //Left Split Pane
-        SplitPane leftSplitPane = new SplitPane();
-        leftSplitPane.setDividerPositions(0.1);
-        leftSplitPane.setOrientation(Orientation.VERTICAL);
-        zeroAnchor(leftSplitPane);
+        SplitPane leftSplitPane = Browser.leftSplitPane(); //new SplitPane();
+
+//        leftSplitPane.setDividerPositions(0.1);
+//        leftSplitPane.setOrientation(Orientation.VERTICAL);
+//        zeroAnchor(leftSplitPane);
         leftSplitPane.getItems().addAll(topAnchorPane, listAnchorPane);
 
         //Left Anchor Pane
@@ -131,11 +101,7 @@ public class Main extends Application {
 
 
         //Add Inital Tab.
-        tabArray.add(new Tab());
-        tabArray.get(0).getWebEngine().load("http://www.google.com/");
-        tab.add(tabArray.get(0).getWebEngine().getLocation());
-        webView = tabArray.get(0).getWebView();
-
+        Browser.addTab(tabArray, tabList, webView);
 
 
         //Right Anchor Pane
@@ -143,8 +109,7 @@ public class Main extends Application {
         rightAnchorPane.getChildren().add(webView);
 
 
-
-
+        
 
         /////////////EVENT HANDLERS
 
@@ -152,9 +117,9 @@ public class Main extends Application {
 
         //Address bar handler
         //On Action
-        addressBar.setOnAction(e -> {
+        addressField.setOnAction(e -> {
 
-            int index = tabList.getFocusModel().getFocusedIndex();
+            int index = tabListView.getFocusModel().getFocusedIndex();
 
             //Search query string
             String search = "https://www.google.com/search?q=";
@@ -171,7 +136,7 @@ public class Main extends Application {
             };
 
             //Get addressBar text
-            String URL = addressBar.getText();
+            String URL = addressField.getText();
 
                 //check for spaces URL's don't have spaces
             if (URL.contains(" ")){
