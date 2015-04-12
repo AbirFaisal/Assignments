@@ -228,13 +228,19 @@ public class Browser {
 
 
     //Add Tab
-    public static void addTab(ArrayList<Tab> tabArray, ObservableList<String> tabList, WebView webView) {
+    public static void addTab(ArrayList<Tab> tabArray, ObservableList<String> tabList,ListView<String> tabListView, WebView webView) {
 
+        //Add tab to tabArray
         tabArray.add(new Tab());
 
-        tabArray.get(0).getWebEngine().load(null);
+        //setTab to Google.com
+        tabArray.get(0).getWebEngine().load("https://www.google.com/");
 
+        //add the new tab to the Observable tabList
         tabList.add(tabArray.get(0).getWebEngine().getLocation());
+
+        //switch to and
+        tabListView.getSelectionModel().select(tabArray.size());
 
         webView = tabArray.get(0).getWebView();
     }
@@ -248,6 +254,6 @@ public class Browser {
         AnchorPane.setLeftAnchor(child, 0.0);
         AnchorPane.setRightAnchor(child, 0.0);
     }
-    
+
 
 }

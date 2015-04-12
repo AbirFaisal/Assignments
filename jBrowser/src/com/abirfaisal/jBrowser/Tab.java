@@ -2,6 +2,7 @@ package com.abirfaisal.jBrowser;
 
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.FontSmoothingType;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
@@ -17,13 +18,12 @@ public class Tab {
 
 
     public Tab() {
-
         this.webView = new WebView();
+        this.webView.setFontSmoothingType(FontSmoothingType.LCD);
         zeroAnchor(this.webView);
         this.webEngine = this.webView.getEngine();
-        this.webEngine.setJavaScriptEnabled(false);
+        this.webEngine.setJavaScriptEnabled(true);
         this.webEngine.load("https://www.google.com/");
-
     }
 
     public Tab(WebEngine webEngine, WebView webView) {

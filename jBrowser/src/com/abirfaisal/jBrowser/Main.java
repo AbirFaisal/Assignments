@@ -96,7 +96,7 @@ public class Main extends Application {
 
 
         //Add Initial Tab.
-        Browser.addTab(tabArray, tabList, webView);
+        Browser.addTab(tabArray, tabList, tabListView, webView);
 
         //Right Anchor Pane
         AnchorPane rightAnchorPane = Browser.rightAnchorPane(webView);
@@ -134,11 +134,14 @@ public class Main extends Application {
 
                 //check for spaces URL's don't have spaces
             if (URL.contains(" ")){
-                System.out.println("Not URL1");
+                System.out.println("Not URL1 Searching");
 
                 //Send and display Google Search Query
                 search = search + URL;
-                tabArray.get(index).getWebEngine().load(search);
+
+                webView.getEngine().load(search);
+
+
 
             }else {
                 //check for TLD and add http scheme if needed
@@ -149,6 +152,7 @@ public class Main extends Application {
 
                         //add www if needed
                         if(!URL.contains("www.")) {
+                            System.out.println("No URL www.");
                             URL = "www." + URL;
                         }
 
@@ -156,22 +160,26 @@ public class Main extends Application {
                         for (int j = 0; j < scheme.length; j++) {
 
                             if(URL.contains(scheme[j])) {
-                                tabArray.get(index).getWebEngine().load(URL);
+                                System.out.println("URL Has Scheme");
+                                webView.getEngine().load(URL);
                                 break;
                             }
                         }
 
                         //loop didnt break so it doesnt have scheme
                         //apply default scheme
+                        System.out.println("No URL Scheme");
                         URL = "http://" + URL;
 
-                        tabArray.get(index).getWebEngine().load(URL);
+                        webView.getEngine().load(URL);
                         break;
                     }
                 }
+
+                System.out.println("Not URL2 Searching");
                 //If all fails just search the string
                 search = search + URL;
-                tabArray.get(index).getWebEngine().load(search);
+                webView.getEngine().load(search);
             }
         });
 
@@ -240,7 +248,7 @@ public class Main extends Application {
 //                tabList.add(tabArray.get(tabArraySize).getWebEngine().getLocation());
 
 
-                Browser.addTab(tabArray, tabList, webView);
+                Browser.addTab(tabArray, tabList, tabListView, webView);
 
 
 //                webView = tabArray.get(tabArraySize).getWebView();
