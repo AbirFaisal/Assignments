@@ -230,19 +230,28 @@ public class Browser {
     //Add Tab
     public static void addTab(ArrayList<Tab> tabArray, ObservableList<String> tabList,ListView<String> tabListView, WebView webView) {
 
+        int index = tabArray.size();
+
         //Add tab to tabArray
         tabArray.add(new Tab());
 
         //setTab to Google.com
-        tabArray.get(0).getWebEngine().load("https://www.google.com/");
+        tabArray.get(index).getWebEngine().load("https://www.google.com/");
 
         //add the new tab to the Observable tabList
-        tabList.add(tabArray.get(0).getWebEngine().getLocation());
+        tabList.add(tabArray.get(index).getWebEngine().getLocation());
+
 
         //switch to and
-        tabListView.getSelectionModel().select(tabArray.size());
 
-        webView = tabArray.get(0).getWebView();
+        tabListView.getFocusModel().focus(index+1);
+
+        tabListView.getSelectionModel().select(index+1);
+
+        webView = tabArray.get(index).getWebView();
+
+        //tabList.set(index+1, webView.getEngine().getTitle());
+
     }
 
 

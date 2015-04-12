@@ -142,13 +142,13 @@ public class Main extends Application {
                 webView.getEngine().load(search);
 
 
-
             }else {
                 //check for TLD and add http scheme if needed
                 for (int i = 0; i < TLD.length; i++) {
 
                     //Loop through and test TLD
                     if (URL.contains(TLD[i])) {
+                        System.out.println("Has TLD");
 
                         //add www if needed
                         if(!URL.contains("www.")) {
@@ -174,9 +174,12 @@ public class Main extends Application {
                         webView.getEngine().load(URL);
                         break;
                     }
+                    break;
                 }
 
-                System.out.println("Not URL2 Searching");
+                System.out.println("Not URL2 Searching: ");
+                System.out.println(URL);
+
                 //If all fails just search the string
                 search = search + URL;
                 webView.getEngine().load(search);
@@ -240,23 +243,14 @@ public class Main extends Application {
 
             //New Tab
             if (test.contains(tabTrigger)) {
-
-//                tabArray.add(new Tab());
-//                tabArray.get(tabArraySize).getWebEngine().load("http://www.google.com/");
-//
-//                //set tab as domain
-//                tabList.add(tabArray.get(tabArraySize).getWebEngine().getLocation());
-
-
                 Browser.addTab(tabArray, tabList, tabListView, webView);
-
-
-//                webView = tabArray.get(tabArraySize).getWebView();
             }
 
             //Switch Tab
             else {
                 webView = tabArray.get(index - 1).getWebView();
+
+                tabList.set(index, webView.getEngine().getTitle());
 
                 rightAnchorPane.getChildren().clear();
                 rightAnchorPane.getChildren().add(webView);
@@ -268,7 +262,10 @@ public class Main extends Application {
 
 
 
-        /////////////EVENT HANDLERS
+
+
+
+        /////////////END EVENT HANDLERS/////////
 
 
 
@@ -290,8 +287,13 @@ public class Main extends Application {
 //        mainWindow.setPrefSize(1024, 786);
 //        mainWindow.getChildren().add(mainSplitPane);
 
+
         //Scene
         Scene mainScene = Browser.mainScene(mainWindow);
+
+
+        //mainScene.setOnS
+
 
         //Stage
         stage.setScene(mainScene);
