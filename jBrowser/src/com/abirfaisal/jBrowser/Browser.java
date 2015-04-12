@@ -55,7 +55,7 @@ public class Browser {
     }
 
     //Address Bar AnchorPane
-    public static AnchorPane addressBarAnchorPane(Node... node){
+    public static AnchorPane addressBarAnchorPane(Node... FXnodes){
 
         //Address Bar AnchorPane
         AnchorPane addressBarAnchorPane = new AnchorPane();
@@ -63,7 +63,7 @@ public class Browser {
         AnchorPane.setTopAnchor(addressBarAnchorPane,2.0);
         AnchorPane.setLeftAnchor(addressBarAnchorPane,2.0);
         AnchorPane.setRightAnchor(addressBarAnchorPane,2.0);
-        addressBarAnchorPane.getChildren().addAll(node);
+        addressBarAnchorPane.getChildren().addAll(FXnodes);
 
         return addressBarAnchorPane;
     }
@@ -91,23 +91,23 @@ public class Browser {
 
     //Progress Bar AnchorPane
 
-    public static AnchorPane progressBarAnchorPane() {
+    public static AnchorPane progressBarAnchorPane(Node... FXnodes) {
         AnchorPane progressBarAnchorPane = new AnchorPane();
         progressBarAnchorPane.setMinSize(0.0, 0.0);
         AnchorPane.setTopAnchor(progressBarAnchorPane, 30.0);
         AnchorPane.setLeftAnchor(progressBarAnchorPane, 0.0);
         AnchorPane.setRightAnchor(progressBarAnchorPane, 0.0);
-        //progressBarAnchorPane.getChildren().addAll(ProgressText, progressBar);
+        progressBarAnchorPane.getChildren().addAll(FXnodes);
 
         return progressBarAnchorPane;
     }
 
 
     //Top AnchorPane
-    public static AnchorPane topAnchorPane() {
+    public static AnchorPane topAnchorPane(Node... FXnodes) {
         AnchorPane topAnchorPane = new AnchorPane();
         topAnchorPane.setMinSize(0.0, 60.0);
-        // topAnchorPane.getChildren().addAll(addressBarAnchorPane, progressAnchorPane);
+        topAnchorPane.getChildren().addAll(FXnodes);
 
         return topAnchorPane;
     }
@@ -128,25 +128,31 @@ public class Browser {
         tabListView.getSelectionModel().select(0);
         zeroAnchor(tabListView);
 
+
         return tabListView;
     }
 
 
 
 //    //List AnchorPane
-//    AnchorPane listAnchorPane = new AnchorPane();
-//    listAnchorPane.getChildren().add(tabList);
+
+    public static AnchorPane listAnchorPane(ListView<Tab> tabListView) {
+        AnchorPane listAnchorPane = new AnchorPane();
+        listAnchorPane.getChildren().add(tabListView);
+
+        return listAnchorPane;
+    }
 
 
 
     //Left Split Pane
-    public static SplitPane leftSplitPane() {
+    public static SplitPane leftSplitPane(Node... FXnode) {
 
         SplitPane leftSplitPane = new SplitPane();
         leftSplitPane.setDividerPositions(0.1);
         leftSplitPane.setOrientation(Orientation.VERTICAL);
         zeroAnchor(leftSplitPane);
-        //leftSplitPane.getItems().addAll(topAnchorPane, listAnchorPane);
+        leftSplitPane.getItems().addAll(FXnode);
 
         return leftSplitPane;
     }
@@ -156,9 +162,16 @@ public class Browser {
     //Left Anchor Pane
     //Simple so no finction
 
-    public static AnchorPane listAnchorPane() {
+    public static AnchorPane leftAnchorPane(Node... FXnode){
         AnchorPane leftAnchorPane = new AnchorPane();
-        //leftAnchorPane.getChildren().addAll(leftSplitPane);
+        leftAnchorPane.getChildren().addAll(FXnode);
+
+        return leftAnchorPane;
+    }
+
+    public static AnchorPane listAnchorPane(Node... FXnode) {
+        AnchorPane leftAnchorPane = new AnchorPane();
+        leftAnchorPane.getChildren().addAll(FXnode);
 
         return leftAnchorPane;
     }

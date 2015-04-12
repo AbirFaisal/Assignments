@@ -46,31 +46,24 @@ public class Main extends Application {
 
         //Back Button
         Button back = Browser.backButton();
-
         //Forward Button
         Button forward = Browser.forwardButton();
-
         //AddressBar
         TextField addressField = Browser.addressField();
-
         //Address Bar AnchorPane
         AnchorPane addressBarAnchorPane = Browser.addressBarAnchorPane(back, forward, addressField);
-        //Add back forward buttons and address text field
-        //addressBarAnchorPane.getChildren().addAll(back, forward, addressField);
+
 
         //ProgressText
         Text progressText = Browser.progressText();
-
         //Progress Bar
         ProgressBar progressBar = Browser.progressBar();
-
         //Progress Bar AnchorPane
-        AnchorPane progressAnchorPane = Browser.progressBarAnchorPane(); //new AnchorPane();
-        progressAnchorPane.getChildren().addAll(progressText, progressBar);
+        AnchorPane progressBarAnchorPane = Browser.progressBarAnchorPane(progressText, progressBar); //new AnchorPane();
+
 
         //Top AnchorPane
-        AnchorPane topAnchorPane = Browser.topAnchorPane();
-        topAnchorPane.getChildren().addAll(addressBarAnchorPane, progressAnchorPane);
+        AnchorPane topAnchorPane = Browser.topAnchorPane(addressBarAnchorPane, progressBarAnchorPane);
 
         //TabList
         ObservableList<String> tabList = Browser.tabList();
@@ -79,16 +72,14 @@ public class Main extends Application {
         ListView tabListView = Browser.tabListView(tabList); //new ListView<String>(tabList);
 
         //List AnchorPane
-        AnchorPane listAnchorPane = Browser.listAnchorPane(); //new AnchorPane();
-        listAnchorPane.getChildren().add(tabListView);
+        AnchorPane listAnchorPane = Browser.listAnchorPane(tabListView); //new AnchorPane();
 
         //Left Split Pane
         SplitPane leftSplitPane = Browser.leftSplitPane(); //new SplitPane();
         leftSplitPane.getItems().addAll(topAnchorPane, listAnchorPane);
 
         //Left Anchor Pane
-        AnchorPane leftAnchorPane = new AnchorPane();
-        leftAnchorPane.getChildren().addAll(leftSplitPane);
+        AnchorPane leftAnchorPane = Browser.leftAnchorPane(leftSplitPane); //new AnchorPane();
 
         //Add Inital Tab.
         Browser.addTab(tabArray, tabList, webView);
@@ -99,8 +90,7 @@ public class Main extends Application {
 
 
 
-
-        //TODO refactor event handlers
+        //TODO refactor event handlers if you have time
         /////////////EVENT HANDLERS
 
 
