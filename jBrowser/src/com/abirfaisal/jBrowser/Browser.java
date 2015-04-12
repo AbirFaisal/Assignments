@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -17,6 +19,10 @@ import java.util.ArrayList;
  * Created by abirfaisal on 4/10/15.
  */
 public class Browser {
+
+
+    ///////Browswer window nodes////////////
+
 
     //Back Button
     public static Button backButton(){
@@ -125,7 +131,7 @@ public class Browser {
     //Tab List View
     public static ListView tabListView(ObservableList<String> tabList){
         ListView tabListView = new ListView<String>(tabList);
-        tabListView.getSelectionModel().select(0);
+        tabListView.getSelectionModel().select(1);
         zeroAnchor(tabListView);
 
 
@@ -133,9 +139,7 @@ public class Browser {
     }
 
 
-
-//    //List AnchorPane
-
+    //List AnchorPane
     public static AnchorPane listAnchorPane(ListView<Tab> tabListView) {
         AnchorPane listAnchorPane = new AnchorPane();
         listAnchorPane.getChildren().add(tabListView);
@@ -176,28 +180,74 @@ public class Browser {
         return leftAnchorPane;
     }
 
-    //Add Tab.
+
+
+
+
+    //Right Anchor Pane
+    public static AnchorPane rightAnchorPane(Node... FXnode){
+        AnchorPane rightAnchorPane = new AnchorPane();
+        rightAnchorPane.getChildren().addAll(FXnode);
+
+        return rightAnchorPane;
+    }
+
+
+    //Main Split Pane
+    public static SplitPane mainSplitPane(Node... FXnode) {
+        SplitPane mainSplitPane = new SplitPane();
+        mainSplitPane.setDividerPositions(0.25);
+        zeroAnchor(mainSplitPane);
+        mainSplitPane.getItems().addAll(FXnode);
+
+        return mainSplitPane;
+    }
+
+
+    //Main Window Anchor Pane
+    public static AnchorPane mainWindowAnchorPane(Node... FXnode) {
+        AnchorPane mainWindow = new AnchorPane();
+        mainWindow.setPrefSize(1024, 786);
+
+        mainWindow.getChildren().addAll(FXnode);
+
+        return mainWindow;
+    }
+
+    //Scene
+    public static Scene mainScene(Parent FXParent) {
+
+        Scene mainScene = new Scene(FXParent);
+
+        return mainScene;
+    }
+
+
+    ////////Functions//////////////
+
+
+
+    //Add Tab
     public static void addTab(ArrayList<Tab> tabArray, ObservableList<String> tabList, WebView webView) {
 
         tabArray.add(new Tab());
-        tabArray.get(0).getWebEngine().load("http://www.google.com/");
+
+        tabArray.get(0).getWebEngine().load(null);
+
         tabList.add(tabArray.get(0).getWebEngine().getLocation());
+
         webView = tabArray.get(0).getWebView();
     }
 
 
 
-    //Right Anchor Pane
-//    AnchorPane rightAnchorPane = new AnchorPane();
-//    rightAnchorPane.getChildren().add(webView);
-
-
+    //Automatic zero anchor so we can save time typing
     static void zeroAnchor(Node child) {
         AnchorPane.setTopAnchor(child, 0.0);
         AnchorPane.setBottomAnchor(child, 0.0);
         AnchorPane.setLeftAnchor(child, 0.0);
         AnchorPane.setRightAnchor(child, 0.0);
     }
-
+    
 
 }

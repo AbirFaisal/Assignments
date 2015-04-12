@@ -3,7 +3,6 @@ package com.abirfaisal.jBrowser;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 
 /**
@@ -11,61 +10,27 @@ import javafx.scene.web.WebView;
  */
 public class Tab {
 
-    private String domainName;
-    private String URL;
+
     private WebView webView;
     private WebEngine webEngine;
-    private WebHistory webHistory;
 
 
 
     public Tab() {
 
-
-
-        //TODO history stuff
-
         this.webView = new WebView();
         zeroAnchor(this.webView);
         this.webEngine = this.webView.getEngine();
         this.webEngine.setJavaScriptEnabled(false);
-        this.webEngine.load("https://www.reddit.com/");
-
-
-
-//        this.domainName = domainName;
-//        this.URL = URL;
-//        this.webView = webView;
-//        this.webEngine = webEngine;
-//        this.webHistory = webHistory;
+        this.webEngine.load("https://www.google.com/");
 
     }
 
-
-    public Tab(String domainName, String URL, WebView webView, WebEngine webEngine, WebHistory webHistory) {
-        this.domainName = domainName;
-        this.URL = URL;
-        this.webView = webView;
+    public Tab(WebEngine webEngine, WebView webView) {
         this.webEngine = webEngine;
-        this.webHistory = webHistory;
+        this.webView = webView;
     }
 
-
-    public String getDomainName() {
-        return domainName;
-    }
-
-    public void setDomainName(String domainName) {
-        this.domainName = domainName;
-    }
-
-    public String getURL() {
-        return URL;
-    }
-
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
 
     public WebView getWebView() {
         return webView;
@@ -82,19 +47,6 @@ public class Tab {
     public void setWebEngine(WebEngine webEngine) {
         this.webEngine = webEngine;
     }
-
-    public WebHistory getWebHistory() {
-        return webHistory;
-    }
-
-    public void setWebHistory(WebHistory webHistory) {
-        this.webHistory = webHistory;
-    }
-
-
-
-
-
 
     void zeroAnchor(Node child) {
         AnchorPane.setTopAnchor(child, 0.0);

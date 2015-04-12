@@ -44,6 +44,7 @@ public class Main extends Application {
         //Set Window Title
         stage.setTitle("jBrowser");
 
+
         //Back Button
         Button back = Browser.backButton();
         //Forward Button
@@ -58,35 +59,48 @@ public class Main extends Application {
         Text progressText = Browser.progressText();
         //Progress Bar
         ProgressBar progressBar = Browser.progressBar();
+
+
+        //Javascript Enable
+        Toggle javaScriptToggle = new ToggleButton();
+
+
         //Progress Bar AnchorPane
-        AnchorPane progressBarAnchorPane = Browser.progressBarAnchorPane(progressText, progressBar); //new AnchorPane();
+        AnchorPane progressBarAnchorPane = Browser.progressBarAnchorPane(progressText, progressBar);
 
 
-        //Top AnchorPane
-        AnchorPane topAnchorPane = Browser.topAnchorPane(addressBarAnchorPane, progressBarAnchorPane);
+
+
+
+
+
 
         //TabList
         ObservableList<String> tabList = Browser.tabList();
-
         //Tab List View
-        ListView tabListView = Browser.tabListView(tabList); //new ListView<String>(tabList);
+        ListView tabListView = Browser.tabListView(tabList);
 
+
+        //Top left AnchorPane
+        AnchorPane topAnchorPane = Browser.topAnchorPane(addressBarAnchorPane, progressBarAnchorPane);
         //List AnchorPane
-        AnchorPane listAnchorPane = Browser.listAnchorPane(tabListView); //new AnchorPane();
+        AnchorPane listAnchorPane = Browser.listAnchorPane(tabListView);
+
 
         //Left Split Pane
-        SplitPane leftSplitPane = Browser.leftSplitPane(); //new SplitPane();
-        leftSplitPane.getItems().addAll(topAnchorPane, listAnchorPane);
+        SplitPane leftSplitPane = Browser.leftSplitPane(topAnchorPane, listAnchorPane);
+
 
         //Left Anchor Pane
-        AnchorPane leftAnchorPane = Browser.leftAnchorPane(leftSplitPane); //new AnchorPane();
+        AnchorPane leftAnchorPane = Browser.leftAnchorPane(leftSplitPane);
 
-        //Add Inital Tab.
+
+        //Add Initial Tab.
         Browser.addTab(tabArray, tabList, webView);
 
         //Right Anchor Pane
-        AnchorPane rightAnchorPane = new AnchorPane();
-        rightAnchorPane.getChildren().add(webView);
+        AnchorPane rightAnchorPane = Browser.rightAnchorPane(webView);
+
 
 
 
@@ -167,31 +181,38 @@ public class Main extends Application {
         //TODO change URL accourdingly
 
 
+
         //Handle Back Button event.
         back.setOnAction(e -> {
 
-
-            //TODO add go back code here
-
+            //Make sure there is actually history to go back to
+            if (webView.getEngine().getHistory().getCurrentIndex() > 0) {
+                webView.getEngine().getHistory().go(-1);
+            }
 
             System.out.println("Back Button Clicked");
         });
+
 
 
 
         //Handle Forward Button event.
         forward.setOnAction(e -> {
 
+            //Make sure there is actually a page to go ahead to
+            //current index should be less than size of history -2
+            if (webView.getEngine().getHistory().getCurrentIndex() <
+                    (webView.getEngine().getHistory().getEntries().size() - 1)) {
 
-            //TODO add go forward code here
+                webView.getEngine().getHistory().go(1);
+            }
 
-
-            webView = tabArray.get(1).getWebView();
-
-
-
-            System.out.println("Back Button Clicked");
+            System.out.println("Forward Button Clicked");
         });
+
+
+
+
 
 
         //Handle Tab Switch and new Tab
@@ -212,14 +233,17 @@ public class Main extends Application {
             //New Tab
             if (test.contains(tabTrigger)) {
 
-                tabArray.add(new Tab());
-                tabArray.get(tabArraySize).getWebEngine().load("http://www.google.com/");
+//                tabArray.add(new Tab());
+//                tabArray.get(tabArraySize).getWebEngine().load("http://www.google.com/");
+//
+//                //set tab as domain
+//                tabList.add(tabArray.get(tabArraySize).getWebEngine().getLocation());
 
-                //set tab as domain
-                tabList.add(tabArray.get(tabArraySize).getWebEngine().getLocation());
+
+                Browser.addTab(tabArray, tabList, webView);
 
 
-                webView = tabArray.get(tabArraySize).getWebView();
+//                webView = tabArray.get(tabArraySize).getWebView();
             }
 
             //Switch Tab
@@ -244,20 +268,22 @@ public class Main extends Application {
 
 
 
+
         //Main Split Pane
-        SplitPane mainSplitPane = new SplitPane();
-        mainSplitPane.setDividerPositions(0.25);
-        zeroAnchor(mainSplitPane);
-        //Add stuff to the split pane
-        mainSplitPane.getItems().addAll(leftAnchorPane, rightAnchorPane);
+        SplitPane mainSplitPane = Browser.mainSplitPane(leftAnchorPane, rightAnchorPane); // new SplitPane();
+//        mainSplitPane.setDividerPositions(0.25);
+//        zeroAnchor(mainSplitPane);
+//        //Add stuff to the split pane
+//        mainSplitPane.getItems().addAll(leftAnchorPane, rightAnchorPane);
+
 
         //Main Window Anchor Pane
-        AnchorPane mainWindow = new AnchorPane();
-        mainWindow.setPrefSize(1024, 786);
-        mainWindow.getChildren().add(mainSplitPane);
+        AnchorPane mainWindow = Browser.mainWindowAnchorPane(mainSplitPane);  // new AnchorPane();
+//        mainWindow.setPrefSize(1024, 786);
+//        mainWindow.getChildren().add(mainSplitPane);
 
         //Scene
-        Scene mainScene = new Scene(mainWindow);
+        Scene mainScene = Browser.mainScene(mainWindow);
 
         //Stage
         stage.setScene(mainScene);

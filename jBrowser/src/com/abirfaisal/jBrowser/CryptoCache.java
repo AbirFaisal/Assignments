@@ -1,7 +1,19 @@
 package com.abirfaisal.jBrowser;
 
 /**
- * Created by abirfaisal on 4/11/15.
+ * Proposed feature
+ * Encrypted Cache
+ *
+ * Holds:
+ * Settings
+ * History
+ * WebEngineCache
+ * Tab Cache
+ * Tab Objects
+ *
+ *
+ *
+ *
  */
 public class CryptoCache {
 }
