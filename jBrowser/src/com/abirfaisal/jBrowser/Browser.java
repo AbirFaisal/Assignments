@@ -55,9 +55,7 @@ public class Browser {
     }
 
     //Address Bar AnchorPane
-    public static AnchorPane addressBarAnchorPane(){
-
-
+    public static AnchorPane addressBarAnchorPane(Node... node){
 
         //Address Bar AnchorPane
         AnchorPane addressBarAnchorPane = new AnchorPane();
@@ -65,6 +63,7 @@ public class Browser {
         AnchorPane.setTopAnchor(addressBarAnchorPane,2.0);
         AnchorPane.setLeftAnchor(addressBarAnchorPane,2.0);
         AnchorPane.setRightAnchor(addressBarAnchorPane,2.0);
+        addressBarAnchorPane.getChildren().addAll(node);
 
         return addressBarAnchorPane;
     }

@@ -3,7 +3,6 @@ package com.abirfaisal.jBrowser;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,19 +14,19 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 
-public class Main extends Application {
+/**
+ * No FXML because its easier to manage code than to @FXML everything.
+**/
 
+public class Main extends Application {
 
     //Main WebView
     WebView webView = new WebView();
-
-    //Array of tabs
-    //Tab[] tabArray = new Tab[500];
-
-
+    //Array of Tab objects as a array list
+    //This allows us to save memory since we can dynamically increase
+    //the size of this and also adds feature not
+    //available to a normal Object[] array
     ArrayList<Tab> tabArray = new ArrayList<Tab>();
-
-    //String defaultURL = "https://www.reddit.com/";
 
 
     public static void main(String[] args) {
@@ -35,8 +34,12 @@ public class Main extends Application {
     }
 
 
+    //TODO turn browser window into an object in the future
+    //TODO add multi window support
+
     @Override
     public void start(Stage stage) {
+
 
         //Set Window Title
         stage.setTitle("jBrowser");
@@ -51,9 +54,9 @@ public class Main extends Application {
         TextField addressField = Browser.addressField();
 
         //Address Bar AnchorPane
-        AnchorPane addressBarAnchorPane = Browser.addressBarAnchorPane();
+        AnchorPane addressBarAnchorPane = Browser.addressBarAnchorPane(back, forward, addressField);
         //Add back forward buttons and address text field
-        addressBarAnchorPane.getChildren().addAll(back, forward, addressField);
+        //addressBarAnchorPane.getChildren().addAll(back, forward, addressField);
 
         //ProgressText
         Text progressText = Browser.progressText();
@@ -63,13 +66,6 @@ public class Main extends Application {
 
         //Progress Bar AnchorPane
         AnchorPane progressAnchorPane = Browser.progressBarAnchorPane(); //new AnchorPane();
-
-//        progressAnchorPane.setMinSize(0.0, 0.0);
-//        AnchorPane.setTopAnchor(progressAnchorPane,30.0);
-//        AnchorPane.setLeftAnchor(progressAnchorPane,0.0);
-//        AnchorPane.setRightAnchor(progressAnchorPane,0.0);
-
-
         progressAnchorPane.getChildren().addAll(progressText, progressBar);
 
         //Top AnchorPane
@@ -79,9 +75,8 @@ public class Main extends Application {
         //TabList
         ObservableList<String> tabList = Browser.tabList();
 
+        //Tab List View
         ListView tabListView = Browser.tabListView(tabList); //new ListView<String>(tabList);
-
-
 
         //List AnchorPane
         AnchorPane listAnchorPane = Browser.listAnchorPane(); //new AnchorPane();
@@ -89,28 +84,23 @@ public class Main extends Application {
 
         //Left Split Pane
         SplitPane leftSplitPane = Browser.leftSplitPane(); //new SplitPane();
-
-//        leftSplitPane.setDividerPositions(0.1);
-//        leftSplitPane.setOrientation(Orientation.VERTICAL);
-//        zeroAnchor(leftSplitPane);
         leftSplitPane.getItems().addAll(topAnchorPane, listAnchorPane);
 
         //Left Anchor Pane
         AnchorPane leftAnchorPane = new AnchorPane();
         leftAnchorPane.getChildren().addAll(leftSplitPane);
 
-
         //Add Inital Tab.
         Browser.addTab(tabArray, tabList, webView);
-
 
         //Right Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane();
         rightAnchorPane.getChildren().add(webView);
 
 
-        
 
+
+        //TODO refactor event handlers
         /////////////EVENT HANDLERS
 
 
@@ -215,9 +205,9 @@ public class Main extends Application {
 
 
         //Handle Tab Switch and new Tab
-        tabList.setOnMouseClicked(e -> {
+        tabListView.setOnMouseClicked(e -> {
 
-            int index = tabList.getFocusModel().getFocusedIndex();
+            int index = tabListView.getFocusModel().getFocusedIndex();
             int tabArraySize = tabArray.size();
 
 
@@ -226,7 +216,7 @@ public class Main extends Application {
 
 
             String tabTrigger = "New Tab";
-            String test = tab.get(index);
+            String test = tabList.get(index);
 
 
             //New Tab
@@ -236,7 +226,7 @@ public class Main extends Application {
                 tabArray.get(tabArraySize).getWebEngine().load("http://www.google.com/");
 
                 //set tab as domain
-                tab.add(tabArray.get(tabArraySize).getWebEngine().getLocation());
+                tabList.add(tabArray.get(tabArraySize).getWebEngine().getLocation());
 
 
                 webView = tabArray.get(tabArraySize).getWebView();
