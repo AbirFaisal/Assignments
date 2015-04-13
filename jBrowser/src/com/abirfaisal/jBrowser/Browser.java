@@ -3,10 +3,12 @@ package com.abirfaisal.jBrowser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
+import javafx.geometry.Side;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -122,13 +124,108 @@ public class Browser {
     public static AnchorPane progressBarAnchorPane(Node... FXnodes) {
         AnchorPane progressBarAnchorPane = new AnchorPane();
         progressBarAnchorPane.setMinSize(0.0, 0.0);
+
         AnchorPane.setTopAnchor(progressBarAnchorPane, 32.0);
         AnchorPane.setLeftAnchor(progressBarAnchorPane, 3.0);
         AnchorPane.setRightAnchor(progressBarAnchorPane, 3.0);
+
         progressBarAnchorPane.getChildren().addAll(FXnodes);
 
         return progressBarAnchorPane;
     }
+
+
+
+    public static Text systemInfoText() {
+        String OS = System.getProperty("os.name");
+        int CPUs = Runtime.getRuntime().availableProcessors();
+        String arch = System.getProperty("os.arch");
+        String javaVersion = System.getProperty("java.version");
+
+        //System Info Text
+        Text systemInfoText = new Text("OS CPUs Memory JVM");
+        systemInfoText.setText(OS + "  " + arch + "\n" + CPUs + " CPUs\nJava: " + javaVersion);
+
+        AnchorPane.setTopAnchor(systemInfoText, 0.0);
+        AnchorPane.setLeftAnchor(systemInfoText, 0.0);
+        AnchorPane.setRightAnchor(systemInfoText, 0.0);
+
+        return systemInfoText;
+    }
+
+
+
+
+    public static Text tabCountText() {
+
+        //Tab Count Text
+        Text tabCountText = new Text("Tabs: ");
+        AnchorPane.setTopAnchor(tabCountText, 50.0);
+        AnchorPane.setLeftAnchor(tabCountText, 0.0);
+
+        return tabCountText;
+    }
+
+
+
+
+    public static Text numTabsText() {
+
+        //Number of tabs text
+        Text numTabsText = new Text("1");
+        AnchorPane.setTopAnchor(numTabsText, 50.0);
+        AnchorPane.setLeftAnchor(numTabsText, 35.0);
+
+        return numTabsText;
+    }
+
+
+    public static ObservableList<PieChart.Data> pieChartData(){
+        PieChart.Data freeMemory = new PieChart.Data("freeMemory", Runtime.getRuntime().freeMemory() / 1024 / 1024);
+        PieChart.Data totalMemory = new PieChart.Data("totalMemory", Runtime.getRuntime().totalMemory() / 1024 / 1024);
+        PieChart.Data maxMemory = new PieChart.Data("maxMemory", Runtime.getRuntime().maxMemory() / 1024 / 1024);
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                freeMemory,
+                totalMemory,
+                maxMemory
+        );
+
+        return pieChartData;
+    }
+
+
+    public static PieChart memoryChartPieChart(ObservableList<PieChart.Data> pieChartData) {
+
+        PieChart memoryChartPieChart = new PieChart(pieChartData);
+        memoryChartPieChart.setLabelLineLength(-10);
+        memoryChartPieChart.setLegendSide(Side.LEFT);
+
+        AnchorPane.setTopAnchor(memoryChartPieChart, 60.0);
+        //AnchorPane.setBottomAnchor(memoryChartPieChart, 0.0);
+        AnchorPane.setLeftAnchor(memoryChartPieChart, 0.0);
+        AnchorPane.setRightAnchor(memoryChartPieChart, 0.0);
+
+        return memoryChartPieChart;
+    }
+
+
+    public static AnchorPane systemInfoAnchorPane(Node... FXnodes) {
+
+        //System Info AnchorPane
+        AnchorPane systemInfoAnchorPane = new AnchorPane();
+        AnchorPane.setTopAnchor(systemInfoAnchorPane, 60.0);
+        AnchorPane.setLeftAnchor(systemInfoAnchorPane, 0.0);
+        AnchorPane.setRightAnchor(systemInfoAnchorPane, 0.0);
+        systemInfoAnchorPane.getChildren().addAll(FXnodes);
+
+        return systemInfoAnchorPane;
+    }
+
+
+
+
+
 
 
     //Top AnchorPane
@@ -253,6 +350,7 @@ public class Browser {
     public static void addTab(ArrayList<Tab> tabArray, ObservableList<String> tabList,ListView<String> tabListView, WebView webView) {
 
 
+
         //know last index
         int index = tabArray.size();
 
@@ -260,10 +358,10 @@ public class Browser {
         tabArray.add(new Tab());
 
         //setTab to Google.com
-        tabArray.get(index).getWebEngine().load("https://www.google.com/");
+        tabArray.get(index).getWebView().getEngine().load("https://www.google.com/");
 
         //add the new tab to the Observable tabList
-        tabList.add(tabArray.get(index).getWebEngine().getLocation());
+        tabList.add(tabArray.get(index).getWebView().getEngine().getLocation());
 
 
         //switch to and
@@ -280,6 +378,19 @@ public class Browser {
 
         else tabList.set(index+1, webView.getEngine().getLocation());
     }
+
+
+//    //Update memory pie chart
+//    public static void updateMemoryPieChart(Propert){
+//
+//        pieChartData.removeAll();
+//
+//        pieChartData = FXCollections.observableArrayList(
+//                new PieChart.Data("freeMemory", Runtime.getRuntime().freeMemory() / 1024 / 1024),
+//                new PieChart.Data("totalMemory", Runtime.getRuntime().totalMemory() / 1024 / 1024),
+//                new PieChart.Data("maxMemory", Runtime.getRuntime().maxMemory() / 1024 / 1024)
+//        );
+//    }
 
 
 

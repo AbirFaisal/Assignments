@@ -24,8 +24,6 @@ public class Tab {
     public Tab() {
         this.webView = new WebView();
 
-
-
         this.webView.setFontSmoothingType(FontSmoothingType.LCD);
         zeroAnchor(this.webView);
 
@@ -44,7 +42,6 @@ public class Tab {
 
 
         this.webEngine.load("https://www.google.com/");
-
     }
 
     public Tab(WebEngine webEngine, WebView webView) {
@@ -57,13 +54,15 @@ public class Tab {
         return webView;
     }
 
+
+
     public void setWebView(WebView webView) {
         this.webView = webView;
     }
 
-    public WebEngine getWebEngine() {
-        return webEngine;
-    }
+//    public WebEngine getWebEngine() {
+//        return webEngine;
+//    }
 
     public void setWebEngine(WebEngine webEngine) {
         this.webEngine = webEngine;

@@ -4,7 +4,6 @@ package com.abirfaisal.jBrowser;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.scene.Node;
@@ -100,68 +99,29 @@ public class Main extends Application {
          *
          */
 
-        String OS = System.getProperty("os.name");
-
-        int CPUs = Runtime.getRuntime().availableProcessors();
-        String arch = System.getProperty("os.arch");
-
-
-        long freeMemory = Runtime.getRuntime().freeMemory() / 1024 / 1024;
-        long totalMemory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
-        long maxMemory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
-
-        String javaVersion = System.getProperty("java.version");
-
-
         //Print system info to terminal
         systemInfo();
 
 
-        //TODO Refactor
-        //Looks retarded
-        //Bug wont resize
-        //Bind values
-
         //System Info Text
-        Text systemInfoText = new Text("OS CPUs Memory JVM");
-        systemInfoText.setText(OS + "  " + arch + "\n" + CPUs + " CPUs\nJava: " + javaVersion);
-        AnchorPane.setTopAnchor(systemInfoText, 0.0);
-        AnchorPane.setLeftAnchor(systemInfoText, 0.0);
-        AnchorPane.setRightAnchor(systemInfoText, 0.0);
+        Text systemInfoText = Browser.systemInfoText();
+
 
 
         //Tab Count Text
-        Text tabCountText = new Text("Tabs: ");
-        AnchorPane.setTopAnchor(tabCountText, 50.0);
-        AnchorPane.setLeftAnchor(tabCountText, 0.0);
+        Text tabCountText = Browser.tabCountText();
 
-        Text numTabsText = new Text("1");
-        AnchorPane.setTopAnchor(numTabsText, 50.0);
-        AnchorPane.setLeftAnchor(numTabsText, 35.0);
+        Text numTabsText = Browser.numTabsText();
 
-
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("freeMemory", freeMemory),
-                new PieChart.Data("totalMemory", totalMemory),
-                new PieChart.Data("maxMemory", maxMemory)
-        );
-
-
-
-        PieChart memoryChartPieChart = new PieChart(pieChartData);
-        AnchorPane.setTopAnchor(memoryChartPieChart, 100.0);
-        AnchorPane.setLeftAnchor(memoryChartPieChart, 0.0);
-        AnchorPane.setRightAnchor(memoryChartPieChart, 0.0);
-
-
+        //Pie Chart
+        PieChart memoryChartPieChart = Browser.memoryChartPieChart(Browser.pieChartData());
 
         //System Info AnchorPane
-        AnchorPane systemInfoAnchorPane = new AnchorPane();
-        AnchorPane.setTopAnchor(systemInfoAnchorPane, 60.0);
-        AnchorPane.setLeftAnchor(systemInfoAnchorPane, 0.0);
-        AnchorPane.setRightAnchor(systemInfoAnchorPane, 0.0);
-        systemInfoAnchorPane.getChildren().addAll(systemInfoText, numTabsText, tabCountText, memoryChartPieChart);
-
+        AnchorPane systemInfoAnchorPane = Browser.systemInfoAnchorPane(
+                systemInfoText,
+                tabCountText,
+                numTabsText,
+                memoryChartPieChart);
 
 
 
@@ -195,10 +155,8 @@ public class Main extends Application {
 
 
 
-
         //TODO refactor event handlers if you have time
         /////////////EVENT HANDLERS
-
 
 
         //Address bar handler
@@ -267,23 +225,9 @@ public class Main extends Application {
                         break;
                     }
                 }
-
-
-
-//                System.out.println("Not URL2 Searching: ");
-//                System.out.println(URL);
-//
-//                //If all fails just search the string
-//                search = search + URL;
-//                webView.getEngine().load(search);
             }
         });
-
-
-        //TODO change page accourdingly
-
-        //TODO change URL accourdingly
-
+        
 
 
         //Handle Back Button event.
@@ -331,6 +275,7 @@ public class Main extends Application {
             //New Tab
             if (index == 0) {
                 Browser.addTab(tabArray, tabList, tabListView, webView);
+                numTabsText.setText(String.valueOf(tabArraySize));
             }
 
 
@@ -396,6 +341,9 @@ public class Main extends Application {
                                     else tabList.set( //Site URL
                                             index, webView.getEngine().getLocation());
 
+
+                                    memoryChartPieChart.setData(Browser.pieChartData());
+
                                     printMemoryInfo();
                                 }
 
@@ -437,6 +385,12 @@ public class Main extends Application {
 
 
             }
+
+
+            Runtime.getRuntime().gc();
+            numTabsText.setText(String.valueOf(tabArraySize));
+
+
         });
 
 
