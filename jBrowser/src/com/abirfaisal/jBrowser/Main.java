@@ -306,44 +306,6 @@ public class Main extends Application {
 
 
 
-
-        //TODO change to setOnMouseClicked
-        //throws exeptions please fix
-
-//        //Handle javascript toggle button
-        javaScriptToggle.setOnMouseClicked(e -> {
-            webView.getEngine().setJavaScriptEnabled(javaScriptToggle.isSelected());
-            webView.getEngine().reload();
-        });
-
-
-
-
-
-
-//        webView.getEngine().getLoadWorker().stateProperty().addListener(
-//                new ChangeListener<Worker.State>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Worker.State> observable,
-//                                Worker.State oldValue,
-//                                Worker.State newValue) {
-//
-//
-//                //System.out.println("Load Listner: " + Worker.State.);
-//
-//                if (newValue == Worker.State.SUCCEEDED) {
-//                    stage.setTitle(webView.getEngine().getLocation());
-//                    System.out.println("called");
-//                }
-//
-//            }
-//        });
-
-
-
-
-
-
         //Handle Tab Switch and new Tab
         tabListView.setOnMouseClicked(e -> {
 
@@ -374,7 +336,14 @@ public class Main extends Application {
                         webView.getEngine().getLoadWorker().progressProperty());
 
 
-                //Handle Loading Bar
+
+                //Bind current webview to javascript toggle
+                webView.getEngine().javaScriptEnabledProperty().bind(
+                        javaScriptToggle.selectedProperty());
+
+
+
+
                 //TODO Add Remove listner add removal of webview while resizing
                 webView.getEngine().getLoadWorker().stateProperty().addListener(
                         new ChangeListener<Worker.State>() {
@@ -387,7 +356,8 @@ public class Main extends Application {
                                     System.out.print("\nSCHEDULED: ");
                                     System.out.println(observable.getValue());
 
-                                    progressBar.setProgress(-1);
+                                    //tabList.set(index, webView.getEngine().getLoadWorker().getMessage());
+
 
                                 }
 
@@ -397,7 +367,10 @@ public class Main extends Application {
 
 
 
+                                    addressField.setText(webView.getEngine().getLocation());
+                                    tabList.set(index, webView.getEngine().getLoadWorker().getMessage());
                                 }
+
 
                                 if (newValue == Worker.State.SUCCEEDED) {
                                     System.out.print("SUCCEEDED: ");
@@ -406,10 +379,12 @@ public class Main extends Application {
 
                                     //Somtimes title is null
                                     if (webView.getEngine().getTitle() != null)
-                                        tabList.set(index, webView.getEngine().getTitle());
+                                        tabList.set( //Site Title
+                                                index, webView.getEngine().getTitle());
+                                    else tabList.set( //Site URL
+                                            index, webView.getEngine().getLocation());
 
-                                    else tabList.set(index, webView.getEngine().getLocation());
-
+                                    printMemoryInfo();
                                 }
 
 
@@ -450,9 +425,8 @@ public class Main extends Application {
                 System.out.println("webView.cacheHintProperty().get(): " + webView.cacheHintProperty().get());
 
 
-                printMemoryInfo();
 
-                // javaScriptToggle.setSelected(webView.getEngine().isJavaScriptEnabled());
+
             }
         });
 
@@ -460,7 +434,18 @@ public class Main extends Application {
 
 
 
+        //TODO change to setOnMouseClicked
+        //throws exeptions please fix
 
+//        //Handle javascript toggle button
+        javaScriptToggle.setOnAction(e -> {
+
+
+            //webView.getEngine().setJavaScriptEnabled();
+            webView.getEngine().reload();
+
+
+        });
 
 
 
