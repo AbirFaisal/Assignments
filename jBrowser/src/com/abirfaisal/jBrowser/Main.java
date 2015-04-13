@@ -359,9 +359,19 @@ public class Main extends Application {
                 Browser.addTab(tabArray, tabList, tabListView, webView);
             }
 
+
+
+
             //Switch Tab
             else {
                 webView = tabArray.get(index - 1).getWebView();
+
+                //Bind progress indicators to current webView
+                //TODO make text int or remove precision
+                progressText.textProperty().bind(
+                        webView.getEngine().getLoadWorker().progressProperty().multiply(100).asString().concat("%"));
+                progressBar.progressProperty().bind(
+                        webView.getEngine().getLoadWorker().progressProperty());
 
 
                 //Handle Loading Bar
@@ -373,32 +383,18 @@ public class Main extends Application {
                                                 Worker.State oldValue,
                                                 Worker.State newValue) {
 
-
-
-
-
                                 if (newValue == Worker.State.SCHEDULED) {
                                     System.out.print("\nSCHEDULED: ");
                                     System.out.println(observable.getValue());
 
-
-                                    progressText.setText("...");
                                     progressBar.setProgress(-1);
 
                                 }
-
-
-
-
 
                                 if (newValue == Worker.State.RUNNING) {
                                     System.out.print("RUNNING: ");
                                     System.out.println(observable.getValue());
 
-
-                                    progressText.setText(
-                                            String.valueOf(
-                                                    webView.getEngine().getLoadWorker().getProgress()));
 
 
                                 }
@@ -407,8 +403,12 @@ public class Main extends Application {
                                     System.out.print("SUCCEEDED: ");
                                     System.out.println(observable.getValue());
 
-                                    progressText.setText("100%");
-                                    progressBar.setProgress(1.0);
+
+                                    //Somtimes title is null
+                                    if (webView.getEngine().getTitle() != null)
+                                        tabList.set(index, webView.getEngine().getTitle());
+
+                                    else tabList.set(index, webView.getEngine().getLocation());
 
                                 }
 
@@ -429,28 +429,6 @@ public class Main extends Application {
                                     System.out.println(observable.getValue());
                                 }
 
-
-
-
-                                //Change Progress Text and Bar while loading
-                                while(newValue == Worker.State.RUNNING){
-
-
-                                    progressText.setText(String.valueOf(
-                                            webView.getEngine().getLoadWorker().getProgress()));
-
-
-
-                                    progressBar.setProgress(
-                                            webView.getEngine().getLoadWorker().getProgress());
-
-
-                                }
-
-
-
-
-
                             }
                         });
 
@@ -461,11 +439,7 @@ public class Main extends Application {
                 //tabList.set(index, webView.getEngine().getTitle());
 
 
-                //Somtimes title is null
-                if (webView.getEngine().getTitle() != null)
-                    tabList.set(index, webView.getEngine().getTitle());
 
-                else tabList.set(index, webView.getEngine().getLocation());
 
 
                 rightAnchorPane.getChildren().clear();
