@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.geometry.*?>
@@ -15,7 +16,7 @@
         <items>
           <AnchorPane>
                <children>
-                  <SplitPane dividerPositions="0.2" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane minHeight="75.0" minWidth="0.0" prefHeight="100.0" prefWidth="150.0">
                            <children>
@@ -29,15 +30,18 @@
                               <AnchorPane fx:id="loadingbar" minHeight="0.0" minWidth="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="32.0">
                                  <children>
                                     <Text fx:id="pageLoadPercent" strokeWidth="0.0" text="100%" textAlignment="CENTER" textOrigin="TOP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0" />
-                                    <ProgressBar fx:id="pageLoadBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0" />
+                                    <ProgressBar fx:id="pageLoadBar" progress="0.85" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0" />
                                     <ToggleButton alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="JS" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="CPUMEMORY" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                              <AnchorPane fx:id="CPUMEMORY" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                                  <children>
-                                    <Text fx:id="OS" strokeType="OUTSIDE" strokeWidth="0.0" text="OS CPUs" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Text fx:id="OS" strokeType="OUTSIDE" strokeWidth="0.0" text="Mac OS X  8 CPUs x86_64 Java 8" textOrigin="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     <Text fx:id="Tabs" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabs:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0" />
-                                 </children></AnchorPane>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="20.0" />
+                                    <PieChart labelLineLength="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

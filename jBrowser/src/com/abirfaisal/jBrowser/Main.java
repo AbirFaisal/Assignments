@@ -4,10 +4,12 @@ package com.abirfaisal.jBrowser;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -71,9 +73,6 @@ public class Main extends Application {
 
 
 
-
-
-
         //TODO make progress bar and text work
         //ProgressText
         Text progressText = Browser.progressText();
@@ -111,50 +110,63 @@ public class Main extends Application {
         long totalMemory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
         long maxMemory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
 
-        String javaHome = System.getProperty("java.home");
-        String javaClassPath = System.getProperty("java.class.path");
-        String javaVendor = System.getProperty("java.vendor");
-        String javaVendorURL = System.getProperty("java.vendor.url");
         String javaVersion = System.getProperty("java.version");
 
 
-
-        System.out.println("OS: " + OS);
-
-        System.out.println("CPUs: " + CPUs);
-        System.out.println("Arch :" + arch);
-
-        System.out.println("freeMemory: " + freeMemory);
-        System.out.println("totalMemory: " + totalMemory);
-        System.out.println("maxMemory: " + maxMemory);
-
-        System.out.println("javaHome: " + javaHome);
-        System.out.println("javaClassPath: " + javaClassPath);
-        System.out.println("javaVendor: " + javaVendor);
-        System.out.println("javaVendorURL: " + javaVendorURL);
-        System.out.println("javaVersion: " + javaVersion);
+        //Print system info to terminal
+        systemInfo();
 
 
-
-
+        //TODO Refactor
+        //Looks retarded
+        //Bug wont resize
+        //Bind values
 
         //System Info Text
         Text systemInfoText = new Text("OS CPUs Memory JVM");
+        systemInfoText.setText(OS + "  " + arch + "\n" + CPUs + " CPUs\nJava: " + javaVersion);
+        AnchorPane.setTopAnchor(systemInfoText, 0.0);
+        AnchorPane.setLeftAnchor(systemInfoText, 0.0);
+        AnchorPane.setRightAnchor(systemInfoText, 0.0);
+
 
         //Tab Count Text
-        Text tabCountText = new Text("tabCount");
+        Text tabCountText = new Text("Tabs: ");
+        AnchorPane.setTopAnchor(tabCountText, 50.0);
+        AnchorPane.setLeftAnchor(tabCountText, 0.0);
+
+        Text numTabsText = new Text("1");
+        AnchorPane.setTopAnchor(numTabsText, 50.0);
+        AnchorPane.setLeftAnchor(numTabsText, 35.0);
+
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("freeMemory", freeMemory),
+                new PieChart.Data("totalMemory", totalMemory),
+                new PieChart.Data("maxMemory", maxMemory)
+        );
+
+
+
+        PieChart memoryChartPieChart = new PieChart(pieChartData);
+        AnchorPane.setTopAnchor(memoryChartPieChart, 100.0);
+        AnchorPane.setLeftAnchor(memoryChartPieChart, 0.0);
+        AnchorPane.setRightAnchor(memoryChartPieChart, 0.0);
+
+
 
         //System Info AnchorPane
-        AnchorPane statsAnchorPane = new AnchorPane();
-
-
-
+        AnchorPane systemInfoAnchorPane = new AnchorPane();
+        AnchorPane.setTopAnchor(systemInfoAnchorPane, 60.0);
+        AnchorPane.setLeftAnchor(systemInfoAnchorPane, 0.0);
+        AnchorPane.setRightAnchor(systemInfoAnchorPane, 0.0);
+        systemInfoAnchorPane.getChildren().addAll(systemInfoText, numTabsText, tabCountText, memoryChartPieChart);
 
 
 
 
         //Top left AnchorPane
-        AnchorPane topAnchorPane = Browser.topAnchorPane(addressBarAnchorPane, progressBarAnchorPane);
+        AnchorPane topAnchorPane = Browser.topAnchorPane(addressBarAnchorPane, progressBarAnchorPane, systemInfoAnchorPane);
 
 
         //TabList
@@ -222,7 +234,7 @@ public class Main extends Application {
                 webView.getEngine().load(search);
 
 
-            }else {
+            } else {
                 //check for TLD and add http scheme if needed
                 for (int i = 0; i < TLD.length; i++) {
 
@@ -232,7 +244,7 @@ public class Main extends Application {
 
                         //add www if needed
                         if(!URL.contains("www.")) {
-                            System.out.println("No URL www.");
+                            System.out.println("No URL www. Adding");
                             URL = "www." + URL;
                         }
 
@@ -248,7 +260,7 @@ public class Main extends Application {
 
                         //loop didnt break so it doesnt have scheme
                         //apply default scheme
-                        System.out.println("No URL Scheme");
+                        System.out.println("No URL Scheme Adding");
                         URL = "http://" + URL;
 
                         webView.getEngine().load(URL);
@@ -387,8 +399,6 @@ public class Main extends Application {
                                     printMemoryInfo();
                                 }
 
-
-
                                 if (newValue == Worker.State.READY) {
                                     System.out.print("READY: ");
                                     System.out.println(observable.getValue());
@@ -408,8 +418,6 @@ public class Main extends Application {
                         });
 
 
-
-
                 //TODO BUG returns null
                 //tabList.set(index, webView.getEngine().getTitle());
 
@@ -417,14 +425,15 @@ public class Main extends Application {
 
 
 
-                rightAnchorPane.getChildren().clear();
-                rightAnchorPane.getChildren().add(webView);
+
 
                 System.out.println("webView.isCache(): " + webView.isCache());
                 System.out.println("webView.cacheProperty().get(): " + webView.cacheProperty().get());
                 System.out.println("webView.cacheHintProperty().get(): " + webView.cacheHintProperty().get());
 
 
+                rightAnchorPane.getChildren().clear();
+                rightAnchorPane.getChildren().add(webView);
 
 
             }
@@ -447,11 +456,6 @@ public class Main extends Application {
 
         });
 
-
-
-
-
-
         /////////////END EVENT HANDLERS/////////
 
 
@@ -462,26 +466,15 @@ public class Main extends Application {
 
 
         //Main Split Pane
-        SplitPane mainSplitPane = Browser.mainSplitPane(leftAnchorPane, rightAnchorPane); // new SplitPane();
-//        mainSplitPane.setDividerPositions(0.25);
-//        zeroAnchor(mainSplitPane);
-//        //Add stuff to the split pane
-//        mainSplitPane.getItems().addAll(leftAnchorPane, rightAnchorPane);
+        SplitPane mainSplitPane = Browser.mainSplitPane(leftAnchorPane, rightAnchorPane);
 
 
         //Main Window Anchor Pane
-        AnchorPane mainWindow = Browser.mainWindowAnchorPane(mainSplitPane);  // new AnchorPane();
-//        mainWindow.setPrefSize(1024, 786);
-//        mainWindow.getChildren().add(mainSplitPane);
+        AnchorPane mainWindow = Browser.mainWindowAnchorPane(mainSplitPane);
 
 
         //Scene
         Scene mainScene = Browser.mainScene(mainWindow);
-
-
-
-
-
 
         //Stage
         //Set Window Title
@@ -503,6 +496,38 @@ public class Main extends Application {
         System.out.println("freeMemory: " + freeMemory);
         System.out.println("totalMemory: " + totalMemory);
         System.out.println("maxMemory: " + maxMemory);
+    }
+
+
+
+    void systemInfo(){
+
+        String OS = System.getProperty("os.name");
+
+        int CPUs = Runtime.getRuntime().availableProcessors();
+        String arch = System.getProperty("os.arch");
+
+        long freeMemory = Runtime.getRuntime().freeMemory() / 1024 / 1024;
+        long totalMemory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+        long maxMemory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
+
+        String javaHome = System.getProperty("java.home");
+        String javaClassPath = System.getProperty("java.class.path");
+        String javaVendor = System.getProperty("java.vendor");
+        String javaVendorURL = System.getProperty("java.vendor.url");
+        String javaVersion = System.getProperty("java.version");
+
+        System.out.println("OS: " + OS);
+        System.out.println("CPUs: " + CPUs);
+        System.out.println("Arch :" + arch);
+        System.out.println("freeMemory: " + freeMemory);
+        System.out.println("totalMemory: " + totalMemory);
+        System.out.println("maxMemory: " + maxMemory);
+        System.out.println("javaHome: " + javaHome);
+        System.out.println("javaClassPath: " + javaClassPath);
+        System.out.println("javaVendor: " + javaVendor);
+        System.out.println("javaVendorURL: " + javaVendorURL);
+        System.out.println("javaVersion: " + javaVersion);
     }
 
 

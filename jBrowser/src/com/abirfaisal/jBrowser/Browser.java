@@ -97,7 +97,7 @@ public class Browser {
 
         AnchorPane.setTopAnchor(progressBar, 0.0);
         AnchorPane.setBottomAnchor(progressBar, 0.0);
-        AnchorPane.setLeftAnchor(progressBar, 40.0);
+        AnchorPane.setLeftAnchor(progressBar, 42.0);
         AnchorPane.setRightAnchor(progressBar, 40.0);
 
         return progressBar;
