@@ -227,7 +227,7 @@ public class Main extends Application {
                 }
             }
         });
-        
+
 
 
         //Handle Back Button event.
