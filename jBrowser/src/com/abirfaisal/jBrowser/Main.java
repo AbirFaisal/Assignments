@@ -2,7 +2,10 @@ package com.abirfaisal.jBrowser;
 
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,8 +23,15 @@ import java.util.ArrayList;
  * Proposed features
  *  - Save/load last browser state
  *
- *  - Change JavaFX webView from built in Webkit and JavaScript
- *  to WebKit and V8 JavaScript engine because slow
+ *  - Multi-Window support
+ *
+ *  - User data & cache Encryption
+ *
+ *  - Multi Threading
+ *
+ *  - Change JavaFX webView from built in Webkit and Nashorn JavaScript
+ *  to WebKit and V8 JavaScript or embed a chrome instance because slow
+ *
 **/
 
 public class Main extends Application {
@@ -47,6 +57,9 @@ public class Main extends Application {
     public void start(Stage stage) {
 
 
+        //TODO refactor into hierarchy format
+
+
         //Back Button
         Button back = Browser.backButton();
         //Forward Button
@@ -55,6 +68,10 @@ public class Main extends Application {
         TextField addressField = Browser.addressField();
         //Address Bar AnchorPane
         AnchorPane addressBarAnchorPane = Browser.addressBarAnchorPane(back, forward, addressField);
+
+
+
+
 
 
         //TODO make progress bar and text work
@@ -74,9 +91,9 @@ public class Main extends Application {
 
 
         //TODO make stats here
-
+        //Not implemented yet
         /**
-         * OS CPUs
+         * OS CPUs Mem Java
          * CPU usage
          * Heap Memory
          * Free Heap Memory
@@ -84,6 +101,50 @@ public class Main extends Application {
          *
          */
 
+        String OS = System.getProperty("os.name");
+
+        int CPUs = Runtime.getRuntime().availableProcessors();
+        String arch = System.getProperty("os.arch");
+
+
+        long freeMemory = Runtime.getRuntime().freeMemory() / 1024 / 1024;
+        long totalMemory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+        long maxMemory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
+
+        String javaHome = System.getProperty("java.home");
+        String javaClassPath = System.getProperty("java.class.path");
+        String javaVendor = System.getProperty("java.vendor");
+        String javaVendorURL = System.getProperty("java.vendor.url");
+        String javaVersion = System.getProperty("java.version");
+
+
+
+        System.out.println("OS: " + OS);
+
+        System.out.println("CPUs: " + CPUs);
+        System.out.println("Arch :" + arch);
+
+        System.out.println("freeMemory: " + freeMemory);
+        System.out.println("totalMemory: " + totalMemory);
+        System.out.println("maxMemory: " + maxMemory);
+
+        System.out.println("javaHome: " + javaHome);
+        System.out.println("javaClassPath: " + javaClassPath);
+        System.out.println("javaVendor: " + javaVendor);
+        System.out.println("javaVendorURL: " + javaVendorURL);
+        System.out.println("javaVersion: " + javaVersion);
+
+
+
+
+
+        //System Info Text
+        Text systemInfoText = new Text("OS CPUs Memory JVM");
+
+        //Tab Count Text
+        Text tabCountText = new Text("tabCount");
+
+        //System Info AnchorPane
         AnchorPane statsAnchorPane = new AnchorPane();
 
 
@@ -259,8 +320,33 @@ public class Main extends Application {
 
 
 
+
+//        webView.getEngine().getLoadWorker().stateProperty().addListener(
+//                new ChangeListener<Worker.State>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Worker.State> observable,
+//                                Worker.State oldValue,
+//                                Worker.State newValue) {
+//
+//
+//                //System.out.println("Load Listner: " + Worker.State.);
+//
+//                if (newValue == Worker.State.SUCCEEDED) {
+//                    stage.setTitle(webView.getEngine().getLocation());
+//                    System.out.println("called");
+//                }
+//
+//            }
+//        });
+
+
+
+
+
+
         //Handle Tab Switch and new Tab
         tabListView.setOnMouseClicked(e -> {
+
 
             int index = tabListView.getFocusModel().getFocusedIndex();
             int tabArraySize = tabArray.size();
@@ -276,6 +362,100 @@ public class Main extends Application {
             //Switch Tab
             else {
                 webView = tabArray.get(index - 1).getWebView();
+
+
+                //Handle Loading Bar
+                //TODO Add Remove listner add removal of webview while resizing
+                webView.getEngine().getLoadWorker().stateProperty().addListener(
+                        new ChangeListener<Worker.State>() {
+                            @Override
+                            public void changed(ObservableValue<? extends Worker.State> observable,
+                                                Worker.State oldValue,
+                                                Worker.State newValue) {
+
+
+
+
+
+                                if (newValue == Worker.State.SCHEDULED) {
+                                    System.out.print("\nSCHEDULED: ");
+                                    System.out.println(observable.getValue());
+
+
+                                    progressText.setText("...");
+                                    progressBar.setProgress(-1);
+
+                                }
+
+
+
+
+
+                                if (newValue == Worker.State.RUNNING) {
+                                    System.out.print("RUNNING: ");
+                                    System.out.println(observable.getValue());
+
+
+                                    progressText.setText(
+                                            String.valueOf(
+                                                    webView.getEngine().getLoadWorker().getProgress()));
+
+
+                                }
+
+                                if (newValue == Worker.State.SUCCEEDED) {
+                                    System.out.print("SUCCEEDED: ");
+                                    System.out.println(observable.getValue());
+
+                                    progressText.setText("100%");
+                                    progressBar.setProgress(1.0);
+
+                                }
+
+
+
+                                if (newValue == Worker.State.READY) {
+                                    System.out.print("READY: ");
+                                    System.out.println(observable.getValue());
+                                }
+
+                                if (newValue == Worker.State.CANCELLED) {
+                                    System.out.print("CANCELLED: ");
+                                    System.out.println(observable.getValue());
+                                }
+
+                                if (newValue == Worker.State.FAILED) {
+                                    System.out.print("FAILED: ");
+                                    System.out.println(observable.getValue());
+                                }
+
+
+
+
+                                //Change Progress Text and Bar while loading
+                                while(newValue == Worker.State.RUNNING){
+
+
+                                    progressText.setText(String.valueOf(
+                                            webView.getEngine().getLoadWorker().getProgress()));
+
+
+
+                                    progressBar.setProgress(
+                                            webView.getEngine().getLoadWorker().getProgress());
+
+
+                                }
+
+
+
+
+
+                            }
+                        });
+
+
+
 
                 //TODO BUG returns null
                 //tabList.set(index, webView.getEngine().getTitle());
@@ -296,9 +476,13 @@ public class Main extends Application {
                 System.out.println("webView.cacheHintProperty().get(): " + webView.cacheHintProperty().get());
 
 
+                printMemoryInfo();
+
                 // javaScriptToggle.setSelected(webView.getEngine().isJavaScriptEnabled());
             }
         });
+
+
 
 
 
@@ -352,8 +536,15 @@ public class Main extends Application {
 
 
 
+    void printMemoryInfo(){
+        long freeMemory = Runtime.getRuntime().freeMemory() / 1024 / 1024;
+        long totalMemory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+        long maxMemory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
 
-
+        System.out.println("freeMemory: " + freeMemory);
+        System.out.println("totalMemory: " + totalMemory);
+        System.out.println("maxMemory: " + maxMemory);
+    }
 
 
 

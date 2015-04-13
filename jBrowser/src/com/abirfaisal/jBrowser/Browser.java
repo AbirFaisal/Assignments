@@ -252,6 +252,7 @@ public class Browser {
     //Add Tab
     public static void addTab(ArrayList<Tab> tabArray, ObservableList<String> tabList,ListView<String> tabListView, WebView webView) {
 
+
         //know last index
         int index = tabArray.size();
 

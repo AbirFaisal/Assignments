@@ -10,8 +10,11 @@ import javafx.scene.web.WebView;
 /**
  * Created by abirfaisal on 4/10/15.
  */
+
+//Implement runnable
 public class Tab {
 
+    //TODO i dont think i need the engine so remove if possible
 
     private WebView webView;
     private WebEngine webEngine;
@@ -31,13 +34,13 @@ public class Tab {
         //user data directory
         //this.webView.getEngine().setUserDataDirectory();
 
-        this.webEngine.setJavaScriptEnabled(true);
+        this.webEngine.setJavaScriptEnabled(false);
 
 
         //still testing speed improvements
         this.webView.setCache(true);
         this.webView.cacheProperty().set(true);
-        this.webView.cacheHintProperty().set(CacheHint.SCALE);
+        this.webView.cacheHintProperty().set(CacheHint.SPEED);
 
 
         this.webEngine.load("https://www.google.com/");
