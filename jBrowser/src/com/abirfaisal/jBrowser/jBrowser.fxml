@@ -28,7 +28,7 @@
                               </AnchorPane>
                               <AnchorPane fx:id="loadingbar" minHeight="0.0" minWidth="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="32.0">
                                  <children>
-                                    <Text fx:id="pageLoadPercent" strokeWidth="0.0" text="100%" textAlignment="CENTER" textOrigin="TOP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Text fx:id="pageLoadPercent" strokeWidth="0.0" text="100%" textAlignment="CENTER" textOrigin="TOP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0" />
                                     <ProgressBar fx:id="pageLoadBar" progress="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0" />
                                     <ToggleButton alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="JS" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>

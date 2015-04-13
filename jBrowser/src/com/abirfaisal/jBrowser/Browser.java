@@ -104,6 +104,20 @@ public class Browser {
     }
 
 
+    //Javascript Enable/Disable toggle
+    public static ToggleButton javaScriptToggle(String buttonText) {
+        ToggleButton javaScriptToggle = new ToggleButton();
+        javaScriptToggle.setText(buttonText);
+
+        AnchorPane.setTopAnchor(javaScriptToggle, 0.0);
+        AnchorPane.setBottomAnchor(javaScriptToggle, 0.0);
+        AnchorPane.setRightAnchor(javaScriptToggle, 0.0);
+
+        return javaScriptToggle;
+    }
+
+
+
     //Progress Bar AnchorPane
     public static AnchorPane progressBarAnchorPane(Node... FXnodes) {
         AnchorPane progressBarAnchorPane = new AnchorPane();
@@ -238,6 +252,7 @@ public class Browser {
     //Add Tab
     public static void addTab(ArrayList<Tab> tabArray, ObservableList<String> tabList,ListView<String> tabListView, WebView webView) {
 
+        //know last index
         int index = tabArray.size();
 
         //Add tab to tabArray
@@ -258,8 +273,11 @@ public class Browser {
 
         webView = tabArray.get(index).getWebView();
 
-        //tabList.set(index+1, webView.getEngine().getTitle());
+        //Somtimes title is null
+        if (webView.getEngine().getTitle() != null)
+            tabList.set(index+1, webView.getEngine().getTitle());
 
+        else tabList.set(index+1, webView.getEngine().getLocation());
     }
 
 

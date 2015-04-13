@@ -1,5 +1,6 @@
 package com.abirfaisal.jBrowser;
 
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.FontSmoothingType;
@@ -32,8 +33,14 @@ public class Tab {
 
         this.webEngine.setJavaScriptEnabled(true);
 
-        this.webEngine.load("https://www.google.com/");
 
+        //still testing speed improvements
+        this.webView.setCache(true);
+        this.webView.cacheProperty().set(true);
+        this.webView.cacheHintProperty().set(CacheHint.SCALE);
+
+
+        this.webEngine.load("https://www.google.com/");
 
     }
 

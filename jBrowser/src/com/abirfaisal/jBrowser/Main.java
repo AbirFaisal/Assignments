@@ -16,6 +16,12 @@ import java.util.ArrayList;
 
 /**
  * No FXML because its easier to manage code than to @FXML everything.
+ *
+ * Proposed features
+ *  - Save/load last browser state
+ *
+ *  - Change JavaFX webView from built in Webkit and JavaScript
+ *  to WebKit and V8 JavaScript engine because slow
 **/
 
 public class Main extends Application {
@@ -23,8 +29,8 @@ public class Main extends Application {
     //Main WebView
     WebView webView = new WebView();
     //Array of Tab objects as a array list
-    //This allows us to save memory since we can dynamically increase
-    //the size of this and also adds feature not
+    //This allows us to save memory since we can increase
+    //the number of elements on demand and also adds features not
     //available to a normal Object[] array
     ArrayList<Tab> tabArray = new ArrayList<Tab>();
 
@@ -51,21 +57,15 @@ public class Main extends Application {
         AnchorPane addressBarAnchorPane = Browser.addressBarAnchorPane(back, forward, addressField);
 
 
+        //TODO make progress bar and text work
         //ProgressText
         Text progressText = Browser.progressText();
         //Progress Bar
         ProgressBar progressBar = Browser.progressBar();
 
 
-
-        //TODO put in browser.java as a method
         //Javascript Enable
-        ToggleButton javaScriptToggle = new ToggleButton();
-        javaScriptToggle.setText("JS");
-        AnchorPane.setTopAnchor(javaScriptToggle, 0.0);
-        AnchorPane.setBottomAnchor(javaScriptToggle, 0.0);
-        AnchorPane.setRightAnchor(javaScriptToggle, 0.0);
-
+        ToggleButton javaScriptToggle = Browser.javaScriptToggle("JS");
 
 
         //Progress Bar AnchorPane
@@ -84,7 +84,16 @@ public class Main extends Application {
          *
          */
 
+        AnchorPane statsAnchorPane = new AnchorPane();
 
+
+
+
+
+
+
+        //Top left AnchorPane
+        AnchorPane topAnchorPane = Browser.topAnchorPane(addressBarAnchorPane, progressBarAnchorPane);
 
 
         //TabList
@@ -93,8 +102,6 @@ public class Main extends Application {
         ListView tabListView = Browser.tabListView(tabList);
 
 
-        //Top left AnchorPane
-        AnchorPane topAnchorPane = Browser.topAnchorPane(addressBarAnchorPane, progressBarAnchorPane);
         //List AnchorPane
         AnchorPane listAnchorPane = Browser.listAnchorPane(tabListView);
 
@@ -239,23 +246,30 @@ public class Main extends Application {
 
 
 
+        //TODO change to setOnMouseClicked
+        //throws exeptions please fix
+
+//        //Handle javascript toggle button
+        javaScriptToggle.setOnMouseClicked(e -> {
+            webView.getEngine().setJavaScriptEnabled(javaScriptToggle.isSelected());
+            webView.getEngine().reload();
+        });
+
+
+
+
+
         //Handle Tab Switch and new Tab
         tabListView.setOnMouseClicked(e -> {
 
             int index = tabListView.getFocusModel().getFocusedIndex();
             int tabArraySize = tabArray.size();
-
-
             System.out.println("FocusedIndex: " + index);
             System.out.println("tabArraySize: " + tabArraySize);
 
 
-            String tabTrigger = "New Tab";
-            String test = tabList.get(index);
-
-
             //New Tab
-            if (test.contains(tabTrigger)) {
+            if (index == 0) {
                 Browser.addTab(tabArray, tabList, tabListView, webView);
             }
 
@@ -263,12 +277,32 @@ public class Main extends Application {
             else {
                 webView = tabArray.get(index - 1).getWebView();
 
-                tabList.set(index, webView.getEngine().getTitle());
+                //TODO BUG returns null
+                //tabList.set(index, webView.getEngine().getTitle());
+
+
+                //Somtimes title is null
+                if (webView.getEngine().getTitle() != null)
+                    tabList.set(index, webView.getEngine().getTitle());
+
+                else tabList.set(index, webView.getEngine().getLocation());
+
 
                 rightAnchorPane.getChildren().clear();
                 rightAnchorPane.getChildren().add(webView);
+
+                System.out.println("webView.isCache(): " + webView.isCache());
+                System.out.println("webView.cacheProperty().get(): " + webView.cacheProperty().get());
+                System.out.println("webView.cacheHintProperty().get(): " + webView.cacheHintProperty().get());
+
+
+                // javaScriptToggle.setSelected(webView.getEngine().isJavaScriptEnabled());
             }
         });
+
+
+
+
 
 
 
