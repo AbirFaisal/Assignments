@@ -15,25 +15,29 @@
         <items>
           <AnchorPane>
                <children>
-                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.2" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="150.0">
+                      <AnchorPane minHeight="75.0" minWidth="0.0" prefHeight="100.0" prefWidth="150.0">
                            <children>
-                              <AnchorPane fx:id="addressbar" minHeight="0.0" minWidth="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                              <AnchorPane fx:id="addressbar" minHeight="0.0" minWidth="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
                                  <children>
-                                    <Button fx:id="back" mnemonicParsing="false" onAction="#handleButtonAction" text="&lt;" textAlignment="CENTER" AnchorPane.leftAnchor="3.0" />
+                                    <Button fx:id="back" mnemonicParsing="false" onAction="#handleButtonAction" text="&lt;" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" />
                                     <Button fx:id="forward" layoutX="27.0" mnemonicParsing="false" text="&gt;" textAlignment="CENTER" AnchorPane.leftAnchor="30.0" />
-                                    <TextField fx:id="addressBar" layoutX="57.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="URL" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="2.0" />
+                                    <TextField fx:id="addressBar" layoutX="57.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="URL" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="0.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="loadingbar" minHeight="0.0" minWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                              <AnchorPane fx:id="loadingbar" minHeight="0.0" minWidth="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="32.0">
                                  <children>
-                                    <Text fx:id="pageLoadPercent" strokeWidth="0.0" text="50%" textAlignment="CENTER" textOrigin="TOP" />
-                                    <ProgressBar fx:id="pageLoadBar" progress="1.0" />
-                                    <ToggleButton alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="JS" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" AnchorPane.rightAnchor="0.0" />
+                                    <Text fx:id="pageLoadPercent" strokeWidth="0.0" text="100%" textAlignment="CENTER" textOrigin="TOP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ProgressBar fx:id="pageLoadBar" progress="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0" />
+                                    <ToggleButton alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="JS" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="Memory" prefHeight="200.0" prefWidth="200.0" />
+                              <AnchorPane fx:id="CPUMEMORY" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                                 <children>
+                                    <Text fx:id="OS" strokeType="OUTSIDE" strokeWidth="0.0" text="OS CPUs" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Text fx:id="Tabs" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabs:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                                 </children></AnchorPane>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -48,7 +52,6 @@
           <AnchorPane>
                <children>
                   <WebView fx:id="webView" layoutX="230.0" layoutY="199.0" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <ToggleButton contentDisplay="CENTER" layoutX="210.0" layoutY="356.0" mnemonicParsing="false" text="JavaScript" textOverrun="CLIP" />
                </children>
             </AnchorPane>
         </items>

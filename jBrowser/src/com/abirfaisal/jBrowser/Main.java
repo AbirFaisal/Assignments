@@ -41,10 +41,6 @@ public class Main extends Application {
     public void start(Stage stage) {
 
 
-        //Set Window Title
-        stage.setTitle("jBrowser");
-
-
         //Back Button
         Button back = Browser.backButton();
         //Forward Button
@@ -61,16 +57,32 @@ public class Main extends Application {
         ProgressBar progressBar = Browser.progressBar();
 
 
+
+        //TODO put in browser.java as a method
         //Javascript Enable
-        Toggle javaScriptToggle = new ToggleButton();
+        ToggleButton javaScriptToggle = new ToggleButton();
+        javaScriptToggle.setText("JS");
+        AnchorPane.setTopAnchor(javaScriptToggle, 0.0);
+        AnchorPane.setBottomAnchor(javaScriptToggle, 0.0);
+        AnchorPane.setRightAnchor(javaScriptToggle, 0.0);
+
 
 
         //Progress Bar AnchorPane
-        AnchorPane progressBarAnchorPane = Browser.progressBarAnchorPane(progressText, progressBar);
+        AnchorPane progressBarAnchorPane = Browser.progressBarAnchorPane(progressText, progressBar, javaScriptToggle);
 
 
 
+        //TODO make stats here
 
+        /**
+         * OS CPUs
+         * CPU usage
+         * Heap Memory
+         * Free Heap Memory
+         * Tab count
+         *
+         */
 
 
 
@@ -174,15 +186,16 @@ public class Main extends Application {
                         webView.getEngine().load(URL);
                         break;
                     }
-                    break;
                 }
 
-                System.out.println("Not URL2 Searching: ");
-                System.out.println(URL);
 
-                //If all fails just search the string
-                search = search + URL;
-                webView.getEngine().load(search);
+
+//                System.out.println("Not URL2 Searching: ");
+//                System.out.println(URL);
+//
+//                //If all fails just search the string
+//                search = search + URL;
+//                webView.getEngine().load(search);
             }
         });
 
@@ -262,9 +275,6 @@ public class Main extends Application {
 
 
 
-
-
-
         /////////////END EVENT HANDLERS/////////
 
 
@@ -292,10 +302,13 @@ public class Main extends Application {
         Scene mainScene = Browser.mainScene(mainWindow);
 
 
-        //mainScene.setOnS
+
+
 
 
         //Stage
+        //Set Window Title
+        stage.setTitle("jBrowser");
         stage.setScene(mainScene);
 
         //Display the window

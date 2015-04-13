@@ -19,11 +19,22 @@ public class Tab {
 
     public Tab() {
         this.webView = new WebView();
+
+
+
         this.webView.setFontSmoothingType(FontSmoothingType.LCD);
         zeroAnchor(this.webView);
+
         this.webEngine = this.webView.getEngine();
+
+        //user data directory
+        //this.webView.getEngine().setUserDataDirectory();
+
         this.webEngine.setJavaScriptEnabled(true);
+
         this.webEngine.load("https://www.google.com/");
+
+
     }
 
     public Tab(WebEngine webEngine, WebView webView) {

@@ -54,6 +54,7 @@ public class Browser {
         //AddressBar
         TextField addressBar = new TextField();
         addressBar.setPromptText("URL");
+
         AnchorPane.setLeftAnchor(addressBar,60.0);
         AnchorPane.setRightAnchor(addressBar, 0.0);
 
@@ -66,9 +67,11 @@ public class Browser {
         //Address Bar AnchorPane
         AnchorPane addressBarAnchorPane = new AnchorPane();
         addressBarAnchorPane.setMinSize(0.0, 0.0);
-        AnchorPane.setTopAnchor(addressBarAnchorPane,2.0);
-        AnchorPane.setLeftAnchor(addressBarAnchorPane,2.0);
-        AnchorPane.setRightAnchor(addressBarAnchorPane,2.0);
+
+        AnchorPane.setTopAnchor(addressBarAnchorPane,3.0);
+        AnchorPane.setLeftAnchor(addressBarAnchorPane,3.0);
+        AnchorPane.setRightAnchor(addressBarAnchorPane,3.0);
+
         addressBarAnchorPane.getChildren().addAll(FXnodes);
 
         return addressBarAnchorPane;
@@ -79,6 +82,9 @@ public class Browser {
         Text progressText = new Text("100%");
         progressText.setTextOrigin(VPos.TOP);
         progressText.setTextAlignment(TextAlignment.CENTER);
+
+        AnchorPane.setTopAnchor(progressText, 4.0);
+        AnchorPane.setBottomAnchor(progressText, 0.0);
         AnchorPane.setLeftAnchor(progressText, 0.0);
 
         return progressText;
@@ -88,21 +94,23 @@ public class Browser {
     public static ProgressBar progressBar() {
         ProgressBar progressBar = new ProgressBar();
         progressBar.setProgress(100.0);
-        AnchorPane.setLeftAnchor(progressBar, 36.0);
-        AnchorPane.setRightAnchor(progressBar, 2.0);
+
+        AnchorPane.setTopAnchor(progressBar, 0.0);
+        AnchorPane.setBottomAnchor(progressBar, 0.0);
+        AnchorPane.setLeftAnchor(progressBar, 40.0);
+        AnchorPane.setRightAnchor(progressBar, 40.0);
 
         return progressBar;
     }
 
 
     //Progress Bar AnchorPane
-
     public static AnchorPane progressBarAnchorPane(Node... FXnodes) {
         AnchorPane progressBarAnchorPane = new AnchorPane();
         progressBarAnchorPane.setMinSize(0.0, 0.0);
-        AnchorPane.setTopAnchor(progressBarAnchorPane, 30.0);
-        AnchorPane.setLeftAnchor(progressBarAnchorPane, 0.0);
-        AnchorPane.setRightAnchor(progressBarAnchorPane, 0.0);
+        AnchorPane.setTopAnchor(progressBarAnchorPane, 32.0);
+        AnchorPane.setLeftAnchor(progressBarAnchorPane, 3.0);
+        AnchorPane.setRightAnchor(progressBarAnchorPane, 3.0);
         progressBarAnchorPane.getChildren().addAll(FXnodes);
 
         return progressBarAnchorPane;
