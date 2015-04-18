@@ -365,7 +365,6 @@ public class Browser {
 
 
         //switch to and
-
         tabListView.getFocusModel().focus(index+1);
 
         tabListView.getSelectionModel().select(index+1);

@@ -6,7 +6,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -240,7 +239,6 @@ public class Main extends Application {
 
             System.out.println("Back Button Clicked");
         });
-
 
 
 
@@ -486,10 +484,10 @@ public class Main extends Application {
 
 
 
-    void zeroAnchor(Node child) {
-        AnchorPane.setTopAnchor(child, 0.0);
-        AnchorPane.setBottomAnchor(child, 0.0);
-        AnchorPane.setLeftAnchor(child, 0.0);
-        AnchorPane.setRightAnchor(child, 0.0);
-    }
+//    void zeroAnchor(Node child) {
+//        AnchorPane.setTopAnchor(child, 0.0);
+//        AnchorPane.setBottomAnchor(child, 0.0);
+//        AnchorPane.setLeftAnchor(child, 0.0);
+//        AnchorPane.setRightAnchor(child, 0.0);
+//    }
 }
