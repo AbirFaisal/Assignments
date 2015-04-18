@@ -69,6 +69,9 @@
 #include <string.h>
 
 
+typedef enum { false, true } bool;
+
+
 	// Create a new structure that holds the following:
 	// ID number: unsigned integer
 	// Name: char[100]
@@ -104,12 +107,12 @@ void clearScreen(int lines){
 
 int main(int argc, const char * argv[]) {
 	
-	int input;
-	
+	int input = 0;
 	
 		//Create an array of 6 of your new structure.
 		// Fill in your own values, this is test data.
 	Record records[6];
+	
 	
 	
 	
@@ -118,32 +121,32 @@ int main(int argc, const char * argv[]) {
 		// 	Search by Year Joined.
 		// 	Exit
 	
-	clearScreen(20);
+	do {
 	
-	printf(" 1. Search by ID \n 2. Search by Year Joined \n 3. Exit \n");
+		clearScreen(20);
 	
-	scanf("%i", &input);
-	
-	printf("\n input: %i", input);
-	
-	
-	clearScreen(5);
+		printf(" 1. Search by ID \n 2. Search by Year Joined \n 3. Exit \n Select option: ");
+		scanf("%i", &input);
 
+		printf("\n input: %i", input);
+	
+		clearScreen(5);
+		
+		if (input == 3) {
+			return 0;
+		}
+		
+	} while (1);
 	
 
 	
     return 0;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+
+
+
+
+
 
 
 
