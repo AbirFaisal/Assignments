@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.381966" layoutX="200.0" layoutY="97.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ListView layoutX="-5.0" layoutY="99.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                  <TextField layoutX="121.0" layoutY="14.0" prefHeight="26.0" prefWidth="168.0" promptText="Search" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="12.0" />
+                  <ChoiceBox layoutX="33.0" layoutY="562.0" maxWidth="103.0" prefHeight="26.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" />
+                  <SplitMenuButton layoutX="110.0" layoutY="562.0" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="20.0">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </SplitMenuButton>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextArea layoutX="26.0" layoutY="391.0" prefHeight="200.0" prefWidth="360.0" promptText="Notes" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="310.0" />
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="118.0" layoutY="19.0" prefWidth="489.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@blank-headshot-icon.jpg" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John M. Doe" textAlignment="CENTER" wrappingWidth="323.606">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </FlowPane>
+                  <Text layoutX="21.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group: asdfasd" wrappingWidth="131.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="260.0" />
+                  <TextFlow layoutX="135.0" layoutY="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="170.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email: Oongaboonga@mail.valenciacollege.edu" wrappingWidth="300.0" />
+                     </children>
+                  </TextFlow>
+                  <FlowPane layoutX="338.0" layoutY="226.0" orientation="VERTICAL" prefHeight="61.0" prefWidth="131.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="190.0" />
+                  <TextFlow layoutX="163.0" layoutY="278.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City State Zip" wrappingWidth="184.642333984375" />
+                     </children>
+                  </TextFlow>
+                  <Text layoutX="26.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth: 1/1/12312" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="280.0" />
+                  <Text layoutX="348.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone: 407-555-5555" wrappingWidth="300.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0" />
+                  <Text layoutX="-13.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" wrappingWidth="131.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="190.0" />
+                  <Text layoutX="25.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Line 1" wrappingWidth="131.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="210.0" />
+                  <Text layoutX="25.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Line 2" wrappingWidth="120.70486450195312" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="225.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
