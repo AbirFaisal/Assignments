@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.381966" layoutX="200.0" layoutY="97.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ListView layoutX="-5.0" layoutY="99.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                  <TextField layoutX="121.0" layoutY="14.0" prefHeight="26.0" prefWidth="168.0" promptText="Search" />
+                  <ChoiceBox layoutX="11.0" layoutY="14.0" maxWidth="103.0" prefHeight="26.0" prefWidth="103.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-image:: \@bg.png;">
+               <children>
+                  <Text layoutX="64.0" layoutY="399.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" wrappingWidth="131.0" />
+                  <TextArea layoutX="62.0" layoutY="402.0" prefHeight="135.0" prefWidth="360.0" />
+                  <Button layoutX="428.0" layoutY="558.0" mnemonicParsing="false" text="Save" />
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="118.0" layoutY="19.0" prefWidth="489.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@blank-headshot-icon.jpg" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John F. Doe" textAlignment="CENTER" wrappingWidth="323.606">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </FlowPane>
+                  <Text layoutX="117.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group" wrappingWidth="131.0" />
+                  <Text layoutX="103.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" wrappingWidth="131.0" />
+                  <Text layoutX="207.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State" wrappingWidth="131.0" />
+                  <Text layoutX="356.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zip" wrappingWidth="131.0" />
+                  <TextFlow layoutX="135.0" layoutY="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="200.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email: sdaf@mail.valenciacollege.edu" wrappingWidth="300.0" />
+                     </children>
+                  </TextFlow>
+                  <TextFlow layoutX="129.0" layoutY="141.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="180.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone: 407-555-5555" wrappingWidth="300.0" />
+                     </children>
+                  </TextFlow>
+                  <FlowPane layoutX="23.0" layoutY="226.0" orientation="VERTICAL" prefHeight="61.0" prefWidth="449.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" wrappingWidth="131.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Line 1" wrappingWidth="131.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Line 2" wrappingWidth="120.70486450195312" />
+                     </children>
+                  </FlowPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
