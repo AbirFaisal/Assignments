@@ -39,9 +39,6 @@
                      </children>
                   </FlowPane>
                   <Text layoutX="117.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group" wrappingWidth="131.0" />
-                  <Text layoutX="103.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" wrappingWidth="131.0" />
-                  <Text layoutX="207.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State" wrappingWidth="131.0" />
-                  <Text layoutX="356.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zip" wrappingWidth="131.0" />
                   <TextFlow layoutX="135.0" layoutY="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="200.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email: sdaf@mail.valenciacollege.edu" wrappingWidth="300.0" />
@@ -57,6 +54,13 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" wrappingWidth="131.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Line 1" wrappingWidth="131.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Line 2" wrappingWidth="120.70486450195312" />
+                     </children>
+                  </FlowPane>
+                  <FlowPane layoutX="19.0" layoutY="279.0" prefWidth="449.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City" wrappingWidth="52.642333984375" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="State" wrappingWidth="47.494781494140625" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zip" wrappingWidth="30.107574462890625" />
                      </children>
                   </FlowPane>
                </children>
