@@ -8,7 +8,6 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-<<<<<<< HEAD
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -17,7 +16,6 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-=======
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,7 +32,6 @@ import java.util.List;
 public class Main extends Application {
 
     List<Contact> contactList;
->>>>>>> AbirFaisal
 
     public static void main(String[] args) {
 
@@ -94,9 +91,9 @@ public class Main extends Application {
         AnchorPane anchorPane = new AnchorPane(splitPane);
         anchorPane.setPrefSize(800, 600);
 
-<<<<<<< HEAD
+
         Scene primaryScene = new Scene(anchorPane);
-=======
+
 
         //TODO somthing here? This is a Sample
         //Information
@@ -233,7 +230,6 @@ public class Main extends Application {
 
 
         Scene primaryScene = new Scene(mainWindowAnchorPane);
->>>>>>> AbirFaisal
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Bullshit Manager");
         primaryStage.show();
