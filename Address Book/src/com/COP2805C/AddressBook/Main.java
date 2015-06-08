@@ -46,10 +46,6 @@ public class Main extends Application {
         Text addressText = new Text("nigger");
         Text groupText = new Text("nigger");
 
-
-
-
-
         TextArea notesTextArea = new TextArea();
         //notesTextArea.setPrefSize(400, 400);
         notesTextArea.setPromptText("Notes");
@@ -74,8 +70,9 @@ public class Main extends Application {
 
 
 
-
         AnchorPane contactInfoAnchorPane = new AnchorPane(contactInfoFlowPane);
+
+
 
         //Scroll pane incase of large amount of data
         ScrollPane contactInfoScrollPane = new ScrollPane(contactInfoAnchorPane);
@@ -83,7 +80,6 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(contactInfoScrollPane, 0.0);
         AnchorPane.setLeftAnchor(contactInfoScrollPane, 0.0);
         AnchorPane.setRightAnchor(contactInfoScrollPane, 0.0);
-
 
 
 
@@ -117,64 +113,38 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
         AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);
         AnchorPane.setRightAnchor(rightAnchorPane, 0.0);
+        //TODO dynamicly generate the above
 
 
 
-
-
-
-
-
-        //TODO add menu items
-        SplitMenuButton menuButton = new SplitMenuButton();
-        //TODO MenuItems here
-
+        SplitMenuButton menuButton = MainWindow.menuButton();
 
 
         //Group selection
-        //TODO some shit here
-        ChoiceBox<String> groupChoiceBox = new ChoiceBox<>();
-        //ObservableList<String> groupObservableList =
-        //groupChoiceBox.setItems();
+        ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+        ChoiceBox<String> groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
+        groupObservableList.add("Main Group");
 
 
         //Search Box
-        //TODO set anchors
-        TextField searchTextField = new TextField();
-
+        TextField searchTextField = MainWindow.searchTextField();
 
         //Contact List
-        //TODO set anchors
-        ListView<String> contactListView = new ListView<String>();
         ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
-
+        ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
 
         //Left side Anchor Pane
-        AnchorPane leftAnchorPane = new AnchorPane();
-        AnchorPane.setTopAnchor(leftAnchorPane, 0.0);
-        AnchorPane.setBottomAnchor(leftAnchorPane, 0.0);
-        AnchorPane.setLeftAnchor(leftAnchorPane, 0.0);
-        AnchorPane.setRightAnchor(leftAnchorPane, 0.0);
-
-
-
+        AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(searchTextField, contactListView, groupChoiceBox, menuButton);
 
         //Split Pane
-        SplitPane splitPane = new SplitPane(leftAnchorPane,rightAnchorPane);
-        AnchorPane.setTopAnchor(splitPane, 0.0);
-        AnchorPane.setBottomAnchor(splitPane, 0.0);
-        AnchorPane.setLeftAnchor(splitPane, 0.0);
-        AnchorPane.setRightAnchor(splitPane, 0.0);
-        splitPane.setDividerPositions(0.381966);
+        SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
 
         //Main Window Anchor Pane
         AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
         mainWindowAnchorPane.setPrefSize(800, 600);
-
-
         Scene primaryScene = new Scene(mainWindowAnchorPane);
         primaryStage.setScene(primaryScene);
-        primaryStage.setTitle("Bullshit Manager");
+        primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
     }
 }
