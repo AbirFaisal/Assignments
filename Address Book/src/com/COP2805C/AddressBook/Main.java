@@ -8,12 +8,26 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+<<<<<<< HEAD
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+=======
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
+
+import java.util.List;
+>>>>>>> AbirFaisal
 
 public class Main extends Application {
 import javafx.scene.image.Image;
@@ -28,9 +42,13 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-
 public class Main extends Application {
 
+<<<<<<< HEAD
+public class Main extends Application {
+
+=======
+>>>>>>> AbirFaisal
     List<Contact> contactList;
 
     public static void main(String[] args) {
@@ -92,8 +110,11 @@ public class Main extends Application {
         anchorPane.setPrefSize(800, 600);
 
 
+<<<<<<< HEAD
         Scene primaryScene = new Scene(anchorPane);
 
+=======
+>>>>>>> AbirFaisal
 
         //TODO somthing here? This is a Sample
         //Information
