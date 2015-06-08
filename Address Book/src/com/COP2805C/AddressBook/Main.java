@@ -38,7 +38,6 @@ public class Main extends Application {
 
 
 
-
         //TODO somthing here? This is a Sample
         //Information
         //TODO TEST REMOVE
@@ -48,15 +47,24 @@ public class Main extends Application {
         Text groupText = new Text("nigger");
 
 
+
+
+
         TextArea notesTextArea = new TextArea();
-        notesTextArea.setPrefSize(400, 400);
+        //notesTextArea.setPrefSize(400, 400);
         notesTextArea.setPromptText("Notes");
 
 
 
         //Flowpane to format the text nicey
         FlowPane contactInfoFlowPane = new FlowPane();
-        contactInfoFlowPane.setVgap(15.0);
+        AnchorPane.setTopAnchor(contactInfoFlowPane, 0.0);
+        AnchorPane.setBottomAnchor(contactInfoFlowPane, 0.0);
+        AnchorPane.setLeftAnchor(contactInfoFlowPane, 0.0);
+        AnchorPane.setRightAnchor(contactInfoFlowPane, 0.0);
+
+        contactInfoFlowPane.setHgap(20.0);
+        contactInfoFlowPane.setAlignment(Pos.TOP_LEFT);
         contactInfoFlowPane.setOrientation(Orientation.VERTICAL);
 
 
@@ -66,8 +74,11 @@ public class Main extends Application {
 
 
 
+
+        AnchorPane contactInfoAnchorPane = new AnchorPane(contactInfoFlowPane);
+
         //Scroll pane incase of large amount of data
-        ScrollPane contactInfoScrollPane = new ScrollPane(contactInfoFlowPane);
+        ScrollPane contactInfoScrollPane = new ScrollPane(contactInfoAnchorPane);
         AnchorPane.setTopAnchor(contactInfoScrollPane, 120.0);
         AnchorPane.setBottomAnchor(contactInfoScrollPane, 0.0);
         AnchorPane.setLeftAnchor(contactInfoScrollPane, 0.0);
