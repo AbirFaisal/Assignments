@@ -10,9 +10,6 @@ import java.util.UUID;
  */
 public class Contact {
 
-    UUID contactUUID; //Contact UUID
-    UUID groupUUID; //Group UUID
-
     Image contactPhoto; //Contact Photo 256x256 16bit color
 
     String first, middle, last; //First Middle and Last Name
