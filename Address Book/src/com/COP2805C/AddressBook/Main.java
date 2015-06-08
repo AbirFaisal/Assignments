@@ -1,6 +1,8 @@
 package com.COP2805C.AddressBook;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -9,72 +11,63 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 
 public class Main extends Application {
 
+    List<Contact> contactList;
+
     public static void main(String[] args) {
 
+
         launch(args);
-	// write your code here
+
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
 
-       //------------------------------------------------------ Right Panel Content
-
-        TextArea textAreaContent = new TextArea();
-        textAreaContent.setPrefSize(360, 200);
-
-        ImageView imageContentHolder = new ImageView(); //IDK Fill in later
-        imageContentHolder.setFitHeight(100);
-        imageContentHolder.setFitWidth(100);
-
-        FlowPane flowPanelArea = new FlowPane(); //ImageConenetHolder is in this area and there are fonts in this area to, but they are abstract classes
-        flowPanelArea.setPrefSize(360, 200);
-
-        FlowPane flowPanelArea2 = new FlowPane(); //Same as flowPanelArea
 
 
-        //----------------------------------------------------- Right Panel Content
+
+        ObservableList<String> contactsObservableList = new FXCollections();
+        ListView<String> contactListView = new ListView<>(contactsObservableList);
 
 
 
 
-       //------------------------------------------------------- Left Panel Content
-        MenuItem menuItemContent2 = new MenuItem();
-        MenuItem menuItemContent = new MenuItem();
-
-        SplitMenuButton splitMenuButton = new SplitMenuButton(menuItemContent, menuItemContent2);
-
-        ChoiceBox choiceBoxSelector = new ChoiceBox();
-        choiceBoxSelector.setPrefSize(103, 26);
-
-        TextField viewTextField = new TextField();
-        viewTextField.setPrefSize(168, 26);
-
-        ListView contactListview = new ListView();
-        contactListview.setPrefSize(200, 200);
-        //------------------------------------------------------- Left Panel Content
-
-        AnchorPane rightAnchorPane = new AnchorPane();
-
+        //Left side Anchor Pane
         AnchorPane leftAnchorPane = new AnchorPane();
-        leftAnchorPane.setPrefSize(100, 160);
+        AnchorPane.setTopAnchor(leftAnchorPane, 0.0);
+        AnchorPane.setBottomAnchor(leftAnchorPane, 0.0);
+        AnchorPane.setLeftAnchor(leftAnchorPane, 0.0);
+        AnchorPane.setRightAnchor(leftAnchorPane, 0.0);
 
-        SplitPane splitPane = new SplitPane(leftAnchorPane, rightAnchorPane);
-        splitPane.setPrefSize(400, 400);
 
-        AnchorPane anchorPane = new AnchorPane(splitPane);
-        anchorPane.setPrefSize(800, 600);
+        //Right side Anchor Pane
+        AnchorPane rightAnchorPane = new AnchorPane();
+        AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
+        AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
+        AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);
+        AnchorPane.setRightAnchor(rightAnchorPane, 0.0);
 
-<<<<<<< HEAD
 
-        AnchorPane anchorPane = new AnchorPane();
-=======
->>>>>>> master
-        Scene primaryScene = new Scene(anchorPane);
+        //Split Pane
+        SplitPane splitPane = new SplitPane(leftAnchorPane,rightAnchorPane);
+        AnchorPane.setTopAnchor(splitPane, 0.0);
+        AnchorPane.setBottomAnchor(splitPane, 0.0);
+        AnchorPane.setLeftAnchor(splitPane, 0.0);
+        AnchorPane.setRightAnchor(splitPane, 0.0);
+        splitPane.setDividerPositions(0.381966);
+
+        //Main Window Anchor Pane
+        AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
+        mainWindowAnchorPane.setPrefSize(800, 600);
+
+
+        Scene primaryScene = new Scene(mainWindowAnchorPane);
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Bullshit Manager");
         primaryStage.show();
