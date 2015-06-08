@@ -46,10 +46,6 @@ public class Main extends Application {
         Text addressText = new Text("nigger");
         Text groupText = new Text("nigger");
 
-
-
-
-
         TextArea notesTextArea = new TextArea();
         //notesTextArea.setPrefSize(400, 400);
         notesTextArea.setPromptText("Notes");
@@ -117,84 +113,38 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
         AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);
         AnchorPane.setRightAnchor(rightAnchorPane, 0.0);
+        //TODO dynamicly generate the above
 
 
 
-
-
-
-
-
-        //TODO add menu items
-        SplitMenuButton menuButton = new SplitMenuButton();
-        menuButton.setText("Edit");
-        AnchorPane.setBottomAnchor(menuButton, 8.0);
-        AnchorPane.setRightAnchor(menuButton, 8.0);
-
-        //TODO MenuItems here
-
+        SplitMenuButton menuButton = MainWindow.menuButton();
 
 
         //Group selection
-        //TODO some shit here
         ObservableList<String> groupObservableList = FXCollections.observableArrayList();
-        ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(groupObservableList);
-        AnchorPane.setBottomAnchor(groupChoiceBox, 8.0);
-        AnchorPane.setLeftAnchor(groupChoiceBox, 8.0);
-
+        ChoiceBox<String> groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
         groupObservableList.add("Main Group");
 
 
         //Search Box
-        TextField searchTextField = new TextField();
-        searchTextField.setPromptText("Search");
-        AnchorPane.setTopAnchor(searchTextField, 8.0);
-        AnchorPane.setLeftAnchor(searchTextField, 8.0);
-        AnchorPane.setRightAnchor(searchTextField, 8.0);
-
-
+        TextField searchTextField = MainWindow.searchTextField();
 
         //Contact List
         ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
-        ListView<String> contactListView = new ListView<String>(contactObservableList);
-        AnchorPane.setTopAnchor(contactListView, 42.0);
-        AnchorPane.setBottomAnchor(contactListView, 42.0);
-        AnchorPane.setLeftAnchor(contactListView, 0.0);
-        AnchorPane.setRightAnchor(contactListView, 0.0);
-
-
-        //TEST REMOVE
-        for (int i = 0; i < 10; i++) {
-            contactObservableList.add("nigger");
-        }
-
-
+        ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
 
         //Left side Anchor Pane
-        AnchorPane leftAnchorPane = new AnchorPane(searchTextField, contactListView, groupChoiceBox, menuButton);
-        AnchorPane.setTopAnchor(leftAnchorPane, 0.0);
-        AnchorPane.setBottomAnchor(leftAnchorPane, 0.0);
-        AnchorPane.setLeftAnchor(leftAnchorPane, 0.0);
-        AnchorPane.setRightAnchor(leftAnchorPane, 0.0);
-
-
+        AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(searchTextField, contactListView, groupChoiceBox, menuButton);
 
         //Split Pane
-        SplitPane splitPane = new SplitPane(leftAnchorPane,rightAnchorPane);
-        AnchorPane.setTopAnchor(splitPane, 0.0);
-        AnchorPane.setBottomAnchor(splitPane, 0.0);
-        AnchorPane.setLeftAnchor(splitPane, 0.0);
-        AnchorPane.setRightAnchor(splitPane, 0.0);
-        splitPane.setDividerPositions(0.381966);
+        SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
 
         //Main Window Anchor Pane
         AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
         mainWindowAnchorPane.setPrefSize(800, 600);
-
-
         Scene primaryScene = new Scene(mainWindowAnchorPane);
         primaryStage.setScene(primaryScene);
-        primaryStage.setTitle("Bullshit Manager");
+        primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
     }
 }
