@@ -41,11 +41,17 @@ public class Main extends Application {
         //TODO somthing here? This is a Sample
         //Information
         //TODO TEST REMOVE
+
+
         Text phoneNumberText = new Text("nigger");
         Text emailText = new Text("nigger");
         Text addressText = new Text("nigger");
         Text groupText = new Text("nigger");
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/ChrisBranch
         TextArea notesTextArea = new TextArea();
         //notesTextArea.setPrefSize(400, 400);
         notesTextArea.setPromptText("Notes");
@@ -137,7 +143,17 @@ public class Main extends Application {
         AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(searchTextField, contactListView, groupChoiceBox, menuButton);
 
         //Split Pane
+<<<<<<< HEAD
         SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
+=======
+        SplitPane splitPane = new SplitPane();
+        splitPane.getItems().addAll(leftAnchorPane,rightAnchorPane);
+        AnchorPane.setTopAnchor(splitPane, 0.0);
+        AnchorPane.setBottomAnchor(splitPane, 0.0);
+        AnchorPane.setLeftAnchor(splitPane, 0.0);
+        AnchorPane.setRightAnchor(splitPane, 0.0);
+        splitPane.setDividerPositions(0.381966);
+>>>>>>> origin/ChrisBranch
 
         //Main Window Anchor Pane
         AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
@@ -146,5 +162,7 @@ public class Main extends Application {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
+
+        Login.loginScreen();//Note I intend for this to pop-up first before the user can do anything thus requiring them to log-in.
     }
 }
