@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Contacts.Contact;
+import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -27,9 +28,16 @@ public class Main extends Application {
     List<Contact> contactList;
 
     public static void main(String[] args) {
-            
-        launch(args);
+        System.out.println("Address Book Manager");
 
+
+        //Prompt for user and password
+        LoginWindow.loginPrompt();
+
+
+
+        //launch(args);
+        System.out.println("Quitting");
     }
 
     @Override
@@ -76,9 +84,6 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(contactInfoScrollPane, 0.0);
         AnchorPane.setLeftAnchor(contactInfoScrollPane, 0.0);
         AnchorPane.setRightAnchor(contactInfoScrollPane, 0.0);
-
-
-        
 
 
 
