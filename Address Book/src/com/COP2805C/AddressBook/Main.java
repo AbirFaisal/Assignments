@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.rmi.server.UID;
 import java.util.List;
 
 
@@ -33,7 +34,6 @@ public class Main extends Application {
 
         //Prompt for user and password
         LoginWindow.loginPrompt();
-
 
 
         launch(args);

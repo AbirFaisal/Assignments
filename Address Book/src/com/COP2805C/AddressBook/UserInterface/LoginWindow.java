@@ -94,6 +94,8 @@ public class LoginWindow {
         jPanel.add(usernameJPanel);
         jPanel.add(passwordJpanel);
 
+
+
         //JOptionPane
         String[] buttons = {"Login", "Create Account"};
         int test = JOptionPane.showOptionDialog(
