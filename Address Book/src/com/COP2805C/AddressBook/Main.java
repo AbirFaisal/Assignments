@@ -36,7 +36,7 @@ public class Main extends Application {
 
 
 
-        //launch(args);
+        launch(args);
         System.out.println("Quitting");
     }
 
