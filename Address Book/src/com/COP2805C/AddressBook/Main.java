@@ -106,12 +106,6 @@ public class Main extends Application {
 
 
 
-
-
-
-
-
-
         //Right side Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane(bannerFlowPane, contactInfoScrollPane);
         AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
@@ -120,6 +114,8 @@ public class Main extends Application {
         AnchorPane.setRightAnchor(rightAnchorPane, 0.0);
         //TODO dynamicly generate the above
 
+        //Something like this then re add the nodes
+        //rightAnchorPane.getChildren().clear();
 
 
         SplitMenuButton editMenuButton = MainWindow.editMenuButton();
@@ -133,7 +129,6 @@ public class Main extends Application {
         Button clearSearchButton = new Button("X");
         AnchorPane.setTopAnchor(clearSearchButton, 8.0);
         AnchorPane.setRightAnchor(clearSearchButton, 8.0);
-
 
 
 
@@ -162,12 +157,8 @@ public class Main extends Application {
 
 
         //Split Pane
-
         SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
 
-            //TODO WTF?
-        //SplitPane splitPane = new SplitPane();
-        splitPane.getItems().addAll(leftAnchorPane,rightAnchorPane);
         AnchorPane.setTopAnchor(splitPane, 0.0);
         AnchorPane.setBottomAnchor(splitPane, 0.0);
         AnchorPane.setLeftAnchor(splitPane, 0.0);

@@ -12,6 +12,7 @@ public class SaveLoadData {
 
     public static void saveData(List<Object> object){
         try {
+            //TODO dont specify absoulute file paths
             FileOutputStream fout = new FileOutputStream("C:\\objects.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(object);
@@ -28,6 +29,7 @@ public class SaveLoadData {
         List<Object> objects = new ArrayList<>();
 
         try{
+            //TODO dont specify absoulute file paths
             FileInputStream fis = new FileInputStream("C:\\objects.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);
             objects = (List<Object>) ois.readObject();
