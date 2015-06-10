@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Contacts.Contact;
+import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -30,11 +31,12 @@ public class Main extends Application {
         System.out.println("Address Book Manager");
 
 
+        //Prompt for user and password
+        LoginWindow.loginPrompt();
 
 
 
-
-        launch(args);
+        //launch(args);
         System.out.println("Quitting");
     }
 
