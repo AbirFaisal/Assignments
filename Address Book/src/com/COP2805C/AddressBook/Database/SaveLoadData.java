@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook;
+package com.COP2805C.AddressBook.Database;
 
 import java.io.*;
 import java.util.ArrayList;

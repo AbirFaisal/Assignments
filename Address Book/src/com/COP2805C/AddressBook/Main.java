@@ -1,5 +1,7 @@
 package com.COP2805C.AddressBook;
 
+import com.COP2805C.AddressBook.Contacts.Contact;
+import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +10,6 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -26,8 +27,7 @@ public class Main extends Application {
     List<Contact> contactList;
 
     public static void main(String[] args) {
-
-
+            
         launch(args);
 
     }
@@ -46,10 +46,7 @@ public class Main extends Application {
         Text addressText = new Text("nigger");
         Text groupText = new Text("nigger");
 
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/ChrisBranch
         TextArea notesTextArea = new TextArea();
         //notesTextArea.setPrefSize(400, 400);
         notesTextArea.setPromptText("Notes");
@@ -165,17 +162,18 @@ public class Main extends Application {
 
 
         //Split Pane
-<<<<<<< HEAD
+
         SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
-=======
-        SplitPane splitPane = new SplitPane();
+
+            //TODO WTF?
+        //SplitPane splitPane = new SplitPane();
         splitPane.getItems().addAll(leftAnchorPane,rightAnchorPane);
         AnchorPane.setTopAnchor(splitPane, 0.0);
         AnchorPane.setBottomAnchor(splitPane, 0.0);
         AnchorPane.setLeftAnchor(splitPane, 0.0);
         AnchorPane.setRightAnchor(splitPane, 0.0);
         splitPane.setDividerPositions(0.381966);
->>>>>>> origin/ChrisBranch
+
 
         //Main Window Anchor Pane
         AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
@@ -185,6 +183,7 @@ public class Main extends Application {
         primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
 
-        Login.loginScreen();//Note I intend for this to pop-up first before the user can do anything thus requiring them to log-in.
+            //TODO fix this?? what is this?
+        //Login.loginScreen();//Note I intend for this to pop-up first before the user can do anything thus requiring them to log-in.
     }
 }

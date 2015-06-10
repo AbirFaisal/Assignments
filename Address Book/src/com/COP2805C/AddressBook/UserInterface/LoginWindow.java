@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook;
+package com.COP2805C.AddressBook.UserInterface;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 /**
  * Created by EpiphX on 6/8/2015.
  */
-public class Login {
+public class LoginWindow {
 
     public static void loginScreen() {
         Stage window;

@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook;
+package com.COP2805C.AddressBook.Contacts;
 
 import java.awt.*;
 import java.util.Calendar;
