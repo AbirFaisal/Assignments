@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook;
+package com.COP2805C.AddressBook.UserInterface;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
