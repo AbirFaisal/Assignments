@@ -36,8 +36,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-
-
         //TODO somthing here? This is a Sample
         //Information
         //TODO TEST REMOVE
@@ -63,16 +61,11 @@ public class Main extends Application {
         contactInfoFlowPane.setAlignment(Pos.TOP_LEFT);
         contactInfoFlowPane.setOrientation(Orientation.VERTICAL);
 
-
-
-        //TEST Remove
+        //TODO TEST Remove
         contactInfoFlowPane.getChildren().addAll(phoneNumberText, emailText, addressText, groupText, notesTextArea);
 
-
-
+        //Contact Info Anchor Pane
         AnchorPane contactInfoAnchorPane = new AnchorPane(contactInfoFlowPane);
-
-
 
         //Scroll pane incase of large amount of data
         ScrollPane contactInfoScrollPane = new ScrollPane(contactInfoAnchorPane);
@@ -80,6 +73,9 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(contactInfoScrollPane, 0.0);
         AnchorPane.setLeftAnchor(contactInfoScrollPane, 0.0);
         AnchorPane.setRightAnchor(contactInfoScrollPane, 0.0);
+
+
+        
 
 
 
@@ -107,6 +103,12 @@ public class Main extends Application {
 
 
 
+
+
+
+
+
+
         //Right side Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane(bannerFlowPane, contactInfoScrollPane);
         AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
@@ -117,13 +119,27 @@ public class Main extends Application {
 
 
 
-        SplitMenuButton menuButton = MainWindow.menuButton();
+        SplitMenuButton editMenuButton = MainWindow.editMenuButton();
+
+        //Add contact button
+        Button addButton = new Button("+");
+        AnchorPane.setTopAnchor(addButton, 8.0);
+        AnchorPane.setLeftAnchor(addButton, 8.0);
+
+        //clear search bar button (Optional)
+        Button clearSearchButton = new Button("X");
+        AnchorPane.setTopAnchor(clearSearchButton, 8.0);
+        AnchorPane.setRightAnchor(clearSearchButton, 8.0);
+
+
 
 
         //Group selection
         ObservableList<String> groupObservableList = FXCollections.observableArrayList();
         ChoiceBox<String> groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
-        groupObservableList.add("Main Group");
+
+        groupObservableList.add("Main Group");//TODO for each group add to list
+        groupChoiceBox.getSelectionModel().selectFirst();
 
 
         //Search Box
@@ -134,7 +150,13 @@ public class Main extends Application {
         ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
 
         //Left side Anchor Pane
-        AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(searchTextField, contactListView, groupChoiceBox, menuButton);
+        AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
+                addButton,
+                searchTextField,
+                contactListView,
+                groupChoiceBox,
+                editMenuButton);
+
 
         //Split Pane
         SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);

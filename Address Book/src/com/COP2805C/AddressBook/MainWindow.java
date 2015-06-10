@@ -48,7 +48,7 @@ public class MainWindow {
         TextField searchTextField = new TextField();
         searchTextField.setPromptText("Search");
         AnchorPane.setTopAnchor(searchTextField, 8.0);
-        AnchorPane.setLeftAnchor(searchTextField, 8.0);
+        AnchorPane.setLeftAnchor(searchTextField, 36.0);
         AnchorPane.setRightAnchor(searchTextField, 8.0);
 
         return searchTextField;
@@ -64,12 +64,10 @@ public class MainWindow {
     }
 
 
-    public static SplitMenuButton menuButton(){
+    public static SplitMenuButton editMenuButton(){
         SplitMenuButton menuButton = new SplitMenuButton();
         menuButton.setText("Edit");
         menuButton.getItems().addAll(
-                new MenuItem("Add"),
-                new MenuItem("Edit"),
                 new MenuItem("Delete"),
                 new MenuItem("Import/Export"));
         AnchorPane.setBottomAnchor(menuButton, 8.0);
