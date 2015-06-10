@@ -70,34 +70,32 @@ public class LoginWindow {
 
     public static void loginPrompt(){
 
+        //Username
         JLabel usernameLabel = new JLabel("Username");
-        JLabel passwordLabel = new JLabel("Password");
-
         JTextField usernameJTextField = new JTextField();
-        JPasswordField passwordJTextField = new JPasswordField();
-        usernameJTextField.setSize(80, 20);
-        passwordJTextField.setSize(80, 20);
-
-
         JPanel usernameJPanel = new JPanel();
-        usernameJPanel.setLayout(new FlowLayout());
+        usernameJPanel.setLayout(new BoxLayout(usernameJPanel, BoxLayout.X_AXIS));
         usernameJPanel.add(usernameLabel);
         usernameJPanel.add(usernameJTextField);
 
+
+        //Password
+        JLabel passwordLabel = new JLabel("Password ");
+        JPasswordField passwordJTextField = new JPasswordField();
         JPanel passwordJpanel = new JPanel();
+        passwordJpanel.setLayout(new BoxLayout(passwordJpanel, BoxLayout.X_AXIS));
         passwordJpanel.add(passwordLabel);
         passwordJpanel.add(passwordJTextField);
 
 
+        //Main JPanel
         JPanel jPanel = new JPanel();
-
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
-
         jPanel.add(usernameJPanel);
         jPanel.add(passwordJpanel);
 
+        //JOptionPane
         String[] buttons = {"Login", "Create Account"};
-
         int test = JOptionPane.showOptionDialog(
                 null,
                 jPanel,
