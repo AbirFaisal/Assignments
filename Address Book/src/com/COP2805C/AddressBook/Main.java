@@ -1,6 +1,8 @@
 package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Database.Database;
+import com.COP2805C.AddressBook.UserInterface.ContactView;
+import com.COP2805C.AddressBook.UserInterface.ContactViewFactory;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -26,11 +28,15 @@ public class Main extends Application {
     static String[] credentials = new String[2];
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
-    String DATABASE_TABLE_MODEL_USER_ACCOUNTS;
-    String DATABASE_TABLE_MODEL_GROUPS;
-    String DATABASE_TABLE_MODEL_PHONE_NUMBERS;
-    String DATABASE_TABLE_MODEL_EMAILS;
-    String DATABASE_TABLE_MODEL_WORKPLACE;
+
+
+    //[Column Name] {Type, Default, Nullable, Unique, PrimaryKey}
+
+    String[][] DATABASE_TABLE_MODEL_USER_ACCOUNTS;
+    String[][] DATABASE_TABLE_MODEL_GROUPS;
+    String[][] DATABASE_TABLE_MODEL_PHONE_NUMBERS;
+    String[][] DATABASE_TABLE_MODEL_EMAILS;
+    String[] DATABASE_TABLE_MODEL_WORKPLACE;
 
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
@@ -64,6 +70,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
+
 
 
         //TODO somthing here? This is a Sample

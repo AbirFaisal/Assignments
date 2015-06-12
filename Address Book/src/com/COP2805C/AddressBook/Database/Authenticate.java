@@ -11,4 +11,11 @@ public class Authenticate {
 
 
     }
+
+
+
+    public static void getUserPasswordSHA(String userName){
+
+
+    }
 }
