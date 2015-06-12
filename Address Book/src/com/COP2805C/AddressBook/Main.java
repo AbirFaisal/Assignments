@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Contacts.Contact;
+import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -20,24 +21,53 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.rmi.server.UID;
 import java.util.List;
 
 
 public class Main extends Application {
 
-    List<Contact> contactList;
+    String[] credentials = new String[2];
+    ObservableList<String> contactObservableList = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
 
 
+        //TODO initialise Database
+
+        //TODO Check if database exsists
+
+        //TODO If so check if empty
+
+        //TODO if does not exsist create it
+
+        //TODO if DB is empty launch createAccount
+
+        //TODO Else launch loginWindow()
+
+
         //Prompt for user and password
-        LoginWindow.loginPrompt();
+        String credentials[] = LoginWindow.loginPrompt();
+
+        //TODO TEST REMOVE
+        System.out.println("\n Username: " + credentials[0] + "\n Passowrd: " + credentials[1]);
 
 
+        //TODO Authenticate User re-prompt on error
 
-        launch(args);
-        System.out.println("Quitting");
+        //TODO Load Contact List from database
+
+
+        //Authenticate the user
+        //TODO TEST
+        String sha1 = Crypto.stringSHA("test");
+        String sha2 = Crypto.stringSHA("tedst");
+        boolean shabool = Crypto.verifySHA(sha1, sha2);
+
+
+        //launch(args);
+        System.out.println(shabool + " Quitting");
     }
 
     @Override
@@ -49,10 +79,10 @@ public class Main extends Application {
         //TODO TEST REMOVE
 
 
-        Text phoneNumberText = new Text("nigger");
-        Text emailText = new Text("nigger");
-        Text addressText = new Text("nigger");
-        Text groupText = new Text("nigger");
+        Text phoneNumberText = new Text("dfsd");
+        Text emailText = new Text("dfsdsf");
+        Text addressText = new Text("sdfsdf");
+        Text groupText = new Text("sdfsdfsd");
 
 
         TextArea notesTextArea = new TextArea();
@@ -94,7 +124,7 @@ public class Main extends Application {
 
 
         //First Middle Last name text label
-        Text contactNameText = new Text("nigger");
+        Text contactNameText = new Text("First Middle Last");
         contactNameText.strokeTypeProperty().set(StrokeType.OUTSIDE);
         contactNameText.setTextAlignment(TextAlignment.CENTER);
         contactNameText.setFont(Font.font(24.0));
@@ -149,8 +179,11 @@ public class Main extends Application {
         TextField searchTextField = MainWindow.searchTextField();
 
         //Contact List
-        ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
+        //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
         ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
+
+        //TODO test
+        contactObservableList.add("test");
 
         //Left side Anchor Pane
         AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
