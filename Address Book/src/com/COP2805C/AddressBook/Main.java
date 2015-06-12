@@ -28,7 +28,7 @@ import java.util.List;
 public class Main extends Application {
 
     String[] credentials = new String[2];
-    ObservableList<String> contactList;
+    ObservableList<String> contactObservableList = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
@@ -179,8 +179,11 @@ public class Main extends Application {
         TextField searchTextField = MainWindow.searchTextField();
 
         //Contact List
-        ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
+        //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
         ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
+
+        //TODO test
+        contactObservableList.add("test");
 
         //Left side Anchor Pane
         AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
