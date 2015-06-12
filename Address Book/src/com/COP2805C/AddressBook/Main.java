@@ -1,7 +1,5 @@
 package com.COP2805C.AddressBook;
 
-import com.COP2805C.AddressBook.Contacts.Contact;
-import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -20,9 +18,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
-import java.rmi.server.UID;
-import java.util.List;
 
 
 public class Main extends Application {
@@ -59,15 +54,8 @@ public class Main extends Application {
         //TODO Load Contact List from database
 
 
-        //Authenticate the user
-        //TODO TEST
-        String sha1 = Crypto.stringSHA("test");
-        String sha2 = Crypto.stringSHA("tedst");
-        boolean shabool = Crypto.verifySHA(sha1, sha2);
-
-
-        //launch(args);
-        System.out.println(shabool + " Quitting");
+        launch(args);
+        System.out.println("Quitting");
     }
 
     @Override
