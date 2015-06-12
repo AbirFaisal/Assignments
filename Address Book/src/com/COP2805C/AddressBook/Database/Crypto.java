@@ -1,9 +1,9 @@
 package com.COP2805C.AddressBook.Database;
 
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 /**
  * Created by abirfaisal on 6/10/15.
@@ -11,38 +11,50 @@ import java.util.Base64;
 public class Crypto {
 
 
-    public static void stringSHA(String string){
+    //TODO decide string or bytes[]
+    public static String stringSHA(String string) {
+
+        byte[] digest = new byte[0];
+        String SHAkey = null;
+
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             messageDigest.update(string.getBytes("UTF-8"));
 
-            byte[] digest = messageDigest.digest();
-
+            digest = messageDigest.digest();
+            SHAkey = new HexBinaryAdapter().marshal(digest);
 
             //TODO TEST REMOVE
-            System.out.println("SHA256: " + );
+            //System.out.println("SHA256: " + SHAkey);
 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        return SHAkey;
     }
 
 
-    public static void verifySHA(){
+    public static boolean verifySHA(String input, String SHA){
 
+        //get SHA
+        String inputSHA = stringSHA(input);
 
-
+        //Return true or false
+        return inputSHA.equals(SHA);
     }
 
 
-    public static void encrypt(){
 
+
+    public static String encryptString(String string){
+        //TODO
+        return string;
     }
 
-    public static void decrypt(){
-
+    public static String decryptString(String string){
+        //TODO
+        return string;
     }
 
 

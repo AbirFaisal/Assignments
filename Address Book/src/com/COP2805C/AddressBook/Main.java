@@ -27,22 +27,47 @@ import java.util.List;
 
 public class Main extends Application {
 
-    List<Contact> contactList;
+    String[] credentials = new String[2];
+    ObservableList<String> contactList;
 
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
 
 
+        //TODO initialise Database
+
+        //TODO Check if database exsists
+
+        //TODO If so check if empty
+
+        //TODO if does not exsist create it
+
+        //TODO if DB is empty launch createAccount
+
+        //TODO Else launch loginWindow()
+
+
         //Prompt for user and password
-        //LoginWindow.loginPrompt();
+        String credentials[] = LoginWindow.loginPrompt();
+
+        //TODO TEST REMOVE
+        System.out.println("\n Username: " + credentials[0] + "\n Passowrd: " + credentials[1]);
+
+
+        //TODO Authenticate User re-prompt on error
+
+        //TODO Load Contact List from database
+
 
         //Authenticate the user
-
-        Crypto.stringSHA("test");
+        //TODO TEST
+        String sha1 = Crypto.stringSHA("test");
+        String sha2 = Crypto.stringSHA("tedst");
+        boolean shabool = Crypto.verifySHA(sha1, sha2);
 
 
         //launch(args);
-        System.out.println("Quitting");
+        System.out.println(shabool + " Quitting");
     }
 
     @Override
