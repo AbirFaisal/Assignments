@@ -1,10 +1,13 @@
 <component name="libraryTable">
   <library name="java">
-    <CLASSES />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/sqlite-jdbc-3.8.10.1.jar!/" />
+    </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/ez-vcard/src/main/java" />
       <root url="file://$PROJECT_DIR$/ez-vcard/src/test/java" />
+      <root url="jar://$USER_HOME$/Desktop/sqlite-jdbc-3.8.10.1.jar!/" />
     </SOURCES>
   </library>
 </component>
