@@ -1,7 +1,13 @@
 package com.COP2805C.AddressBook.UserInterface;
 
+import com.COP2805C.AddressBook.Database.Database;
+
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by EpiphX on 6/8/2015.
@@ -69,7 +75,7 @@ public class LoginWindow {
 
 
     public static void loginPrompt(){
-
+        Connection conn = Database.dbConnector();
         //Username
         JLabel usernameLabel = new JLabel("Username");
         JTextField usernameJTextField = new JTextField();
@@ -104,6 +110,28 @@ public class LoginWindow {
                 JOptionPane.PLAIN_MESSAGE,
                 null,
                 buttons, buttons[0]);
+
+
+        if(test == 0){
+            try {
+                System.out.println("Blah");
+                String query = "select * from user where username =? and password =?";
+                PreparedStatement pst = conn.prepareStatement(query);
+                pst.setString(1, usernameJTextField.getText());
+                pst.setString(2, passwordJTextField.getText());
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    System.out.println("User Found");
+                }else{
+                    System.out.println("User not found");
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }else if(test == 1){
+            createAccountPrompt();
+        }
+
 
         //TODO TEST REMOVE
         System.out.println(usernameJTextField.getText() + passwordJTextField.getText());
