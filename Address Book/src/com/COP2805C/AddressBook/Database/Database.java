@@ -10,7 +10,6 @@ import java.sql.Statement;
  */
 public class Database {
 
-<<<<<<< HEAD
     Connection conn = null;
     public static Connection dbConnector(){
         try{
@@ -31,8 +30,4 @@ public class Database {
             return null;
         }
     }
-=======
-
-
->>>>>>> master
 }

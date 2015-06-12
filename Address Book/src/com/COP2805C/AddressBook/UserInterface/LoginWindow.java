@@ -13,15 +13,12 @@ import java.sql.SQLException;
  * Created by EpiphX on 6/8/2015.
  */
 public class LoginWindow {
+//    TODO ???
+//    public static String[] loginPrompt(){
+//        Connection conn = Database.dbConnector();
 
-<<<<<<< HEAD
-
-    public static void loginPrompt(){
-        Connection conn = Database.dbConnector();
-=======
     public static String[] loginPrompt() {
 
->>>>>>> master
         //Username
         JLabel usernameLabel = new JLabel("Username");
         JTextField usernameJTextField = new JTextField();
@@ -58,27 +55,26 @@ public class LoginWindow {
                 null,
                 buttons, buttons[0]);
 
-
-        if(test == 0){
-            try {
-                System.out.println("Blah");
-                String query = "select * from user where username =? and password =?";
-                PreparedStatement pst = conn.prepareStatement(query);
-                pst.setString(1, usernameJTextField.getText());
-                pst.setString(2, passwordJTextField.getText());
-                ResultSet rs = pst.executeQuery();
-                if(rs.next()){
-                    System.out.println("User Found");
-                }else{
-                    System.out.println("User not found");
-                }
-            }catch(SQLException e){
-                e.printStackTrace();
-            }
-        }else if(test == 1){
-            createAccountPrompt();
-        }
-
+            //TODO does not beling in LoginWindow.java belongs in database or functions
+//        if(test == 0){
+//            try {
+//                System.out.println("Blah");
+//                String query = "select * from user where username =? and password =?";
+//                PreparedStatement pst = conn.prepareStatement(query);
+//                pst.setString(1, usernameJTextField.getText());
+//                pst.setString(2, passwordJTextField.getText());
+//                ResultSet rs = pst.executeQuery();
+//                if(rs.next()){
+//                    System.out.println("User Found");
+//                }else{
+//                    System.out.println("User not found");
+//                }
+//            }catch(SQLException e){
+//                e.printStackTrace();
+//            }
+//        }else if(test == 1){
+//            //createAccountPrompt();
+//        }
 
         //TODO TEST REMOVE
         System.out.println(usernameJTextField.getText() + passwordJTextField.getText());

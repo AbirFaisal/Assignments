@@ -193,16 +193,8 @@ public class Main extends Application {
                 groupChoiceBox,
                 editMenuButton);
 
-
         //Split Pane
         SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
-
-        AnchorPane.setTopAnchor(splitPane, 0.0);
-        AnchorPane.setBottomAnchor(splitPane, 0.0);
-        AnchorPane.setLeftAnchor(splitPane, 0.0);
-        AnchorPane.setRightAnchor(splitPane, 0.0);
-        splitPane.setDividerPositions(0.381966);
-
 
         //Main Window Anchor Pane
         AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
