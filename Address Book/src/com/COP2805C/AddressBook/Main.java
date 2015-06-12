@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Contacts.Contact;
+import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -33,10 +34,14 @@ public class Main extends Application {
 
 
         //Prompt for user and password
-        LoginWindow.loginPrompt();
+        //LoginWindow.loginPrompt();
+
+        //Authenticate the user
+
+        Crypto.stringSHA("test");
 
 
-        launch(args);
+        //launch(args);
         System.out.println("Quitting");
     }
 
@@ -49,10 +54,10 @@ public class Main extends Application {
         //TODO TEST REMOVE
 
 
-        Text phoneNumberText = new Text("nigger");
-        Text emailText = new Text("nigger");
-        Text addressText = new Text("nigger");
-        Text groupText = new Text("nigger");
+        Text phoneNumberText = new Text("dfsd");
+        Text emailText = new Text("dfsdsf");
+        Text addressText = new Text("sdfsdf");
+        Text groupText = new Text("sdfsdfsd");
 
 
         TextArea notesTextArea = new TextArea();
@@ -94,7 +99,7 @@ public class Main extends Application {
 
 
         //First Middle Last name text label
-        Text contactNameText = new Text("nigger");
+        Text contactNameText = new Text("First Middle Last");
         contactNameText.strokeTypeProperty().set(StrokeType.OUTSIDE);
         contactNameText.setTextAlignment(TextAlignment.CENTER);
         contactNameText.setFont(Font.font(24.0));

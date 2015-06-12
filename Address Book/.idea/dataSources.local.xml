@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="AddressBookDB" uuid="02d13c2b-012a-444b-bc29-4096c9e78dcc">
+    <data-source name="AddressbookDB" uuid="604a8558-e1a6-4196-bd63-db6a62316415">
       <secret-storage>master_key</secret-storage>
     </data-source>
   </component>
