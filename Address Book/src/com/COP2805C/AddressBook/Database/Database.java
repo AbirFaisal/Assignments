@@ -10,6 +10,49 @@ import java.sql.Statement;
  */
 public class Database {
 
+    public static void initializeDatabase(){
+        //TODO
+    }
+
+    //TODO fix spelling cant spell exsist properly
+    public static boolean doesDatabaseExsist(String databaseFileName){
+        //TODO
+        return false;
+    }
+
+    public static void createDefaultDatabase(){
+
+    }
+
+    public static void addTable(String tableName){
+        //TODO
+    }
+
+    //TODO fix spelling i cnat spell comumnl
+    public static void addColumn(String columnName){
+        //TODO
+    }
+
+    public static void addRow(){
+        //TODO
+    }
+
+    public static void deleteRow(){
+        //TODO
+    }
+
+    public static void getRow(){
+        //TODO
+    }
+
+    public static void getRecord(String username){
+        //TODO
+    }
+
+
+
+
+
     Connection conn = null;
     public static Connection dbConnector(){
         try{

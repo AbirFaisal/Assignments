@@ -1,5 +1,6 @@
 package com.COP2805C.AddressBook.UserInterface;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -7,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public interface ContactViewFactory {
 
+    ImageView profileImageView();
     AnchorPane anchorPane();
 
 }

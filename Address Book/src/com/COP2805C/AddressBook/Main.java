@@ -1,5 +1,6 @@
 package com.COP2805C.AddressBook;
 
+import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -22,20 +23,23 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    String[] credentials = new String[2];
+    static String[] credentials = new String[2];
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
+    ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+    String DATABASE_TABLE_MODEL_USER_ACCOUNTS;
+    String DATABASE_TABLE_MODEL_GROUPS;
+    String DATABASE_TABLE_MODEL_PHONE_NUMBERS;
+    String DATABASE_TABLE_MODEL_EMAILS;
+    String DATABASE_TABLE_MODEL_WORKPLACE;
 
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
 
 
-        //TODO initialise Database
+        //initialise Database
+        //Database.initializeDatabase();
 
-        //TODO Check if database exsists
-
-        //TODO If so check if empty
-
-        //TODO if does not exsist create it
+        //TODO check if username table is empty
 
         //TODO if DB is empty launch createAccount
 
@@ -43,7 +47,7 @@ public class Main extends Application {
 
 
         //Prompt for user and password
-        String credentials[] = LoginWindow.loginPrompt();
+        credentials = LoginWindow.loginPrompt();
 
         //TODO TEST REMOVE
         System.out.println("\n Username: " + credentials[0] + "\n Passowrd: " + credentials[1]);
@@ -156,7 +160,7 @@ public class Main extends Application {
 
 
         //Group selection
-        ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+        //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
         ChoiceBox<String> groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
 
         groupObservableList.add("Main Group");//TODO for each group add to list
