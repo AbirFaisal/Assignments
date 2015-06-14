@@ -1,5 +1,7 @@
 package com.COP2805C.AddressBook.Database;
 
+import com.sun.javafx.tk.Toolkit;
+import javafx.scene.image.Image;
 import org.sqlite.SQLiteConfig;
 
 import javax.swing.*;
@@ -31,7 +33,7 @@ public class Database {
             //Table for generic data
             stat.executeUpdate("create table if not exists CONTACTS(ACCOUNT VARCHAR ,"
                     + "CONTACT_ID INTEGER," + "F_Name VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
-                    + "StreetName VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES TEXT,"
+                    + "StreetName VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
                     + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "primary key (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
             stat.executeUpdate("CREATE TABLE DYNAMIC_DATA(ROW_ID INTEGER NOT NULL," + "CONTACT_ID INTEGER NOT NULL ,"
@@ -121,17 +123,27 @@ public class Database {
         }
     }
 
-    //TODO BUILD A METHOD FOR IMAGE RETRIEVAL
-    public void addDate(int CONTCT_ID, Calendar calender){
-
+    public void addDate(int CONTACT_ID, Calendar calendar) throws SQLException{
+        String update = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setLong(1,calendar.getTimeInMillis());
+        pst.setInt(2,CONTACT_ID);
+        pst.executeUpdate();
+        pst.close();
     }
 
-    public void retrievePicture(int CONTACT_ID){
+    public long getDate(int CONTACT_ID) throws SQLException{
+        String query = "SELECT DOB from CONTACTS WHERE CONTACT_ID =?";
+        PreparedStatement pst = conn.prepareStatement(query);
+        pst.setInt(1, CONTACT_ID);
+        ResultSet rs = pst.executeQuery();
+        return rs.getLong("DOB");
+    }
+    public void getPicture(int CONTACT_ID){
         OutputStream outputStream = null;
         InputStream inputStream = null;
 
         try{
-            // File image = new File()
             String query = "SELECT picture from CONTACTS where CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, CONTACT_ID);
@@ -139,8 +151,7 @@ public class Database {
             if(rs.next()){
                 inputStream = rs.getBinaryStream("picture");
             }
-            inputStream = new FileInputStream(new File("Student_img.jpg"));
-            outputStream = new FileOutputStream("std_img.jpg");
+            outputStream = new FileOutputStream("std_img"+CONTACT_ID+".jpg");
             byte[] content = new byte[1024];
             int size = 0;
             while((size = inputStream.read(content))!= -1){
@@ -157,11 +168,15 @@ public class Database {
         }
     }
 
-
     //To add multiple phoneNumbers, Emails etc. Just call this method additional times with the same CONTACT_ID.
-    public void createDynamicData(int CONTACT_ID, int phoneNumber, String EMAIL,String WORK_PLACE){
+    public void addDynamicData(int CONTACT_ID, int phoneNumber, String EMAIL,String WORK_PLACE){
 
     }
+    public void addDynamicData(int CONTACT_ID, int phoneNumber){}
+
+    public void addDynamicData(int CONTACT_ID, String EMAIL){}
+    public void addDynamicData(String WORK_PLACE, int CONTACT_ID){}
+
 
     public void closeDB() throws SQLException{
         conn.close();

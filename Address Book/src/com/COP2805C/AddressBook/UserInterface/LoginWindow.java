@@ -13,9 +13,6 @@ import java.sql.SQLException;
  * Created by EpiphX on 6/8/2015.
  */
 public class LoginWindow {
-//    TODO ???
-//    public static String[] loginPrompt(){
-//        Connection conn = Database.dbConnector();
 
     public static String[] loginPrompt() {
 
@@ -54,15 +51,6 @@ public class LoginWindow {
                 JOptionPane.PLAIN_MESSAGE,
                 null,
                 buttons, buttons[0]);
-
-            //TODO does not beling in LoginWindow.java belongs in database or functions
-//        if(test == 0){
-//            try {
-//                System.out.println("Blah");
-
-//        }else if(test == 1){
-//            //createAccountPrompt();
-//        }
 
         //TODO TEST REMOVE
         System.out.println(usernameJTextField.getText() + passwordJTextField.getText());
