@@ -2,6 +2,10 @@ package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
+import com.COP2805C.AddressBook.UserInterface.ContactView.Contact;
+import com.COP2805C.AddressBook.UserInterface.ContactView.ContactAnchorPane;
+import com.COP2805C.AddressBook.UserInterface.ContactView.ContactInformation;
+import com.COP2805C.AddressBook.UserInterface.ContactView.ContactViewFactory;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -18,11 +22,9 @@ public class Main extends Application {
     static String[] credentials = new String[2];
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
-<<<<<<< HEAD
-    static Database db = Database.getDatabase();
-=======
 
->>>>>>> AbirFaisal
+    static Database db = Database.getDatabase();
+
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
         db.innitialize();
@@ -64,12 +66,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-
-
-
+        //TODO TEST CONTACT VIEW FACTORY
+        ContactViewFactory contactViewFactory = new ContactViewFactory();
+        ContactInformation contactInformation = new ContactInformation();//test here
+        ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation);
 
         //Right side Anchor Pane
-        AnchorPane rightAnchorPane = new AnchorPane();
+        AnchorPane rightAnchorPane = new AnchorPane(contactAnchorPane.contactView());
         AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
         AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
         AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);

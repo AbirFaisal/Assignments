@@ -8,21 +8,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
 /**
  * Created by abirfaisal on 6/12/15.
  */
 public interface ContactView {
 
-    Image profileImage();
-    ImageView profileImageView();
-    Text nameText();
-    FlowPane bannerFlowPane();
-    TextFlow contactInformationTextFlow();
-    ScrollPane scrollPane();
-    AnchorPane anchorPane();
+    AnchorPane contactView();
 
 }
