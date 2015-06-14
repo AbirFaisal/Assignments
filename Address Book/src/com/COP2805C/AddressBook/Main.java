@@ -29,15 +29,6 @@ public class Main extends Application {
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
 
-
-    //[Column Name] {Type, Default, Nullable, Unique, PrimaryKey}
-
-    String[][] DATABASE_TABLE_MODEL_USER_ACCOUNTS;
-    String[][] DATABASE_TABLE_MODEL_GROUPS;
-    String[][] DATABASE_TABLE_MODEL_PHONE_NUMBERS;
-    String[][] DATABASE_TABLE_MODEL_EMAILS;
-    String[] DATABASE_TABLE_MODEL_WORKPLACE;
-
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
 
@@ -73,75 +64,11 @@ public class Main extends Application {
 
 
 
-        //TODO somthing here? This is a Sample
-        //Information
-        //TODO TEST REMOVE
-
-
-        Text phoneNumberText = new Text("dfsd");
-        Text emailText = new Text("dfsdsf");
-        Text addressText = new Text("sdfsdf");
-        Text groupText = new Text("sdfsdfsd");
-
-
-        TextArea notesTextArea = new TextArea();
-        //notesTextArea.setPrefSize(400, 400);
-        notesTextArea.setPromptText("Notes");
-
-
-
-        //Flowpane to format the text nicey
-        FlowPane contactInfoFlowPane = new FlowPane();
-        AnchorPane.setTopAnchor(contactInfoFlowPane, 0.0);
-        AnchorPane.setBottomAnchor(contactInfoFlowPane, 0.0);
-        AnchorPane.setLeftAnchor(contactInfoFlowPane, 0.0);
-        AnchorPane.setRightAnchor(contactInfoFlowPane, 0.0);
-
-        contactInfoFlowPane.setHgap(20.0);
-        contactInfoFlowPane.setAlignment(Pos.TOP_LEFT);
-        contactInfoFlowPane.setOrientation(Orientation.VERTICAL);
-
-        //TODO TEST Remove
-        contactInfoFlowPane.getChildren().addAll(phoneNumberText, emailText, addressText, groupText, notesTextArea);
-
-        //Contact Info Anchor Pane
-        AnchorPane contactInfoAnchorPane = new AnchorPane(contactInfoFlowPane);
-
-        //Scroll pane incase of large amount of data
-        ScrollPane contactInfoScrollPane = new ScrollPane(contactInfoAnchorPane);
-        AnchorPane.setTopAnchor(contactInfoScrollPane, 120.0);
-        AnchorPane.setBottomAnchor(contactInfoScrollPane, 0.0);
-        AnchorPane.setLeftAnchor(contactInfoScrollPane, 0.0);
-        AnchorPane.setRightAnchor(contactInfoScrollPane, 0.0);
-
-
-
-        //Contact Photo
-        ImageView contactPhotoImageView = new ImageView();
-        //Image contactImage = new Image("default.jpg");
-        //contactPhotoImageView.setImage(contactImage);
-
-
-        //First Middle Last name text label
-        Text contactNameText = new Text("First Middle Last");
-        contactNameText.strokeTypeProperty().set(StrokeType.OUTSIDE);
-        contactNameText.setTextAlignment(TextAlignment.CENTER);
-        contactNameText.setFont(Font.font(24.0));
-
-
-
-        //Top banner with photo and name
-        FlowPane bannerFlowPane = new FlowPane(contactPhotoImageView, contactNameText);
-        bannerFlowPane.setAlignment(Pos.CENTER);
-        bannerFlowPane.setColumnHalignment(HPos.CENTER);
-        AnchorPane.setTopAnchor(bannerFlowPane, 20.0);
-        AnchorPane.setLeftAnchor(bannerFlowPane, 20.0);
-        AnchorPane.setRightAnchor(bannerFlowPane, 20.0);
 
 
 
         //Right side Anchor Pane
-        AnchorPane rightAnchorPane = new AnchorPane(bannerFlowPane, contactInfoScrollPane);
+        AnchorPane rightAnchorPane = new AnchorPane();
         AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
         AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
         AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);
