@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook.UserInterface;
+package com.COP2805C.AddressBook.UserInterface.ContactView;
 
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -10,12 +10,12 @@ import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by abirfaisal on 6/12/15.
  */
-public class ContactView implements ContactViewFactory {
+public class ContactViewFactory {
+
 
     private String group;
 
@@ -69,6 +69,4 @@ public class ContactView implements ContactViewFactory {
 
         return null;
     }
-
-
 }

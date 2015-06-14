@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook.UserInterface;
+package com.COP2805C.AddressBook.UserInterface.ContactView;
 
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -8,10 +8,14 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by abirfaisal on 6/12/15.
  */
-public interface ContactViewFactory {
+public interface ContactView {
 
     Image profileImage();
     ImageView profileImageView();
@@ -20,6 +24,5 @@ public interface ContactViewFactory {
     TextFlow contactInformationTextFlow();
     ScrollPane scrollPane();
     AnchorPane anchorPane();
-    
 
 }
