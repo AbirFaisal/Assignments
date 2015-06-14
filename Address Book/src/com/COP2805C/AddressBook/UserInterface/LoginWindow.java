@@ -59,19 +59,7 @@ public class LoginWindow {
 //        if(test == 0){
 //            try {
 //                System.out.println("Blah");
-//                String query = "select * from user where username =? and password =?";
-//                PreparedStatement pst = conn.prepareStatement(query);
-//                pst.setString(1, usernameJTextField.getText());
-//                pst.setString(2, passwordJTextField.getText());
-//                ResultSet rs = pst.executeQuery();
-//                if(rs.next()){
-//                    System.out.println("User Found");
-//                }else{
-//                    System.out.println("User not found");
-//                }
-//            }catch(SQLException e){
-//                e.printStackTrace();
-//            }
+
 //        }else if(test == 1){
 //            //createAccountPrompt();
 //        }

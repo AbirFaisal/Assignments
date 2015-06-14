@@ -1,5 +1,10 @@
 package com.COP2805C.AddressBook;
 
+<<<<<<< HEAD
+=======
+import com.COP2805C.AddressBook.Contacts.Contact;
+import com.COP2805C.AddressBook.Database.Crypto;
+>>>>>>> CBranch
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
@@ -20,11 +25,19 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+<<<<<<< HEAD
+=======
+import java.rmi.server.UID;
+import java.sql.Connection;
+import java.util.List;
+
+>>>>>>> CBranch
 
 public class Main extends Application {
 
     static String[] credentials = new String[2];
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
+<<<<<<< HEAD
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
     String DATABASE_TABLE_MODEL_USER_ACCOUNTS;
     String DATABASE_TABLE_MODEL_GROUPS;
@@ -32,9 +45,12 @@ public class Main extends Application {
     String DATABASE_TABLE_MODEL_EMAILS;
     String DATABASE_TABLE_MODEL_WORKPLACE;
 
+=======
+    static Database db = Database.getDatabase();
+>>>>>>> CBranch
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
-
+        db.innitialize();
 
         //initialise Database
         //Database.initializeDatabase();
@@ -51,15 +67,28 @@ public class Main extends Application {
 
         //TODO TEST REMOVE
         System.out.println("\n Username: " + credentials[0] + "\n Passowrd: " + credentials[1]);
-
+        //temp Method call
+        //Database.checkLogin(con,credentials);
 
         //TODO Authenticate User re-prompt on error
 
         //TODO Load Contact List from database
 
 
+<<<<<<< HEAD
         launch(args);
         System.out.println("Quitting");
+=======
+        //Authenticate the user
+        //TODO TEST
+        String sha1 = Crypto.stringSHA("test");
+        String sha2 = Crypto.stringSHA("tedst");
+        boolean shabool = Crypto.verifySHA(sha1, sha2);
+
+
+        launch(args);
+        System.out.println(shabool + " Quitting");
+>>>>>>> CBranch
     }
 
     @Override
@@ -176,7 +205,6 @@ public class Main extends Application {
 
         //TODO test
         contactObservableList.add("test");
-
         //Left side Anchor Pane
         AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
                 addButton,
