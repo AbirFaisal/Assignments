@@ -73,8 +73,6 @@ public class Main extends Application {
 
 
 
-
-
         //TODO somthing here? This is a Sample
         //Information
         //TODO TEST REMOVE

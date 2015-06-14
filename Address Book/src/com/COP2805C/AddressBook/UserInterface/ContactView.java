@@ -1,8 +1,12 @@
 package com.COP2805C.AddressBook.UserInterface;
 
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,43 +17,58 @@ import java.util.Date;
  */
 public class ContactView implements ContactViewFactory {
 
-    String group;
+    private String group;
 
-    ImageView imageView;
-    String first;
-    String middle;
-    String last;
-    String nickname;
+    private Image profileImage;
+    private ImageView profileImageView;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String nickname;
 
-    String addressLine1;
-    String addressLine2;
-    String city;
-    String state;
-    String zip;
+    private String addressLine1;
+    private String addressLine2;
+    private String city;
+    private String state;
+    private String zip;
 
-    String notes;
+    private String notes;
 
-    ArrayList<String> phoneNumbers;
-    ArrayList<String> emails;
-    ArrayList<String> workPlaces;
+    private ArrayList<String> phoneNumbers;
+    private ArrayList<String> emails;
+    private ArrayList<String> workPlaces;
 
-    Calendar birthday;
-
-
+    private Calendar birthday;
 
 
-    @Override
-    public AnchorPane bannerAnchorPane() {
+    public Image profileImage(/**TODO image from file?**/) {
         return null;
     }
 
-    @Override
+    public ImageView profileImageView() {
+        return null;
+    }
+
+    public Text nameText() {
+        return null;
+    }
+
+    public FlowPane bannerFlowPane() {
+        return null;
+    }
+
+    public TextFlow contactInformationTextFlow() {
+        return null;
+    }
+
     public ScrollPane scrollPane() {
         return null;
     }
 
-    @Override
     public AnchorPane anchorPane() {
+
         return null;
     }
+
+
 }
