@@ -36,7 +36,7 @@ public class Database {
                     + "StreetName VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
                     + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "primary key (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
-            stat.executeUpdate("CREATE TABLE DYNAMIC_DATA(ROW_ID INTEGER NOT NULL," + "CONTACT_ID INTEGER NOT NULL ,"
+            stat.executeUpdate("CREATE TABLE DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
                     + "PHONE_NUMBER INTEGER," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, "+ "FOREIGN KEY(CONTACT_ID) "
                     + "REFERENCES CONTACTS(CONTACT_ID) ON DELETE CASCADE);");
         }catch(Exception e){
@@ -65,7 +65,6 @@ public class Database {
             pst.executeUpdate();
             pst.close();
     }
-
 
     //This method adds a CONTACT_ID for the listed account and returns the key for this contact. This key can then be used in the other functions to add the required fields.
     public int createContact(String ACCOUNT) throws SQLException{
@@ -168,15 +167,42 @@ public class Database {
         }
     }
 
-    //To add multiple phoneNumbers, Emails etc. Just call this method additional times with the same CONTACT_ID.
-    public void addDynamicData(int CONTACT_ID, int phoneNumber, String EMAIL,String WORK_PLACE){
-
+    //TODO DECIDE IF WE WANT PHONE_NUMBER AS A LONG OR A STRING.
+    public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER, String EMAIL,String WORK_PLACE) throws SQLException{
+        String update = "INSERT into DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) values (?,?,?,?);";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setInt(1,CONTACT_ID);
+        pst.setLong(2, PHONE_NUMBER);
+        pst.setString(3,EMAIL);
+        pst.setString(4,WORK_PLACE);
+        pst.executeUpdate();
+        pst.close();
     }
-    public void addDynamicData(int CONTACT_ID, int phoneNumber){}
+    public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER)throws SQLException{
+        String update = "INSERT into DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) values (?,?,null,null);";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setInt(1,CONTACT_ID);
+        pst.setLong(2, PHONE_NUMBER);
+        pst.executeUpdate();
+        pst.close();
+    }
 
-    public void addDynamicData(int CONTACT_ID, String EMAIL){}
-    public void addDynamicData(String WORK_PLACE, int CONTACT_ID){}
-
+    public void addDynamicData(int CONTACT_ID, String EMAIL)throws SQLException{
+        String update = "INSERT into DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) values (?,null,?,null);";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setInt(1,CONTACT_ID);
+        pst.setString(2, EMAIL);
+        pst.executeUpdate();
+        pst.close();
+    }
+    public void addDynamicData(String WORK_PLACE, int CONTACT_ID)throws SQLException{
+        String update = "INSERT into DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) values (?,null,null,?);";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setInt(1,CONTACT_ID);
+        pst.setString(2,WORK_PLACE);
+        pst.executeUpdate();
+        pst.close();
+    }
 
     public void closeDB() throws SQLException{
         conn.close();
