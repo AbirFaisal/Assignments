@@ -16,6 +16,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import java.util.ArrayList;
+
 /**
  * Created by abirfaisal on 6/13/15.
  */
@@ -33,10 +35,10 @@ public class ContactAnchorPane implements ContactView {
                 contactImageView(contactInformation),
                 nameText(contactInformation));
 
-
-
-        TextFlow informationTextFlow = informationTextFlow();
-
+        TextFlow informationTextFlow =
+                informationTextFlow(
+                informationText(
+                getInformationString(contactInformation)));
 
 
         return contactViewAnchorPane(bannerFlowPane, informationTextFlow);
@@ -71,22 +73,6 @@ public class ContactAnchorPane implements ContactView {
 
         return bannerFlowPane;
     }
-
-//    public static ScrollPane informationScrollPane(Node... FXNode){
-//        AnchorPane anchorPane = new AnchorPane(FXNode);
-//
-//        ScrollPane informationScrollPane = new ScrollPane(anchorPane);
-//
-//        AnchorPane.setTopAnchor(informationScrollPane, 120.0);
-//        AnchorPane.setBottomAnchor(informationScrollPane, 0.0);
-//        AnchorPane.setLeftAnchor(informationScrollPane, 0.0);
-//        AnchorPane.setRightAnchor(informationScrollPane, 0.0);
-//
-//        //informationScrollPane.getChildrenUnmodifiable().addAll(FXNode);
-//
-//        return informationScrollPane;
-//    }
-
 
 
     public static ImageView contactImageView(ContactInformation contactInformation){
@@ -137,55 +123,90 @@ public class ContactAnchorPane implements ContactView {
 
 
 
-    public static FlowPane informationFlowPane(){
 
-        return new FlowPane();
-    }
 
-    public static TextFlow informationTextFlow(){
 
-        TextFlow informationTextFlow = new TextFlow();
+    public static TextFlow informationTextFlow(Text text){
+
+        TextFlow informationTextFlow = new TextFlow(text);
 
         AnchorPane.setTopAnchor(informationTextFlow, 140.0);
         AnchorPane.setBottomAnchor(informationTextFlow, 0.0);
         AnchorPane.setLeftAnchor(informationTextFlow, 0.0);
         AnchorPane.setRightAnchor(informationTextFlow, 0.0);
 
-        return new TextFlow();
+        return informationTextFlow;
     }
 
-    public static TextArea notesTextArea(){
-
-        return new TextArea();
-    }
-
-    public static Text informationText(){
-        return new Text();
-    }
-
-
-    public static String getInformationText(ContactInformation contactInformation){
-
-        String informationText = "";
-
-
-
-        return informationText;
-    }
-
-
-    public static String getInformationNotes(ContactInformation contactInformation){
-
-
-        return new String();
-    }
-
-
-//    public static Image getImage(ContactInformation contactInformation){
-//        if (contactInformation.getProfileImage() != null){
-//            return contactInformation.getProfileImage();
-//        }
-//        //TODO return with default image
-//        return null;
+//    public static TextArea notesTextArea(){
+//
+//        return new TextArea();
 //    }
+
+    public static Text informationText(String informationText){
+
+        return new Text(informationText);
+    }
+
+
+    public static String getInformationString(ContactInformation contactInformation){
+
+        String phoneNumbers = getFormattedPhoneNumbers(contactInformation.getPhoneNumbers());
+        String emails = getFormattedEmails(contactInformation.getPhoneNumbers());
+        String workPlaces = getFormattedWorkPlaces(contactInformation.getWorkPlaces());
+
+
+        System.out.println(phoneNumbers + emails + workPlaces);
+
+        return new String(phoneNumbers + emails + workPlaces);
+    }
+
+
+    public static String getFormattedPhoneNumbers(ArrayList<String> phoneNumberArrayList){
+        String phoneNumbers = " ";
+
+        for (int i = 0; i < phoneNumberArrayList.size(); i++) {
+            phoneNumbers = phoneNumbers + phoneNumberArrayList.get(i) + "\n";
+
+            //TODO REMOVE
+            System.out.println(phoneNumbers);
+        }
+        return phoneNumbers;
+    }
+
+    public static String getFormattedEmails(ArrayList<String> emailsArrayList){
+        String emails = " ";
+
+        for (int i = 0; i < emailsArrayList.size(); i++) {
+            emails = emails + emailsArrayList.get(i) + "\n";
+
+            //TODO REMOVE
+            System.out.println(emails);
+        }
+        return emails;
+    }
+
+    public static String getFormattedWorkPlaces(ArrayList<String> workPlacesArrayList){
+        String workplaces = " ";
+
+        for (int i = 0; i < workPlacesArrayList.size(); i++) {
+            workplaces = workplaces + workPlacesArrayList.get(i) + "\n";
+
+            //TODO REMOVE
+            System.out.println(workplaces);
+        }
+        return workplaces;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
