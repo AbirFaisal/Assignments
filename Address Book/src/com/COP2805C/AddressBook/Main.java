@@ -2,7 +2,6 @@ package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
-import com.COP2805C.AddressBook.UserInterface.ContactView.Contact;
 import com.COP2805C.AddressBook.UserInterface.ContactView.ContactAnchorPane;
 import com.COP2805C.AddressBook.UserInterface.ContactView.ContactInformation;
 import com.COP2805C.AddressBook.UserInterface.ContactView.ContactViewFactory;

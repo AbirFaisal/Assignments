@@ -35,6 +35,10 @@ public class ContactInformation {
 
     private Calendar birthday;
 
+    public ContactInformation(){
+
+    }
+
     public ContactInformation(
             int key, String group,
             Image profileImage, ImageView profileImageView,
