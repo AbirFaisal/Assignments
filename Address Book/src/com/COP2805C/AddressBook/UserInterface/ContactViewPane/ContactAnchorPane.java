@@ -16,16 +16,22 @@ import javafx.scene.text.TextFlow;
  */
 public class ContactAnchorPane implements ContactView {
 
+    private ContactInformation contactInformation;
 
     public ContactAnchorPane(ContactInformation contactInformation) {
+        this.contactInformation = contactInformation;
     }
 
-    @Override
     public AnchorPane contactView() {
-        return new AnchorPane();
+
+        FlowPane bannerFlowPane = bannerFlowPane(
+                contactImageView(contactInformation),
+                nameText(contactInformation));
+
+
+        return contactViewAnchorPane(bannerFlowPane);
     }
 
-    //TODO fx elements here
 
     public static AnchorPane contactViewAnchorPane(Node... FXNode){
 
@@ -33,9 +39,11 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-    public static FlowPane bannerFlowPane(){
+    public static FlowPane bannerFlowPane(Node... FXNode){
 
-        return new FlowPane();
+
+
+        return new FlowPane(FXNode);
     }
 
     public static ScrollPane informationScrollPane(){
@@ -45,14 +53,41 @@ public class ContactAnchorPane implements ContactView {
 
 
 
-    public static ImageView contactImageView(Image contactImage){
+    public static ImageView contactImageView(ContactInformation contactInformation){
 
+
+        try {
+
+                return new ImageView(contactInformation.getProfileImage());
+
+        }catch (Exception e){
+            System.out.println("No Profile image");
+        }
+        //TODO return with default image
         return new ImageView();
     }
 
-    public static Text nameText(){
+    public static Text nameText(ContactInformation contactInformation){
+        String name = "";
 
-        return new Text();
+        try {
+                name = name + contactInformation.getFirstName();
+        }catch (Exception e){System.out.println("No First Name");}
+
+        try {
+            name = name + contactInformation.getMiddleName();
+        }catch (Exception e){System.out.println("No Middle Name");}
+
+        try {
+                name = name + contactInformation.getLastName();
+        }catch (Exception e){System.out.println("No Last Name");}
+
+        try {
+                name = name + contactInformation.getNickname();
+        }catch (Exception e){System.out.println("No Nickname");}
+
+
+        return new Text(name);
     }
 
 
@@ -92,7 +127,11 @@ public class ContactAnchorPane implements ContactView {
 
 
     public static Image getImage(ContactInformation contactInformation){
-        return contactInformation.getProfileImage();
+        if (contactInformation.getProfileImage() != null){
+            return contactInformation.getProfileImage();
+        }
+        //TODO return with default image
+        return null;
     }
 
 

@@ -26,11 +26,11 @@ public class Main extends Application {
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
 
-    static Database db = Database.getDatabase();
+    //static Database database = Database.getDatabase();
 
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
-        db.innitialize();
+        //database.innitialize();
 
 
         //initialise Database
@@ -44,7 +44,7 @@ public class Main extends Application {
 
 
         //Prompt for user and password
-        credentials = LoginWindow.loginPrompt();
+        //credentials = LoginWindow.loginPrompt();
 
         //TODO TEST REMOVE
         System.out.println("\n Username: " + credentials[0] + "\n Passowrd: " + credentials[1]);
@@ -71,18 +71,15 @@ public class Main extends Application {
 
 
         /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
-        ContactViewFactory contactViewFactory = new ContactViewFactory();
         Image testImage = new Image("http://i.imgur.com/0dMGQvy.jpg");
         ArrayList<String> phone = new ArrayList<>();
         ArrayList<String> email = new ArrayList<>();
         ArrayList<String> work = new ArrayList<>();
-
         for (int i = 0; i < 5; i++) {
             phone.add("phone" + i);
             email.add("email" + i);
             work.add("work" + i);
         }
-
         Calendar testCalendar = new GregorianCalendar(2015,3,3);
 
         ContactInformation contactInformation = new ContactInformation(
@@ -94,9 +91,10 @@ public class Main extends Application {
                 phone, email, work,
                 testCalendar);
 
+
+        ContactViewFactory contactViewFactory = new ContactViewFactory();
         ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation);
         /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
-
 
 
         //Right side Anchor Pane
