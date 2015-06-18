@@ -93,12 +93,13 @@ public class Main extends Application {
 
 
         ContactViewFactory contactViewFactory = new ContactViewFactory();
-        ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation);
+        //ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation).contactView();
         /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
 
 
         //Right side Anchor Pane
-        AnchorPane rightAnchorPane = new AnchorPane(contactAnchorPane.contactView());
+        AnchorPane rightAnchorPane = contactViewFactory.contact(contactInformation).contactView();
+
         AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
         AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
         AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);
