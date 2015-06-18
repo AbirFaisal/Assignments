@@ -1,4 +1,6 @@
-package com.COP2805C.AddressBook.UserInterface.ContactView;
+package com.COP2805C.AddressBook.UserInterface.ContactViewPane;
+
+import com.COP2805C.AddressBook.ContactInformation;
 
 /**
  * Created by abirfaisal on 6/12/15.

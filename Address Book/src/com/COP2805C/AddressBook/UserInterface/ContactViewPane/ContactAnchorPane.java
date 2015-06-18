@@ -1,5 +1,6 @@
-package com.COP2805C.AddressBook.UserInterface.ContactView;
+package com.COP2805C.AddressBook.UserInterface.ContactViewPane;
 
+import com.COP2805C.AddressBook.ContactInformation;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -91,13 +92,12 @@ public class ContactAnchorPane implements ContactView {
 
 
     public static Image getImage(ContactInformation contactInformation){
-
-
-        return new Image();
+        return contactInformation.getProfileImage();
     }
 
 
-    public static String getContactName(ContactInformation contactInformation){
+    public static String getContactFMLN(ContactInformation contactInformation){
+
 
 
         return new String();

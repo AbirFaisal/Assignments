@@ -2,9 +2,8 @@ package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
-import com.COP2805C.AddressBook.UserInterface.ContactView.ContactAnchorPane;
-import com.COP2805C.AddressBook.UserInterface.ContactView.ContactInformation;
-import com.COP2805C.AddressBook.UserInterface.ContactView.ContactViewFactory;
+import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactAnchorPane;
+import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -12,8 +11,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class Main extends Application {
@@ -27,6 +31,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         System.out.println("Address Book Manager");
         db.innitialize();
+
 
         //initialise Database
         //Database.initializeDatabase();
@@ -65,10 +70,34 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        //TODO TEST CONTACT VIEW FACTORY
+        /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
         ContactViewFactory contactViewFactory = new ContactViewFactory();
-        ContactInformation contactInformation = new ContactInformation();//test here
+        Image testImage = new Image("http://i.imgur.com/0dMGQvy.jpg");
+        ArrayList<String> phone = new ArrayList<>();
+        ArrayList<String> email = new ArrayList<>();
+        ArrayList<String> work = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            phone.add("phone" + i);
+            email.add("email" + i);
+            work.add("work" + i);
+        }
+
+        Calendar testCalendar = new GregorianCalendar(2015,3,3);
+
+        ContactInformation contactInformation = new ContactInformation(
+                1 ,"group",
+                testImage,
+                "First", "Middle", "Last", "Nick",
+                "addr1", "addr2", "city", "state", "zip",
+                "notes",
+                phone, email, work,
+                testCalendar);
+
         ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation);
+        /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
+
+
 
         //Right side Anchor Pane
         AnchorPane rightAnchorPane = new AnchorPane(contactAnchorPane.contactView());

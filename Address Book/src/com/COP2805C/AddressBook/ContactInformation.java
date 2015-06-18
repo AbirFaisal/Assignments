@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook.UserInterface.ContactView;
+package com.COP2805C.AddressBook;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,7 +15,6 @@ public class ContactInformation {
     private String group;
 
     private Image profileImage;
-    private ImageView profileImageView;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -35,13 +34,15 @@ public class ContactInformation {
 
     private Calendar birthday;
 
-    public ContactInformation(){
 
-    }
+    //TESTING Empty
+//    public ContactInformation(){
+//
+//    }
 
     public ContactInformation(
             int key, String group,
-            Image profileImage, ImageView profileImageView,
+            Image profileImage,
             String firstName, String middleName, String lastName, String nickname,
             String addressLine1, String addressLine2,
             String city, String state, String zip,
@@ -54,7 +55,6 @@ public class ContactInformation {
         this.key = key;
         this.group = group;
         this.profileImage = profileImage;
-        this.profileImageView = profileImageView;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -93,14 +93,6 @@ public class ContactInformation {
 
     public void setProfileImage(Image profileImage) {
         this.profileImage = profileImage;
-    }
-
-    public ImageView getProfileImageView() {
-        return profileImageView;
-    }
-
-    public void setProfileImageView(ImageView profileImageView) {
-        this.profileImageView = profileImageView;
     }
 
     public String getFirstName() {
