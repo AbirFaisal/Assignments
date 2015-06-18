@@ -18,7 +18,7 @@ public class Database {
         return DATABASE;
     }
 
-    public void innitialize(){
+    public void initialize(){
         try{
             Class.forName("org.sqlite.JDBC");
             SQLiteConfig config = new SQLiteConfig();
@@ -28,7 +28,7 @@ public class Database {
             Statement stat = conn.createStatement();
             //Table to track user
             stat.executeUpdate("create table if not exists ACCOUNTS(ACCOUNT VARCHAR, primary key(ACCOUNT));");
-            //Table for generic data
+            //Table for static data
             stat.executeUpdate("create table if not exists CONTACTS(ACCOUNT VARCHAR ,"
                     + "CONTACT_ID INTEGER," + "F_Name VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
                     + "StreetName VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES TEXT,"
@@ -41,6 +41,17 @@ public class Database {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+
+
+
+    public static boolean isColumnEmpty(String table, String column){
+        //TODO put code here Chris
+        return true;
+    }
+
+
+
+
     //DELETES ALL OF THE CONTACTS RECORDS IF GIVEN THE CONTACT ID
     public void deleteCONTACTID(int CONTACT_ID){
         try{

@@ -2,8 +2,8 @@ package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
-import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactAnchorPane;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
+import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -22,64 +23,62 @@ import java.util.GregorianCalendar;
 
 public class Main extends Application {
 
-    static String[] credentials = new String[2];
+    private static String[] credentials = new String[2]; //Username and password
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+    ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
-    //static Database database = Database.getDatabase();
+    public static Database database = Database.getDatabase();
 
     public static void main(String[] args) {
-        System.out.println("Address Book Manager");
-        //database.innitialize();
+
+        //Check if database exists if not create it
+        database.initialize();
+
+        do {
+            //TODO check if username column is empty
+            //                          Table       Column
+            if (database.isColumnEmpty("Accounts", "Usernames")) {
+                credentials = CreateAccountWindow.createAccount();
+            } else {
+                //Prompt for user and password
+                credentials = LoginWindow.loginPrompt();
+
+                if (Crypto.authinticateUser(credentials)){
+                    JOptionPane.showMessageDialog(null, "Invalid username or password");
+                }
+            }
+        }while (Crypto.authinticateUser(credentials));
 
 
-        //initialise Database
-        //Database.initializeDatabase();
-
-        //TODO check if username table is empty
-
-        //TODO if DB is empty launch createAccount
-
-        //TODO Else launch loginWindow()
-
-
-        //Prompt for user and password
-        //credentials = LoginWindow.loginPrompt();
 
         //TODO TEST REMOVE
         System.out.println("\n Username: " + credentials[0] + "\n Passowrd: " + credentials[1]);
-        //temp Method call
-        //Database.checkLogin(con,credentials);
 
-        //TODO Authenticate User re-prompt on error
 
-        //TODO Load Contact List from database
+        //TODO Load Contact List from database into FXcollections
 
+
+        //Launch main window
         launch(args);
-        System.out.println("Quitting");
-        //Authenticate the user
-        //TODO TEST
-        String sha1 = Crypto.stringSHA("test");
-        String sha2 = Crypto.stringSHA("tedst");
-        boolean shabool = Crypto.verifySHA(sha1, sha2);
-
-        System.out.println(shabool + " Quitting");
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
 
         /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
         Image testImage = new Image("http://i.imgur.com/0dMGQvy.jpg");
         ArrayList<String> phone = new ArrayList<>();
         ArrayList<String> email = new ArrayList<>();
         ArrayList<String> work = new ArrayList<>();
+
         for (int i = 0; i < 5; i++) {
             phone.add("phone" + i);
             email.add("email" + i);
             work.add("work" + i);
         }
+
         Calendar testCalendar = new GregorianCalendar(2015,3,3);
 
         ContactInformation contactInformation = new ContactInformation(

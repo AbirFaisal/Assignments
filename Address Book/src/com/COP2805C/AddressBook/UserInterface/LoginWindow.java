@@ -55,14 +55,6 @@ public class LoginWindow {
                 null,
                 buttons, buttons[0]);
 
-            //TODO does not beling in LoginWindow.java belongs in database or functions
-//        if(test == 0){
-//            try {
-//                System.out.println("Blah");
-
-//        }else if(test == 1){
-//            //createAccountPrompt();
-//        }
 
         //TODO TEST REMOVE
         System.out.println(usernameJTextField.getText() + passwordJTextField.getText());
@@ -71,6 +63,7 @@ public class LoginWindow {
         //Login
         if (test == 0) {
             //TODO create account
+            CreateAccountWindow.createAccount();
         }else {
             //Return string array with username and password
             return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};

@@ -40,7 +40,6 @@ public class ContactAnchorPane implements ContactView {
                 informationText(
                 getInformationString(contactInformation)));
 
-
         return contactViewAnchorPane(bannerFlowPane, informationTextFlow);
     }
 
@@ -51,8 +50,6 @@ public class ContactAnchorPane implements ContactView {
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
-
-
         return contactViewAnchorPane;
     }
 
@@ -94,7 +91,6 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-
     public static Text nameText(ContactInformation contactInformation){
         String name = "";
 
@@ -114,7 +110,6 @@ public class ContactAnchorPane implements ContactView {
                 name = name + " (" + contactInformation.getNickname() + ")";
         }catch (Exception e){System.out.println("No Nickname");}
 
-        System.out.println(name);
 
         Text nameText = new Text(name);
         nameText.setFont(Font.font(24.0));
@@ -122,91 +117,84 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-
-
-
-
     public static TextFlow informationTextFlow(Text text){
 
         TextFlow informationTextFlow = new TextFlow(text);
 
         AnchorPane.setTopAnchor(informationTextFlow, 140.0);
-        AnchorPane.setBottomAnchor(informationTextFlow, 0.0);
-        AnchorPane.setLeftAnchor(informationTextFlow, 0.0);
-        AnchorPane.setRightAnchor(informationTextFlow, 0.0);
+        AnchorPane.setBottomAnchor(informationTextFlow, 20.0);
+        AnchorPane.setLeftAnchor(informationTextFlow, 20.0);
+        AnchorPane.setRightAnchor(informationTextFlow, 20.0);
 
         return informationTextFlow;
     }
 
-//    public static TextArea notesTextArea(){
-//
-//        return new TextArea();
-//    }
 
     public static Text informationText(String informationText){
 
+        /** Do any text formatting here if needed **/
+
         return new Text(informationText);
     }
-
 
     public static String getInformationString(ContactInformation contactInformation){
 
         String phoneNumbers = getFormattedPhoneNumbers(contactInformation.getPhoneNumbers());
         String emails = getFormattedEmails(contactInformation.getPhoneNumbers());
         String workPlaces = getFormattedWorkPlaces(contactInformation.getWorkPlaces());
+        String address = getFormattedAddress(contactInformation);
 
-
-        System.out.println(phoneNumbers + emails + workPlaces);
-
-        return new String(phoneNumbers + emails + workPlaces);
+        return new String(phoneNumbers + emails + workPlaces + address);
     }
 
 
     public static String getFormattedPhoneNumbers(ArrayList<String> phoneNumberArrayList){
-        String phoneNumbers = " ";
+        String phoneNumbers = "\nPhone Numbers: \n";
 
         for (int i = 0; i < phoneNumberArrayList.size(); i++) {
             phoneNumbers = phoneNumbers + phoneNumberArrayList.get(i) + "\n";
-
-            //TODO REMOVE
-            System.out.println(phoneNumbers);
         }
+        //TODO REMOVE
+        System.out.println(phoneNumbers);
         return phoneNumbers;
     }
 
     public static String getFormattedEmails(ArrayList<String> emailsArrayList){
-        String emails = " ";
+        String emails = "\nEmails: \n";
 
         for (int i = 0; i < emailsArrayList.size(); i++) {
             emails = emails + emailsArrayList.get(i) + "\n";
-
-            //TODO REMOVE
-            System.out.println(emails);
         }
+
+        //TODO REMOVE
+        System.out.println(emails);
         return emails;
     }
 
     public static String getFormattedWorkPlaces(ArrayList<String> workPlacesArrayList){
-        String workplaces = " ";
+        String workplaces = "\nWorkplaces: \n";
 
         for (int i = 0; i < workPlacesArrayList.size(); i++) {
             workplaces = workplaces + workPlacesArrayList.get(i) + "\n";
-
-            //TODO REMOVE
-            System.out.println(workplaces);
         }
+
+        //TODO REMOVE
+        System.out.println(workplaces);
         return workplaces;
     }
 
+    public static String getFormattedAddress(ContactInformation contactInformation){
+        String addressString = "\nAddress: \n";
 
+        addressString = addressString + contactInformation.getAddressLine1() + "\n";
+        addressString = addressString + contactInformation.getAddressLine2()+ "\n";
 
+        addressString = addressString + contactInformation.getCity() + ", ";
+        addressString = addressString + contactInformation.getState() + " ";
+        addressString = addressString + contactInformation.getZip() + " ";
 
+        System.out.println(addressString);
 
-
-
-
-
-
-
-
+        return addressString;
+    }
 }
