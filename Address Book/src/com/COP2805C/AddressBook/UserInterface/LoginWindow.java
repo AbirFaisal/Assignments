@@ -59,10 +59,10 @@ public class LoginWindow {
         //Login
         if (test == 0) {
             //TODO create account
-            CreateAccountWindow.createAccount();
+            return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
         }else {
             //Return string array with username and password
-            return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
+            CreateAccountWindow.createAccount();
         }
         return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
     }
