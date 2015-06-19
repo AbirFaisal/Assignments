@@ -11,6 +11,7 @@ import java.util.Calendar;
  */
 public class ContactInformation {
 
+    //Key from the database
     private int key;
     private String group;
 

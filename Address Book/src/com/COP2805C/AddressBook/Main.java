@@ -38,9 +38,7 @@ public class Main extends Application {
 
         do {
             //TODO check if username column is empty
-            //
-            try {
-                if (database.isColumnEmpty()) {
+                if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
                     credentials = CreateAccountWindow.createAccount();
                 } else {
                     //Prompt for user and password
@@ -50,9 +48,7 @@ public class Main extends Application {
                         JOptionPane.showMessageDialog(null, "Invalid username or password");
                     }
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
         }while (Crypto.authinticateUser(credentials));
 //
 

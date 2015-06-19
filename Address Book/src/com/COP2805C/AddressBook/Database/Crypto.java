@@ -65,13 +65,13 @@ public class Crypto {
     }
 
 
-    public static boolean authinticateUser(String[] credientals){
+    public static boolean authinticateUser(String[] credentials){
 
 
         //                              Table       Username        Password
-        if (Main.database.doesUserExist("ACCOUNTS", credientals)) {
+        if (Main.database.doesUserExist(credentials)) {
 
-            if (verifySHA(credientals[1], Main.database.getPassword("Accounts", credientals))) {
+            if (verifySHA(credentials[1], Main.database.getPassword(credentials))) {
                 return true;
             } else return false;
         }

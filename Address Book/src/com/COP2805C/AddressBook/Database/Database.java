@@ -30,7 +30,7 @@ public class Database {
             System.out.println("Connection successful");
             Statement stat = conn.createStatement();
             //Table to track user
-            stat.executeUpdate("create table if not exists ACCOUNTS(ACCOUNT VARCHAR, primary key(ACCOUNT));");
+            stat.executeUpdate("create table if not exists ACCOUNTS(ACCOUNT VARCHAR," + "PASSWORD VARCHAR,"+ " primary key(ACCOUNT));");
             //Table for static data
             stat.executeUpdate("create table if not exists CONTACTS(ACCOUNT VARCHAR ,"
                     + "CONTACT_ID INTEGER," + "F_Name VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
@@ -46,34 +46,61 @@ public class Database {
     }
 
 
-
-    public boolean isColumnEmpty()throws SQLException{
+    //Function that checks if provided column is empty, one for table, one for column.
+    public boolean isColumnEmpty(String TABLE, String COLUMN){
         //TODO put code here Chris
-
-        String query = "SELECT * from ACCOUNTS";
         try{
+        String query = "SELECT "+COLUMN+" from " + TABLE;
         PreparedStatement st = conn.prepareStatement(query);
             ResultSet rs = st.executeQuery(query);
-            if(rs.getString("ACCOUNT")==null) {
+            if(rs.getString(COLUMN)==null) {
+                //testing
+                System.out.println("Working");
                 return true;
             }else{
                 return false;
             }
-        }catch(NullPointerException e){
-
-            e.printStackTrace();
+        }catch(NullPointerException | SQLException e){
+            System.out.println(e);
+            return true;
         }
-        return false;
     }
 
-    public boolean doesUserExist(String blah, String[] blahss){
-        return true;
+    public boolean doesUserExist(String[] credentials)
+    {
+
+        try {
+            String query = "SELECT ACCOUNT FROM ACCOUNTS WHERE ACCOUNT=?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, credentials[1]);
+            ResultSet rs = pst.executeQuery();
+            if(rs.getString("ACCOUNT")==null){
+                return false;
+            }else{
+                return true;
+            }
+        }catch(NullPointerException|SQLException e){
+            System.out.println(e);
+            return false;
+
+        }
     }
 
 
-    public static String getPassword(String blah, String[] blahss){
-        return new String();
-    };
+    public static String getPassword(String[] credentials){
+        String password = new String();
+        try {
+            String query = "SELECT PASSWORD FROM ACCOUNTS WHERE ACCOUNT=?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, credentials[1]);
+            ResultSet rs = pst.executeQuery();
+            password = rs.getString("PASSWORD");
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+
+        return password;
+    }
 
     //DELETES ALL OF THE CONTACTS RECORDS IF GIVEN THE CONTACT ID
     public void deleteCONTACTID(int CONTACT_ID){
@@ -89,11 +116,12 @@ public class Database {
         }
     }
     //ADDs A USER TO THE DATABASE
-    public void addAccount(String ACCOUNT) throws SQLException{
+    public void addAccount(String[] credentials) throws SQLException{
 
-            String update = "INSERT into ACCOUNTS(ACCOUNT) values (?)";
+            String update = "INSERT into ACCOUNTS(ACCOUNT,PASSWORD) values (?,?)";
             PreparedStatement pst = conn.prepareStatement(update);
-            pst.setString(1, ACCOUNT);
+            pst.setString(1, credentials[0]);
+            pst.setString(2, credentials[1]);
             pst.executeUpdate();
             pst.close();
     }
