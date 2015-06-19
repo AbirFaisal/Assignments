@@ -13,9 +13,6 @@ import java.sql.SQLException;
  * Created by EpiphX on 6/8/2015.
  */
 public class LoginWindow {
-//    TODO ???
-//    public static String[] loginPrompt(){
-//        Connection conn = Database.dbConnector();
 
     public static String[] loginPrompt() {
 
@@ -56,7 +53,6 @@ public class LoginWindow {
                 buttons, buttons[0]);
 
 
-        //TODO TEST REMOVE
         System.out.println(usernameJTextField.getText() + passwordJTextField.getText());
         System.out.println(test);
 

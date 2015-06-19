@@ -69,9 +69,9 @@ public class Crypto {
 
 
         //                              Table       Username        Password
-        if (Main.database.doesUserExist("Accounts", credientals)) {
+        if (Main.database.doesUserExist("ACCOUNTS", credientals)) {
 
-            if (verifySHA(credientals[1], Main.database.getPasssword("Accounts", credientals))) {
+            if (verifySHA(credientals[1], Main.database.getPassword("Accounts", credientals))) {
                 return true;
             } else return false;
         }

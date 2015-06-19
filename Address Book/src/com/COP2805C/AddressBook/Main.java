@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -33,23 +34,27 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         //Check if database exists if not create it
-        database.initialize();
+        //database.initialize();
 
         do {
             //TODO check if username column is empty
-            //                          Table       Column
-            if (database.isColumnEmpty("Accounts", "Usernames")) {
-                credentials = CreateAccountWindow.createAccount();
-            } else {
-                //Prompt for user and password
-                credentials = LoginWindow.loginPrompt();
+            //
+            try {
+                if (database.isColumnEmpty()) {
+                    credentials = CreateAccountWindow.createAccount();
+                } else {
+                    //Prompt for user and password
+                    credentials = LoginWindow.loginPrompt();
 
-                if (Crypto.authinticateUser(credentials)){
-                    JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    if (Crypto.authinticateUser(credentials)){
+                        JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }while (Crypto.authinticateUser(credentials));
-
+//
 
 
         //TODO TEST REMOVE

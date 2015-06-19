@@ -1,8 +1,11 @@
 package com.COP2805C.AddressBook.Database;
 
+import com.sun.javafx.tk.Toolkit;
+import javafx.scene.image.Image;
 import org.sqlite.SQLiteConfig;
 
 import javax.swing.*;
+import javax.xml.transform.Result;
 import java.io.*;
 import java.sql.*;
 import java.util.Calendar;
@@ -12,7 +15,7 @@ import java.util.Calendar;
 public class Database {
     private static final Database DATABASE = new Database();
     private Database(){}
-    private Connection conn = null;
+    private static Connection conn = null;
 
     public static Database getDatabase(){
         return DATABASE;
@@ -31,10 +34,10 @@ public class Database {
             //Table for static data
             stat.executeUpdate("create table if not exists CONTACTS(ACCOUNT VARCHAR ,"
                     + "CONTACT_ID INTEGER," + "F_Name VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
-                    + "StreetName VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES TEXT,"
+                    + "StreetName VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
                     + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "primary key (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
-            stat.executeUpdate("CREATE TABLE DYNAMIC_DATA(ROW_ID INTEGER NOT NULL," + "CONTACT_ID INTEGER NOT NULL ,"
+            stat.executeUpdate("CREATE TABLE DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
                     + "PHONE_NUMBER INTEGER," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, "+ "FOREIGN KEY(CONTACT_ID) "
                     + "REFERENCES CONTACTS(CONTACT_ID) ON DELETE CASCADE);");
         }catch(Exception e){
@@ -44,13 +47,33 @@ public class Database {
 
 
 
-    public static boolean isColumnEmpty(String table, String column){
+    public boolean isColumnEmpty()throws SQLException{
         //TODO put code here Chris
+
+        String query = "SELECT * from ACCOUNTS";
+        try{
+        PreparedStatement st = conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery(query);
+            if(rs.getString("ACCOUNT")==null) {
+                return true;
+            }else{
+                return false;
+            }
+        }catch(NullPointerException e){
+
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean doesUserExist(String blah, String[] blahss){
         return true;
     }
 
 
-
+    public static String getPassword(String blah, String[] blahss){
+        return new String();
+    };
 
     //DELETES ALL OF THE CONTACTS RECORDS IF GIVEN THE CONTACT ID
     public void deleteCONTACTID(int CONTACT_ID){
@@ -74,7 +97,6 @@ public class Database {
             pst.executeUpdate();
             pst.close();
     }
-
 
     //This method adds a CONTACT_ID for the listed account and returns the key for this contact. This key can then be used in the other functions to add the required fields.
     public int createContact(String ACCOUNT) throws SQLException{
@@ -132,17 +154,27 @@ public class Database {
         }
     }
 
-    //TODO BUILD A METHOD FOR IMAGE RETRIEVAL
-    public void addDate(int CONTCT_ID, Calendar calender){
-
+    public void addDate(int CONTACT_ID, Calendar calendar) throws SQLException{
+        String update = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setLong(1,calendar.getTimeInMillis());
+        pst.setInt(2,CONTACT_ID);
+        pst.executeUpdate();
+        pst.close();
     }
 
-    public void retrievePicture(int CONTACT_ID){
+    public long getDate(int CONTACT_ID) throws SQLException{
+        String query = "SELECT DOB from CONTACTS WHERE CONTACT_ID =?";
+        PreparedStatement pst = conn.prepareStatement(query);
+        pst.setInt(1, CONTACT_ID);
+        ResultSet rs = pst.executeQuery();
+        return rs.getLong("DOB");
+    }
+    public void getPicture(int CONTACT_ID){
         OutputStream outputStream = null;
         InputStream inputStream = null;
 
         try{
-            // File image = new File()
             String query = "SELECT picture from CONTACTS where CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, CONTACT_ID);
@@ -150,8 +182,7 @@ public class Database {
             if(rs.next()){
                 inputStream = rs.getBinaryStream("picture");
             }
-            inputStream = new FileInputStream(new File("Student_img.jpg"));
-            outputStream = new FileOutputStream("std_img.jpg");
+            outputStream = new FileOutputStream("std_img"+CONTACT_ID+".jpg");
             byte[] content = new byte[1024];
             int size = 0;
             while((size = inputStream.read(content))!= -1){
@@ -168,10 +199,41 @@ public class Database {
         }
     }
 
+    //TODO DECIDE IF WE WANT PHONE_NUMBER AS A LONG OR A STRING.
+    public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER, String EMAIL,String WORK_PLACE) throws SQLException{
+        String update = "INSERT into DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) values (?,?,?,?);";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setInt(1,CONTACT_ID);
+        pst.setLong(2, PHONE_NUMBER);
+        pst.setString(3,EMAIL);
+        pst.setString(4,WORK_PLACE);
+        pst.executeUpdate();
+        pst.close();
+    }
+    public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER)throws SQLException{
+        String update = "INSERT into DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) values (?,?,null,null);";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setInt(1,CONTACT_ID);
+        pst.setLong(2, PHONE_NUMBER);
+        pst.executeUpdate();
+        pst.close();
+    }
 
-    //To add multiple phoneNumbers, Emails etc. Just call this method additional times with the same CONTACT_ID.
-    public void createDynamicData(int CONTACT_ID, int phoneNumber, String EMAIL,String WORK_PLACE){
-
+    public void addDynamicData(int CONTACT_ID, String EMAIL)throws SQLException{
+        String update = "INSERT into DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) values (?,null,?,null);";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setInt(1,CONTACT_ID);
+        pst.setString(2, EMAIL);
+        pst.executeUpdate();
+        pst.close();
+    }
+    public void addDynamicData(String WORK_PLACE, int CONTACT_ID)throws SQLException{
+        String update = "INSERT into DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) values (?,null,null,?);";
+        PreparedStatement pst = conn.prepareStatement(update);
+        pst.setInt(1,CONTACT_ID);
+        pst.setString(2,WORK_PLACE);
+        pst.executeUpdate();
+        pst.close();
     }
 
     public void closeDB() throws SQLException{
