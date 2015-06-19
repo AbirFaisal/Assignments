@@ -52,13 +52,14 @@ public class LoginWindow {
                 null,
                 buttons, buttons[0]);
 
-        //TODO TEST REMOVE
+
         System.out.println(usernameJTextField.getText() + passwordJTextField.getText());
         System.out.println(test);
 
         //Login
         if (test == 0) {
             //TODO create account
+            CreateAccountWindow.createAccount();
         }else {
             //Return string array with username and password
             return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};

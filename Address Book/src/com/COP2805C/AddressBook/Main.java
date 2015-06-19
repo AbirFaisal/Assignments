@@ -2,142 +2,108 @@ package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
+import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
+import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.HPos;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.shape.StrokeType;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class Main extends Application {
 
-    static String[] credentials = new String[2];
+    private static String[] credentials = new String[2]; //Username and password
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
-    static Database db = Database.getDatabase();
+    ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
+
+    public static Database database = Database.getDatabase();
+
     public static void main(String[] args) {
-        System.out.println("Address Book Manager");
-        db.innitialize();
 
-        //initialise Database
-        //Database.initializeDatabase();
+        //Check if database exists if not create it
+        //database.initialize();
 
-        //TODO check if username table is empty
+        do {
+            //TODO check if username column is empty
+            //
+            try {
+                if (database.isColumnEmpty()) {
+                    credentials = CreateAccountWindow.createAccount();
+                } else {
+                    //Prompt for user and password
+                    credentials = LoginWindow.loginPrompt();
 
-        //TODO if DB is empty launch createAccount
+                    if (Crypto.authinticateUser(credentials)){
+                        JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }while (Crypto.authinticateUser(credentials));
+//
 
-        //TODO Else launch loginWindow()
-
-
-        //Prompt for user and password
-        credentials = LoginWindow.loginPrompt();
 
         //TODO TEST REMOVE
         System.out.println("\n Username: " + credentials[0] + "\n Passowrd: " + credentials[1]);
-        //temp Method call
-        //Database.checkLogin(con,credentials);
 
-        //TODO Authenticate User re-prompt on error
 
-        //TODO Load Contact List from database
+        //TODO Load Contact List from database into FXcollections
 
+
+        //Launch main window
         launch(args);
-        System.out.println("Quitting");
-        //Authenticate the user
-        //TODO TEST
-        String sha1 = Crypto.stringSHA("test");
-        String sha2 = Crypto.stringSHA("tedst");
-        boolean shabool = Crypto.verifySHA(sha1, sha2);
-
-        System.out.println(shabool + " Quitting");
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
+        Image testImage = new Image("http://i.imgur.com/0dMGQvy.jpg");
+        ArrayList<String> phone = new ArrayList<>();
+        ArrayList<String> email = new ArrayList<>();
+        ArrayList<String> work = new ArrayList<>();
 
-        //TODO somthing here? This is a Sample
-        //Information
-        //TODO TEST REMOVE
+        for (int i = 0; i < 5; i++) {
+            phone.add("phone" + i);
+            email.add("email" + i);
+            work.add("work" + i);
+        }
 
+        Calendar testCalendar = new GregorianCalendar(2015,3,3);
 
-        Text phoneNumberText = new Text("dfsd");
-        Text emailText = new Text("dfsdsf");
-        Text addressText = new Text("sdfsdf");
-        Text groupText = new Text("sdfsdfsd");
-
-
-        TextArea notesTextArea = new TextArea();
-        //notesTextArea.setPrefSize(400, 400);
-        notesTextArea.setPromptText("Notes");
-
-
-
-        //Flowpane to format the text nicey
-        FlowPane contactInfoFlowPane = new FlowPane();
-        AnchorPane.setTopAnchor(contactInfoFlowPane, 0.0);
-        AnchorPane.setBottomAnchor(contactInfoFlowPane, 0.0);
-        AnchorPane.setLeftAnchor(contactInfoFlowPane, 0.0);
-        AnchorPane.setRightAnchor(contactInfoFlowPane, 0.0);
-
-        contactInfoFlowPane.setHgap(20.0);
-        contactInfoFlowPane.setAlignment(Pos.TOP_LEFT);
-        contactInfoFlowPane.setOrientation(Orientation.VERTICAL);
-
-        //TODO TEST Remove
-        contactInfoFlowPane.getChildren().addAll(phoneNumberText, emailText, addressText, groupText, notesTextArea);
-
-        //Contact Info Anchor Pane
-        AnchorPane contactInfoAnchorPane = new AnchorPane(contactInfoFlowPane);
-
-        //Scroll pane incase of large amount of data
-        ScrollPane contactInfoScrollPane = new ScrollPane(contactInfoAnchorPane);
-        AnchorPane.setTopAnchor(contactInfoScrollPane, 120.0);
-        AnchorPane.setBottomAnchor(contactInfoScrollPane, 0.0);
-        AnchorPane.setLeftAnchor(contactInfoScrollPane, 0.0);
-        AnchorPane.setRightAnchor(contactInfoScrollPane, 0.0);
+        ContactInformation contactInformation = new ContactInformation(
+                1 ,"group",
+                testImage,
+                "First", "Middle", "Last", "Nick",
+                "addr1", "addr2", "city", "state", "zip",
+                "notes",
+                phone, email, work,
+                testCalendar);
 
 
-
-        //Contact Photo
-        ImageView contactPhotoImageView = new ImageView();
-        //Image contactImage = new Image("default.jpg");
-        //contactPhotoImageView.setImage(contactImage);
-
-
-        //First Middle Last name text label
-        Text contactNameText = new Text("First Middle Last");
-        contactNameText.strokeTypeProperty().set(StrokeType.OUTSIDE);
-        contactNameText.setTextAlignment(TextAlignment.CENTER);
-        contactNameText.setFont(Font.font(24.0));
-
-
-
-        //Top banner with photo and name
-        FlowPane bannerFlowPane = new FlowPane(contactPhotoImageView, contactNameText);
-        bannerFlowPane.setAlignment(Pos.CENTER);
-        bannerFlowPane.setColumnHalignment(HPos.CENTER);
-        AnchorPane.setTopAnchor(bannerFlowPane, 20.0);
-        AnchorPane.setLeftAnchor(bannerFlowPane, 20.0);
-        AnchorPane.setRightAnchor(bannerFlowPane, 20.0);
-
+        ContactViewFactory contactViewFactory = new ContactViewFactory();
+        //ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation).contactView();
+        /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
 
 
         //Right side Anchor Pane
-        AnchorPane rightAnchorPane = new AnchorPane(bannerFlowPane, contactInfoScrollPane);
+        AnchorPane rightAnchorPane = contactViewFactory.contact(contactInformation).contactView();
+
         AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
         AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
         AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);

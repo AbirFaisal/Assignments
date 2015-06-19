@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import org.sqlite.SQLiteConfig;
 
 import javax.swing.*;
+import javax.xml.transform.Result;
 import java.io.*;
 import java.sql.*;
 import java.util.Calendar;
@@ -14,13 +15,13 @@ import java.util.Calendar;
 public class Database {
     private static final Database DATABASE = new Database();
     private Database(){}
-    private Connection conn = null;
+    private static Connection conn = null;
 
     public static Database getDatabase(){
         return DATABASE;
     }
 
-    public void innitialize(){
+    public void initialize(){
         try{
             Class.forName("org.sqlite.JDBC");
             SQLiteConfig config = new SQLiteConfig();
@@ -30,7 +31,7 @@ public class Database {
             Statement stat = conn.createStatement();
             //Table to track user
             stat.executeUpdate("create table if not exists ACCOUNTS(ACCOUNT VARCHAR, primary key(ACCOUNT));");
-            //Table for generic data
+            //Table for static data
             stat.executeUpdate("create table if not exists CONTACTS(ACCOUNT VARCHAR ,"
                     + "CONTACT_ID INTEGER," + "F_Name VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
                     + "StreetName VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
@@ -43,6 +44,37 @@ public class Database {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+
+
+
+    public boolean isColumnEmpty()throws SQLException{
+        //TODO put code here Chris
+
+        String query = "SELECT * from ACCOUNTS";
+        try{
+        PreparedStatement st = conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery(query);
+            if(rs.getString("ACCOUNT")==null) {
+                return true;
+            }else{
+                return false;
+            }
+        }catch(NullPointerException e){
+
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean doesUserExist(String blah, String[] blahss){
+        return true;
+    }
+
+
+    public static String getPassword(String blah, String[] blahss){
+        return new String();
+    };
+
     //DELETES ALL OF THE CONTACTS RECORDS IF GIVEN THE CONTACT ID
     public void deleteCONTACTID(int CONTACT_ID){
         try{
