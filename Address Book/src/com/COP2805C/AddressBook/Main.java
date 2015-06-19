@@ -39,30 +39,21 @@ public class Main extends Application {
 
             //Check if username column is empty
             if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
-                    do {
-                        //Get new account information
-                        credentials = CreateAccountWindow.createAccount();
-
-                        //Prompt user if account already exists
-                        if (database.doesUserExist(credentials)) {
-                            JOptionPane.showMessageDialog(null, "User already Exists");
-                        }else { //create account and break the loop
-                            database.addAccount(credentials);
-                            break;
-                        }
-                        //Keep asking if user inputs existing username
-                    } while (database.doesUserExist(credentials));
+                //Create Account
+                Functions.createAccount(credentials, database);
             } else {
                 do {
-                    //Prompt for user and password
+                    //Returns null if user selects create account
                     credentials = LoginWindow.loginPrompt();
 
-                    //Prompt if username and password are invalid
-                    if (!Crypto.authenticateUser(credentials)) {
+                    if (credentials == null){
+                        Functions.createAccount(credentials, database);
+                        break;
+                    }else if (!Crypto.authenticateUser(credentials)) {
                         JOptionPane.showMessageDialog(null, "Invalid username or password");
                     }
                     //keep prompting while user is not authenticated
-                } while (Crypto.authenticateUser(credentials));
+                } while (!Crypto.authenticateUser(credentials));
             }
 
         //populate the contactInformationArrayList

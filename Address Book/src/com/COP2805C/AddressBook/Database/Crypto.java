@@ -80,23 +80,6 @@ public class Crypto {
         return false;
     }
 
-
-
-
-
-
-    public static boolean checkPasswordStrength(String password){
-        if (password.length() >= 6){
-            return true;
-        }
-
-        JOptionPane.showMessageDialog(null,
-                "Password not strong enough. Your password must be at least 6 characters long");
-        return false;
-    }
-
-
-
 }
 
 
