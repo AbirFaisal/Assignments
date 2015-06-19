@@ -6,7 +6,4 @@ package com.COP2805C.AddressBook.UserInterface;
 public class EventHandlers {
 
 
-
-
-
 }

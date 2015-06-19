@@ -10,36 +10,36 @@ import java.util.List;
  */
 public class SaveLoadData {
 
-    public static void saveData(List<Object> object){
+    public static void saveData(List<Object> object) {
         try {
             //TODO dont specify absoulute file paths
             FileOutputStream fout = new FileOutputStream("C:\\objects.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(object);
             oos.close();
-        }catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static List<Object> loadData(){
+    public static List<Object> loadData() {
 
         List<Object> objects = new ArrayList<>();
 
-        try{
+        try {
             //TODO dont specify absoulute file paths
             FileInputStream fis = new FileInputStream("C:\\objects.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);
             objects = (List<Object>) ois.readObject();
             ois.close();
 
-        }catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }catch(ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return objects;

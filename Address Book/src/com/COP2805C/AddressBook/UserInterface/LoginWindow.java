@@ -1,13 +1,6 @@
 package com.COP2805C.AddressBook.UserInterface;
 
-import com.COP2805C.AddressBook.Database.Database;
-
 import javax.swing.*;
-import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * Created by EpiphX on 6/8/2015.
@@ -60,7 +53,7 @@ public class LoginWindow {
         if (login == 0) {
             //Return string array with username and password
             return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
-        }else {
+        } else {
             //if return null if create account
             return null;
         }

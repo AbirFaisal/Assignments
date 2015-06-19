@@ -4,7 +4,6 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
-import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -37,24 +36,24 @@ public class Main extends Application {
         database.initialize();
 
 
-            //Check if username column is empty
-            if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
-                //Create Account
-                Functions.createAccount(credentials, database);
-            } else {
-                do {
-                    //Returns null if user selects create account
-                    credentials = LoginWindow.loginPrompt();
+        //Check if username column is empty
+        if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
+            //Create Account
+            Functions.createAccount(credentials, database);
+        } else {
+            do {
+                //Returns null if user selects create account
+                credentials = LoginWindow.loginPrompt();
 
-                    if (credentials == null){
-                        Functions.createAccount(credentials, database);
-                        break;
-                    }else if (!Crypto.authenticateUser(credentials)) {
-                        JOptionPane.showMessageDialog(null, "Invalid username or password");
-                    }
-                    //keep prompting while user is not authenticated
-                } while (!Crypto.authenticateUser(credentials));
-            }
+                if (credentials == null) {
+                    Functions.createAccount(credentials, database);
+                    break;
+                } else if (!Crypto.authenticateUser(credentials)) {
+                    JOptionPane.showMessageDialog(null, "Invalid username or password");
+                }
+                //keep prompting while user is not authenticated
+            } while (!Crypto.authenticateUser(credentials));
+        }
 
         //populate the contactInformationArrayList
         if (Crypto.authenticateUser(credentials)) {
@@ -64,7 +63,7 @@ public class Main extends Application {
         //TODO Load Contact List from database into FXcollections Observable list
         //ContactInformation = new ContactInformation(database.generateContact);
         int number = database.numberOfContacts(credentials);
-        for(int begin = 0; begin<number;number++){
+        for (int begin = 0; begin < number; number++) {
 
         }
 

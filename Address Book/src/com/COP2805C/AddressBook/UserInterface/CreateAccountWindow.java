@@ -1,6 +1,5 @@
 package com.COP2805C.AddressBook.UserInterface;
 
-import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Functions;
 
 import javax.swing.*;
@@ -10,7 +9,6 @@ import java.util.Objects;
  * Created by abirfaisal on 6/18/15.
  */
 public class CreateAccountWindow {
-
 
 
     public static String[] createAccount() {
@@ -50,8 +48,8 @@ public class CreateAccountWindow {
 
 
         do {
-                //JOptionPane
-                String[] buttons = {"Create Account"};
+            //JOptionPane
+            String[] buttons = {"Create Account"};
             int test = JOptionPane.showOptionDialog(
                     null,
                     jPanel,
@@ -66,7 +64,7 @@ public class CreateAccountWindow {
             if (!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText())) {
                 JOptionPane.showMessageDialog(null, "Passwords do not match");
             }
-        }while(!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText()) ||
+        } while (!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText()) ||
                 !Functions.isPasswordStrong(usernameJTextField.getText(), passwordJTextField.getText()));
 
         return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};

@@ -2,7 +2,6 @@ package com.COP2805C.AddressBook.Database;
 
 import com.COP2805C.AddressBook.Main;
 
-import javax.swing.*;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -64,7 +63,7 @@ public class Crypto {
     }
 
 
-    public static boolean authenticateUser(String[] credentials){
+    public static boolean authenticateUser(String[] credentials) {
 
         //Check if user exsists
         if (Main.database.doesUserExist(credentials)) {

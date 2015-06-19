@@ -22,7 +22,7 @@ public class MainWindow {
     }
 
     //Left Side Anchor Pane
-    public static AnchorPane leftAnchorPane(Node... FXNode){
+    public static AnchorPane leftAnchorPane(Node... FXNode) {
         AnchorPane leftAnchorPane = new AnchorPane(FXNode);
         AnchorPane.setTopAnchor(leftAnchorPane, 0.0);
         AnchorPane.setBottomAnchor(leftAnchorPane, 0.0);
@@ -33,7 +33,7 @@ public class MainWindow {
     }
 
 
-    public static ListView<String> contactListView(ObservableList<String> observableList){
+    public static ListView<String> contactListView(ObservableList<String> observableList) {
         ListView<String> contactListView = new ListView<String>(observableList);
         AnchorPane.setTopAnchor(contactListView, 42.0);
         AnchorPane.setBottomAnchor(contactListView, 42.0);
@@ -44,7 +44,7 @@ public class MainWindow {
     }
 
     //Search Field
-    public static TextField searchTextField(){
+    public static TextField searchTextField() {
         TextField searchTextField = new TextField();
         searchTextField.setPromptText("Search");
         AnchorPane.setTopAnchor(searchTextField, 8.0);
@@ -55,7 +55,7 @@ public class MainWindow {
     }
 
     //Group Selection Choice Box
-    public static ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList){
+    public static ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList) {
         ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(observableList);
         AnchorPane.setBottomAnchor(groupChoiceBox, 8.0);
         AnchorPane.setLeftAnchor(groupChoiceBox, 8.0);
@@ -64,7 +64,7 @@ public class MainWindow {
     }
 
 
-    public static SplitMenuButton editMenuButton(){
+    public static SplitMenuButton editMenuButton() {
         SplitMenuButton menuButton = new SplitMenuButton();
         menuButton.setText("Edit");
         menuButton.getItems().addAll(
