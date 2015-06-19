@@ -6,15 +6,13 @@ package com.COP2805C.AddressBook.Database;
 public class Authenticate {
 
 
-
-    public static void authenticate(String username, String password){
+    public static void authenticate(String username, String password) {
 
 
     }
 
 
-
-    public static void getUserPasswordSHA(String userName){
+    public static void getUserPasswordSHA(String userName) {
 
 
     }

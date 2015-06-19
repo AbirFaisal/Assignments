@@ -1,7 +1,6 @@
-package com.COP2805C.AddressBook;
+package com.COP2805C.AddressBook.Contacts;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,8 +37,8 @@ public class ContactInformation {
 
 
     //TESTING Empty
-    public ContactInformation(){
-            this.key = 0;
+    public ContactInformation() {
+        this.key = 0;
     }
 
     public ContactInformation(

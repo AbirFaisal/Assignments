@@ -1,14 +1,9 @@
 package com.COP2805C.AddressBook.UserInterface.ContactViewPane;
 
-import com.COP2805C.AddressBook.ContactInformation;
-import javafx.geometry.HPos;
+import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -37,14 +32,14 @@ public class ContactAnchorPane implements ContactView {
 
         TextFlow informationTextFlow =
                 informationTextFlow(
-                informationText(
-                getInformationString(contactInformation)));
+                        informationText(
+                                getInformationString(contactInformation)));
 
         return contactViewAnchorPane(bannerFlowPane, informationTextFlow);
     }
 
 
-    public static AnchorPane contactViewAnchorPane(Node... FXNode){
+    public static AnchorPane contactViewAnchorPane(Node... FXNode) {
         AnchorPane contactViewAnchorPane = new AnchorPane(FXNode);
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
@@ -54,7 +49,7 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-    public static FlowPane bannerFlowPane(Node... FXNode){
+    public static FlowPane bannerFlowPane(Node... FXNode) {
         FlowPane bannerFlowPane = new FlowPane(FXNode);
         AnchorPane.setTopAnchor(bannerFlowPane, 20.0);
         AnchorPane.setLeftAnchor(bannerFlowPane, 20.0);
@@ -72,7 +67,7 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-    public static ImageView contactImageView(ContactInformation contactInformation){
+    public static ImageView contactImageView(ContactInformation contactInformation) {
 
 
         try {
@@ -83,7 +78,7 @@ public class ContactAnchorPane implements ContactView {
 
             return contactImageView;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("No Profile image");
         }
         //TODO return with default image
@@ -91,24 +86,32 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-    public static Text nameText(ContactInformation contactInformation){
+    public static Text nameText(ContactInformation contactInformation) {
         String name = "";
 
         try {
-                name = name + contactInformation.getFirstName();
-        }catch (Exception e){System.out.println("No First Name");}
+            name = name + contactInformation.getFirstName();
+        } catch (Exception e) {
+            System.out.println("No First Name");
+        }
 
         try {
             name = name + " " + contactInformation.getMiddleName();
-        }catch (Exception e){System.out.println("No Middle Name");}
+        } catch (Exception e) {
+            System.out.println("No Middle Name");
+        }
 
         try {
-                name = name + " " + contactInformation.getLastName();
-        }catch (Exception e){System.out.println("No Last Name");}
+            name = name + " " + contactInformation.getLastName();
+        } catch (Exception e) {
+            System.out.println("No Last Name");
+        }
 
         try {
-                name = name + " (" + contactInformation.getNickname() + ")";
-        }catch (Exception e){System.out.println("No Nickname");}
+            name = name + " (" + contactInformation.getNickname() + ")";
+        } catch (Exception e) {
+            System.out.println("No Nickname");
+        }
 
 
         Text nameText = new Text(name);
@@ -117,7 +120,7 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-    public static TextFlow informationTextFlow(Text text){
+    public static TextFlow informationTextFlow(Text text) {
 
         TextFlow informationTextFlow = new TextFlow(text);
 
@@ -130,14 +133,14 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-    public static Text informationText(String informationText){
+    public static Text informationText(String informationText) {
 
         /** Do any text formatting here if needed **/
 
         return new Text(informationText);
     }
 
-    public static String getInformationString(ContactInformation contactInformation){
+    public static String getInformationString(ContactInformation contactInformation) {
 
         String phoneNumbers = getFormattedPhoneNumbers(contactInformation.getPhoneNumbers());
         String emails = getFormattedEmails(contactInformation.getPhoneNumbers());
@@ -148,7 +151,7 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
-    public static String getFormattedPhoneNumbers(ArrayList<String> phoneNumberArrayList){
+    public static String getFormattedPhoneNumbers(ArrayList<String> phoneNumberArrayList) {
         String phoneNumbers = "\nPhone Numbers: \n";
 
         for (int i = 0; i < phoneNumberArrayList.size(); i++) {
@@ -159,7 +162,7 @@ public class ContactAnchorPane implements ContactView {
         return phoneNumbers;
     }
 
-    public static String getFormattedEmails(ArrayList<String> emailsArrayList){
+    public static String getFormattedEmails(ArrayList<String> emailsArrayList) {
         String emails = "\nEmails: \n";
 
         for (int i = 0; i < emailsArrayList.size(); i++) {
@@ -171,7 +174,7 @@ public class ContactAnchorPane implements ContactView {
         return emails;
     }
 
-    public static String getFormattedWorkPlaces(ArrayList<String> workPlacesArrayList){
+    public static String getFormattedWorkPlaces(ArrayList<String> workPlacesArrayList) {
         String workplaces = "\nWorkplaces: \n";
 
         for (int i = 0; i < workPlacesArrayList.size(); i++) {
@@ -183,11 +186,11 @@ public class ContactAnchorPane implements ContactView {
         return workplaces;
     }
 
-    public static String getFormattedAddress(ContactInformation contactInformation){
+    public static String getFormattedAddress(ContactInformation contactInformation) {
         String addressString = "\nAddress: \n";
 
         addressString = addressString + contactInformation.getAddressLine1() + "\n";
-        addressString = addressString + contactInformation.getAddressLine2()+ "\n";
+        addressString = addressString + contactInformation.getAddressLine2() + "\n";
 
         addressString = addressString + contactInformation.getCity() + ", ";
         addressString = addressString + contactInformation.getState() + " ";

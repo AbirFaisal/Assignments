@@ -63,18 +63,22 @@ public class Crypto {
     }
 
 
-    public static boolean authinticateUser(String[] credentials){
+    public static boolean authenticateUser(String[] credentials) {
 
-
-        //                              Table       Username        Password
+        //Check if user exsists
         if (Main.database.doesUserExist(credentials)) {
 
+            //Check if password user entered matches the password from user in the database
             if (verifySHA(credentials[1], Main.database.getPassword(credentials))) {
+
+                //Return True if username and password match the database
                 return true;
             }
         }
+        //else return false if any of the 2 checks above fail
         return false;
     }
+
 }
 
 
