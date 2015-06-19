@@ -46,10 +46,16 @@ public class Database {
     }
 
 
+<<<<<<< HEAD
     //Function that checks if provided column is empty, one for table, one for column.
     public boolean isColumnEmpty(String TABLE, String COLUMN){
+=======
+
+    public boolean isColumnEmpty(String accounts, String usernames) {
+>>>>>>> AbirFaisal
         //TODO put code here Chris
         try{
+<<<<<<< HEAD
         String query = "SELECT "+COLUMN+" from " + TABLE;
         PreparedStatement st = conn.prepareStatement(query);
             ResultSet rs = st.executeQuery(query);
@@ -64,6 +70,33 @@ public class Database {
             System.out.println(e);
             return true;
         }
+=======
+            PreparedStatement st = null;
+            try {
+                st = conn.prepareStatement(query);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ResultSet rs = null;
+            try {
+                rs = st.executeQuery(query);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if(rs.getString("ACCOUNT")==null) {
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }catch(NullPointerException e){
+            System.out.println(e);
+        }
+        return true;
+>>>>>>> AbirFaisal
     }
 
     public boolean doesUserExist(String[] credentials)

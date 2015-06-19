@@ -34,30 +34,57 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         //Check if database exists if not create it
-        //database.initialize();
+        database.initialize();
 
         do {
             //TODO check if username column is empty
+<<<<<<< HEAD
                 if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
+=======
+            if (database.isColumnEmpty("ACCOUNTS", "USERNAMES")) {
+                do {
+                    //Get new account information
+>>>>>>> AbirFaisal
                     credentials = CreateAccountWindow.createAccount();
-                } else {
-                    //Prompt for user and password
-                    credentials = LoginWindow.loginPrompt();
 
-                    if (Crypto.authinticateUser(credentials)){
-                        JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    //Prompt user if account already exists
+                    if (database.doesUserExist(credentials)) {
+                        JOptionPane.showMessageDialog(null, "User already Exists");
                     }
+<<<<<<< HEAD
                 }
 
         }while (Crypto.authinticateUser(credentials));
 //
+=======
+>>>>>>> AbirFaisal
 
+                    //make sure username doesnt exist
+                } while (database.doesUserExist(credentials));
 
-        //TODO TEST REMOVE
-        System.out.println("\n Username: " + credentials[0] + "\n Passowrd: " + credentials[1]);
+                //if account doesnt exist then add it
+                if (!database.doesUserExist(credentials)) {
+                    database.addAccount(credentials);
+                }
+                //if username columlnm is not empty
+            } else {
+                //Prompt for user and password
+                credentials = LoginWindow.loginPrompt();
 
+                //prompt username and password are invalid
+                if (Crypto.authinticateUser(credentials)) {
+                    JOptionPane.showMessageDialog(null, "Invalid username or password");
+                }
+            }
+            //keep prompting while user is not authinticated
+        } while (Crypto.authinticateUser(credentials));
 
-        //TODO Load Contact List from database into FXcollections
+        //populate the contactInformationArrayList
+        if (Crypto.authinticateUser(credentials)) {
+            //TODO populate contactInformationArrayList
+        }
+
+        //TODO Load Contact List from database into FXcollections Observable list
 
 
         //Launch main window
@@ -80,10 +107,10 @@ public class Main extends Application {
             work.add("work" + i);
         }
 
-        Calendar testCalendar = new GregorianCalendar(2015,3,3);
+        Calendar testCalendar = new GregorianCalendar(2015, 3, 3);
 
         ContactInformation contactInformation = new ContactInformation(
-                1 ,"group",
+                1, "group",
                 testImage,
                 "First", "Middle", "Last", "Nick",
                 "addr1", "addr2", "city", "state", "zip",
@@ -123,7 +150,6 @@ public class Main extends Application {
         AnchorPane.setRightAnchor(clearSearchButton, 8.0);
 
 
-
         //Group selection
         //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
         ChoiceBox<String> groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
@@ -160,7 +186,7 @@ public class Main extends Application {
         primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
 
-            //TODO fix this?? what is this?
+        //TODO fix this?? what is this?
         //Login.loginScreen();//Note I intend for this to pop-up first before the user can do anything thus requiring them to log-in.
     }
 }
