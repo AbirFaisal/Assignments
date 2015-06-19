@@ -48,9 +48,7 @@ public class Main extends Application {
                     if (database.doesUserExist(credentials)) {
                         JOptionPane.showMessageDialog(null, "User already Exists");
                     }
-                }
-
-        }while (Crypto.authinticateUser(credentials));
+                } while (Crypto.authinticateUser(credentials));
                     //make sure username doesnt exist
                 } while (database.doesUserExist(credentials));
 
