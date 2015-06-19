@@ -37,7 +37,7 @@ public class Crypto {
     }
 
 
-    public static boolean verifySHA(String input, String SHA){
+    public static boolean verifySHA(String input, String SHA) {
 
         //get SHA
         String inputSHA = stringSHA(input);
@@ -47,36 +47,33 @@ public class Crypto {
     }
 
 
-    public static void edfasdfas(){
+    public static void edfasdfas() {
 
     }
 
 
-
-
-    public static String encryptString(String string){
+    public static String encryptString(String string) {
         //TODO
         return string;
     }
 
-    public static String decryptString(String string){
+    public static String decryptString(String string) {
         //TODO
         return string;
     }
 
 
-    public static boolean authinticateUser(String[] credientals){
+    public static boolean authinticateUser(String[] credientals) {
 
 
         //                              Table       Username        Password
         if (Main.database.doesUserExist("ACCOUNTS", credientals)) {
 
-            if (verifySHA(credientals[1], Main.database.getPassword("Accounts", credientals))) {
+            if (verifySHA(credientals[1], Main.database.getPassword("ACCOUNTS", credientals))) {
                 return true;
-            } else return false;
+            }
         }
-        //TODO change to false
-        return true;
+        return false;
     }
 }
 

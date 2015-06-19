@@ -47,23 +47,36 @@ public class Database {
 
 
 
-    public boolean isColumnEmpty()throws SQLException{
+    public boolean isColumnEmpty(String accounts, String usernames) {
         //TODO put code here Chris
 
         String query = "SELECT * from ACCOUNTS";
         try{
-        PreparedStatement st = conn.prepareStatement(query);
-            ResultSet rs = st.executeQuery(query);
-            if(rs.getString("ACCOUNT")==null) {
-                return true;
-            }else{
-                return false;
+            PreparedStatement st = null;
+            try {
+                st = conn.prepareStatement(query);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ResultSet rs = null;
+            try {
+                rs = st.executeQuery(query);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if(rs.getString("ACCOUNT")==null) {
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }catch(NullPointerException e){
-
-            e.printStackTrace();
+            System.out.println(e);
         }
-        return false;
+        return true;
     }
 
     public boolean doesUserExist(String blah, String[] blahss){
