@@ -38,19 +38,20 @@ public class Main extends Application {
 
         do {
             //TODO check if username column is empty
+            if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
                 if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
-            if (database.isColumnEmpty("ACCOUNTS", "USERNAMES")) {
-                do {
-                    //Get new account information
-                    credentials = CreateAccountWindow.createAccount();
+                    do {
+                        //Get new account information
+                        credentials = CreateAccountWindow.createAccount();
 
-                    //Prompt user if account already exists
-                    if (database.doesUserExist(credentials)) {
-                        JOptionPane.showMessageDialog(null, "User already Exists");
-                    }
-                } while (Crypto.authinticateUser(credentials));
+                        //Prompt user if account already exists
+                        if (database.doesUserExist(credentials)) {
+                            JOptionPane.showMessageDialog(null, "User already Exists");
+                        }
+                    } while (Crypto.authinticateUser(credentials));
                     //make sure username doesnt exist
-                } while (database.doesUserExist(credentials));
+                }
+                while (database.doesUserExist(credentials)) ;
 
                 //if account doesnt exist then add it
                 if (!database.doesUserExist(credentials)) {
@@ -59,6 +60,7 @@ public class Main extends Application {
                 //if username columlnm is not empty
             } else {
                 //Prompt for user and password
+                //TODO User:Bob Password:121212
                 credentials = LoginWindow.loginPrompt();
 
                 //prompt username and password are invalid
@@ -75,7 +77,11 @@ public class Main extends Application {
         }
 
         //TODO Load Contact List from database into FXcollections Observable list
+        //ContactInformation = new ContactInformation(database.generateContact);
+        int number = database.numberOfContacts(credentials);
+        for(int begin = 0; begin<number;number++){
 
+        }
 
         //Launch main window
         launch(args);

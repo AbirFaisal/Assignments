@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.xml.transform.Result;
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 /**
  * Created by abirfaisal on 6/10/15.
@@ -41,57 +42,44 @@ public class Database {
                     + "PHONE_NUMBER INTEGER," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, "+ "FOREIGN KEY(CONTACT_ID) "
                     + "REFERENCES CONTACTS(CONTACT_ID) ON DELETE CASCADE);");
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            System.out.println(e);
         }
     }
 
+    public int numberOfContacts(String[] credentials){
+        try {
+            String query = "SELECT COUNT(ACCOUNT) AS NumberOfContacts FROM CONTACTS WHERE ACCOUNT=?";
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, credentials[0]);
+            ResultSet rs = st.executeQuery();
+            return rs.getInt("NumberOfContacts");
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     //Function that checks if provided column is empty, one for table, one for column.
-    public boolean isColumnEmpty(String TABLE, String COLUMN){
+    public boolean isColumnEmpty(String TABLE, String COLUMN) {
 
-    public boolean isColumnEmpty(String accounts, String usernames) {
         //TODO put code here Chris
-        try{
-        String query = "SELECT "+COLUMN+" from " + TABLE;
-        PreparedStatement st = conn.prepareStatement(query);
-            ResultSet rs = st.executeQuery(query);
-            if(rs.getString(COLUMN)==null) {
+        try {
+            String query = "SELECT " + COLUMN + " from " + TABLE;
+            PreparedStatement st = conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            if (rs.getString(COLUMN) == null) {
                 //testing
                 System.out.println("Working");
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }catch(NullPointerException | SQLException e){
+        } catch (NullPointerException | SQLException e) {
             System.out.println(e);
             return true;
         }
-            PreparedStatement st = null;
-            try {
-                st = conn.prepareStatement(query);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            ResultSet rs = null;
-            try {
-                rs = st.executeQuery(query);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                if(rs.getString("ACCOUNT")==null) {
-                    return true;
-                }else{
-                    return false;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }catch(NullPointerException e){
-            System.out.println(e);
-        }
-        return true;
     }
+
 
     public boolean doesUserExist(String[] credentials)
     {
@@ -99,7 +87,7 @@ public class Database {
         try {
             String query = "SELECT ACCOUNT FROM ACCOUNTS WHERE ACCOUNT=?";
             PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1, credentials[1]);
+            pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
             if(rs.getString("ACCOUNT")==null){
                 return false;
@@ -112,6 +100,23 @@ public class Database {
 
         }
     }
+    public ArrayList<Integer> getContactIDS(String[] credentials){
+        ArrayList<Integer> contactIDS = new ArrayList<>();
+        int count=0;
+        try {
+            String query = "SELECT CONTACT_ID FROM ACCOUNTS WHERE ACCOUNT=?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, credentials[0]);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                contactIDS.add(rs.getInt("CONTACT_ID"));
+            }
+            return contactIDS;
+        }catch(SQLException e){
+            System.out.println(e);
+            return null;
+        }
+    }
 
 
     public static String getPassword(String[] credentials){
@@ -119,7 +124,7 @@ public class Database {
         try {
             String query = "SELECT PASSWORD FROM ACCOUNTS WHERE ACCOUNT=?";
             PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1, credentials[1]);
+            pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
             password = rs.getString("PASSWORD");
         }catch(SQLException e){
@@ -143,14 +148,18 @@ public class Database {
         }
     }
     //ADDs A USER TO THE DATABASE
-    public void addAccount(String[] credentials) throws SQLException{
+    public void addAccount(String[] credentials){
 
-            String update = "INSERT into ACCOUNTS(ACCOUNT,PASSWORD) values (?,?)";
+        try {
+            String update = "INSERT INTO ACCOUNTS(ACCOUNT,PASSWORD) VALUES (?,?)";
             PreparedStatement pst = conn.prepareStatement(update);
             pst.setString(1, credentials[0]);
             pst.setString(2, credentials[1]);
             pst.executeUpdate();
             pst.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     //This method adds a CONTACT_ID for the listed account and returns the key for this contact. This key can then be used in the other functions to add the required fields.

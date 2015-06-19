@@ -12,6 +12,7 @@ import java.util.Calendar;
 public class ContactInformation {
 
     //Key from the database
+
     private int key;
     private String group;
 
@@ -37,9 +38,9 @@ public class ContactInformation {
 
 
     //TESTING Empty
-//    public ContactInformation(){
-//
-//    }
+    public ContactInformation(){
+            this.key = 0;
+    }
 
     public ContactInformation(
             int key, String group,
