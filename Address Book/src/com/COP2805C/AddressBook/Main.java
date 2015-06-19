@@ -38,27 +38,19 @@ public class Main extends Application {
 
         do {
             //TODO check if username column is empty
-<<<<<<< HEAD
                 if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
-=======
             if (database.isColumnEmpty("ACCOUNTS", "USERNAMES")) {
                 do {
                     //Get new account information
->>>>>>> AbirFaisal
                     credentials = CreateAccountWindow.createAccount();
 
                     //Prompt user if account already exists
                     if (database.doesUserExist(credentials)) {
                         JOptionPane.showMessageDialog(null, "User already Exists");
                     }
-<<<<<<< HEAD
                 }
 
         }while (Crypto.authinticateUser(credentials));
-//
-=======
->>>>>>> AbirFaisal
-
                     //make sure username doesnt exist
                 } while (database.doesUserExist(credentials));
 
