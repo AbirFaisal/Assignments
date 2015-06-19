@@ -36,8 +36,8 @@ public class Main extends Application {
         //Check if database exists if not create it
         database.initialize();
 
-        
-            //TODO check if username column is empty
+
+            //Check if username column is empty
             if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
                     do {
                         //Get new account information
@@ -47,8 +47,8 @@ public class Main extends Application {
                         if (database.doesUserExist(credentials)) {
                             JOptionPane.showMessageDialog(null, "User already Exists");
                         }else { //create account and break the loop
-
-
+                            database.addAccount(credentials);
+                            break;
                         }
                         //Keep asking if user inputs existing username
                     } while (database.doesUserExist(credentials));

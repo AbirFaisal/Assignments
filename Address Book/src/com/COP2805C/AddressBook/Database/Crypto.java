@@ -2,6 +2,7 @@ package com.COP2805C.AddressBook.Database;
 
 import com.COP2805C.AddressBook.Main;
 
+import javax.swing.*;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -78,6 +79,24 @@ public class Crypto {
         //else return false if any of the 2 checks above fail
         return false;
     }
+
+
+
+
+
+
+    public static boolean checkPasswordStrength(String password){
+        if (password.length() >= 6){
+            return true;
+        }
+
+        JOptionPane.showMessageDialog(null,
+                "Password not strong enough. Your password must be at least 6 characters long");
+        return false;
+    }
+
+
+
 }
 
 

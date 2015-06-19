@@ -1,5 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface;
 
+import com.COP2805C.AddressBook.Database.Crypto;
+
 import javax.swing.*;
 import java.util.Objects;
 
@@ -47,6 +49,7 @@ public class CreateAccountWindow {
 
 
         do {
+
             //JOptionPane
             String[] buttons = {"Create Account"};
             int test = JOptionPane.showOptionDialog(
@@ -59,18 +62,12 @@ public class CreateAccountWindow {
                     buttons, buttons[0]);
 
 
-            //TODO TEST REMOVE
-            System.out.println(usernameJTextField.getText() + passwordJTextField.getText() + confirmPasswordJTextField.getText());
-            System.out.println(test);
-
             //Prompt user that passwords don't match
-            if (!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText())){
+            if (!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText())) {
                 JOptionPane.showMessageDialog(null, "Passwords do not match");
-            }//TODO make sure username and password is not blank
-
-        }while(!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText()));
-
-
+            }
+        }while(!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText()) &&
+                Crypto.checkPasswordStrength(passwordJTextField.getText()));
 
         return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
     }
