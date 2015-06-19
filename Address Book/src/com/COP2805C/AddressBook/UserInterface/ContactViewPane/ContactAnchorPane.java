@@ -1,14 +1,9 @@
 package com.COP2805C.AddressBook.UserInterface.ContactViewPane;
 
-import com.COP2805C.AddressBook.ContactInformation;
-import javafx.geometry.HPos;
+import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;

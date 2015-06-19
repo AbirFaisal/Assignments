@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook;
+package com.COP2805C.AddressBook.Contacts;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

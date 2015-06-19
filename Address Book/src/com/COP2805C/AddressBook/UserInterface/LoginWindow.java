@@ -43,7 +43,7 @@ public class LoginWindow {
 
         //JOptionPane
         String[] buttons = {"Login", "Create Account"};
-        int test = JOptionPane.showOptionDialog(
+        int login = JOptionPane.showOptionDialog(
                 null,
                 jPanel,
                 "Login",
@@ -54,16 +54,15 @@ public class LoginWindow {
 
 
         System.out.println(usernameJTextField.getText() + passwordJTextField.getText());
-        System.out.println(test);
+        System.out.println(login);
 
         //Login
-        if (test == 0) {
-            //TODO create account
+        if (login == 0) {
+            //Return string array with username and password
             return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
         }else {
-            //Return string array with username and password
-            CreateAccountWindow.createAccount();
+            //if return null if create account
+            return null;
         }
-        return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
     }
 }

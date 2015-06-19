@@ -1,5 +1,6 @@
 package com.COP2805C.AddressBook;
 
+import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
@@ -16,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -25,8 +25,8 @@ import java.util.GregorianCalendar;
 public class Main extends Application {
 
     private static String[] credentials = new String[2]; //Username and password
-    ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+    ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
     public static Database database = Database.getDatabase();
@@ -36,10 +36,9 @@ public class Main extends Application {
         //Check if database exists if not create it
         database.initialize();
 
-        do {
+        
             //TODO check if username column is empty
             if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
-                if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
                     do {
                         //Get new account information
                         credentials = CreateAccountWindow.createAccount();
@@ -47,32 +46,27 @@ public class Main extends Application {
                         //Prompt user if account already exists
                         if (database.doesUserExist(credentials)) {
                             JOptionPane.showMessageDialog(null, "User already Exists");
+                        }else { //create account and break the loop
+
+
                         }
-                    } while (Crypto.authinticateUser(credentials));
-                    //make sure username doesnt exist
-                }
-                while (database.doesUserExist(credentials)) ;
-
-                //if account doesnt exist then add it
-                if (!database.doesUserExist(credentials)) {
-                    database.addAccount(credentials);
-                }
-                //if username columlnm is not empty
+                        //Keep asking if user inputs existing username
+                    } while (database.doesUserExist(credentials));
             } else {
-                //Prompt for user and password
-                //TODO User:Bob Password:121212
-                credentials = LoginWindow.loginPrompt();
+                do {
+                    //Prompt for user and password
+                    credentials = LoginWindow.loginPrompt();
 
-                //prompt username and password are invalid
-                if (Crypto.authinticateUser(credentials)) {
-                    JOptionPane.showMessageDialog(null, "Invalid username or password");
-                }
+                    //Prompt if username and password are invalid
+                    if (!Crypto.authenticateUser(credentials)) {
+                        JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    }
+                    //keep prompting while user is not authenticated
+                } while (Crypto.authenticateUser(credentials));
             }
-            //keep prompting while user is not authinticated
-        } while (Crypto.authinticateUser(credentials));
 
         //populate the contactInformationArrayList
-        if (Crypto.authinticateUser(credentials)) {
+        if (Crypto.authenticateUser(credentials)) {
             //TODO populate contactInformationArrayList
         }
 
@@ -92,15 +86,15 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
-        Image testImage = new Image("http://i.imgur.com/0dMGQvy.jpg");
+        Image testImage = new Image("http://i.imgur.com/6zqQI1S.jpg");
         ArrayList<String> phone = new ArrayList<>();
         ArrayList<String> email = new ArrayList<>();
         ArrayList<String> work = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            phone.add("phone" + i);
-            email.add("email" + i);
-            work.add("work" + i);
+        for (int i = 0; i < 3; i++) {
+            phone.add("phone " + i);
+            email.add("email " + i);
+            work.add("work " + i);
         }
 
         Calendar testCalendar = new GregorianCalendar(2015, 3, 3);
@@ -163,6 +157,7 @@ public class Main extends Application {
 
         //TODO test
         contactObservableList.add("test");
+
         //Left side Anchor Pane
         AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
                 addButton,
