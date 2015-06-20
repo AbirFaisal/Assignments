@@ -1,5 +1,6 @@
 package com.COP2805C.AddressBook.UserInterface;
 
+import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Functions;
 
 import javax.swing.*;
@@ -67,6 +68,8 @@ public class CreateAccountWindow {
         } while (!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText()) ||
                 !Functions.isPasswordStrong(usernameJTextField.getText(), passwordJTextField.getText()));
 
-        return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
+        //TODO I did this to temporarily fix the login problem, so that I can test database. Password on database needed to be SHA
+        String encryptedPassword = Crypto.stringSHA(passwordJTextField.getText());
+        return new String[]{usernameJTextField.getText(), encryptedPassword};
     }
 }

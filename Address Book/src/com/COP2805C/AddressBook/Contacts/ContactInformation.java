@@ -207,4 +207,12 @@ public class ContactInformation {
     public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
     }
+
+    //TODO toString used for testing purposes.
+    public String toString(){
+        return getFirstName() + " " + getMiddleName() + " " + getLastName() + " " + getNickname()
+                + " " + getAddressLine1() + " " + getAddressLine2() + " " + getCity() + " " + getZip()
+                + " " + getState() + " " + getNotes();
+    }
+
 }

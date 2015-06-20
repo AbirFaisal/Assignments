@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
@@ -26,9 +27,10 @@ public class Main extends Application {
     private static String[] credentials = new String[2]; //Username and password
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
     ObservableList<String> contactObservableList = FXCollections.observableArrayList();
-    ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
+    static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
     public static Database database = Database.getDatabase();
+    public static ArrayList<Integer> contactIDS = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -39,14 +41,14 @@ public class Main extends Application {
         //Check if username column is empty
         if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
             //Create Account
-            Functions.createAccount(credentials, database);
+            credentials = Functions.createAccount(database);
         } else {
             do {
                 //Returns null if user selects create account
                 credentials = LoginWindow.loginPrompt();
 
                 if (credentials == null) {
-                    Functions.createAccount(credentials, database);
+                    credentials = Functions.createAccount(database);
                     break;
                 } else if (!Crypto.authenticateUser(credentials)) {
                     JOptionPane.showMessageDialog(null, "Invalid username or password");
@@ -62,9 +64,16 @@ public class Main extends Application {
 
         //TODO Load Contact List from database into FXcollections Observable list
         //ContactInformation = new ContactInformation(database.generateContact);
-        int number = database.numberOfContacts(credentials);
-        for (int begin = 0; begin < number; number++) {
+        try {
+            contactIDS = database.getContactIDS(credentials);
 
+            ContactInformationBuilder cib = new ContactInformationBuilder();
+            for (int begin = 0; begin < contactIDS.size(); begin++) {
+                contactInformationArrayList.add(cib.prepareContact(contactIDS.get(begin)));
+            }
+            System.out.println(contactInformationArrayList.toString());
+        }catch(NullPointerException e){
+            System.out.println(e+ " No contacts are created for this user yet");
         }
 
         //Launch main window

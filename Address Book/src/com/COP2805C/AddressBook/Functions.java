@@ -10,7 +10,8 @@ import javax.swing.*;
  */
 public class Functions {
 
-    public static void createAccount(String[] credentials, Database database) {
+    public static String[] createAccount(Database database) {
+        String[] credentials;
         do {
             //Get new account information
             credentials = CreateAccountWindow.createAccount();
@@ -24,6 +25,7 @@ public class Functions {
             }
             //Keep asking if user inputs existing username
         } while (database.doesUserExist(credentials));
+        return credentials;
     }
 
 

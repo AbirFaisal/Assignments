@@ -34,8 +34,8 @@ public class Database {
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS ACCOUNTS(ACCOUNT VARCHAR," + "PASSWORD VARCHAR," + " PRIMARY KEY(ACCOUNT));");
             //Table for static data
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS CONTACTS(ACCOUNT VARCHAR ,"
-                    + "CONTACT_ID INTEGER," + "F_Name VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
-                    + "StreetName VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
+                    + "CONTACT_ID INTEGER," + "F_NAME VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
+                    + "ADDRESSLINE1 VARCHAR," + "ADDRESSLINE2 VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
                     + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
             stat.executeUpdate("CREATE TABLE DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
@@ -62,8 +62,8 @@ public class Database {
     //Function that checks if provided column is empty, one for table, one for column.
     public boolean isColumnEmpty(String TABLE, String COLUMN) {
 
-        //TODO put code here Chris
         try {
+
             String query = "SELECT " + COLUMN + " from " + TABLE;
             PreparedStatement st = conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
@@ -102,9 +102,8 @@ public class Database {
 
     public ArrayList<Integer> getContactIDS(String[] credentials) {
         ArrayList<Integer> contactIDS = new ArrayList<>();
-        int count = 0;
         try {
-            String query = "SELECT CONTACT_ID FROM ACCOUNTS WHERE ACCOUNT=?";
+            String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=?";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
@@ -189,15 +188,16 @@ public class Database {
     }
 
     //adds address to the key provided
-    public void addAddress(int CONTACT_ID, String StreetName, String CITY, String STATE, String ZIP, String COUNTRY) throws SQLException {
-        String update = "UPDATE CONTACTS SET StreetName =?," + "CITY =?," + "STATE =?," + "ZIP =?," + "COUNTRY =? WHERE CONTACT_ID =?";
+    public void addAddress(int CONTACT_ID, String ADDRESSLINE1, String ADDRESSLINE2, String CITY, String STATE, String ZIP, String COUNTRY) throws SQLException {
+        String update = "UPDATE CONTACTS SET ADDRESSLINE1 =?," + "ADDRESSLINE2 = ?," + "CITY =?," + "STATE =?," + "ZIP =?," + "COUNTRY =? WHERE CONTACT_ID =?";
         PreparedStatement pst = conn.prepareStatement(update);
-        pst.setString(1, StreetName);
-        pst.setString(2, CITY);
-        pst.setString(3, STATE);
-        pst.setString(4, ZIP);
-        pst.setString(5, COUNTRY);
-        pst.setInt(6, CONTACT_ID);
+        pst.setString(1, ADDRESSLINE1);
+        pst.setString(2, ADDRESSLINE2);
+        pst.setString(3, CITY);
+        pst.setString(4, STATE);
+        pst.setString(5, ZIP);
+        pst.setString(6, COUNTRY);
+        pst.setInt(7, CONTACT_ID);
         pst.executeUpdate();
         pst.close();
     }
@@ -230,6 +230,77 @@ public class Database {
         pst.executeUpdate();
         pst.close();
     }
+
+
+    public String getGroup(int CONTACT_ID, String GROUP_ASSC){
+        String query = "SELECT GROUP_ASSC FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, GROUP_ASSC, query);
+    }
+
+    public String getFName(int CONTACT_ID, String F_NAME) {
+        String query = "SELECT F_NAME FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, F_NAME, query);
+
+    }
+
+    public String getMName(int CONTACT_ID, String M_NAME) {
+        String query = "SELECT M_NAME FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, M_NAME, query);
+    }
+
+    public String getLName(int CONTACT_ID, String L_NAME) {
+        String query = "SELECT L_NAME FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, L_NAME, query);
+    }
+    public String getNName(int CONTACT_ID, String N_NAME) {
+        String query = "SELECT N_NAME FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, N_NAME, query);
+    }
+
+    public String getAddress1(int CONTACT_ID, String ADDRESSLINE1) {
+        String query = "SELECT ADDRESSLINE1 FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, ADDRESSLINE1, query);
+    }
+    public String getAddress2(int CONTACT_ID, String ADDRESSLINE2) {
+        String query = "SELECT ADDRESSLINE2 FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, ADDRESSLINE2, query);
+    }
+
+    public String getCity(int CONTACT_ID, String CITY) {
+        String query = "SELECT CITY FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, CITY, query);
+    }
+    public String getState(int CONTACT_ID, String STATE) {
+        String query = "SELECT STATE FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, STATE, query);
+    }
+    public String getZIP(int CONTACT_ID, String ZIP) {
+        String query = "SELECT ZIP FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, ZIP, query);
+    }
+
+    public String getNotes(int CONTACT_ID, String NOTES) {
+        String query = "SELECT NOTES FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, NOTES, query);
+    }
+
+    private String runContactStringQuery(int CONTACT_ID, String subject, String query) {
+        try {
+            String result;
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, CONTACT_ID);
+            ResultSet rs = pst.executeQuery();
+            result = rs.getString(subject);
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }catch(NullPointerException e){
+            System.out.println(e);
+            return "";
+        }
+    }
+
 
     public long getDate(int CONTACT_ID) throws SQLException {
         String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
