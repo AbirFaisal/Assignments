@@ -61,7 +61,7 @@ public class Functions {
     }
 
 
-
+    //get first, middle, last, and nickname as a single string
     public static String getFormattenNameFMLN(ContactInformation contactInformation) {
         String name = "";
 

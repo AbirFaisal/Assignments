@@ -9,8 +9,4 @@ public class ContactFactory {
     public ContactAnchorPane contact(ContactInformation contactInformation) {
         return new ContactAnchorPane(contactInformation);
     }
-
-    public ContactForm contactForm(ContactInformation contactInformation){
-        return new ContactForm(contactInformation);
-    }
 }
