@@ -59,21 +59,25 @@ public class Main extends Application {
 
         //populate the contactInformationArrayList
         if (Crypto.authenticateUser(credentials)) {
-            //TODO populate contactInformationArrayList
-        }
+            //TODO Load Contact List from database into FXcollections Observable list
+            //ContactInformation = new ContactInformation(database.generateContact);
+            try {
+                contactIDS = database.getContactIDS(credentials);
 
-        //TODO Load Contact List from database into FXcollections Observable list
-        //ContactInformation = new ContactInformation(database.generateContact);
-        try {
-            contactIDS = database.getContactIDS(credentials);
-
-            ContactInformationBuilder cib = new ContactInformationBuilder();
-            for (int begin = 0; begin < contactIDS.size(); begin++) {
-                contactInformationArrayList.add(cib.prepareContact(contactIDS.get(begin)));
+                ContactInformationBuilder cib = new ContactInformationBuilder();
+                for (int i = 0; i < contactIDS.size(); i++) {
+                    contactInformationArrayList.add(cib.prepareContact(contactIDS.get(i)));
+                }
+                System.out.println(contactInformationArrayList.toString());
+            } catch (NullPointerException e) {
+                System.out.println(e + " No contacts are created for this user yet");
             }
-            System.out.println(contactInformationArrayList.toString());
-        }catch(NullPointerException e){
-            System.out.println(e+ " No contacts are created for this user yet");
+
+
+
+
+
+
         }
 
         //Launch main window
