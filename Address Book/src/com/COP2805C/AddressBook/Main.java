@@ -4,7 +4,7 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
-import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
+import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactFactory;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -26,13 +26,18 @@ public class Main extends Application {
 
     private static String[] credentials = new String[2]; //Username and password
     ObservableList<String> groupObservableList = FXCollections.observableArrayList();
-    ObservableList<String> contactObservableList = FXCollections.observableArrayList();
+    static ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
     public static Database database = Database.getDatabase();
     public static ArrayList<Integer> contactIDS = new ArrayList<>();
 
     public static void main(String[] args) {
+
+
+        //TODO Chris can you make a database.addContact(credentials, contactInformation)?
+        //I'm not sure how to approach this matter.
+
 
         //Check if database exists if not create it
         database.initialize();
@@ -57,31 +62,39 @@ public class Main extends Application {
             } while (!Crypto.authenticateUser(credentials));
         }
 
-        //populate the contactInformationArrayList
+        //Populate the contactInformationArrayList
         if (Crypto.authenticateUser(credentials)) {
-            //TODO Load Contact List from database into FXcollections Observable list
+
             //ContactInformation = new ContactInformation(database.generateContact);
             try {
                 contactIDS = database.getContactIDS(credentials);
+                ContactInformation contactInformation;
 
                 ContactInformationBuilder cib = new ContactInformationBuilder();
                 for (int i = 0; i < contactIDS.size(); i++) {
                     contactInformationArrayList.add(cib.prepareContact(contactIDS.get(i)));
+
+                    //Add to FXObservable list
+                    contactInformation = contactInformationArrayList.get(i);
+                    contactObservableList.add(Functions.getFormattenNameFMLN(contactInformation));
+
+                    //TODO need to add groups somehow
                 }
+
+                //TODO remove this?
                 System.out.println(contactInformationArrayList.toString());
+
             } catch (NullPointerException e) {
-                System.out.println(e + " No contacts are created for this user yet");
+                System.out.println(e + "User has no contacts");
             }
-
-
-
-
-
-
         }
+
 
         //Launch main window
         launch(args);
+
+
+        //TODO save contactInformationArrayList to database
     }
 
 
@@ -112,7 +125,7 @@ public class Main extends Application {
                 testCalendar);
 
 
-        ContactViewFactory contactViewFactory = new ContactViewFactory();
+        ContactFactory contactViewFactory = new ContactFactory();
         //ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation).contactView();
         /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
 
@@ -158,8 +171,7 @@ public class Main extends Application {
         //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
         ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
 
-        //TODO test
-        contactObservableList.add("test");
+
 
         //Left side Anchor Pane
         AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
