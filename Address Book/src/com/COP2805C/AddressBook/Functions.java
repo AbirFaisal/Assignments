@@ -1,7 +1,10 @@
 package com.COP2805C.AddressBook;
 
+import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
 
@@ -56,4 +59,39 @@ public class Functions {
 
         return true;
     }
+
+
+    //get first, middle, last, and nickname as a single string
+    public static String getFormattenNameFMLN(ContactInformation contactInformation) {
+        String name = "";
+
+        try {
+            name = name + contactInformation.getFirstName();
+        } catch (Exception e) {
+            System.out.println("No First Name");
+        }
+
+        try {
+            name = name + " " + contactInformation.getMiddleName();
+        } catch (Exception e) {
+            System.out.println("No Middle Name");
+        }
+
+        try {
+            name = name + " " + contactInformation.getLastName();
+        } catch (Exception e) {
+            System.out.println("No Last Name");
+        }
+
+        try {
+            name = name + " (" + contactInformation.getNickname() + ")";
+        } catch (Exception e) {
+            System.out.println("No Nickname");
+        }
+
+        return name;
+    }
+
+
+
 }
