@@ -5,6 +5,8 @@ import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
+import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
+import com.COP2805C.AddressBook.UserInterface.CreateContactWindow;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -31,7 +33,7 @@ public class Main extends Application {
 
     public static Database database = Database.getDatabase();
     public static ArrayList<Integer> contactIDS = new ArrayList<>();
-
+    public static boolean populateContacts = true;
     public static void main(String[] args) {
 
         //Check if database exists if not create it
@@ -64,17 +66,6 @@ public class Main extends Application {
 
         //TODO Load Contact List from database into FXcollections Observable list
         //ContactInformation = new ContactInformation(database.generateContact);
-        try {
-            contactIDS = database.getContactIDS(credentials);
-
-            ContactInformationBuilder cib = new ContactInformationBuilder();
-            for (int begin = 0; begin < contactIDS.size(); begin++) {
-                contactInformationArrayList.add(cib.prepareContact(contactIDS.get(begin)));
-            }
-            System.out.println(contactInformationArrayList.toString());
-        }catch(NullPointerException e){
-            System.out.println(e+ " No contacts are created for this user yet");
-        }
 
         //Launch main window
         launch(args);
@@ -83,7 +74,24 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //Abir, I had to put this function here because javafx will not allow images to be loaded into contacts before the applications graphics have been loaded.
+        //I have done much research on it and it has to be this way in order for the program to not explode.
+        //I also believe, that having a boolean turn it on and off will allow us to quickly disperse the objects we have and resort them later.
+        if(populateContacts){
+            try {
+                contactIDS = database.getContactIDS(credentials);
 
+                ContactInformationBuilder cib = new ContactInformationBuilder();
+                for (int begin = 0; begin < contactIDS.size(); begin++) {
+                    contactInformationArrayList.add(cib.prepareContact(contactIDS.get(begin)));
+                }
+                //Below: For testing
+                System.out.println(contactInformationArrayList.toString());
+            }catch(NullPointerException e){
+                System.out.println(e+ " No contacts are created for this user yet");
+            }
+            populateContacts = false;
+        }
         /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
         Image testImage = new Image("http://i.imgur.com/6zqQI1S.jpg");
         ArrayList<String> phone = new ArrayList<>();
@@ -130,6 +138,9 @@ public class Main extends Application {
 
         //Add contact button
         Button addButton = new Button("+");
+        addButton.setOnAction(e->{
+            CreateContactWindow.display(credentials);
+        });
         AnchorPane.setTopAnchor(addButton, 8.0);
         AnchorPane.setLeftAnchor(addButton, 8.0);
 

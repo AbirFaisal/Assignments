@@ -72,4 +72,5 @@ public class CreateAccountWindow {
         String encryptedPassword = Crypto.stringSHA(passwordJTextField.getText());
         return new String[]{usernameJTextField.getText(), encryptedPassword};
     }
+
 }

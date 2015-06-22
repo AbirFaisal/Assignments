@@ -1,7 +1,9 @@
 package com.COP2805C.AddressBook.Database;
 
+import javafx.scene.image.Image;
 import org.sqlite.SQLiteConfig;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -302,18 +304,25 @@ public class Database {
     }
 
 
-    public long getDate(int CONTACT_ID) throws SQLException {
-        String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
-        PreparedStatement pst = conn.prepareStatement(query);
-        pst.setInt(1, CONTACT_ID);
-        ResultSet rs = pst.executeQuery();
-        return rs.getLong("DOB");
+    public Calendar getDOB(int CONTACT_ID){
+        Calendar birthday = null;
+        try {
+            String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, CONTACT_ID);
+            ResultSet rs = pst.executeQuery();
+            birthday.setTimeInMillis(rs.getLong("DOB"));
+            return birthday;
+        }catch(NullPointerException|SQLException e){
+            System.out.println(e+ " getBirthday");
+            return birthday;
+        }
     }
-
-    public void getPicture(int CONTACT_ID) {
+    //TODO test getPicture method.
+    public Image getPicture(int CONTACT_ID) {
+        Image profilePic;
         OutputStream outputStream = null;
         InputStream inputStream = null;
-
         try {
             String query = "SELECT picture FROM CONTACTS WHERE CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(query);
@@ -322,7 +331,8 @@ public class Database {
             if (rs.next()) {
                 inputStream = rs.getBinaryStream("picture");
             }
-            outputStream = new FileOutputStream("std_img" + CONTACT_ID + ".jpg");
+            outputStream = new FileOutputStream("profilePic" + CONTACT_ID + ".png");
+
             byte[] content = new byte[1024];
             int size = 0;
             while ((size = inputStream.read(content)) != -1) {
@@ -336,7 +346,12 @@ public class Database {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch(NullPointerException e){
+            return new Image("file:///Address Book/src/picture.jpg");
         }
+
+         profilePic = new Image("file:///Address Book/profilePic" + CONTACT_ID + ".png");
+         return profilePic;
     }
 
     //TODO DECIDE IF WE WANT PHONE_NUMBER AS A LONG OR A STRING.

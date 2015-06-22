@@ -212,7 +212,7 @@ public class ContactInformation {
     public String toString(){
         return getFirstName() + " " + getMiddleName() + " " + getLastName() + " " + getNickname()
                 + " " + getAddressLine1() + " " + getAddressLine2() + " " + getCity() + " " + getZip()
-                + " " + getState() + " " + getNotes();
+                + " " + getState() + " " + getNotes() + getProfileImage().toString();
     }
 
 }
