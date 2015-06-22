@@ -192,7 +192,5 @@ public class Main extends Application {
         primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
 
-        //TODO fix this?? what is this?
-        //Login.loginScreen();//Note I intend for this to pop-up first before the user can do anything thus requiring them to log-in.
     }
 }
