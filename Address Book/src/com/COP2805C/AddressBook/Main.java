@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -42,6 +43,7 @@ public class Main extends Application {
 
         //TODO Chris can you make a database.addContact(credentials, contactInformation)?
         //I'm not sure how to approach this matter.
+
 
 
         //Check if database exists if not create it
