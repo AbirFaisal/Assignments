@@ -21,6 +21,8 @@ public class ContactInformationBuilder {
         contact.setZip(Main.database.getZIP(CONTACT_ID,"ZIP"));
         contact.setState(Main.database.getState(CONTACT_ID,"STATE"));
         contact.setNotes(Main.database.getNotes(CONTACT_ID,"NOTES"));
+        contact.setBirthday(Main.database.getDOB(CONTACT_ID));
+        contact.setProfileImage(Main.database.getPicture(CONTACT_ID));
         //TODO Build database functions getImage, getDynamicData for emails, phoneNumbers, and workplace
         return contact;
     }
