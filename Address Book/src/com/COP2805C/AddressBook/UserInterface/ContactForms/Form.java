@@ -5,8 +5,6 @@ import javafx.stage.Stage;
 /**
  * Created by abirfaisal on 6/21/15.
  */
-public interface ContactForm {
-
+public interface Form {
     Stage contactForm();
-
 }
