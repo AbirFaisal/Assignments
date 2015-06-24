@@ -82,9 +82,7 @@ public class Main extends Application {
     }
         @Override
         public void start(Stage primaryStage)throws Exception {
-            //Abir, I had to put this function here because javafx will not allow images to be loaded into contacts before the applications graphics have been loaded.
-            //I have done much research on it and it has to be this way in order for the program to not explode.
-            //I also believe, that having a boolean turn it on and off will allow us to quickly disperse the objects we have and resort them later.
+
             if (populateContacts) {
                 try {
                     contactIDS = database.getContactIDS(credentials);
@@ -147,7 +145,8 @@ public class Main extends Application {
             //Add contact button
             Button addButton = new Button("+");
             addButton.setOnAction(e -> {
-                CreateContactWindow.display(credentials);
+                CreateContactWindow createContact = new CreateContactWindow();
+                createContact.display(credentials);
             });
             AnchorPane.setTopAnchor(addButton, 8.0);
             AnchorPane.setLeftAnchor(addButton, 8.0);

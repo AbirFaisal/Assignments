@@ -1,13 +1,11 @@
 package com.COP2805C.AddressBook.UserInterface;
 
 import com.COP2805C.AddressBook.Main;
-import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -16,25 +14,26 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class CreateContactWindow{
     private Desktop desktop = Desktop.getDesktop();
-    private static String fileString;
-    private static Stage window;
-    private static Scene scene;
+    private String fileString;
+    private Stage window;
+    private int x = 0;
+    private Pane pane = new Pane();
 
-    public static void display(String[] credentials){
+    public void display(String[] credentials){
+        Scene scene;
         window = new Stage();
         window.setResizable(false);
         window.setMinWidth(379);
         window.setMinHeight(535);
         window.initModality(Modality.APPLICATION_MODAL);
 
-        Pane pane = new Pane();
+
+
         pane.setPrefHeight(535);
         pane.setPrefWidth(379);
 
@@ -59,28 +58,46 @@ public class CreateContactWindow{
         create.setLayoutY(25);
 
         TextField fnameText = new TextField();
-        fnameText.setLayoutX(109);
+        fnameText.setLayoutX(81);
         fnameText.setLayoutY(166);
         fnameText.setPrefHeight(26);
         fnameText.setPrefWidth(244);
 
         TextField lnameText = new TextField();
-        lnameText.setLayoutX(109);
+        lnameText.setLayoutX(81);
         lnameText.setLayoutY(197);
         lnameText.setPrefHeight(26);
         lnameText.setPrefWidth(244);
 
         TextField phoneText = new TextField();
-        phoneText.setLayoutX(109);
+        phoneText.setLayoutX(81);
         phoneText.setLayoutY(227);
         phoneText.setPrefHeight(26);
         phoneText.setPrefWidth(244);
 
         TextField emailText = new TextField();
-        emailText.setLayoutX(109);
-        emailText.setLayoutY(256);
+        emailText.setLayoutX(81);
+        emailText.setLayoutY(256+x);
         emailText.setPrefHeight(26);
         emailText.setPrefWidth(244);
+
+        Button addButton = new Button("+");
+        addButton.setPrefHeight(26);
+        addButton.setPrefWidth(20);
+        addButton.setLayoutX(330);
+        addButton.setLayoutY(227);
+
+        addButton.setOnAction(e->{
+            x += 29;
+            TextField phoneText2 = new TextField();
+            phoneText2.setLayoutX(81);
+            phoneText2.setLayoutY(227+x);
+            phoneText2.setPrefWidth(26);
+            phoneText2.setPrefWidth(244);
+            emailText.setLayoutY(256+x);
+            pane.getChildren().add(phoneText2);
+
+        });
 
         Button createButton = new Button("Create");
         createButton.setLayoutX(108);
@@ -100,7 +117,11 @@ public class CreateContactWindow{
         });
 
         Button cancelButton = new Button("Cancel");
-        cancelButton.setOnAction(e-> window.close());
+        cancelButton.setOnAction(e-> {
+            window.setScene(null);
+            window.close();
+
+        });
         cancelButton.setLayoutX(227);
         cancelButton.setLayoutY(296);
         cancelButton.setMnemonicParsing(false);
@@ -140,7 +161,9 @@ public class CreateContactWindow{
         vb.setMaxHeight(110);
         vb.setMaxWidth(112);
         //vb.setAlignment(Pos.CENTER);
-        pane.getChildren().addAll(fname, lname, phone, email, create, fnameText, lnameText, phoneText, emailText, createButton, cancelButton, vb);
+
+
+        pane.getChildren().addAll(fname, lname, phone, email, create, fnameText, lnameText, phoneText, emailText, createButton, cancelButton,addButton, vb);
 
         scene = new Scene(pane);
         window.setScene(scene);

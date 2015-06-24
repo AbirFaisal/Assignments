@@ -40,8 +40,8 @@ public class Database {
                     + "ADDRESSLINE1 VARCHAR," + "ADDRESSLINE2 VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
                     + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
-            stat.executeUpdate("CREATE TABLE DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
-                    + "PHONE_NUMBER INTEGER," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, " + "FOREIGN KEY(CONTACT_ID) "
+            stat.executeUpdate("CREATE TABLE IF NOT EXISTS DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
+                    + "PHONE_NUMBER VARCHAR," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, " + "FOREIGN KEY(CONTACT_ID) "
                     + "REFERENCES CONTACTS(CONTACT_ID) ON DELETE CASCADE);");
         } catch (Exception e) {
             System.out.println(e);
@@ -232,7 +232,10 @@ public class Database {
         pst.executeUpdate();
         pst.close();
     }
-
+    public ArrayList<String> getDynamicData(int CONTACT_ID,String column){
+        String query = "SELECT * FROM DYNAMIC_DATA WHERE CONTACT_ID = ?";
+        return runDynamicStringQuery(CONTACT_ID, column, query);
+    }
 
     public String getGroup(int CONTACT_ID, String GROUP_ASSC){
         String query = "SELECT GROUP_ASSC FROM CONTACTS WHERE CONTACT_ID = ?";
@@ -300,6 +303,29 @@ public class Database {
         }catch(NullPointerException e){
             System.out.println(e);
             return "";
+        }
+    }
+
+    private ArrayList<String> runDynamicStringQuery(int CONTACT_ID, String subject, String query){
+        try {
+            ArrayList<String> list = new ArrayList<>();
+
+            String result;
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, CONTACT_ID);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()) {
+
+                result = rs.getString(subject);
+                if(result!=null)list.add(result);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }catch(NullPointerException e){
+            System.out.println(e);
+            return null;
         }
     }
 
