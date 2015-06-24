@@ -100,6 +100,8 @@ public class Main extends Application {
                 }
                 populateContacts = false;
             }
+
+
             /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
             Image testImage = new Image("http://i.imgur.com/6zqQI1S.jpg");
             ArrayList<String> phone = new ArrayList<>();
@@ -164,8 +166,9 @@ public class Main extends Application {
             //Group selection
             //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
             ChoiceBox<String> groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
-
-            groupObservableList.add("Main Group");//TODO for each group add to list
+            //TODO move into event handlers
+            ArrayList<String> groups = database.getGroups(credentials);
+            groupObservableList.addAll(groups);//TODO for each group add to list
             groupChoiceBox.getSelectionModel().selectFirst();
 
 

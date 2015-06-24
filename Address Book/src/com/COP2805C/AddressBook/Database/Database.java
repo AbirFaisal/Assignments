@@ -140,7 +140,7 @@ public class Database {
     public ArrayList<String> getGroups(String[] credentials){
         ArrayList<String> groups = new ArrayList<String>();
         try{
-            String query = "SELECT GROUP_ASSC FROM ACCOUNTS WHERE ACCOUNT=?";
+            String query = "SELECT DISTINCT GROUP_ASSC FROM CONTACTS WHERE ACCOUNT=?";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
@@ -199,6 +199,7 @@ public class Database {
     }
 
     public int createContact(String ACCOUNT,ContactInformation contact){
+
         try {
             int key = createContactID(ACCOUNT);
             addNames(key, contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), contact.getNickname());
@@ -210,6 +211,7 @@ public class Database {
             return key;
         }catch(SQLException e){
             System.out.println(e);
+            return 0;
         }
     }
 
@@ -252,25 +254,22 @@ public class Database {
     //Adds image to the selected CONTACT_ID
     public void addPicture(int CONTACT_ID, Image image) throws SQLException {
         FileInputStream inputStream = null;
-
+        ByteArrayInputStream byteInputStream = null;
+        byte[] bytes = new byte[1080];
         try {
-            byte[] data = toBytes(image);
+            bytes = toBytes(image);
         } catch (IOException e) {
             System.out.println(e + "\n some shit happened");
         }
-
-
         try {
             //File image = new File(fileDirectory);
-            inputStream = new FileInputStream(image);
+            byteInputStream = new ByteArrayInputStream(bytes);
             String update = "UPDATE CONTACTS SET PICTURE =? WHERE CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(update);
             //pst.setBinaryStream(1, inputStream, (int) (image.length()));
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
             pst.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("FileNotFoundException: - " + e);
         } catch (SQLException e) {
             System.out.println("SQLExceptionL - " + e);
         }
