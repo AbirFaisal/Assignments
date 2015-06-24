@@ -154,9 +154,10 @@ public class Database {
 
         try {
             String update = "INSERT INTO ACCOUNTS(ACCOUNT,PASSWORD) VALUES (?,?)";
+            String encryptPassword = Crypto.stringSHA(credentials[1]);
             PreparedStatement pst = conn.prepareStatement(update);
             pst.setString(1, credentials[0]);
-            pst.setString(2, credentials[1]);
+            pst.setString(2, encryptPassword);
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
