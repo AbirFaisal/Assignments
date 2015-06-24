@@ -72,6 +72,7 @@ public class ContactInformation {
         this.birthday = birthday;
     }
 
+
     public int getKey() {
         return key;
     }
