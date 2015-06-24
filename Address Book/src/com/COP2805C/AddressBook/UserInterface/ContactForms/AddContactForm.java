@@ -31,6 +31,7 @@ public class AddContactForm implements Form {
 
     TextArea notesTextArea = new TextArea("Notes");
 
+    DatePicker birthDatePicker = new DatePicker();
 
     public AddContactForm(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
@@ -42,7 +43,7 @@ public class AddContactForm implements Form {
         //TODO Use the functions below to generate these
         for (int i = 0; i < labelStrings.length; i++) {
             this.labels.add(label(this.labelStrings[i]));
-            this.textFields.add(new TextField());
+            this.textFields.add(textField());
         }
 
 
@@ -60,11 +61,8 @@ public class AddContactForm implements Form {
 
         //flow pane
 
-        //anchor pane
 
-        //scroll pane
 
-        //put scroll pane in anchor pane
 
         AnchorPane anchorPane = anchorPane();
 
