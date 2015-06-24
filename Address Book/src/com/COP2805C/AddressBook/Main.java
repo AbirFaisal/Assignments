@@ -82,6 +82,8 @@ public class Main extends Application {
         @Override
         public void start(Stage primaryStage)throws Exception {
 
+            //TODO build method that repopulates contacts depending on which group is selected.
+            //TODO load groups from database into an ArrayList.
             if (populateContacts) {
                 try {
                     contactIDS = database.getContactIDS(credentials);
@@ -90,6 +92,7 @@ public class Main extends Application {
                     for (int begin = 0; begin < contactIDS.size(); begin++) {
                         contactInformationArrayList.add(cib.prepareContact(contactIDS.get(begin)));
                     }
+
                     //Below: For testing
                     System.out.println(contactInformationArrayList.toString());
                 } catch (NullPointerException e) {
