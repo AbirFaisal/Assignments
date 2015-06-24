@@ -33,6 +33,7 @@ public class AddContactForm implements Form {
 
     DatePicker birthDatePicker = new DatePicker();
 
+
     public AddContactForm(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
     }
@@ -46,25 +47,26 @@ public class AddContactForm implements Form {
             this.textFields.add(textField());
         }
 
+        //TODO Conctact image view and selector
+
 
         GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
-
         GridPane phoneGridPane = gridPane(new ArrayList<Label>(), this.phoneTextFields);
-
         GridPane emailGridPane = gridPane(new ArrayList<Label>(), this.emailTextFields);
-
         GridPane workplaceGridPane = gridPane(new ArrayList<Label>(), this.workplaceTextFields);
 
 
 
-
-
         //flow pane
+        FlowPane flowpane = flowPane(staticDataGridPane, phoneGridPane, emailGridPane, workplaceGridPane, this.birthDatePicker, this.notesTextArea);
 
+        //anchor pane put in scroll pane
+        AnchorPane scrollPaneAnchorPane = anchorPane(flowpane);
 
+        //scroll pane put in pane in anchor pane
+        ScrollPane scrollPane = new ScrollPane(scrollPaneAnchorPane);
 
-
-        AnchorPane anchorPane = anchorPane();
+        AnchorPane anchorPane = anchorPane(scrollPane);
 
         return new Scene(anchorPane, 400.0, 600.0);
     }
@@ -77,11 +79,11 @@ public class AddContactForm implements Form {
     }
 
 
-    public AnchorPane anchorPane(){
+    public AnchorPane anchorPane(Node... FXNode){
 
         //TODO stuff here
 
-        return new AnchorPane();
+        return new AnchorPane(FXNode);
     }
 
 
