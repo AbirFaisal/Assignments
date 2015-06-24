@@ -4,10 +4,8 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
-//import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
-import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
+import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
 import com.COP2805C.AddressBook.UserInterface.CreateContactWindow;
-import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactFactory;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -20,9 +18,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+//import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
 
 
 public class Main extends Application {
@@ -35,12 +36,14 @@ public class Main extends Application {
     public static Database database = Database.getDatabase();
     public static ArrayList<Integer> contactIDS = new ArrayList<>();
     public static boolean populateContacts = true;
+    public Stage mainStage; //TODO needed for switching to the form
 
     public static void main(String[] args) {
 
 
         //TODO Chris can you make a database.addContact(credentials, contactInformation)?
         //I'm not sure how to approach this matter.
+
 
 
         //Check if database exists if not create it
@@ -122,7 +125,7 @@ public class Main extends Application {
                     testCalendar);
 
 
-            ContactFactory contactViewFactory = new ContactFactory();
+            ContactViewFactory contactViewFactory = new ContactViewFactory();
             //ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation).contactView();
             /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
 
@@ -151,7 +154,7 @@ public class Main extends Application {
             AnchorPane.setTopAnchor(addButton, 8.0);
             AnchorPane.setLeftAnchor(addButton, 8.0);
 
-            //clear search bar button (Optional)
+            //TODO clear search bar button (Optional)
             Button clearSearchButton = new Button("X");
             AnchorPane.setTopAnchor(clearSearchButton, 8.0);
             AnchorPane.setRightAnchor(clearSearchButton, 8.0);
