@@ -3,18 +3,16 @@ package com.COP2805C.AddressBook.UserInterface.ContactForms;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
-/**
- * Created by abirfaisal on 6/23/15.
- */
+
 public class AddContactForm implements Form {
 
 
@@ -27,14 +25,11 @@ public class AddContactForm implements Form {
     ArrayList<Label> labels = new ArrayList<>();
     ArrayList<TextField> textFields = new ArrayList<>();
 
-    ArrayList<TextField> phoneLabelTextFields = new ArrayList<>();
     ArrayList<TextField> phoneTextFields = new ArrayList<>();
-
-    ArrayList<TextField> emailLabelTextField = new ArrayList<>();
-    ArrayList<TextField> emailFields = new ArrayList<>();
-
-    ArrayList<TextField> workplaceLabelTextField = new ArrayList<>();
+    ArrayList<TextField> emailTextFields = new ArrayList<>();
     ArrayList<TextField> workplaceTextFields = new ArrayList<>();
+
+    TextArea notesTextArea = new TextArea("Notes");
 
 
     public AddContactForm(ContactInformation contactInformation) {
@@ -42,27 +37,38 @@ public class AddContactForm implements Form {
     }
 
     @Override
-    public Stage contactForm() {
+    public Scene contactForm() {
 
         //TODO Use the functions below to generate these
         for (int i = 0; i < labelStrings.length; i++) {
-            labels.add(label(this.labelStrings[i]));
-            textFields.add(new TextField());
+            this.labels.add(label(this.labelStrings[i]));
+            this.textFields.add(new TextField());
         }
 
 
-        //TODO for each phone number add a label
-        for (int i = 0; i < this.contactInformation.getPhoneNumbers().size() - 1; i++) {
+        GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
 
-        }
+        GridPane phoneGridPane = gridPane(new ArrayList<Label>(), this.phoneTextFields);
 
+        GridPane emailGridPane = gridPane(new ArrayList<Label>(), this.emailTextFields);
 
-
-
-
+        GridPane workplaceGridPane = gridPane(new ArrayList<Label>(), this.workplaceTextFields);
 
 
-        return null;
+
+
+
+        //flow pane
+
+        //anchor pane
+
+        //scroll pane
+
+        //put scroll pane in anchor pane
+
+        AnchorPane anchorPane = anchorPane();
+
+        return new Scene(anchorPane, 400.0, 600.0);
     }
 
     public ScrollPane scrollPane(){
@@ -90,7 +96,7 @@ public class AddContactForm implements Form {
 
 
 
-    public FlowPane flowPane(){
+    public FlowPane flowPane(Node... FXNode){
         FlowPane flowPane = new FlowPane();
         //TODO format this
         flowPane.setAlignment(Pos.CENTER);
@@ -101,11 +107,20 @@ public class AddContactForm implements Form {
 
 
 
-    public GridPane gridPane(){
+    public GridPane gridPane(ArrayList<Label> labels, ArrayList<TextField> textFields){
         GridPane gridPane = new GridPane();
 
-        gridPane.addColumn(0, null);
-        gridPane.addColumn(1, null);
+        //TODO add some formatting to make it look nice
+
+        //Add labels in column 0 row i
+        for (int i = 0; i < labels.size() - 1; i++) {
+            gridPane.add(labels.get(i), 0, i);
+        }
+
+        //Add texfields in column 1 row i
+        for (int i = 0; i < textFields.size() - 1; i++) {
+            gridPane.add(textFields.get(i), 1, i);
+        }
 
         return gridPane;
     }

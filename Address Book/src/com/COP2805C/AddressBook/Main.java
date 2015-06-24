@@ -16,14 +16,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import javax.swing.*;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-//import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
 
 
 public class Main extends Application {
@@ -132,6 +128,8 @@ public class Main extends Application {
             /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
 
 
+
+            //TODO the bleow code needs to go into MainWindow.java
             //Right side Anchor Pane
             AnchorPane rightAnchorPane = contactViewFactory.contact(contactInformation).contactView();
 
