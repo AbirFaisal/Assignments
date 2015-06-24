@@ -1,5 +1,6 @@
 package com.COP2805C.AddressBook.Database;
 
+import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import javafx.scene.image.Image;
 import org.sqlite.SQLiteConfig;
 
@@ -40,8 +41,8 @@ public class Database {
                     + "ADDRESSLINE1 VARCHAR," + "ADDRESSLINE2 VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
                     + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
-            stat.executeUpdate("CREATE TABLE DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
-                    + "PHONE_NUMBER INTEGER," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, " + "FOREIGN KEY(CONTACT_ID) "
+            stat.executeUpdate("CREATE TABLE IF NOT EXISTS DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
+                    + "PHONE_NUMBER VARCHAR," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, " + "FOREIGN KEY(CONTACT_ID) "
                     + "REFERENCES CONTACTS(CONTACT_ID) ON DELETE CASCADE);");
         } catch (Exception e) {
             System.out.println(e);
@@ -154,18 +155,19 @@ public class Database {
 
         try {
             String update = "INSERT INTO ACCOUNTS(ACCOUNT,PASSWORD) VALUES (?,?)";
+            String encryptPassword = Crypto.stringSHA(credentials[1]);
             PreparedStatement pst = conn.prepareStatement(update);
             pst.setString(1, credentials[0]);
-            pst.setString(2, credentials[1]);
+            pst.setString(2, encryptPassword);
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    //TODO edit createContact method to submit a contactInformation object to the database.
     //This method adds a CONTACT_ID for the listed account and returns the key for this contact. This key can then be used in the other functions to add the required fields.
-    public int createContact(String ACCOUNT) throws SQLException {
+    public int createContactID(String ACCOUNT) throws SQLException {
         String update = "INSERT INTO CONTACTS(ACCOUNT) VALUES" + "(?);";
         PreparedStatement pst = conn.prepareStatement(update);
         pst.setString(1, ACCOUNT);
@@ -176,40 +178,59 @@ public class Database {
         return key;
     }
 
+    public int createContact(String ACCOUNT,ContactInformation contact){
+        int key = createContactID(String ACCOUNT);
+        addNames(key, contact.getFirstName(),contact.getMiddleName(),contact.getLastName(),contact.getNickname());
+        addAddress(key, contact.getAddressLine1(), contact.getAddressLine2(),contact.getCity(),contact.getState(),contact.getZip(),contact.getCountry());
+        addDate(key, contact.getBirthday());
+        addGroup(key, contact.getGroup());
+        addNotes(key, contact.getNotes());
+        addPicture(key, contact.getProfileImage().);
+        return key;
+    }
+
     //Adds names to the provided CONTACT_KEY
-    public void addNames(int CONTACT_ID, String F_NAME, String M_NAME, String L_NAME, String N_NAME) throws SQLException {
-        String update = "UPDATE CONTACTS SET F_NAME =?," + "M_NAME =?," + "L_NAME =?," + "N_NAME =? WHERE CONTACT_ID =?";
-        PreparedStatement pst = conn.prepareStatement(update);
-        pst.setString(1, F_NAME);
-        pst.setString(2, M_NAME);
-        pst.setString(3, L_NAME);
-        pst.setString(4, N_NAME);
-        pst.setInt(5, CONTACT_ID);
-        pst.executeUpdate();
-        pst.close();
+    public void addNames(int CONTACT_ID, String F_NAME, String M_NAME, String L_NAME, String N_NAME)  {
+        try {
+            String update = "UPDATE CONTACTS SET F_NAME =?," + "M_NAME =?," + "L_NAME =?," + "N_NAME =? WHERE CONTACT_ID =?";
+            PreparedStatement pst = conn.prepareStatement(update);
+            pst.setString(1, F_NAME);
+            pst.setString(2, M_NAME);
+            pst.setString(3, L_NAME);
+            pst.setString(4, N_NAME);
+            pst.setInt(5, CONTACT_ID);
+            pst.executeUpdate();
+            pst.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
     }
 
     //adds address to the key provided
-    public void addAddress(int CONTACT_ID, String ADDRESSLINE1, String ADDRESSLINE2, String CITY, String STATE, String ZIP, String COUNTRY) throws SQLException {
-        String update = "UPDATE CONTACTS SET ADDRESSLINE1 =?," + "ADDRESSLINE2 = ?," + "CITY =?," + "STATE =?," + "ZIP =?," + "COUNTRY =? WHERE CONTACT_ID =?";
-        PreparedStatement pst = conn.prepareStatement(update);
-        pst.setString(1, ADDRESSLINE1);
-        pst.setString(2, ADDRESSLINE2);
-        pst.setString(3, CITY);
-        pst.setString(4, STATE);
-        pst.setString(5, ZIP);
-        pst.setString(6, COUNTRY);
-        pst.setInt(7, CONTACT_ID);
-        pst.executeUpdate();
-        pst.close();
+    public void addAddress(int CONTACT_ID, String ADDRESSLINE1, String ADDRESSLINE2, String CITY, String STATE, String ZIP, String COUNTRY) {
+        try {
+            String update = "UPDATE CONTACTS SET ADDRESSLINE1 =?," + "ADDRESSLINE2 = ?," + "CITY =?," + "STATE =?," + "ZIP =?," + "COUNTRY =? WHERE CONTACT_ID =?";
+            PreparedStatement pst = conn.prepareStatement(update);
+            pst.setString(1, ADDRESSLINE1);
+            pst.setString(2, ADDRESSLINE2);
+            pst.setString(3, CITY);
+            pst.setString(4, STATE);
+            pst.setString(5, ZIP);
+            pst.setString(6, COUNTRY);
+            pst.setInt(7, CONTACT_ID);
+            pst.executeUpdate();
+            pst.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
     }
 
     //Adds image to the selected CONTACT_ID
-    public void addPicture(int CONTACT_ID, String fileDirectory) throws SQLException {
+    public void addPicture(int CONTACT_ID, Image image) throws SQLException {
         FileInputStream inputStream = null;
 
         try {
-            File image = new File(fileDirectory);
+            //File image = new File(fileDirectory);
             inputStream = new FileInputStream(image);
             String update = "UPDATE CONTACTS SET PICTURE =? WHERE CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(update);
@@ -224,15 +245,49 @@ public class Database {
         }
     }
 
-    public void addDate(int CONTACT_ID, Calendar calendar) throws SQLException {
-        String update = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
-        PreparedStatement pst = conn.prepareStatement(update);
-        pst.setLong(1, calendar.getTimeInMillis());
-        pst.setInt(2, CONTACT_ID);
-        pst.executeUpdate();
-        pst.close();
+    public void addDate(int CONTACT_ID, Calendar calendar){
+        try {
+            String update = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
+            PreparedStatement pst = conn.prepareStatement(update);
+            pst.setLong(1, calendar.getTimeInMillis());
+            pst.setInt(2, CONTACT_ID);
+            pst.executeUpdate();
+            pst.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
     }
 
+    public void addGroup(int CONTACT_ID, String GROUP_ASSC) {
+        try {
+            String update = "UPDATE CONTACTS SET GROUP_ASSC=? WHERE CONTACT_ID =?";
+            PreparedStatement pst = conn.prepareStatement(update);
+            pst.setString(1, GROUP_ASSC);
+            pst.setInt(2, CONTACT_ID);
+            pst.executeUpdate();
+            pst.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void addNotes(int CONTACT_ID, String NOTES){
+        try {
+            String update = "UPDATE CONTACTS SET NOTES=? WHERE CONTACT_ID =?";
+            PreparedStatement pst = conn.prepareStatement(update);
+            pst.setString(1, NOTES);
+            pst.setInt(2, CONTACT_ID);
+            pst.executeUpdate();
+            pst.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+
+    public ArrayList<String> getDynamicData(int CONTACT_ID,String column){
+        String query = "SELECT * FROM DYNAMIC_DATA WHERE CONTACT_ID = ?";
+        return runDynamicStringQuery(CONTACT_ID, column, query);
+    }
 
     public String getGroup(int CONTACT_ID, String GROUP_ASSC){
         String query = "SELECT GROUP_ASSC FROM CONTACTS WHERE CONTACT_ID = ?";
@@ -303,6 +358,29 @@ public class Database {
         }
     }
 
+    private ArrayList<String> runDynamicStringQuery(int CONTACT_ID, String subject, String query){
+        try {
+            ArrayList<String> list = new ArrayList<>();
+
+            String result;
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, CONTACT_ID);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()) {
+
+                result = rs.getString(subject);
+                if(result!=null)list.add(result);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }catch(NullPointerException e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
 
     public Calendar getDOB(int CONTACT_ID){
         Calendar birthday = null;
@@ -354,7 +432,7 @@ public class Database {
          return profilePic;
     }
 
-    //TODO DECIDE IF WE WANT PHONE_NUMBER AS A LONG OR A STRING.
+
     public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER, String EMAIL, String WORK_PLACE) throws SQLException {
         String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,?,?,?);";
         PreparedStatement pst = conn.prepareStatement(update);

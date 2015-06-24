@@ -69,7 +69,7 @@ public class CreateAccountWindow {
                 !Functions.isPasswordStrong(usernameJTextField.getText(), passwordJTextField.getText()));
 
         //TODO I did this to temporarily fix the login problem, so that I can test database. Password on database needed to be SHA
-        String encryptedPassword = Crypto.stringSHA(passwordJTextField.getText());
+        String encryptedPassword = passwordJTextField.getText();
         return new String[]{usernameJTextField.getText(), encryptedPassword};
     }
 

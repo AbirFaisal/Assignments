@@ -23,7 +23,9 @@ public class ContactInformationBuilder {
         contact.setNotes(Main.database.getNotes(CONTACT_ID,"NOTES"));
         contact.setBirthday(Main.database.getDOB(CONTACT_ID));
         contact.setProfileImage(Main.database.getPicture(CONTACT_ID));
-        //TODO Build database functions getImage, getDynamicData for emails, phoneNumbers, and workplace
+        contact.setEmails(Main.database.getDynamicData(CONTACT_ID,"EMAIL"));
+        contact.setPhoneNumbers(Main.database.getDynamicData(CONTACT_ID,"PHONE_NUMBER"));
+        contact.setWorkPlaces(Main.database.getDynamicData(CONTACT_ID,"WORK_PLACE"));
         return contact;
     }
 }
