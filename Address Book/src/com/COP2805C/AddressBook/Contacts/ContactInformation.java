@@ -29,9 +29,9 @@ public class ContactInformation {
 
     private String notes;
 
-    private ArrayList<String> phoneNumbers;
-    private ArrayList<String> emails;
-    private ArrayList<String> workPlaces;
+    private ArrayList<String[]> phoneNumbers;
+    private ArrayList<String[]> emails;
+    private ArrayList<String[]> workPlaces;
 
     private Calendar birthday;
 
@@ -48,9 +48,9 @@ public class ContactInformation {
             String addressLine1, String addressLine2,
             String city, String state, String zip,
             String notes,
-            ArrayList<String> phoneNumbers,
-            ArrayList<String> emails,
-            ArrayList<String> workPlaces,
+            ArrayList<String[]> phoneNumbers,
+            ArrayList<String[]> emails,
+            ArrayList<String[]> workPlaces,
             Calendar birthday) {
 
         this.key = key;
@@ -176,27 +176,27 @@ public class ContactInformation {
         this.notes = notes;
     }
 
-    public ArrayList<String> getPhoneNumbers() {
+    public ArrayList<String[]> getPhoneNumbers() {
         return phoneNumbers;
     }
 
-    public void setPhoneNumbers(ArrayList<String> phoneNumbers) {
+    public void setPhoneNumbers(ArrayList<String[]> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
 
-    public ArrayList<String> getEmails() {
+    public ArrayList<String[]> getEmails() {
         return emails;
     }
 
-    public void setEmails(ArrayList<String> emails) {
+    public void setEmails(ArrayList<String[]> emails) {
         this.emails = emails;
     }
 
-    public ArrayList<String> getWorkPlaces() {
+    public ArrayList<String[]> getWorkPlaces() {
         return workPlaces;
     }
 
-    public void setWorkPlaces(ArrayList<String> workPlaces) {
+    public void setWorkPlaces(ArrayList<String[]> workPlaces) {
         this.workPlaces = workPlaces;
     }
 
