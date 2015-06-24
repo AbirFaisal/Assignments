@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 
 /**
@@ -251,6 +252,13 @@ public class Database {
     //Adds image to the selected CONTACT_ID
     public void addPicture(int CONTACT_ID, Image image) throws SQLException {
         FileInputStream inputStream = null;
+
+        try {
+            byte[] data = toBytes(image);
+        } catch (IOException e) {
+            System.out.println(e + "\n some shit happened");
+        }
+
 
         try {
             //File image = new File(fileDirectory);
@@ -502,4 +510,22 @@ public class Database {
     public void closeDB() throws SQLException {
         conn.close();
     }
+
+
+    private byte[] toBytes(Object object) throws IOException {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+             ObjectOutput out = new ObjectOutputStream(bos)) {
+            out.writeObject(object);
+            return bos.toByteArray();
+        }
+    }
+
+    private Object fromBytes(byte[] bytes) throws IOException, ClassNotFoundException {
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+             ObjectInput in = new ObjectInputStream(bis)) {
+            return in.readObject();
+        }
+    }
+
+
 }

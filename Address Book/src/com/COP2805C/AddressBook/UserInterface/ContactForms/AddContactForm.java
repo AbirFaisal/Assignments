@@ -3,46 +3,72 @@ package com.COP2805C.AddressBook.UserInterface.ContactForms;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
-/**
- * Created by abirfaisal on 6/23/15.
- */
+
 public class AddContactForm implements Form {
 
 
     ContactInformation contactInformation;
 
-    String[] labelStrings = {"First Name", "Middle Name", "Last Name", "Nickname", "addressLine1", "addressLine2", "city", "state", "zip"};
+    String[] labelStrings = {
+            "First Name", "Middle Name", "Last Name", "Nickname",
+            "Address Line 1", "Address Line 2", "City", "State", "Zip"};
+
     ArrayList<Label> labels = new ArrayList<>();
     ArrayList<TextField> textFields = new ArrayList<>();
+
+    ArrayList<TextField> phoneTextFields = new ArrayList<>();
+    ArrayList<TextField> emailTextFields = new ArrayList<>();
+    ArrayList<TextField> workplaceTextFields = new ArrayList<>();
+
+    TextArea notesTextArea = new TextArea("Notes");
+
+    DatePicker birthDatePicker = new DatePicker();
 
 
     public AddContactForm(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
-
     }
 
     @Override
-    public Stage contactForm() {
+    public Scene contactForm() {
 
         //TODO Use the functions below to generate these
         for (int i = 0; i < labelStrings.length; i++) {
-            labels.add(new Label(this.labelStrings[i]));
-            textFields.add(new TextField());
+            this.labels.add(label(this.labelStrings[i]));
+            this.textFields.add(textField());
         }
 
+        //TODO Conctact image view and selector
+
+
+        GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
+        GridPane phoneGridPane = gridPane(new ArrayList<Label>(), this.phoneTextFields);
+        GridPane emailGridPane = gridPane(new ArrayList<Label>(), this.emailTextFields);
+        GridPane workplaceGridPane = gridPane(new ArrayList<Label>(), this.workplaceTextFields);
 
 
 
-        return null;
+        //flow pane
+        FlowPane flowpane = flowPane(staticDataGridPane, phoneGridPane, emailGridPane, workplaceGridPane, this.birthDatePicker, this.notesTextArea);
+
+        //anchor pane put in scroll pane
+        AnchorPane scrollPaneAnchorPane = anchorPane(flowpane);
+
+        //scroll pane put in pane in anchor pane
+        ScrollPane scrollPane = new ScrollPane(scrollPaneAnchorPane);
+
+        AnchorPane anchorPane = anchorPane(scrollPane);
+
+        return new Scene(anchorPane, 400.0, 600.0);
     }
 
     public ScrollPane scrollPane(){
@@ -53,11 +79,11 @@ public class AddContactForm implements Form {
     }
 
 
-    public AnchorPane anchorPane(){
+    public AnchorPane anchorPane(Node... FXNode){
 
         //TODO stuff here
 
-        return new AnchorPane();
+        return new AnchorPane(FXNode);
     }
 
 
@@ -70,7 +96,7 @@ public class AddContactForm implements Form {
 
 
 
-    public FlowPane flowPane(){
+    public FlowPane flowPane(Node... FXNode){
         FlowPane flowPane = new FlowPane();
         //TODO format this
         flowPane.setAlignment(Pos.CENTER);
@@ -81,45 +107,67 @@ public class AddContactForm implements Form {
 
 
 
-    public GridPane gridPane(){
+    public GridPane gridPane(ArrayList<Label> labels, ArrayList<TextField> textFields){
         GridPane gridPane = new GridPane();
 
-        gridPane.addColumn(0, null);
-        gridPane.addColumn(1, null);
+        //TODO add some formatting to make it look nice
+
+        //Add labels in column 0 row i
+        for (int i = 0; i < labels.size() - 1; i++) {
+            gridPane.add(labels.get(i), 0, i);
+        }
+
+        //Add texfields in column 1 row i
+        for (int i = 0; i < textFields.size() - 1; i++) {
+            gridPane.add(textFields.get(i), 1, i);
+        }
 
         return gridPane;
     }
 
 
 
-    public Label label(){
-        //TODO format labels
-        return null;
+    public Label label(String labelString){
+        Label label = new Label(labelString);
+        //Format label if needed
+        return label;
     }
 
     public TextField textField(){
-        //TODO format fields
-        return null;
+        TextField textField = new TextField();
+        //Format label if needed
+        return textField;
     }
 
 
 
 
 
-    //TODO bottons
-    public MenuButton groupSelectButton(){
+    public DatePicker birthDatePicker(){
+        DatePicker datePicker = new DatePicker();
+        //TODO stuff here if needed
+        return datePicker;
+    }
 
-        return null;
+
+
+    //TODO Anchor buttons into correct position
+    public MenuButton groupSelectButton(){
+        MenuButton menuButton = new MenuButton();
+
+        return menuButton;
     }
 
     public Button addButton(){
+        Button button = new Button();
 
-        return null;
+        return button;
     }
 
     public Button cancelButton(){
+        Button button = new Button();
 
-        return null;
+        return button;
     }
 
 

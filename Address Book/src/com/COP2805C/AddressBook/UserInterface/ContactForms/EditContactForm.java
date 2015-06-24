@@ -1,7 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
-import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 /**
  * Created by abirfaisal on 6/23/15.
@@ -15,7 +15,7 @@ public class EditContactForm implements Form {
     }
 
     @Override
-    public Stage contactForm() {
+    public Scene contactForm() {
         return null;
     }
 }
