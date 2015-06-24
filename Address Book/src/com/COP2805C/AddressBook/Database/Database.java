@@ -136,6 +136,25 @@ public class Database {
         return password;
     }
 
+    public ArrayList<String> getGroups(String[] credentials){
+        ArrayList<String> groups = new ArrayList<String>();
+        try{
+            String query = "SELECT GROUP_ASSC FROM ACCOUNTS WHERE ACCOUNT=?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, credentials[0]);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                groups.add(rs.getString("GROUP_ASSC"));
+            }
+            return groups;
+        }catch(SQLException e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
+
     //DELETES ALL OF THE CONTACTS RECORDS IF GIVEN THE CONTACT ID
     public void deleteCONTACTID(int CONTACT_ID) {
         try {
@@ -179,14 +198,18 @@ public class Database {
     }
 
     public int createContact(String ACCOUNT,ContactInformation contact){
-        int key = createContactID(String ACCOUNT);
-        addNames(key, contact.getFirstName(),contact.getMiddleName(),contact.getLastName(),contact.getNickname());
-        addAddress(key, contact.getAddressLine1(), contact.getAddressLine2(),contact.getCity(),contact.getState(),contact.getZip(),contact.getCountry());
-        addDate(key, contact.getBirthday());
-        addGroup(key, contact.getGroup());
-        addNotes(key, contact.getNotes());
-        addPicture(key, contact.getProfileImage().);
-        return key;
+        try {
+            int key = createContactID(ACCOUNT);
+            addNames(key, contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), contact.getNickname());
+            addAddress(key, contact.getAddressLine1(), contact.getAddressLine2(), contact.getCity(), contact.getState(), contact.getZip(), contact.getCountry());
+            addDate(key, contact.getBirthday());
+            addGroup(key, contact.getGroup());
+            addNotes(key, contact.getNotes());
+            addPicture(key, contact.getProfileImage());
+            return key;
+        }catch(SQLException e){
+            System.out.println(e);
+        }
     }
 
     //Adds names to the provided CONTACT_KEY
@@ -234,7 +257,7 @@ public class Database {
             inputStream = new FileInputStream(image);
             String update = "UPDATE CONTACTS SET PICTURE =? WHERE CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(update);
-            pst.setBinaryStream(1, inputStream, (int) (image.length()));
+            //pst.setBinaryStream(1, inputStream, (int) (image.length()));
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
             pst.close();
@@ -330,6 +353,11 @@ public class Database {
     public String getState(int CONTACT_ID, String STATE) {
         String query = "SELECT STATE FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, STATE, query);
+    }
+
+    public String getCountry(int CONTACT_ID, String COUNTRY){
+        String query = "SELECT COUNTRY FROM CONTACTS WHERE CONTACT_ID = ?";
+        return runContactStringQuery(CONTACT_ID, COUNTRY, query);
     }
     public String getZIP(int CONTACT_ID, String ZIP) {
         String query = "SELECT ZIP FROM CONTACTS WHERE CONTACT_ID = ?";

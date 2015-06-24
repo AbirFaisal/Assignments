@@ -122,7 +122,7 @@ public class Main extends Application {
                     1, "group",
                     testImage,
                     "First", "Middle", "Last", "Nick",
-                    "addr1", "addr2", "city", "state", "zip",
+                    "addr1", "addr2", "city", "state", "zip", "country",
                     "notes",
                     phone, email, work,
                     testCalendar);

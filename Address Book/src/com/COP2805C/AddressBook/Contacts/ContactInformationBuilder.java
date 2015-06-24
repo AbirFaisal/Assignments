@@ -20,6 +20,7 @@ public class ContactInformationBuilder {
         contact.setCity(Main.database.getCity(CONTACT_ID,"CITY"));
         contact.setZip(Main.database.getZIP(CONTACT_ID,"ZIP"));
         contact.setState(Main.database.getState(CONTACT_ID,"STATE"));
+        contact.setCountry(Main.database.getCountry(CONTACT_ID,"COUNTRY"));
         contact.setNotes(Main.database.getNotes(CONTACT_ID,"NOTES"));
         contact.setBirthday(Main.database.getDOB(CONTACT_ID));
         contact.setProfileImage(Main.database.getPicture(CONTACT_ID));
