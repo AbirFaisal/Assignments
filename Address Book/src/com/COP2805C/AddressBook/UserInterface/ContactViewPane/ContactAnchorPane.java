@@ -195,7 +195,11 @@ public class ContactAnchorPane implements ContactView {
         addressString = addressString + contactInformation.getCity() + ", ";
         addressString = addressString + contactInformation.getState() + " ";
         addressString = addressString + contactInformation.getZip() + " ";
+        addressString = addressString + contactInformation.getCountry() + " ";
 
+
+
+        //TODO remove test
         System.out.println(addressString);
 
         return addressString;

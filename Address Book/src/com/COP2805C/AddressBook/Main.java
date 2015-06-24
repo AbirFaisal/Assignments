@@ -36,7 +36,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-
         //TODO Chris can you make a database.addContact(credentials, contactInformation)?
         //I'm not sure how to approach this matter.
 
@@ -120,7 +119,11 @@ public class Main extends Application {
                     1, "group",
                     testImage,
                     "First", "Middle", "Last", "Nick",
+<<<<<<< HEAD
                     "addr1", "addr2", "city", "state", "zip", "country",
+=======
+                    "addr1", "addr2", "city", "state", "zip","country",
+>>>>>>> AbirFaisal
                     "notes",
                     phone, email, work,
                     testCalendar);

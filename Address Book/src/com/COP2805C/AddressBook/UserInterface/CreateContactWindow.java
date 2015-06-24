@@ -141,10 +141,15 @@ public class CreateContactWindow{
         {
 
             configureFileChooser(fileChooser);
+
             File file = fileChooser.showOpenDialog(window);
+
             imageButton.setFileURL(file.getAbsolutePath());
+
             fileString = imageButton.getFileURL();
+
             System.out.println(fileString);
+
             if (file != null) {
                 Image test = new Image("file://" + file.getAbsolutePath(), 122, 110, false, false);
                 imageButton.changePicture(test);

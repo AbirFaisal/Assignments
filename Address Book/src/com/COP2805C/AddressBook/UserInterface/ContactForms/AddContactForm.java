@@ -1,45 +1,61 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.UserInterface.EventHandlers;
+import com.COP2805C.AddressBook.UserInterface.ImageButton;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+
+import java.io.File;
 import java.util.ArrayList;
 
 
 public class AddContactForm implements Form {
 
-
     ContactInformation contactInformation;
+    String[] labelStrings;
 
-    String[] labelStrings = {
-            "First Name", "Middle Name", "Last Name", "Nickname",
-            "Address Line 1", "Address Line 2", "City", "State", "Zip"};
+    //Static Data
+    ArrayList<Label> labels;
+    ArrayList<TextField> textFields;
 
-    ArrayList<Label> labels = new ArrayList<>();
-    ArrayList<TextField> textFields = new ArrayList<>();
+    //Dynamic Data
+    ArrayList<TextField> phoneTextFields;
+    ArrayList<TextField> emailTextFields;
+    ArrayList<TextField> workplaceTextFields;
 
-    ArrayList<TextField> phoneTextFields = new ArrayList<>();
-    ArrayList<TextField> emailTextFields = new ArrayList<>();
-    ArrayList<TextField> workplaceTextFields = new ArrayList<>();
-
-    TextArea notesTextArea = new TextArea("Notes");
-
-    DatePicker birthDatePicker = new DatePicker();
-
+    TextArea notesTextArea;
+    DatePicker birthDatePicker;
 
     public AddContactForm(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
+        this.labelStrings = new String[]{
+                "First Name", "Middle Name", "Last Name", "Nickname",
+                "Address Line 1", "Address Line 2", "City", "State", "Zip", "Country"};
+
+        this.labels = new ArrayList<>();
+        this.textFields = new ArrayList<>();
+        this.phoneTextFields = new ArrayList<>();
+        this.emailTextFields = new ArrayList<>();
+        this.workplaceTextFields = new ArrayList<>();
+        this.birthDatePicker = birthDatePicker();
+        this.notesTextArea = notesTextArea();
     }
 
+
     @Override
-    public Scene contactForm() {
+    public Scene form() {
 
         //TODO Use the functions below to generate these
         for (int i = 0; i < labelStrings.length; i++) {
@@ -47,8 +63,7 @@ public class AddContactForm implements Form {
             this.textFields.add(textField());
         }
 
-        //TODO Conctact image view and selector
-
+        //TODO Contact image view and selector
 
         GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
         GridPane phoneGridPane = gridPane(new ArrayList<Label>(), this.phoneTextFields);
@@ -58,7 +73,10 @@ public class AddContactForm implements Form {
 
 
         //flow pane
-        FlowPane flowpane = flowPane(staticDataGridPane, phoneGridPane, emailGridPane, workplaceGridPane, this.birthDatePicker, this.notesTextArea);
+        FlowPane flowpane = flowPane(staticDataGridPane, phoneGridPane, emailGridPane, workplaceGridPane,
+                this.birthDatePicker, this.notesTextArea,
+                groupSelectButton(), addButton(), cancelButton());
+
 
         //anchor pane put in scroll pane
         AnchorPane scrollPaneAnchorPane = anchorPane(flowpane);
@@ -87,18 +105,58 @@ public class AddContactForm implements Form {
     }
 
 
-    public ImageView contactImage(ContactInformation contactInformation){
+    public ImageButton contactImage(ContactInformation contactInformation){
 
-        //TODO stuff here
-        return new ImageView(contactInformation.getProfileImage());
+        //Get default image from file
+        File file = new File("/defaultProfileImage.jpg");
+        FileChooser fileChooser = fileChooser();
+        ImageButton imageButton = new ImageButton(file.toURI().toString());
+
+
+        //TODO move to event handlers
+        imageButton.setOnMouseClicked(event -> {
+
+            imageButton.setFileURL(
+                    fileChooser.showOpenDialog(new Stage()).getAbsolutePath());
+
+            //TODO remove test
+            System.out.println(imageButton.getFileURL());
+
+            if (imageButton.getFileURL() != null){
+
+                //TODO run image through image formatter
+                Image image = new Image("file://" + imageButton.getFileURL(),
+                        100.0, 100.0,   //Dimensions pixels
+                        true,           //Keep aspect ratio
+                        false);         //bool Smooth no idea what that means
+
+                //change image button image
+                imageButton.changePicture(image);
+                //set this contact image image
+                this.contactInformation.setProfileImage(image);
+            }
+        });
+
+
+        return imageButton;
     }
 
 
+    public FileChooser fileChooser(){
+        FileChooser fileChooser = new FileChooser();
+
+        fileChooser.setTitle("View Pictures");
+
+        //TODO make sure this works in windows
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        return fileChooser;
+    }
 
 
     public FlowPane flowPane(Node... FXNode){
         FlowPane flowPane = new FlowPane();
-        //TODO format this
+        //TODO format this further
         flowPane.setAlignment(Pos.CENTER);
         flowPane.setOrientation(Orientation.VERTICAL);
 
@@ -140,6 +198,11 @@ public class AddContactForm implements Form {
     }
 
 
+    public TextArea notesTextArea(){
+        TextArea textArea = new TextArea();
+
+        return textArea;
+    }
 
 
 
@@ -155,17 +218,27 @@ public class AddContactForm implements Form {
     public MenuButton groupSelectButton(){
         MenuButton menuButton = new MenuButton();
 
+        AnchorPane.setLeftAnchor(menuButton, 5.0);
+        AnchorPane.setBottomAnchor(menuButton, 5.0);
+
         return menuButton;
     }
 
     public Button addButton(){
         Button button = new Button();
 
+        AnchorPane.setRightAnchor(button, 35.0);
+        AnchorPane.setBottomAnchor(button, 5.0);
+
         return button;
     }
 
     public Button cancelButton(){
         Button button = new Button();
+
+        AnchorPane.setRightAnchor(button, 5.0);
+        AnchorPane.setBottomAnchor(button, 5.0);
+
 
         return button;
     }
