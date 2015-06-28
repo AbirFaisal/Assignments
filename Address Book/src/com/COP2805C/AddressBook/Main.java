@@ -40,7 +40,6 @@ public class Main extends Application {
         //I'm not sure how to approach this matter.
 
 
-
         //Check if database exists if not create it
         database.initialize();
 
@@ -100,6 +99,8 @@ public class Main extends Application {
                 populateContacts = false;
             }
 
+            Image testing = new Image("http://i.imgur.com/6zqQI1S.jpg");
+            database.addPicture(1,testing);
 
             /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
             Image testImage = new Image("http://i.imgur.com/6zqQI1S.jpg");
@@ -119,11 +120,7 @@ public class Main extends Application {
                     1, "group",
                     testImage,
                     "First", "Middle", "Last", "Nick",
-<<<<<<< HEAD
                     "addr1", "addr2", "city", "state", "zip", "country",
-=======
-                    "addr1", "addr2", "city", "state", "zip","country",
->>>>>>> AbirFaisal
                     "notes",
                     phone, email, work,
                     testCalendar);

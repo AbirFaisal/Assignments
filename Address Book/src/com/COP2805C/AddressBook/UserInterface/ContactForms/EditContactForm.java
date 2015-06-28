@@ -14,8 +14,9 @@ public class EditContactForm implements Form {
         this.contactInformation = contactInformation;
     }
 
+
     @Override
-    public Scene contactForm() {
+    public Scene form() {
         return null;
     }
 }

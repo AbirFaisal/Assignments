@@ -1,9 +1,13 @@
 package com.COP2805C.AddressBook.Database;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.UserInterface.OSUtils;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.sqlite.SQLiteConfig;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
@@ -253,27 +257,25 @@ public class Database {
 
     //Adds image to the selected CONTACT_ID
     public void addPicture(int CONTACT_ID, Image image) throws SQLException {
-        FileInputStream inputStream = null;
-        ByteArrayInputStream byteInputStream = null;
-        byte[] bytes = new byte[1080];
+
+
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image,null);
+        ByteArrayOutputStream s = new ByteArrayOutputStream();
+        ByteArrayInputStream in;
         try {
-            bytes = toBytes(image);
-        } catch (IOException e) {
-            System.out.println(e + "\n some shit happened");
-        }
-        try {
-            //File image = new File(fileDirectory);
-            byteInputStream = new ByteArrayInputStream(bytes);
+            ImageIO.write(bImage, "png", s);
+            byte[] res = s.toByteArray();
+            in = new ByteArrayInputStream(res);
             String update = "UPDATE CONTACTS SET PICTURE =? WHERE CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(update);
-            //pst.setBinaryStream(1, inputStream, (int) (image.length()));
+            pst.setBinaryStream(1, in,res.length);
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
             pst.close();
-        } catch (SQLException e) {
-            System.out.println("SQLExceptionL - " + e);
+        }catch(SQLException|IOException e){
+            System.out.println(e + "\nTesting addPicture");
         }
-    }
+        }
 
     public void addDate(int CONTACT_ID, Calendar calendar){
         try {
@@ -445,7 +447,6 @@ public class Database {
                 inputStream = rs.getBinaryStream("picture");
             }
             outputStream = new FileOutputStream("profilePic" + CONTACT_ID + ".png");
-
             byte[] content = new byte[1024];
             int size = 0;
             while ((size = inputStream.read(content)) != -1) {
@@ -460,10 +461,17 @@ public class Database {
         } catch (IOException e) {
             e.printStackTrace();
         } catch(NullPointerException e){
+            if(OSUtils.isWindows()){
+                return new Image("c://Address Book/src/picture.jpg");
+            }
             return new Image("file:///Address Book/src/picture.jpg");
         }
 
-         profilePic = new Image("file:///Address Book/profilePic" + CONTACT_ID + ".png");
+        if(OSUtils.isWindows()){
+            profilePic = new Image("c://Address Book/profilePic" + CONTACT_ID + ".png");
+        }else {
+            profilePic = new Image("file:///Address Book/profilePic" + CONTACT_ID + ".png");
+        }
          return profilePic;
     }
 
