@@ -45,6 +45,7 @@ public class AddContactForm implements Form {
                 "Address Line 1", "Address Line 2", "City", "State", "Zip", "Country"};
 
         this.labels = new ArrayList<>();
+
         this.textFields = new ArrayList<>();
         this.phoneTextFields = new ArrayList<>();
         this.emailTextFields = new ArrayList<>();
@@ -69,6 +70,7 @@ public class AddContactForm implements Form {
         GridPane phoneGridPane = gridPane(new ArrayList<Label>(), this.phoneTextFields);
         GridPane emailGridPane = gridPane(new ArrayList<Label>(), this.emailTextFields);
         GridPane workplaceGridPane = gridPane(new ArrayList<Label>(), this.workplaceTextFields);
+
 
 
 
