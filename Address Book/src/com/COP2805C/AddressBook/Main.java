@@ -32,10 +32,10 @@ public class Main extends Application {
 
     public static Database database = Database.getDatabase();
     public static ArrayList<Integer> contactIDS = new ArrayList<>();
-<<<<<<< HEAD
+
     public Stage mainStage = new Stage(); //TODO needed for switching to the form
     public AnchorPane rightAnchorPane;
-=======
+
     public static boolean populateContacts = true;
 
 
@@ -47,7 +47,6 @@ public class Main extends Application {
 
 
 
->>>>>>> AbirFaisal
     public static void main(String[] args) {
 
         //TODO Chris can you make a database.addContact(credentials, contactInformation)?
