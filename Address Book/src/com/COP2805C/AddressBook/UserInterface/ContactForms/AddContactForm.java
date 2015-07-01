@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -71,39 +72,58 @@ public class AddContactForm implements Form {
         GridPane emailGridPane = gridPane(new ArrayList<Label>(), this.emailTextFields);
         GridPane workplaceGridPane = gridPane(new ArrayList<Label>(), this.workplaceTextFields);
 
-
-
-
         //flow pane
-        FlowPane flowpane = flowPane(staticDataGridPane, phoneGridPane, emailGridPane, workplaceGridPane,
-                this.birthDatePicker, this.notesTextArea,
-                groupSelectButton(), addButton(), cancelButton());
+        FlowPane flowpane = flowPane(
+                staticDataGridPane, phoneGridPane, emailGridPane, workplaceGridPane,
+                this.birthDatePicker, this.notesTextArea);
+                //groupSelectButton(), addButton(), cancelButton());
 
 
         //anchor pane put in scroll pane
         AnchorPane scrollPaneAnchorPane = anchorPane(flowpane);
 
         //scroll pane put in pane in anchor pane
-        ScrollPane scrollPane = new ScrollPane(scrollPaneAnchorPane);
+        ScrollPane scrollPane = scrollPane(scrollPaneAnchorPane);
+
 
         AnchorPane anchorPane = anchorPane(scrollPane);
 
+        //TODO change back to anchor pane
         return new Scene(anchorPane, 400.0, 600.0);
     }
 
-    public ScrollPane scrollPane(){
+    public ScrollPane scrollPane(Node... FXNode){
+        ScrollPane scrollPane = new ScrollPane();
+
+        for (int i = 0; i < FXNode.length; i++) {
+            scrollPane = new ScrollPane(FXNode[i]);
+        }
+
+        AnchorPane.setTopAnchor(scrollPane, 0.0);
+        AnchorPane.setBottomAnchor(scrollPane, 0.0);
+        AnchorPane.setLeftAnchor(scrollPane, 0.0);
+        AnchorPane.setRightAnchor(scrollPane, 0.0);
+
 
         //TODO stuff here
-
-        return new ScrollPane();
+        return scrollPane;
     }
 
 
     public AnchorPane anchorPane(Node... FXNode){
 
+        AnchorPane anchorPane = new AnchorPane();
+
+        for (int i = 0; i < FXNode.length; i++) {
+            AnchorPane.setTopAnchor(FXNode[i], 0.0);
+        }
+
+        anchorPane.getChildren().addAll(FXNode);
+
         //TODO stuff here
 
-        return new AnchorPane(FXNode);
+
+        return anchorPane;
     }
 
 
@@ -158,9 +178,15 @@ public class AddContactForm implements Form {
 
     public FlowPane flowPane(Node... FXNode){
         FlowPane flowPane = new FlowPane();
+
+        flowPane.getChildren().addAll(FXNode);
+
         //TODO format this further
-        flowPane.setAlignment(Pos.CENTER);
+        flowPane.setAlignment(Pos.TOP_LEFT);
         flowPane.setOrientation(Orientation.VERTICAL);
+
+        
+
 
         return flowPane;
     }
@@ -170,7 +196,9 @@ public class AddContactForm implements Form {
     public GridPane gridPane(ArrayList<Label> labels, ArrayList<TextField> textFields){
         GridPane gridPane = new GridPane();
 
-        //TODO add some formatting to make it look nice
+        //TODO change gaps
+        gridPane.setHgap(5.0);
+        gridPane.setVgap(8.0);
 
         //Add labels in column 0 row i
         for (int i = 0; i < labels.size() - 1; i++) {
