@@ -31,14 +31,7 @@ public class Main extends Application {
     static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
     public static Database database = Database.getDatabase();
-    public static ArrayList<Integer> contactIDS = new ArrayList<>();
-<<<<<<< HEAD
-    public Stage mainStage = new Stage(); //TODO needed for switching to the form
     public AnchorPane rightAnchorPane;
-=======
-    public static boolean populateContacts = true;
-
-
 
 
     public Stage mainStage = new Stage(); //TODO needed for switching to the form
@@ -47,7 +40,6 @@ public class Main extends Application {
 
 
 
->>>>>>> AbirFaisal
     public static void main(String[] args) {
 
         //TODO Chris can you make a database.addContact(credentials, contactInformation)?
@@ -205,11 +197,6 @@ public class Main extends Application {
                 rightAnchorPane.getChildren().clear();
                 rightAnchorPane.getChildren().add(newRightAnchorPane);
             });
-
-
-            for (int i = 0; i < contactInformationArrayList.size(); i++) {
-                contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
-            }
 
 
             //Left side Anchor Pane
