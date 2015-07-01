@@ -4,6 +4,8 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
+import com.COP2805C.AddressBook.UserInterface.ContactForms.Form;
+import com.COP2805C.AddressBook.UserInterface.ContactForms.FormFactory;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
 import com.COP2805C.AddressBook.UserInterface.CreateContactWindow;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
@@ -30,7 +32,21 @@ public class Main extends Application {
     static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
     public static Database database = Database.getDatabase();
+<<<<<<< HEAD
     public Stage mainStage; //TODO needed for switching to the form
+=======
+    public static ArrayList<Integer> contactIDS = new ArrayList<>();
+    public static boolean populateContacts = true;
+
+
+
+
+    public Stage mainStage = new Stage(); //TODO needed for switching to the form
+
+
+
+
+>>>>>>> AbirFaisal
 
     public static void main(String[] args) {
 
@@ -149,11 +165,17 @@ public class Main extends Application {
 
             SplitMenuButton editMenuButton = MainWindow.editMenuButton();
 
+            FormFactory formFactory = new FormFactory();
+
             //Add contact button
             Button addButton = new Button("+");
-            addButton.setOnAction(e -> {
-                CreateContactWindow createContact = new CreateContactWindow();
-                createContact.display(credentials);
+            addButton.setOnMouseClicked(e -> {
+
+
+                mainStage.setScene(formFactory.getForm(contactInformationArrayList.get(0), "ADD").form());
+
+                mainStage.show();
+
             });
             AnchorPane.setTopAnchor(addButton, 8.0);
             AnchorPane.setLeftAnchor(addButton, 8.0);
@@ -167,6 +189,7 @@ public class Main extends Application {
             //Group selection
             //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
             ChoiceBox<String> groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
+
             //TODO move into event handlers
             ArrayList<String> groups = database.getGroups(credentials);
             groupObservableList.addAll(groups);//TODO for each group add to list
@@ -179,6 +202,11 @@ public class Main extends Application {
             //Contact List
             //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
             ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
+
+
+            for (int i = 0; i < contactInformationArrayList.size(); i++) {
+                contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
+            }
 
 
             //Left side Anchor Pane
