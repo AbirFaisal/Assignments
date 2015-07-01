@@ -5,7 +5,6 @@ import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.UserInterface.OSUtils;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import org.sqlite.SQLiteConfig;
 
 import javax.imageio.ImageIO;
@@ -13,7 +12,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Calendar;
 
 /**
@@ -58,15 +56,20 @@ public class Database {
     public ArrayList<ContactInformation> populateContactList(String[] credentials, String group){
         ArrayList<Integer> contactIDS = new ArrayList<>();
         ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<>();
-        contactIDS = getContactIDS(credentials, group);
-
+        if(group == "Main"){
+            contactIDS = getContactIDS(credentials);
+        }else {
+            contactIDS = getContactIDS(credentials, group);
+        }
         ContactInformationBuilder cib = new ContactInformationBuilder();
         for(int i = 0; i < contactIDS.size(); i++){
             contactInformationArrayList.add(cib.prepareContact(contactIDS.get(i)));
         }
-
         return contactInformationArrayList;
     }
+
+
+
 
     public int numberOfContacts(String[] credentials) {
         try {
@@ -129,6 +132,23 @@ public class Database {
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setString(1, credentials[0]);
             pst.setString(2,group);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                contactIDS.add(rs.getInt("CONTACT_ID"));
+            }
+            return contactIDS;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public ArrayList<Integer> getContactIDS(String[] credentials) {
+        ArrayList<Integer> contactIDS = new ArrayList<>();
+        try {
+            String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 contactIDS.add(rs.getInt("CONTACT_ID"));
@@ -462,7 +482,7 @@ public class Database {
             if (rs.next()) {
                 inputStream = rs.getBinaryStream("picture");
             }
-            outputStream = new FileOutputStream("profilePic" + CONTACT_ID + ".png");
+            outputStream = new FileOutputStream("src/res/profilePic"+CONTACT_ID+".png");
             byte[] content = new byte[1024];
             int size = 0;
             while ((size = inputStream.read(content)) != -1) {
@@ -478,15 +498,16 @@ public class Database {
             e.printStackTrace();
         } catch(NullPointerException e){
             if(OSUtils.isWindows()){
-                return new Image("c://Address Book/src/picture.jpg");
+                return new Image("res/defaultProfileImage.png");
             }
-            return new Image("file:///Address Book/src/picture.jpg");
+            return new Image("res/defaultProfileImage.png");
         }
 
         if(OSUtils.isWindows()){
             profilePic = new Image("c://Address Book/profilePic" + CONTACT_ID + ".png");
         }else {
-            profilePic = new Image("file:///Address Book/profilePic" + CONTACT_ID + ".png");
+            String workingDir = System.getProperty("user.dir");
+            profilePic = new Image("file://"+workingDir+"/src/res/profilePic"+CONTACT_ID+".png");
         }
          return profilePic;
     }
