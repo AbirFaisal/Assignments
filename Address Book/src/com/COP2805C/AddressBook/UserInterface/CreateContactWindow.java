@@ -20,11 +20,12 @@ import java.sql.SQLException;
 public class CreateContactWindow{
     private Desktop desktop = Desktop.getDesktop();
     private String fileString;
-    private Stage window;
     private int x = 0;
     private Pane pane = new Pane();
+    private Image test;
 
     public void display(String[] credentials){
+        Stage window;
         Scene scene;
         window = new Stage();
         window.setResizable(false);
@@ -96,7 +97,7 @@ public class CreateContactWindow{
             phoneText2.setPrefWidth(244);
             emailText.setLayoutY(256+x);
             pane.getChildren().add(phoneText2);
-
+            pane.getChildren().remove(0,pane.getChildren().size());
         });
 
         Button createButton = new Button("Create");
@@ -109,6 +110,7 @@ public class CreateContactWindow{
                 int key = Main.database.createContactID(credentials[0]);
                 Main.database.addNames(key, fnameText.getText(), null, lnameText.getText(), null);
                 Main.database.addDynamicData(key, emailText.getText());
+                Main.database.addPicture(key,test);
                 //Main.database.addPicture(key, fileString);
                 window.close();
             } catch (SQLException e1) {
@@ -151,7 +153,7 @@ public class CreateContactWindow{
             System.out.println(fileString);
 
             if (file != null) {
-                Image test = new Image("file://" + file.getAbsolutePath(), 122, 110, false, false);
+                test = new Image("file://" + file.getAbsolutePath(), 122, 110, false, false);
                 imageButton.changePicture(test);
             }
         });
@@ -169,7 +171,6 @@ public class CreateContactWindow{
 
 
         pane.getChildren().addAll(fname, lname, phone, email, create, fnameText, lnameText, phoneText, emailText, createButton, cancelButton,addButton, vb);
-
         scene = new Scene(pane);
         window.setScene(scene);
         window.show();

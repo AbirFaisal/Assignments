@@ -1,7 +1,6 @@
 package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
-import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
@@ -31,7 +30,7 @@ public class Main extends Application {
 
     public static Database database = Database.getDatabase();
     public Stage mainStage; //TODO needed for switching to the form
-
+    public AnchorPane rightAnchorPane;
     public static void main(String[] args) {
 
         //TODO Chris can you make a database.addContact(credentials, contactInformation)?
@@ -81,8 +80,8 @@ public class Main extends Application {
             //TODO build method that repopulates contacts depending on which group is selected.
             //TODO load groups from database into an ArrayList.
 
-
             contactInformationArrayList = database.populateContactList(credentials, "Main Group");
+
             //Old code in case it is needed.
 //            if (populateContacts) {
 //                try {
@@ -100,11 +99,8 @@ public class Main extends Application {
 //                populateContacts = false;
 //            }
 
-            Image testing = new Image("http://i.imgur.com/6zqQI1S.jpg");
-            database.addPicture(1,testing);
-
             /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
-            Image testImage = new Image("http://i.imgur.com/6zqQI1S.jpg");
+            Image testImage = new Image("/res/defaultProfileImage.png");
             ArrayList<String> phone = new ArrayList<>();
             ArrayList<String> email = new ArrayList<>();
             ArrayList<String> work = new ArrayList<>();
@@ -135,7 +131,9 @@ public class Main extends Application {
 
             //TODO the bleow code needs to go into MainWindow.java
             //Right side Anchor Pane
-            AnchorPane rightAnchorPane = contactViewFactory.contact(contactInformation).contactView();
+
+            rightAnchorPane = contactViewFactory.contact(contactInformation).contactView();
+            //rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
 
             AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
             AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
@@ -171,6 +169,14 @@ public class Main extends Application {
             ArrayList<String> groups = database.getGroups(credentials);
             groupObservableList.addAll(groups);//TODO for each group add to list
             groupChoiceBox.getSelectionModel().selectFirst();
+            groupChoiceBox.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue)->{
+                contactInformationArrayList = database.populateContactList(credentials,newValue);
+                contactObservableList.clear();
+                for(int i = 0; i < contactInformationArrayList.size();i++){
+                    contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
+                }
+                System.out.println(contactInformationArrayList.toString());
+            });
 
 
             //Search Box
@@ -179,7 +185,18 @@ public class Main extends Application {
             //Contact List
             //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
             ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
-
+            for(int i = 0; i < contactInformationArrayList.size();i++){
+                contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
+            }
+            contactListView.getSelectionModel().selectFirst();
+            contactListView.getSelectionModel().selectedIndexProperty().addListener((v,oldValue,newValue)->{
+                int index = 0;
+                //error checking necessary to avoid array Out Of Bounds.
+                if(newValue.intValue()!=-1)index = newValue.intValue();
+                AnchorPane newRightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(index)).contactView();
+                rightAnchorPane.getChildren().clear();
+                rightAnchorPane.getChildren().add(newRightAnchorPane);
+            });
 
             //Left side Anchor Pane
             AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
