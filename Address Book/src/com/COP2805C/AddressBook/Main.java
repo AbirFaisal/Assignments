@@ -76,8 +76,10 @@ public class Main extends Application {
         @Override
         public void start(Stage primaryStage)throws Exception {
 
-            contactInformationArrayList = database.populateContactList(credentials, "Main");
-
+            //Checks to see if user has contacts to load from the database.
+            if(database.numberOfContacts(credentials)>0) {
+                contactInformationArrayList = database.populateContactList(credentials, "Main");
+            }
             /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
             Image testImage = new Image("/res/defaultProfileImage.png");
             ArrayList<String> phone = new ArrayList<>();
@@ -95,7 +97,7 @@ public class Main extends Application {
             ContactInformation contactInformation = new ContactInformation(
                     1, "group",
                     testImage,
-                    "First", "Middle", "Last", "Nick",
+                    "First", "Middle", "Last", "Sample",
                     "addr1", "addr2", "city", "state", "zip", "country",
                     "notes",
                     phone, email, work,
@@ -111,13 +113,19 @@ public class Main extends Application {
             //TODO the bleow code needs to go into MainWindow.java
             //Right side Anchor Pane
             //Initial contact load.
-            rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
-            //rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
-
+            //If the user has contacts to load from the database, this will load the first contact as an introduction
+            if(database.numberOfContacts(credentials)>0) {
+                rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
+            }else{//If the user has no contacts, it will load a sample contactView
+                rightAnchorPane = contactViewFactory.contact(contactInformation).contactView();
+            }
             AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
             AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
             AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);
             AnchorPane.setRightAnchor(rightAnchorPane, 0.0);
+            //rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
+
+
             //TODO dynamicly generate the above
 
             //Something like this then re add the nodes
