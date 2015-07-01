@@ -30,8 +30,6 @@ public class Main extends Application {
     static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
     public static Database database = Database.getDatabase();
-    public static ArrayList<Integer> contactIDS = new ArrayList<>();
-    public static boolean populateContacts = true;
     public Stage mainStage; //TODO needed for switching to the form
 
     public static void main(String[] args) {
@@ -82,22 +80,25 @@ public class Main extends Application {
 
             //TODO build method that repopulates contacts depending on which group is selected.
             //TODO load groups from database into an ArrayList.
-            if (populateContacts) {
-                try {
-                    contactIDS = database.getContactIDS(credentials);
 
-                    ContactInformationBuilder cib = new ContactInformationBuilder();
-                    for (int begin = 0; begin < contactIDS.size(); begin++) {
-                        contactInformationArrayList.add(cib.prepareContact(contactIDS.get(begin)));
-                    }
 
-                    //Below: For testing
-                    System.out.println(contactInformationArrayList.toString());
-                } catch (NullPointerException e) {
-                    System.out.println(e + " No contacts are created for this user yet");
-                }
-                populateContacts = false;
-            }
+            contactInformationArrayList = database.populateContactList(credentials, "Main Group");
+            //Old code in case it is needed.
+//            if (populateContacts) {
+//                try {
+//                    contactIDS = database.getContactIDS(credentials);
+//
+//                    ContactInformationBuilder cib = new ContactInformationBuilder();
+//                    for (int begin = 0; begin < contactIDS.size(); begin++) {
+//                        contactInformationArrayList.add(cib.prepareContact(contactIDS.get(begin)));
+//                    }
+//                    //Below: For testing
+//                    System.out.println(contactInformationArrayList.toString());
+//                } catch (NullPointerException e) {
+//                    System.out.println(e + " No contacts are created for this user yet");
+//                }
+//                populateContacts = false;
+//            }
 
             Image testing = new Image("http://i.imgur.com/6zqQI1S.jpg");
             database.addPicture(1,testing);

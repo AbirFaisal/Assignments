@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.Database;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.UserInterface.OSUtils;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -44,7 +45,7 @@ public class Database {
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS CONTACTS(ACCOUNT VARCHAR ,"
                     + "CONTACT_ID INTEGER," + "F_NAME VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
                     + "ADDRESSLINE1 VARCHAR," + "ADDRESSLINE2 VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
-                    + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
+                    + "GROUP_ASSC VARCHAR DEFAULT 'Main Group'," + "DOB INTEGER," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
                     + "PHONE_NUMBER VARCHAR," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, " + "FOREIGN KEY(CONTACT_ID) "
@@ -52,6 +53,19 @@ public class Database {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public ArrayList<ContactInformation> populateContactList(String[] credentials, String group){
+        ArrayList<Integer> contactIDS = new ArrayList<>();
+        ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<>();
+        contactIDS = getContactIDS(credentials, group);
+
+        ContactInformationBuilder cib = new ContactInformationBuilder();
+        for(int i = 0; i < contactIDS.size(); i++){
+            contactInformationArrayList.add(cib.prepareContact(contactIDS.get(i)));
+        }
+
+        return contactInformationArrayList;
     }
 
     public int numberOfContacts(String[] credentials) {
@@ -108,12 +122,13 @@ public class Database {
         }
     }
 
-    public ArrayList<Integer> getContactIDS(String[] credentials) {
+    public ArrayList<Integer> getContactIDS(String[] credentials, String group) {
         ArrayList<Integer> contactIDS = new ArrayList<>();
         try {
-            String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=?";
+            String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=? AND GROUP_ASSC=?";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setString(1, credentials[0]);
+            pst.setString(2,group);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 contactIDS.add(rs.getInt("CONTACT_ID"));
@@ -201,8 +216,8 @@ public class Database {
 
         return key;
     }
-
-    public int createContact(String ACCOUNT,ContactInformation contact){
+    //TODO Decide later if we want to return key in order to minimize resource overhead.
+    public void createContact(String ACCOUNT, ContactInformation contact){
 
         try {
             int key = createContactID(ACCOUNT);
@@ -212,11 +227,12 @@ public class Database {
             addGroup(key, contact.getGroup());
             addNotes(key, contact.getNotes());
             addPicture(key, contact.getProfileImage());
-            return key;
+            //return key;
         }catch(SQLException e){
             System.out.println(e);
-            return 0;
+            //return 0;
         }
+        //contactObject.setKey(createContact(credentials,contactObject));
     }
 
     //Adds names to the provided CONTACT_KEY
