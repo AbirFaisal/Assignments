@@ -1,8 +1,10 @@
 package com.COP2805C.AddressBook.UserInterface.ContactViewPane;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +28,6 @@ public class ContactAnchorPane implements ContactView {
     }
 
     public AnchorPane contactView() {
-
 
 
         FlowPane bannerFlowPane = bannerFlowPane(
@@ -66,7 +67,7 @@ public class ContactAnchorPane implements ContactView {
         bannerFlowPane.setAlignment(Pos.CENTER);
         //bannerFlowPane.setColumnHalignment(HPos.CENTER);
         //bannerFlowPane.setRowValignment(VPos.CENTER);
-        
+
         return bannerFlowPane;
     }
 
@@ -85,8 +86,6 @@ public class ContactAnchorPane implements ContactView {
 
             contactImageView.fitHeightProperty().set(100.0);
             contactImageView.fitWidthProperty().set(100.0);
-            contactImageView.setLayoutX(50);
-            contactImageView.setLayoutY(50);
 
             return contactImageView;
 
