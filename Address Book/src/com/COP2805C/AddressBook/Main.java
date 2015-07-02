@@ -15,8 +15,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,10 +38,6 @@ public class Main extends Application {
 
 
     public Stage mainStage = new Stage(); //TODO needed for switching to the form
-
-
-
-
 
     public static void main(String[] args) {
 
@@ -174,7 +173,9 @@ public class Main extends Application {
                 contactInformationArrayList = database.populateContactList(credentials,newValue);
                 contactObservableList.clear();
                 for(int i = 0; i < contactInformationArrayList.size();i++){
-                    contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
+                    //contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
+                    contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
+                            contactInformationArrayList.get(i).getLastName());
                 }
             });
 
@@ -184,10 +185,17 @@ public class Main extends Application {
 
             //Contact List
             //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
+
+
             ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
             for(int i = 0; i < contactInformationArrayList.size();i++){
-                contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
+                contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
+                contactInformationArrayList.get(i).getLastName());
             }
+            //This sets the customImageListView
+            contactListView.setCellFactory(list -> new AttachmentListCell());
+
+            contactListView.setFixedCellSize(40.0);
             contactListView.getSelectionModel().selectFirst();
             contactListView.getSelectionModel().selectedIndexProperty().addListener((v,oldValue,newValue)->{
                 int index = 0;
@@ -220,4 +228,23 @@ public class Main extends Application {
 
         }
     }
+//TODO Abir, where should I put this? lol.
+//Custom ListCell for listView
+class AttachmentListCell extends ListCell<String> {
+    @Override
+    public void updateItem(String item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty) {
+            setGraphic(null);
+            setText(null);
+        } else {
+            Image fxImage = Main.contactInformationArrayList.get(getIndex()).getProfileImage();
+            ImageView imageView = new ImageView(fxImage);
+            imageView.fitWidthProperty().set(50);
+            imageView.fitHeightProperty().set(50);
+            setGraphic(imageView);
+            setText(item);
+        }
+    }
+}
 

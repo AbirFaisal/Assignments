@@ -4,9 +4,11 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -71,10 +73,14 @@ public class ContactAnchorPane implements ContactView {
 
 
         try {
+            Circle clip = new Circle(50,50,47);
             ImageView contactImageView = new ImageView(contactInformation.getProfileImage());
-
+            System.out.println("LayoutBounds are: x:" + contactImageView.getLayoutX()+ ",y:"+ contactImageView.getLayoutY());
+            contactImageView.setClip(clip);
             contactImageView.fitHeightProperty().set(100.0);
             contactImageView.fitWidthProperty().set(100.0);
+            contactImageView.setLayoutX(50);
+            contactImageView.setLayoutY(50);
 
             return contactImageView;
 
