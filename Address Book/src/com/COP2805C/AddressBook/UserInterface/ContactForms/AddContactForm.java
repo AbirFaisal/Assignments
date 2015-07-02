@@ -87,7 +87,7 @@ public class AddContactForm implements Form {
 
 
         //TODO Contact image view and selector
-
+        //TODO simplify
         GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
         GridPane phoneGridPane = gridPane(phonelabel, this.phoneTextFields);
         GridPane emailGridPane = gridPane(emaillabel, this.emailTextFields);
@@ -99,10 +99,12 @@ public class AddContactForm implements Form {
                 phoneGridPane,
                 addButton("Add Phone Number", phoneGridPane, this.phoneTextFields),
                 emailGridPane,
+                addButton("Add Email", emailGridPane, this.emailTextFields),
                 workplaceGridPane,
+                addButton("Add Workplace", workplaceGridPane, this.workplaceTextFields),
                 this.birthDatePicker,
                 this.notesTextArea);
-                //groupSelectButton(), addButton(), cancelButton());
+                //TODO groupSelectButton(), addButton(), cancelButton());
 
 
         //anchor pane put in scroll pane
@@ -212,6 +214,9 @@ public class AddContactForm implements Form {
         flowPane.setAlignment(Pos.TOP_LEFT);
         flowPane.setOrientation(Orientation.VERTICAL);
         flowPane.setPrefWrapLength(Double.MAX_VALUE);
+        flowPane.setVgap(8.0);
+
+        
 
         return flowPane;
     }
@@ -287,7 +292,7 @@ public class AddContactForm implements Form {
 
         button.setOnMouseClicked(e -> {
             textFields.add(new TextField());
-            gridPane.addRow(textFields.size()-1, textFields.get(textFields.size()-1));
+            gridPane.addRow(textFields.size(), textFields.get(textFields.size()-1));
 
         });
 
