@@ -32,7 +32,7 @@ public class Main extends Application {
 
     static ListView<String> contactListView;
     static ObservableList<String> contactObservableList = FXCollections.observableArrayList();
-    private ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
+    private static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
 
     public static Database database = Database.getDatabase();
@@ -87,6 +87,7 @@ public class Main extends Application {
             if(database.numberOfContacts(credentials)>0) {
                 contactInformationArrayList = database.populateContactList(credentials, "Main");
             }
+
             /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
             Image testImage = new Image("/res/defaultProfileImage.png");
             ArrayList<String> phone = new ArrayList<>();
@@ -183,7 +184,8 @@ public class Main extends Application {
             //TODO move into event handlers
             groups = database.getGroups(credentials);
             refreshGroupList();
-            groupChoiceBox.getSelectionModel().selectFirst();
+            groupChoiceBox.getSelectionModel().selectFirst(); // select first by default
+
             groupChoiceBox.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue)->{
                 contactInformationArrayList = database.populateContactList(credentials,newValue);
                 refreshListView();
@@ -210,9 +212,11 @@ public class Main extends Application {
                 selectedIndex = 0;
                 //error checking necessary to avoid array Out Of Bounds.
                 if(newValue.intValue()!=-1)selectedIndex = newValue.intValue();
+                //TODO DEPRECIATED
                 AnchorPane newRightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView();
                 rightAnchorPane.getChildren().clear();
                 rightAnchorPane.getChildren().add(newRightAnchorPane);
+                        //contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView());
             });
 
 
@@ -241,6 +245,10 @@ public class Main extends Application {
         contactObservableList.clear();
         for(int i = 0; i < contactInformationArrayList.size();i++){
             //contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
+
+            //TODO use function I built in contactAncorPane do do the below in a more proper way
+            //todo since it checks for null and everything
+
             contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
                     contactInformationArrayList.get(i).getLastName());
         }
@@ -254,8 +262,8 @@ public class Main extends Application {
     }
 
 
-    public ArrayList<ContactInformation> getContactInformationArrayList() {
-        return this.contactInformationArrayList;
+    public static ArrayList<ContactInformation> getContactInformationArrayList() {
+        return contactInformationArrayList;
     }
 }
 

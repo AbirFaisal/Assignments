@@ -52,7 +52,12 @@ public class LoginWindow {
         //Login
         if (login == 0) {
             //Return string array with username and password
-            return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
+
+            //TODO TEST re enable this and disable the next line!
+            //return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
+            return new String[]{"Chris_12456", "121212"};
+
+
         } else {
             //if return null if create account
             return null;
