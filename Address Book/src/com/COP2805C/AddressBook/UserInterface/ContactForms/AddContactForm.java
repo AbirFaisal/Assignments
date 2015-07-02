@@ -37,6 +37,8 @@ public class AddContactForm implements Form {
     ArrayList<TextField> emailTextFields;
     ArrayList<TextField> workplaceTextFields;
 
+    ScrollPane scrollPane;
+    FlowPane flowpane;
     TextArea notesTextArea;
     DatePicker birthDatePicker;
 
@@ -94,7 +96,7 @@ public class AddContactForm implements Form {
         GridPane workplaceGridPane = gridPane(workplacelabel, this.workplaceTextFields);
 
         //flow pane
-        FlowPane flowpane = flowPane(
+        this.flowpane = flowPane(
                 staticDataGridPane,
                 phoneGridPane,
                 addButton("Add Phone Number", phoneGridPane, this.phoneTextFields),
@@ -104,17 +106,17 @@ public class AddContactForm implements Form {
                 addButton("Add Workplace", workplaceGridPane, this.workplaceTextFields),
                 this.birthDatePicker,
                 this.notesTextArea);
-                //TODO groupSelectButton(), addButton(), cancelButton());
-
 
         //anchor pane put in scroll pane
         AnchorPane scrollPaneAnchorPane = anchorPane(flowpane);
 
         //scroll pane put in pane in anchor pane
-        ScrollPane scrollPane = scrollPane(scrollPaneAnchorPane);
+        this.scrollPane = scrollPane(scrollPaneAnchorPane);
+
+
 
         //AnchorPane anchorPane = anchorPane(scrollPane);
-        AnchorPane anchorPane = anchorPane(scrollPane);
+        AnchorPane anchorPane = anchorPane(scrollPane, groupSelectButton());
 
 
         //TODO change back to anchor pane
@@ -123,13 +125,15 @@ public class AddContactForm implements Form {
 
     public ScrollPane scrollPane(Node... FXNode){
         ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         for (int i = 0; i < FXNode.length; i++) {
             scrollPane = new ScrollPane(FXNode[i]);
         }
 
         AnchorPane.setTopAnchor(scrollPane, 0.0);
-        AnchorPane.setBottomAnchor(scrollPane, 0.0);
+        AnchorPane.setBottomAnchor(scrollPane, 20.0);
         AnchorPane.setLeftAnchor(scrollPane, 0.0);
         AnchorPane.setRightAnchor(scrollPane, 0.0);
 
@@ -213,7 +217,7 @@ public class AddContactForm implements Form {
         //TODO format this further
         flowPane.setAlignment(Pos.TOP_LEFT);
         flowPane.setOrientation(Orientation.VERTICAL);
-        flowPane.setPrefWrapLength(Double.MAX_VALUE);//TODO umm... seriously?
+        flowPane.setPrefWrapLength(FXNode.length*128);//TODO umm... seriously?
         flowPane.setVgap(8.0);
 
         AnchorPane.setTopAnchor(flowPane, 20.0);
@@ -264,6 +268,7 @@ public class AddContactForm implements Form {
     public TextArea notesTextArea(){
         TextArea textArea = new TextArea();
 
+
         return textArea;
     }
 
@@ -295,11 +300,13 @@ public class AddContactForm implements Form {
 
         button.setOnMouseClicked(e -> {
             textFields.add(new TextField());
-            gridPane.addRow(textFields.size(), textFields.get(textFields.size()-1));
+            gridPane.addRow(textFields.size(), textFields.get(textFields.size() - 1));
+
+            System.out.println(flowpane.getChildren().size()*120);
+
+            this.flowpane.setPrefWrapLength(flowpane.getChildren().size()*120);
 
         });
-
-
 
         return button;
     }
@@ -310,10 +317,6 @@ public class AddContactForm implements Form {
         AnchorPane.setRightAnchor(button, 5.0);
         AnchorPane.setBottomAnchor(button, 5.0);
 
-
         return button;
     }
-
-
-
 }
