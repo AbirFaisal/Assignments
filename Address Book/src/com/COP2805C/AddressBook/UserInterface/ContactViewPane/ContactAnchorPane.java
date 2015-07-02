@@ -4,7 +4,6 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -28,6 +27,8 @@ public class ContactAnchorPane implements ContactView {
 
     public AnchorPane contactView() {
 
+
+
         FlowPane bannerFlowPane = bannerFlowPane(
                 contactImageView(contactInformation),
                 nameText(contactInformation));
@@ -36,6 +37,7 @@ public class ContactAnchorPane implements ContactView {
                 informationTextFlow(
                         informationText(
                                 getInformationString(contactInformation)));
+
 
         return contactViewAnchorPane(bannerFlowPane, informationTextFlow);
     }
@@ -64,7 +66,7 @@ public class ContactAnchorPane implements ContactView {
         bannerFlowPane.setAlignment(Pos.CENTER);
         //bannerFlowPane.setColumnHalignment(HPos.CENTER);
         //bannerFlowPane.setRowValignment(VPos.CENTER);
-
+        
         return bannerFlowPane;
     }
 
@@ -73,10 +75,14 @@ public class ContactAnchorPane implements ContactView {
 
 
         try {
-            Circle clip = new Circle(50,50,47);
+
+
             ImageView contactImageView = new ImageView(contactInformation.getProfileImage());
             System.out.println("LayoutBounds are: x:" + contactImageView.getLayoutX()+ ",y:"+ contactImageView.getLayoutY());
-            contactImageView.setClip(clip);
+
+            //add clipping mask to makle image a circle
+            contactImageView.setClip(new Circle(50, 50, 47));
+
             contactImageView.fitHeightProperty().set(100.0);
             contactImageView.fitWidthProperty().set(100.0);
             contactImageView.setLayoutX(50);
@@ -130,7 +136,7 @@ public class ContactAnchorPane implements ContactView {
 
         TextFlow informationTextFlow = new TextFlow(text);
 
-        AnchorPane.setTopAnchor(informationTextFlow, 140.0);
+        AnchorPane.setTopAnchor(informationTextFlow, 150.0);
         AnchorPane.setBottomAnchor(informationTextFlow, 20.0);
         AnchorPane.setLeftAnchor(informationTextFlow, 20.0);
         AnchorPane.setRightAnchor(informationTextFlow, 20.0);
