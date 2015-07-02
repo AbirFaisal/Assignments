@@ -29,13 +29,18 @@ import java.util.GregorianCalendar;
 public class Main extends Application {
 
     private static String[] credentials = new String[2]; //Username and password
-    ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+    static ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+    static ChoiceBox<String> groupChoiceBox;
+    static ArrayList<String> groups = new ArrayList<>();
+
+    static ListView<String> contactListView;
     static ObservableList<String> contactObservableList = FXCollections.observableArrayList();
     static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
+
     public static Database database = Database.getDatabase();
     public AnchorPane rightAnchorPane;
-
+    public static int selectedIndex;
 
     public Stage mainStage = new Stage(); //TODO needed for switching to the form
 
@@ -139,6 +144,20 @@ public class Main extends Application {
 
             SplitMenuButton editMenuButton = MainWindow.editMenuButton();
 
+
+            editMenuButton.setOnAction(e->{
+               System.out.println("Edit button pressed");
+            });
+            //TODO This is the functionality for the delete Button. I did not know how to access the menuItem.
+            editMenuButton.setOnMouseClicked(e -> {
+                database.deleteCONTACTID(contactInformationArrayList.get(selectedIndex).getKey());
+                contactInformationArrayList.remove(selectedIndex);
+                refreshListView();
+                groups = database.getGroups(credentials);
+                refreshGroupList();
+                groupChoiceBox.getSelectionModel().selectFirst();
+            });
+
             FormFactory formFactory = new FormFactory();
 
             //Add contact button
@@ -162,21 +181,15 @@ public class Main extends Application {
 
             //Group selection
             //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
-            ChoiceBox<String> groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
+            groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
 
             //TODO move into event handlers
-            ArrayList<String> groups = database.getGroups(credentials);
-            groupObservableList.add("Main");
-            groupObservableList.addAll(groups);
+            groups = database.getGroups(credentials);
+            refreshGroupList();
             groupChoiceBox.getSelectionModel().selectFirst();
             groupChoiceBox.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue)->{
                 contactInformationArrayList = database.populateContactList(credentials,newValue);
-                contactObservableList.clear();
-                for(int i = 0; i < contactInformationArrayList.size();i++){
-                    //contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
-                    contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
-                            contactInformationArrayList.get(i).getLastName());
-                }
+                refreshListView();
             });
 
 
@@ -187,21 +200,20 @@ public class Main extends Application {
             //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
 
 
-            ListView<String> contactListView = MainWindow.contactListView(contactObservableList);
+            contactListView = MainWindow.contactListView(contactObservableList);
             for(int i = 0; i < contactInformationArrayList.size();i++){
                 contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
                 contactInformationArrayList.get(i).getLastName());
             }
             //This sets the customImageListView
             contactListView.setCellFactory(list -> new AttachmentListCell());
-
             contactListView.setFixedCellSize(40.0);
             contactListView.getSelectionModel().selectFirst();
             contactListView.getSelectionModel().selectedIndexProperty().addListener((v,oldValue,newValue)->{
-                int index = 0;
+                selectedIndex = 0;
                 //error checking necessary to avoid array Out Of Bounds.
-                if(newValue.intValue()!=-1)index = newValue.intValue();
-                AnchorPane newRightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(index)).contactView();
+                if(newValue.intValue()!=-1)selectedIndex = newValue.intValue();
+                AnchorPane newRightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView();
                 rightAnchorPane.getChildren().clear();
                 rightAnchorPane.getChildren().add(newRightAnchorPane);
             });
@@ -227,6 +239,22 @@ public class Main extends Application {
             primaryStage.show();
 
         }
+
+    public void refreshListView(){
+        contactObservableList.clear();
+        for(int i = 0; i < contactInformationArrayList.size();i++){
+            //contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
+            contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
+                    contactInformationArrayList.get(i).getLastName());
+        }
+        contactListView.getSelectionModel().selectFirst();
+    }
+
+    public void refreshGroupList(){
+        groupObservableList.clear();
+        groupObservableList.add("Main");
+        groupObservableList.addAll(groups);
+    }
     }
 //TODO Abir, where should I put this? lol.
 //Custom ListCell for listView

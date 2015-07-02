@@ -43,7 +43,7 @@ public class Database {
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS CONTACTS(ACCOUNT VARCHAR ,"
                     + "CONTACT_ID INTEGER," + "F_NAME VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
                     + "ADDRESSLINE1 VARCHAR," + "ADDRESSLINE2 VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
-                    + "GROUP_ASSC VARCHAR DEFAULT 'Main Group'," + "DOB INTEGER," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
+                    + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
                     + "PHONE_NUMBER VARCHAR," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, " + "FOREIGN KEY(CONTACT_ID) "
@@ -184,7 +184,10 @@ public class Database {
             pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                groups.add(rs.getString("GROUP_ASSC"));
+                System.out.println(rs.getString("GROUP_ASSC"));
+                if(rs.getString("GROUP_ASSC")!=null) {
+                    groups.add(rs.getString("GROUP_ASSC"));
+                }
             }
             return groups;
         }catch(SQLException e){
