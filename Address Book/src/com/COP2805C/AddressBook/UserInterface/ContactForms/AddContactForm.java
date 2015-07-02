@@ -213,10 +213,13 @@ public class AddContactForm implements Form {
         //TODO format this further
         flowPane.setAlignment(Pos.TOP_LEFT);
         flowPane.setOrientation(Orientation.VERTICAL);
-        flowPane.setPrefWrapLength(Double.MAX_VALUE);
+        flowPane.setPrefWrapLength(Double.MAX_VALUE);//TODO umm... seriously?
         flowPane.setVgap(8.0);
 
-        
+        AnchorPane.setTopAnchor(flowPane, 20.0);
+        AnchorPane.setBottomAnchor(flowPane, 20.0);
+        AnchorPane.setLeftAnchor(flowPane, 20.0);
+        AnchorPane.setRightAnchor(flowPane, 20.0);
 
         return flowPane;
     }
