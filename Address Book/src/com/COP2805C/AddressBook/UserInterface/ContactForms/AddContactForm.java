@@ -26,6 +26,7 @@ public class AddContactForm implements Form {
 
     ContactInformation contactInformation;
     String[] labelStrings;
+    String[] dynamicLabelStrings;
 
     //Static Data
     ArrayList<Label> labels;
@@ -44,6 +45,12 @@ public class AddContactForm implements Form {
         this.labelStrings = new String[]{
                 "First Name", "Middle Name", "Last Name", "Nickname",
                 "Address Line 1", "Address Line 2", "City", "State", "Zip", "Country"};
+        this.dynamicLabelStrings = new String[]{
+                "Phone Numbers:",
+                "Emails",
+                "Workplaces"
+        };
+
 
         this.labels = new ArrayList<>();
 
@@ -65,18 +72,39 @@ public class AddContactForm implements Form {
             this.textFields.add(textField());
         }
 
-        //TODO Contact image view and selector
 
+
+        //TODO simplify this
+        ArrayList<Label> phonelabel = new ArrayList<Label>();
+        phonelabel.add(new Label("Phone Numbers"));
+
+        ArrayList<Label> emaillabel = new ArrayList<Label>();
+        emaillabel.add(new Label("Email"));
+
+        ArrayList<Label> workplacelabel = new ArrayList<Label>();
+        workplacelabel.add(new Label("Workplaces"));
+
+
+
+        //TODO Contact image view and selector
+        //TODO simplify
         GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
-        GridPane phoneGridPane = gridPane(new ArrayList<Label>(), this.phoneTextFields);
-        GridPane emailGridPane = gridPane(new ArrayList<Label>(), this.emailTextFields);
-        GridPane workplaceGridPane = gridPane(new ArrayList<Label>(), this.workplaceTextFields);
+        GridPane phoneGridPane = gridPane(phonelabel, this.phoneTextFields);
+        GridPane emailGridPane = gridPane(emaillabel, this.emailTextFields);
+        GridPane workplaceGridPane = gridPane(workplacelabel, this.workplaceTextFields);
 
         //flow pane
         FlowPane flowpane = flowPane(
-                staticDataGridPane, phoneGridPane, emailGridPane, workplaceGridPane,
-                this.birthDatePicker, this.notesTextArea);
-                //groupSelectButton(), addButton(), cancelButton());
+                staticDataGridPane,
+                phoneGridPane,
+                addButton("Add Phone Number", phoneGridPane, this.phoneTextFields),
+                emailGridPane,
+                addButton("Add Email", emailGridPane, this.emailTextFields),
+                workplaceGridPane,
+                addButton("Add Workplace", workplaceGridPane, this.workplaceTextFields),
+                this.birthDatePicker,
+                this.notesTextArea);
+                //TODO groupSelectButton(), addButton(), cancelButton());
 
 
         //anchor pane put in scroll pane
@@ -85,8 +113,9 @@ public class AddContactForm implements Form {
         //scroll pane put in pane in anchor pane
         ScrollPane scrollPane = scrollPane(scrollPaneAnchorPane);
 
-
+        //AnchorPane anchorPane = anchorPane(scrollPane);
         AnchorPane anchorPane = anchorPane(scrollPane);
+
 
         //TODO change back to anchor pane
         return new Scene(anchorPane, 400.0, 600.0);
@@ -144,7 +173,7 @@ public class AddContactForm implements Form {
             //TODO remove test
             System.out.println(imageButton.getFileURL());
 
-            if (imageButton.getFileURL() != null){
+            if (imageButton.getFileURL() != null) {
 
                 //TODO run image through image formatter
                 Image image = new Image("file://" + imageButton.getFileURL(),
@@ -184,9 +213,13 @@ public class AddContactForm implements Form {
         //TODO format this further
         flowPane.setAlignment(Pos.TOP_LEFT);
         flowPane.setOrientation(Orientation.VERTICAL);
+        flowPane.setPrefWrapLength(Double.MAX_VALUE);//TODO umm... seriously?
+        flowPane.setVgap(8.0);
 
-        
-
+        AnchorPane.setTopAnchor(flowPane, 20.0);
+        AnchorPane.setBottomAnchor(flowPane, 20.0);
+        AnchorPane.setLeftAnchor(flowPane, 20.0);
+        AnchorPane.setRightAnchor(flowPane, 20.0);
 
         return flowPane;
     }
@@ -201,12 +234,12 @@ public class AddContactForm implements Form {
         gridPane.setVgap(8.0);
 
         //Add labels in column 0 row i
-        for (int i = 0; i < labels.size() - 1; i++) {
+        for (int i = 0; i < labels.size(); i++) {
             gridPane.add(labels.get(i), 0, i);
         }
 
         //Add texfields in column 1 row i
-        for (int i = 0; i < textFields.size() - 1; i++) {
+        for (int i = 0; i < textFields.size(); i++) {
             gridPane.add(textFields.get(i), 1, i);
         }
 
@@ -254,11 +287,19 @@ public class AddContactForm implements Form {
         return menuButton;
     }
 
-    public Button addButton(){
-        Button button = new Button();
+    public Button addButton(String buttonText, GridPane gridPane, ArrayList<TextField> textFields){
+        Button button = new Button(buttonText);
 
-        AnchorPane.setRightAnchor(button, 35.0);
-        AnchorPane.setBottomAnchor(button, 5.0);
+        // AnchorPane.setRightAnchor(button, 35.0);
+        // AnchorPane.setBottomAnchor(button, 5.0);
+
+        button.setOnMouseClicked(e -> {
+            textFields.add(new TextField());
+            gridPane.addRow(textFields.size(), textFields.get(textFields.size()-1));
+
+        });
+
+
 
         return button;
     }

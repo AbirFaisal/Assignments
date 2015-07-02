@@ -1,8 +1,10 @@
 package com.COP2805C.AddressBook.UserInterface.ContactViewPane;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +28,6 @@ public class ContactAnchorPane implements ContactView {
     }
 
     public AnchorPane contactView() {
-
 
 
         FlowPane bannerFlowPane = bannerFlowPane(
@@ -61,37 +62,36 @@ public class ContactAnchorPane implements ContactView {
 
         bannerFlowPane.setHgap(20.0);
         bannerFlowPane.setVgap(20.0);
+        bannerFlowPane.setPrefWrapLength(0.0);
 
         bannerFlowPane.setOrientation(Orientation.HORIZONTAL);
         bannerFlowPane.setAlignment(Pos.CENTER);
         //bannerFlowPane.setColumnHalignment(HPos.CENTER);
         //bannerFlowPane.setRowValignment(VPos.CENTER);
-        
+
         return bannerFlowPane;
     }
 
 
     public static ImageView contactImageView(ContactInformation contactInformation) {
 
-
         try {
-
 
             ImageView contactImageView = new ImageView(contactInformation.getProfileImage());
             System.out.println("LayoutBounds are: x:" + contactImageView.getLayoutX()+ ",y:"+ contactImageView.getLayoutY());
 
             //add clipping mask to makle image a circle
-            contactImageView.setClip(new Circle(50, 50, 47));
+            contactImageView.setClip(new Circle(50, 50, 49));
 
             contactImageView.fitHeightProperty().set(100.0);
             contactImageView.fitWidthProperty().set(100.0);
-            contactImageView.setLayoutX(50);
-            contactImageView.setLayoutY(50);
 
             return contactImageView;
 
         } catch (Exception e) {
             System.out.println("No Profile image");
+        } finally {
+            //TODO return default image
         }
         //TODO return with default image
         return new ImageView();
