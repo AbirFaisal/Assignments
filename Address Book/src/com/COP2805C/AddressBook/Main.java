@@ -3,10 +3,9 @@ package com.COP2805C.AddressBook;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
-import com.COP2805C.AddressBook.UserInterface.ContactForms.Form;
+import com.COP2805C.AddressBook.UserInterface.AttachmentListCell;
 import com.COP2805C.AddressBook.UserInterface.ContactForms.FormFactory;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
-import com.COP2805C.AddressBook.UserInterface.CreateContactWindow;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
 import javafx.application.Application;
@@ -15,10 +14,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -35,7 +32,7 @@ public class Main extends Application {
 
     static ListView<String> contactListView;
     static ObservableList<String> contactObservableList = FXCollections.observableArrayList();
-    static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
+    private ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
 
     public static Database database = Database.getDatabase();
@@ -255,24 +252,10 @@ public class Main extends Application {
         groupObservableList.add("Main");
         groupObservableList.addAll(groups);
     }
-    }
-//TODO Abir, where should I put this? lol.
-//Custom ListCell for listView
-class AttachmentListCell extends ListCell<String> {
-    @Override
-    public void updateItem(String item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty) {
-            setGraphic(null);
-            setText(null);
-        } else {
-            Image fxImage = Main.contactInformationArrayList.get(getIndex()).getProfileImage();
-            ImageView imageView = new ImageView(fxImage);
-            imageView.fitWidthProperty().set(50);
-            imageView.fitHeightProperty().set(50);
-            setGraphic(imageView);
-            setText(item);
-        }
+
+
+    public ArrayList<ContactInformation> getContactInformationArrayList() {
+        return this.contactInformationArrayList;
     }
 }
 
