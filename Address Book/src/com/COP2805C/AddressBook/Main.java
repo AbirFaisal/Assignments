@@ -32,7 +32,7 @@ public class Main extends Application {
 
     static ListView<String> contactListView;
     static ObservableList<String> contactObservableList = FXCollections.observableArrayList();
-    private static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
+    public static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
 
 
     public static Database database = Database.getDatabase();
@@ -156,20 +156,12 @@ public class Main extends Application {
                 groupChoiceBox.getSelectionModel().selectFirst();
             });
 
-            FormFactory formFactory = new FormFactory();
 
             //Add contact button
-            Button addButton = new Button("+");
-            addButton.setOnMouseClicked(e -> {
+            //TODO move button to Mainwindow.java and put even handler inside before returning add button
+            Button addButton = MainWindow.addButton(this.mainStage);
 
 
-                mainStage.setScene(formFactory.getForm(contactInformationArrayList.get(0), "ADD").form());
-
-                mainStage.show();
-
-            });
-            AnchorPane.setTopAnchor(addButton, 8.0);
-            AnchorPane.setLeftAnchor(addButton, 8.0);
 
             //TODO clear search bar button (Optional)
             Button clearSearchButton = new Button("X");
@@ -269,5 +261,6 @@ public class Main extends Application {
     public static ObservableList<String> getGroupObservableList() {
         return groupObservableList;
     }
+
 }
 
