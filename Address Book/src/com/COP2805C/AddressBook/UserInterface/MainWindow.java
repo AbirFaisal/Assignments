@@ -56,7 +56,9 @@ public class MainWindow {
 
     //Group Selection Choice Box
     public static ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList) {
+
         ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(observableList);
+
         AnchorPane.setBottomAnchor(groupChoiceBox, 8.0);
         AnchorPane.setLeftAnchor(groupChoiceBox, 8.0);
 

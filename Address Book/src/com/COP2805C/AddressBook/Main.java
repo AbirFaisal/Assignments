@@ -265,5 +265,9 @@ public class Main extends Application {
     public static ArrayList<ContactInformation> getContactInformationArrayList() {
         return contactInformationArrayList;
     }
+
+    public static ObservableList<String> getGroupObservableList() {
+        return groupObservableList;
+    }
 }
 

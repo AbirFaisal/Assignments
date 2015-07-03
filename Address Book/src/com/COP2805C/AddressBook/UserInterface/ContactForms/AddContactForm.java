@@ -1,8 +1,10 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.EventHandlers;
 import com.COP2805C.AddressBook.UserInterface.ImageButton;
+import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -110,13 +112,13 @@ public class AddContactForm implements Form {
         //anchor pane put in scroll pane
         AnchorPane scrollPaneAnchorPane = anchorPane(flowpane);
 
+
         //scroll pane put in pane in anchor pane
         this.scrollPane = scrollPane(scrollPaneAnchorPane);
 
 
-
         //AnchorPane anchorPane = anchorPane(scrollPane);
-        AnchorPane anchorPane = anchorPane(scrollPane, groupSelectButton());
+        AnchorPane anchorPane = anchorPane(scrollPane, groupChoiceBox(Main.getGroupObservableList()));
 
 
         //TODO change back to anchor pane
@@ -283,13 +285,14 @@ public class AddContactForm implements Form {
 
 
     //TODO Anchor buttons into correct position
-    public MenuButton groupSelectButton(){
-        MenuButton menuButton = new MenuButton();
+    public ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList){
 
-        AnchorPane.setLeftAnchor(menuButton, 5.0);
-        AnchorPane.setBottomAnchor(menuButton, 5.0);
+        ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(observableList);
 
-        return menuButton;
+        AnchorPane.setLeftAnchor(groupChoiceBox, 5.0);
+        AnchorPane.setBottomAnchor(groupChoiceBox, 5.0);
+
+        return groupChoiceBox;
     }
 
     public Button addButton(String buttonText, GridPane gridPane, ArrayList<TextField> textFields){
@@ -301,10 +304,6 @@ public class AddContactForm implements Form {
         button.setOnMouseClicked(e -> {
             textFields.add(new TextField());
             gridPane.addRow(textFields.size(), textFields.get(textFields.size() - 1));
-
-            System.out.println(flowpane.getChildren().size()*120);
-
-            this.flowpane.setPrefWrapLength(flowpane.getChildren().size()*120);
 
         });
 
