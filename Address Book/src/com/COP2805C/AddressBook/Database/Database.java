@@ -247,7 +247,8 @@ public class Database {
             int key = createContactID(credentials[0]);
             addNames(key, contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), contact.getNickname());
             addAddress(key, contact.getAddressLine1(), contact.getAddressLine2(), contact.getCity(), contact.getState(), contact.getZip(), contact.getCountry());
-            addDate(key, contact.getBirthday());
+            //TODO fix addDate method to take in a chronological object.
+            //addDate(key, contact.getBirthday());
             addGroup(key, contact.getGroup());
             addNotes(key, contact.getNotes());
             addPicture(key, contact.getProfileImage());
@@ -321,7 +322,7 @@ public class Database {
         try {
             String update = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(update);
-            pst.setLong(1, chronology.getTimeInMillis()); //TODO adjust this thanks chris
+            //pst.setLong(1, chronology) //TODO adjust this thanks chris
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
             pst.close();
