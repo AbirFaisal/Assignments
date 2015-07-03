@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.EventHandlers;
 import com.COP2805C.AddressBook.UserInterface.ImageButton;
@@ -395,6 +396,15 @@ public class AddContactForm implements Form {
             }
 
             //add to database
+            //TODO chris???
+            //Add key to contactInformation Object
+            this.contactInformation.setKey(
+                    Database.createContact(
+                            Main.getCredentials(), this.contactInformation));
+
+            Main.getDatabase().addContact(dkfkaslkjdfanskjdfaslkdf) //TODO
+
+            //TODO update list view and stuff
         });
 
 

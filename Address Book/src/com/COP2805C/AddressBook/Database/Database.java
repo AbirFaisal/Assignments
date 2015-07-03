@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
+import java.time.chrono.Chronology;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -316,11 +317,11 @@ public class Database {
         }
         }
 
-    public void addDate(int CONTACT_ID, Calendar calendar){
+    public void addDate(int CONTACT_ID, Chronology chronology){
         try {
             String update = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
             PreparedStatement pst = conn.prepareStatement(update);
-            pst.setLong(1, calendar.getTimeInMillis());
+            pst.setLong(1, chronology.getTimeInMillis()); //TODO adjust this thanks chris
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
             pst.close();

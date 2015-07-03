@@ -18,9 +18,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.Chronology;
+import java.time.chrono.Era;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalField;
+import java.time.temporal.ValueRange;
+import java.util.*;
 
 
 public class Main extends Application {
@@ -100,7 +106,72 @@ public class Main extends Application {
                 work.add("work " + i);
             }
 
-            Calendar testCalendar = new GregorianCalendar(2015, 3, 3);
+            Chronology testChronology = new Chronology() {
+                @Override
+                public String getId() {
+                    return null;
+                }
+
+                @Override
+                public String getCalendarType() {
+                    return null;
+                }
+
+                @Override
+                public ChronoLocalDate date(int prolepticYear, int month, int dayOfMonth) {
+                    return null;
+                }
+
+                @Override
+                public ChronoLocalDate dateYearDay(int prolepticYear, int dayOfYear) {
+                    return null;
+                }
+
+                @Override
+                public ChronoLocalDate dateEpochDay(long epochDay) {
+                    return null;
+                }
+
+                @Override
+                public ChronoLocalDate date(TemporalAccessor temporal) {
+                    return null;
+                }
+
+                @Override
+                public boolean isLeapYear(long prolepticYear) {
+                    return false;
+                }
+
+                @Override
+                public int prolepticYear(Era era, int yearOfEra) {
+                    return 0;
+                }
+
+                @Override
+                public Era eraOf(int eraValue) {
+                    return null;
+                }
+
+                @Override
+                public List<Era> eras() {
+                    return null;
+                }
+
+                @Override
+                public ValueRange range(ChronoField field) {
+                    return null;
+                }
+
+                @Override
+                public ChronoLocalDate resolveDate(Map<TemporalField, Long> fieldValues, ResolverStyle resolverStyle) {
+                    return null;
+                }
+
+                @Override
+                public int compareTo(Chronology other) {
+                    return 0;
+                }
+            };
 
             ContactInformation contactInformation = new ContactInformation(
                     1, "group",
@@ -109,7 +180,7 @@ public class Main extends Application {
                     "addr1", "addr2", "city", "state", "zip", "country",
                     "notes",
                     phone, email, work,
-                    testCalendar);
+                    testChronology);
 
 
             ContactViewFactory contactViewFactory = new ContactViewFactory();
@@ -262,5 +333,12 @@ public class Main extends Application {
         return groupObservableList;
     }
 
+    public static String[] getCredentials() {
+        return credentials;
+    }
+
+    public static Database getDatabase() {
+        return database;
+    }
 }
 
