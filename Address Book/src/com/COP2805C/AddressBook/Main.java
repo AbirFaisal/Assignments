@@ -44,7 +44,7 @@ public class Main extends Application {
     public static Database database = Database.getDatabase();
     public AnchorPane rightAnchorPane;
     public static int selectedIndex;
-
+    public static String previousGroupUserWasOn;
     public Stage mainStage = new Stage(); //TODO needed for switching to the form
 
     public static void main(String[] args) {
@@ -257,6 +257,9 @@ public class Main extends Application {
 
             //Search Box
             TextField searchTextField = MainWindow.searchTextField();
+            searchTextField.textProperty().addListener((v,oldValue,newValue)->{
+                searchByKey(oldValue,newValue);
+            });
 
             //Contact List
             //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
@@ -303,6 +306,39 @@ public class Main extends Application {
             primaryStage.show();
 
         }
+    //TODO Optimize search so that it only shows relevant contacts in contactList
+    private void searchByKey(String oldValue, String newValue) {
+        //This method will search Googlishly for the contact typed in. When the searchfield is emptied it will return to the group the user was previously in.
+        if(oldValue.length()==0){
+            previousGroupUserWasOn = groupChoiceBox.getSelectionModel().getSelectedItem();
+        }
+        if(newValue.length()==0) {
+            groupChoiceBox.getSelectionModel().select(previousGroupUserWasOn);
+            contactListView.getSelectionModel().selectFirst();
+        }else{
+            //When the user types, it will search through the main group because that contains all the contacts.
+            groupChoiceBox.getSelectionModel().select("Main");
+            String[] parts = newValue.toUpperCase().split(" ");
+            // Filter out the entries that don't contain the entered text
+            String search = contactListView.getItems().get(0);
+            for ( Object entry: contactListView.getItems() ) {
+                boolean match = true;
+                String entryText = (String)entry;
+                for ( String part: parts ) {
+                    // The entry needs to contain all portions of the
+                    // search string *but* in any order
+                    if ( ! entryText.toUpperCase().contains(part) ) {
+                        match = false;
+                        break;
+                    }
+                }
+                if ( match ) {
+                    search = entryText;
+                }
+            }
+            contactListView.getSelectionModel().select(search);
+        }
+    }
 
     public void refreshListView(){
         contactObservableList.clear();

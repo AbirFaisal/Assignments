@@ -241,10 +241,10 @@ public class Database {
         return key;
     }
     //TODO Decide later if we want to return key in order to minimize resource overhead.
-    public void createContact(String ACCOUNT, ContactInformation contact){
+    public void createContact(String[] credentials, ContactInformation contact){
 
         try {
-            int key = createContactID(ACCOUNT);
+            int key = createContactID(credentials[0]);
             addNames(key, contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), contact.getNickname());
             addAddress(key, contact.getAddressLine1(), contact.getAddressLine2(), contact.getCity(), contact.getState(), contact.getZip(), contact.getCountry());
             addDate(key, contact.getBirthday());
