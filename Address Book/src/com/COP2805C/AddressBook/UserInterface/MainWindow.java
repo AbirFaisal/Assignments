@@ -1,9 +1,13 @@
 package com.COP2805C.AddressBook.UserInterface;
 
+import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Main;
+import com.COP2805C.AddressBook.UserInterface.ContactForms.FormFactory;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * Created by abirfaisal on 6/8/15.
@@ -43,6 +47,22 @@ public class MainWindow {
         return contactListView;
     }
 
+    //Add Contact Button
+    public static Button addButton(Stage mainStage){
+        Button button = new Button("+");
+        FormFactory formFactory = new FormFactory();
+
+        button.setOnMouseClicked(e -> {
+            mainStage.setScene(formFactory.getForm(new ContactInformation(), "ADD").form());
+            mainStage.show();
+        });
+
+        AnchorPane.setTopAnchor(button, 8.0);
+        AnchorPane.setLeftAnchor(button, 8.0);
+
+        return button;
+    }
+
     //Search Field
     public static TextField searchTextField() {
         TextField searchTextField = new TextField();
@@ -56,7 +76,9 @@ public class MainWindow {
 
     //Group Selection Choice Box
     public static ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList) {
+
         ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(observableList);
+
         AnchorPane.setBottomAnchor(groupChoiceBox, 8.0);
         AnchorPane.setLeftAnchor(groupChoiceBox, 8.0);
 

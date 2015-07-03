@@ -2,6 +2,7 @@ package com.COP2805C.AddressBook.Contacts;
 
 import javafx.scene.image.Image;
 
+import java.time.chrono.Chronology;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -34,7 +35,7 @@ public class ContactInformation {
     private ArrayList<String> emails;
     private ArrayList<String> workPlaces;
 
-    private Calendar birthday;
+    private Chronology birthday;
 
 
     //TESTING Empty
@@ -52,7 +53,7 @@ public class ContactInformation {
             ArrayList<String> phoneNumbers,
             ArrayList<String> emails,
             ArrayList<String> workPlaces,
-            Calendar birthday) {
+            Chronology birthday) {
 
         this.key = key;
         this.group = group;
@@ -207,11 +208,11 @@ public class ContactInformation {
         this.workPlaces = workPlaces;
     }
 
-    public Calendar getBirthday() {
+    public Chronology getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Calendar birthday) {
+    public void setBirthday(Chronology birthday) {
         this.birthday = birthday;
     }
 
