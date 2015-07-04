@@ -60,10 +60,12 @@ public class Database {
         ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<>();
         ContactInformationBuilder contactInformationBuilder = new ContactInformationBuilder();
 
-        if(group != null){
+        //Don't delete this!! Main group is a pseudoGroup that includes all groups. There's a reason why I had to do this. I'll explain on hangouts tomorrow.
+        if(group == "Main"){
+            contactID = getContactIDS(credentials);
+        }else {
             contactID = getContactIDS(credentials, group);
-        }else throw new NullPointerException("populateContactList() in Database.java: null group string field");
-
+        }
         for(int i = 0; i < contactID.size(); i++){
             contactInformationArrayList.add(contactInformationBuilder.prepareContact(contactID.get(i)));
         }
@@ -283,7 +285,7 @@ public class Database {
     }
 
     //TODO Decide later if we want to return key in order to minimize resource overhead.
-    public void createContact(String[] credentials, ContactInformation contactInformation){
+    public int createContact(String[] credentials, ContactInformation contactInformation){
         int key;
 
         try {
@@ -308,12 +310,11 @@ public class Database {
             addGroup(key, contactInformation.getGroup());
             addNotes(key, contactInformation.getNotes());
             addPicture(key, contactInformation.getProfileImage());
-            //return key;
+            return key;
         }catch(SQLException e){
             System.out.println(e);
-            //return 0;
+            return 0;
         }
-        //contactObject.setKey(createContact(credentials,contactObject));
     }
 
     //Adds names to the provided CONTACT_KEY
