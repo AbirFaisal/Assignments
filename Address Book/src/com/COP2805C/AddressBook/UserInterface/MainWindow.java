@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.ContactForms.FormFactory;
 import javafx.collections.ObservableList;
@@ -71,6 +72,15 @@ public class MainWindow {
         AnchorPane.setLeftAnchor(searchTextField, 36.0);
         AnchorPane.setRightAnchor(searchTextField, 8.0);
 
+
+        searchTextField.textProperty().addListener((v,oldValue,newValue)->{
+            Functions.searchByKey(oldValue,newValue);
+        });
+
+
+
+
+
         return searchTextField;
     }
 
@@ -82,18 +92,54 @@ public class MainWindow {
         AnchorPane.setBottomAnchor(groupChoiceBox, 8.0);
         AnchorPane.setLeftAnchor(groupChoiceBox, 8.0);
 
+
+        Main.setGroupsArrayList(
+                Main.getDatabase().getGroups(
+                        Main.getCredentials()));
+
+        Functions.refreshGroupList();
+        groupChoiceBox.getSelectionModel().selectFirst(); // select first by default
+
+        groupChoiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            Main.setContactInformationArrayList(
+                    Main.getDatabase().populateContactList(
+                            Main.getCredentials(), newValue));
+            Functions.refreshListView();
+        });
+
         return groupChoiceBox;
     }
 
 
     public static SplitMenuButton editMenuButton() {
         SplitMenuButton menuButton = new SplitMenuButton();
+        int selectedIndex = 0;
+
+
         menuButton.setText("Edit");
         menuButton.getItems().addAll(
                 new MenuItem("Delete"),
                 new MenuItem("Import/Export"));
         AnchorPane.setBottomAnchor(menuButton, 8.0);
         AnchorPane.setRightAnchor(menuButton, 8.0);
+
+        menuButton.setOnAction(e -> {
+            System.out.println("Edit button pressed");
+        });
+        //TODO This is the functionality for the delete Button. I did not know how to access the menuItem.
+        //TODO COMMENT THIS
+        menuButton.setOnMouseClicked(e -> {
+            Main.getDatabase().deleteCONTACTID(
+                    Main.getContactInformationArrayList().get(selectedIndex).getKey());
+
+            Main.getContactInformationArrayList().remove(selectedIndex);
+            Functions.refreshListView();
+            Main.setGroupsArrayList(
+                    Main.getDatabase().getGroups(
+                            Main.getCredentials()));
+            Functions.refreshGroupList();
+            Main.getGroupChoiceBox().getSelectionModel().selectFirst();
+        });
 
         return menuButton;
     }

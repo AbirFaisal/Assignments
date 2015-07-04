@@ -5,7 +5,9 @@ import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
@@ -14,12 +16,69 @@ import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by abirfaisal on 5/28/15.
  */
 public class Functions {
 
+    //TODO Optimize search so that it only shows relevant contacts in contactList
+    public static void searchByKey(String oldValue, String newValue) {
+
+        String previousGroup = null;
+
+        //This method will search Googlishly for the contact typed in. When the searchfield is emptied it will return to the group the user was previously in.
+        if(oldValue.length()==0){
+            previousGroup = Main.getGroupChoiceBox().getSelectionModel().getSelectedItem();
+        }
+
+        if(newValue.length()==0) {
+            Main.getGroupChoiceBox().getSelectionModel().select(previousGroup);
+            Main.getContactListView().getSelectionModel().selectFirst();
+        }else{
+            //When the user types, it will search through the main group because that contains all the contacts.
+            Main.getGroupChoiceBox().getSelectionModel().select("Main");
+            String[] parts = newValue.toUpperCase().split(" ");
+            // Filter out the entries that don't contain the entered text
+            String search = Main.getContactListView().getItems().get(0);
+            for ( Object entry: Main.getContactListView().getItems() ) {
+                boolean match = true;
+                String entryText = (String)entry;
+                for ( String part: parts ) {
+                    // The entry needs to contain all portions of the
+                    // search string *but* in any order
+                    if ( ! entryText.toUpperCase().contains(part) ) {
+                        match = false;
+                        break;
+                    }
+                }
+                if ( match ) {
+                    search = entryText;
+                }
+            }
+            Main.getContactListView().getSelectionModel().select(search);
+        }
+    }
+
+
+    public static void refreshListView(){
+        //Clear GUI list
+        Main.getContactObservableList().clear();
+        //Populate FX Observable list
+        for(int i = 0; i < Main.getContactInformationArrayList().size();i++){
+            Main.contactObservableList.add(
+                    Functions.getFormattenNameFMLN(
+                            Main.getContactInformationArrayList().get(i)));
+        }
+        Main.getContactListView().getSelectionModel().selectFirst();
+    }
+
+    public static void refreshGroupList(){
+        Main.getGroupObservableList().clear();
+        Main.getGroupObservableList().add("Main");
+        Main.getGroupObservableList().addAll(Main.getGroupsArrayList());
+    }
 
     public static void zeroAnchor(Node node){
         AnchorPane.setTopAnchor(node, 0.0);

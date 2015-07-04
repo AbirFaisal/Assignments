@@ -35,9 +35,9 @@ import java.util.*;
 public class Main extends Application {
 
     private static String[] credentials = new String[2]; //Username and password
-    static ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+    public static ObservableList<String> groupObservableList = FXCollections.observableArrayList();
     static ChoiceBox<String> groupChoiceBox;
-    static ArrayList<String> groups = new ArrayList<>();
+    public static ArrayList<String> groupsArrayList = new ArrayList<>();
 
     static ListView<String> contactListView;
     static ObservableList<String> contactObservableList = FXCollections.observableArrayList();
@@ -107,7 +107,7 @@ public class Main extends Application {
 
             ContactViewFactory contactViewFactory = new ContactViewFactory();
 
-            //TODO the bleow code needs to go into MainWindow.java
+            //TODO the bellow code needs to go into MainWindow.java
             //Right side Anchor Pane
             //Initial contact load.
             //If the user has contacts to load from the database, this will load the first contact as an introduction
@@ -118,29 +118,12 @@ public class Main extends Application {
             }
             Functions.zeroAnchor(rightAnchorPane);
 
-
             SplitMenuButton editMenuButton = MainWindow.editMenuButton();
-
-
-            editMenuButton.setOnAction(e->{
-               System.out.println("Edit button pressed");
-            });
-            //TODO This is the functionality for the delete Button. I did not know how to access the menuItem.
-            editMenuButton.setOnMouseClicked(e -> {
-                database.deleteCONTACTID(contactInformationArrayList.get(selectedIndex).getKey());
-                contactInformationArrayList.remove(selectedIndex);
-                refreshListView();
-                groups = database.getGroups(credentials);
-                refreshGroupList();
-                groupChoiceBox.getSelectionModel().selectFirst();
-            });
 
 
             //Add contact button
             //TODO move button to Mainwindow.java and put even handler inside before returning add button
             Button addButton = MainWindow.addButton(this.mainStage);
-
-
 
             //TODO clear search bar button (Optional)
             Button clearSearchButton = new Button("X");
@@ -152,21 +135,10 @@ public class Main extends Application {
             //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
             groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
 
-            //TODO move into event handlers
-            groups = database.getGroups(credentials);
-            refreshGroupList();
-            groupChoiceBox.getSelectionModel().selectFirst(); // select first by default
-
-            groupChoiceBox.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue)->{
-                contactInformationArrayList = database.populateContactList(credentials,newValue);
-                refreshListView();
-            });
-
-
             //Search Box
             TextField searchTextField = MainWindow.searchTextField();
             searchTextField.textProperty().addListener((v,oldValue,newValue)->{
-                searchByKey(oldValue,newValue);
+                Functions.searchByKey(oldValue,newValue);
             });
 
             //Contact List
@@ -174,6 +146,7 @@ public class Main extends Application {
 
 
             contactListView = MainWindow.contactListView(contactObservableList);
+
             for(int i = 0; i < contactInformationArrayList.size();i++){
                 contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
                 contactInformationArrayList.get(i).getLastName());
@@ -215,73 +188,102 @@ public class Main extends Application {
 
         }
 
-    //TODO Optimize search so that it only shows relevant contacts in contactList
-    private void searchByKey(String oldValue, String newValue) {
-        //This method will search Googlishly for the contact typed in. When the searchfield is emptied it will return to the group the user was previously in.
-        if(oldValue.length()==0){
-            previousGroupUserWasOn = groupChoiceBox.getSelectionModel().getSelectedItem();
-        }
-        if(newValue.length()==0) {
-            groupChoiceBox.getSelectionModel().select(previousGroupUserWasOn);
-            contactListView.getSelectionModel().selectFirst();
-        }else{
-            //When the user types, it will search through the main group because that contains all the contacts.
-            groupChoiceBox.getSelectionModel().select("Main");
-            String[] parts = newValue.toUpperCase().split(" ");
-            // Filter out the entries that don't contain the entered text
-            String search = contactListView.getItems().get(0);
-            for ( Object entry: contactListView.getItems() ) {
-                boolean match = true;
-                String entryText = (String)entry;
-                for ( String part: parts ) {
-                    // The entry needs to contain all portions of the
-                    // search string *but* in any order
-                    if ( ! entryText.toUpperCase().contains(part) ) {
-                        match = false;
-                        break;
-                    }
-                }
-                if ( match ) {
-                    search = entryText;
-                }
-            }
-            contactListView.getSelectionModel().select(search);
-        }
+
+
+    public static String[] getCredentials() {
+        return credentials;
     }
 
-    public void refreshListView(){
-        //Clear GUI list
-        contactObservableList.clear();
-
-        for(int i = 0; i < contactInformationArrayList.size();i++){
-            contactObservableList.add(
-                    Functions.getFormattenNameFMLN(
-                            contactInformationArrayList.get(i)));
-        }
-        contactListView.getSelectionModel().selectFirst();
-    }
-
-    public void refreshGroupList(){
-        groupObservableList.clear();
-        groupObservableList.add("Main");
-        groupObservableList.addAll(groups);
-    }
-
-
-    public static ArrayList<ContactInformation> getContactInformationArrayList() {
-        return contactInformationArrayList;
+    public static void setCredentials(String[] credentials) {
+        Main.credentials = credentials;
     }
 
     public static ObservableList<String> getGroupObservableList() {
         return groupObservableList;
     }
 
-    public static String[] getCredentials() {
-        return credentials;
+    public static void setGroupObservableList(ObservableList<String> groupObservableList) {
+        Main.groupObservableList = groupObservableList;
+    }
+
+    public static ChoiceBox<String> getGroupChoiceBox() {
+        return groupChoiceBox;
+    }
+
+    public static void setGroupChoiceBox(ChoiceBox<String> groupChoiceBox) {
+        Main.groupChoiceBox = groupChoiceBox;
+    }
+
+    public static ArrayList<String> getGroupsArrayList() {
+        return groupsArrayList;
+    }
+
+    public static void setGroupsArrayList(ArrayList<String> groupsArrayList) {
+        Main.groupsArrayList = groupsArrayList;
+    }
+
+    public static ListView<String> getContactListView() {
+        return contactListView;
+    }
+
+    public static void setContactListView(ListView<String> contactListView) {
+        Main.contactListView = contactListView;
+    }
+
+    public static ObservableList<String> getContactObservableList() {
+        return contactObservableList;
+    }
+
+    public static void setContactObservableList(ObservableList<String> contactObservableList) {
+        Main.contactObservableList = contactObservableList;
+    }
+
+    public static ArrayList<ContactInformation> getContactInformationArrayList() {
+        return contactInformationArrayList;
+    }
+
+    public static void setContactInformationArrayList(ArrayList<ContactInformation> contactInformationArrayList) {
+        Main.contactInformationArrayList = contactInformationArrayList;
     }
 
     public static Database getDatabase() {
         return database;
+    }
+
+    public static void setDatabase(Database database) {
+        Main.database = database;
+    }
+
+    public AnchorPane getRightAnchorPane() {
+        return rightAnchorPane;
+    }
+
+    public void setRightAnchorPane(AnchorPane rightAnchorPane) {
+        this.rightAnchorPane = rightAnchorPane;
+    }
+
+    public static int getSelectedIndex() {
+        return selectedIndex;
+    }
+
+    public static void setSelectedIndex(int selectedIndex) {
+        Main.selectedIndex = selectedIndex;
+    }
+
+    public static String getPreviousGroupUserWasOn() {
+        return previousGroupUserWasOn;
+    }
+
+    public static void setPreviousGroupUserWasOn(String previousGroupUserWasOn) {
+        Main.previousGroupUserWasOn = previousGroupUserWasOn;
+    }
+
+    public Stage getMainStage() {
+        return mainStage;
+    }
+
+    public void setMainStage(Stage mainStage) {
+        this.mainStage = mainStage;
     }
 }
 
