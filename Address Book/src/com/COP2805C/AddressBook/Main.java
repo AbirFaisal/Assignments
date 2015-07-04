@@ -3,8 +3,6 @@ package com.COP2805C.AddressBook;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
-import com.COP2805C.AddressBook.UserInterface.AttachmentListCell;
-import com.COP2805C.AddressBook.UserInterface.ContactForms.FormFactory;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
@@ -13,44 +11,40 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.sqlite.Function;
 
 import javax.swing.*;
 import java.sql.SQLException;
-import java.time.chrono.ChronoLocalDate;
-import java.time.chrono.Chronology;
-import java.time.chrono.Era;
-import java.time.format.ResolverStyle;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
-import java.time.temporal.TemporalField;
-import java.time.temporal.ValueRange;
-import java.util.*;
+import java.util.ArrayList;
 
 
 public class Main extends Application {
 
-    private static String[] credentials = new String[2]; //Username and password
-    public static ObservableList<String> groupObservableList = FXCollections.observableArrayList();
-    static ChoiceBox<String> groupChoiceBox;
-    public static ArrayList<String> groupsArrayList = new ArrayList<>();
+    private static String[] credentials; //Username and password
+    private static ObservableList<String> groupObservableList;
+    private static ChoiceBox<String> groupChoiceBox;
+    private static ArrayList<String> groupsArrayList;
 
-    static ListView<String> contactListView;
-    static ObservableList<String> contactObservableList = FXCollections.observableArrayList();
-    public static ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<ContactInformation>();
+    private static ListView<String> contactListView;
+    private static ObservableList<String> contactObservableList;
+    public static ArrayList<ContactInformation> contactInformationArrayList;
 
-
-    public static Database database = Database.getDatabase();
-    public static AnchorPane rightAnchorPane;
-    public static int selectedIndex;
-    public static String previousGroupUserWasOn;
-    public Stage mainStage = new Stage(); //TODO needed for switching to the form
+    private static Database database;
+    private static AnchorPane rightAnchorPane;
+    private static Stage mainStage;
 
     public static void main(String[] args) throws SQLException {
+        credentials = new String[2];
+        database = Database.getDatabase();
+
+        contactObservableList = FXCollections.observableArrayList();
+        groupObservableList = FXCollections.observableArrayList();
+        contactInformationArrayList = new ArrayList<ContactInformation>();
+        groupsArrayList = new ArrayList<>();
+
+        mainStage = new Stage();
 
         //Check if database exists if not create it
         database.initialize();
@@ -78,12 +72,12 @@ public class Main extends Application {
         if (Crypto.authenticateUser(credentials)) {
             //Launch main window if user is authenticated
             launch(args);
-        }else {
+        } else {
             try {
                 throw new IllegalAccessException("Why u tryn ta hack brah");
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 credentials[0] = null;
                 credentials[1] = null;
                 database.closeDB();
@@ -97,83 +91,75 @@ public class Main extends Application {
     }
 
 
-        @Override
-        public void start(Stage primaryStage)throws Exception {
-
-            //Checks to see if user has contacts to load from the database.
-            if(database.numberOfContacts(credentials)>0) {
-                contactInformationArrayList = database.populateContactList(credentials, "Main");
-            }
-
-            ContactViewFactory contactViewFactory = new ContactViewFactory();
-
-            //TODO the bellow code needs to go into MainWindow.java
-            //Right side Anchor Pane
-            //Initial contact load.
-            //If the user has contacts to load from the database, this will load the first contact as an introduction
-            if(database.numberOfContacts(credentials)>0) {
-                rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
-            }else{//If the user has no contacts, it will load a sample contactView
-                rightAnchorPane = new AnchorPane(new Text("No Contacts"));
-            }
-            Functions.zeroAnchor(rightAnchorPane);
-
-            SplitMenuButton editMenuButton = MainWindow.editMenuButton();
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        ContactViewFactory contactViewFactory = new ContactViewFactory();
 
 
-            //Add contact button
-            //TODO move button to Mainwindow.java and put even handler inside before returning add button
-            Button addButton = MainWindow.addButton(this.mainStage);
-
-            //TODO clear search bar button (Optional)
-            Button clearSearchButton = new Button("X");
-            AnchorPane.setTopAnchor(clearSearchButton, 8.0);
-            AnchorPane.setRightAnchor(clearSearchButton, 8.0);
-
-
-            //Group selection
-            //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
-            groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
-
-            //Search Box
-            TextField searchTextField = MainWindow.searchTextField();
-
-            //Contact List
-            contactListView = MainWindow.contactListView(contactObservableList);
-
-            for(int i = 0; i < contactInformationArrayList.size();i++){
-                contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
-                contactInformationArrayList.get(i).getLastName());
-            }
-            //This sets the customImageListView
-            contactListView.setCellFactory(list -> new AttachmentListCell());
-            contactListView.setFixedCellSize(40.0);
-            contactListView.getSelectionModel().selectFirst();
-
-
-
-            //Left side Anchor Pane
-            AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
-                    addButton,
-                    searchTextField,
-                    contactListView,
-                    groupChoiceBox,
-                    editMenuButton);
-
-            //Split Pane
-            SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
-
-            //Main Window Anchor Pane
-            AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
-            mainWindowAnchorPane.setPrefSize(800, 600);
-            Scene primaryScene = new Scene(mainWindowAnchorPane);
-            primaryStage.setScene(primaryScene);
-            primaryStage.setTitle("Contacts Manager");
-            primaryStage.show();
-
+        //Checks to see if user has contacts to load from the database.
+        if (database.numberOfContacts(credentials) > 0) {
+            contactInformationArrayList = database.populateContactList(credentials, "Main");
         }
 
 
+        //TODO the bellow code needs to go into MainWindow.java
+        //Right side Anchor Pane
+        //Initial contact load.
+        //If the user has contacts to load from the database, this will load the first contact as an introduction
+        if (database.numberOfContacts(credentials) > 0) {
+            rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
+        } else {//If the user has no contacts, it will load a sample contactView
+            rightAnchorPane = new AnchorPane(new Text("No Contacts"));
+        }
+        Functions.zeroAnchor(rightAnchorPane);
+
+        SplitMenuButton editMenuButton = MainWindow.editMenuButton();
+
+        //Add contact button
+        //TODO move button to Mainwindow.java and put even handler inside before returning add button
+        Button addButton = MainWindow.addButton(this.mainStage);
+
+        //TODO clear search bar button (Optional)
+        Button clearSearchButton = new Button("X");
+        AnchorPane.setTopAnchor(clearSearchButton, 8.0);
+        AnchorPane.setRightAnchor(clearSearchButton, 8.0);
+
+
+        //Group selection
+        //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
+        groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
+
+        //Search Box
+        TextField searchTextField = MainWindow.searchTextField();
+
+        //Contact List
+        contactListView = MainWindow.contactListView(contactObservableList);
+
+        for (int i = 0; i < contactInformationArrayList.size(); i++) {
+            contactObservableList.add(Functions.getFormattedNameFMLN(contactInformationArrayList.get(i)));
+        }
+
+
+        //Left side Anchor Pane
+        AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
+                addButton,
+                searchTextField,
+                contactListView,
+                groupChoiceBox,
+                editMenuButton);
+
+        //Split Pane
+        SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
+
+        //Main Window Anchor Pane
+        AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
+        mainWindowAnchorPane.setPrefSize(800, 600);
+        Scene primaryScene = new Scene(mainWindowAnchorPane);
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle("Contacts Manager");
+        primaryStage.show();
+
+    }
 
 
     public static String[] getCredentials() {
@@ -246,22 +232,6 @@ public class Main extends Application {
 
     public void setRightAnchorPane(AnchorPane rightAnchorPane) {
         this.rightAnchorPane = rightAnchorPane;
-    }
-
-    public static int getSelectedIndex() {
-        return selectedIndex;
-    }
-
-    public static void setSelectedIndex(int selectedIndex) {
-        Main.selectedIndex = selectedIndex;
-    }
-
-    public static String getPreviousGroupUserWasOn() {
-        return previousGroupUserWasOn;
-    }
-
-    public static void setPreviousGroupUserWasOn(String previousGroupUserWasOn) {
-        Main.previousGroupUserWasOn = previousGroupUserWasOn;
     }
 
     public Stage getMainStage() {
