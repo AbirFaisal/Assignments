@@ -57,15 +57,12 @@ public class Database {
     public ArrayList<ContactInformation> populateContactList(String[] credentials, String group){
 
         ArrayList<Integer> contactID = new ArrayList<>();
-
         ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<>();
+        ContactInformationBuilder contactInformationBuilder = new ContactInformationBuilder();
 
         if(group != null){
             contactID = getContactIDS(credentials, group);
-        }else throw new NullPointerException("populateContactList in Database.java: null group string field");
-
-        
-        ContactInformationBuilder contactInformationBuilder = new ContactInformationBuilder();
+        }else throw new NullPointerException("populateContactList() in Database.java: null group string field");
 
         for(int i = 0; i < contactID.size(); i++){
             contactInformationArrayList.add(contactInformationBuilder.prepareContact(contactID.get(i)));
@@ -75,15 +72,19 @@ public class Database {
     }
 
 
-
-
     public int numberOfContacts(String[] credentials) {
+        String query = "SELECT COUNT(ACCOUNT) AS NumberOfContacts FROM CONTACTS WHERE ACCOUNT=?";
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+
         try {
-            String query = "SELECT COUNT(ACCOUNT) AS NumberOfContacts FROM CONTACTS WHERE ACCOUNT=?";
-            PreparedStatement st = connection.prepareStatement(query);
-            st.setString(1, credentials[0]);
-            ResultSet rs = st.executeQuery();
-            return rs.getInt("NumberOfContacts");
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, credentials[0]);
+            resultSet = preparedStatement.executeQuery();
+
+            return resultSet.getInt("NumberOfContacts");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,19 +93,22 @@ public class Database {
 
     //Function that checks if provided column is empty, one for table, one for column.
     public boolean isColumnEmpty(String TABLE, String COLUMN) {
+        String query = "SELECT " + COLUMN + " from " + TABLE;
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
 
         try {
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
 
-            String query = "SELECT " + COLUMN + " from " + TABLE;
-            PreparedStatement st = connection.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-            if (rs.getString(COLUMN) == null) {
+            if (resultSet.getString(COLUMN) == null) {
                 //testing
                 System.out.println("Working");
                 return true;
             } else {
                 return false;
             }
+
         } catch (NullPointerException | SQLException e) {
             System.out.println(e);
             return true;
@@ -113,13 +117,17 @@ public class Database {
 
 
     public boolean doesUserExist(String[] credentials) {
+        String query = "SELECT ACCOUNT FROM ACCOUNTS WHERE ACCOUNT=?";
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
 
         try {
-            String query = "SELECT ACCOUNT FROM ACCOUNTS WHERE ACCOUNT=?";
-            PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, credentials[0]);
-            ResultSet rs = pst.executeQuery();
-            if (rs.getString("ACCOUNT") == null) {
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, credentials[0]);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.getString("ACCOUNT") == null) {
                 return false;
             } else {
                 return true;
@@ -127,20 +135,27 @@ public class Database {
         } catch (NullPointerException | SQLException e) {
             System.out.println(e);
             return false;
-
         }
     }
 
+
     public ArrayList<Integer> getContactIDS(String[] credentials, String group) {
-        ArrayList<Integer> contactIDS = new ArrayList<>();
+        String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=? AND GROUP_ASSC=?";
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        ArrayList<Integer> contactIDS;
+
+
         try {
-            String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=? AND GROUP_ASSC=?";
-            PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, credentials[0]);
-            pst.setString(2,group);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                contactIDS.add(rs.getInt("CONTACT_ID"));
+            contactIDS = new ArrayList<>();
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, credentials[0]);
+            preparedStatement.setString(2,group);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                contactIDS.add(resultSet.getInt("CONTACT_ID"));
             }
             return contactIDS;
         } catch (SQLException e) {
@@ -150,14 +165,19 @@ public class Database {
     }
 
     public ArrayList<Integer> getContactIDS(String[] credentials) {
-        ArrayList<Integer> contactIDS = new ArrayList<>();
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        ArrayList<Integer> contactIDS;
+
         try {
+            contactIDS = new ArrayList<>();
+
             String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=?";
-            PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, credentials[0]);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                contactIDS.add(rs.getInt("CONTACT_ID"));
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, credentials[0]);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                contactIDS.add(resultSet.getInt("CONTACT_ID"));
             }
             return contactIDS;
         } catch (SQLException e) {
@@ -168,31 +188,37 @@ public class Database {
 
 
     public static String getPassword(String[] credentials) {
-        String password = new String();
+        String query = "SELECT PASSWORD FROM ACCOUNTS WHERE ACCOUNT=?";
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        String password = "";
+
         try {
-            String query = "SELECT PASSWORD FROM ACCOUNTS WHERE ACCOUNT=?";
-            PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, credentials[0]);
-            ResultSet rs = pst.executeQuery();
-            password = rs.getString("PASSWORD");
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, credentials[0]);
+            resultSet = preparedStatement.executeQuery();
+            password = resultSet.getString("PASSWORD");
         } catch (SQLException e) {
             System.out.println(e);
         }
-
         return password;
     }
 
     public ArrayList<String> getGroups(String[] credentials){
+        String query = "SELECT DISTINCT GROUP_ASSC FROM CONTACTS WHERE ACCOUNT=?";
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
         ArrayList<String> groups = new ArrayList<String>();
+
         try{
-            String query = "SELECT DISTINCT GROUP_ASSC FROM CONTACTS WHERE ACCOUNT=?";
-            PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, credentials[0]);
-            ResultSet rs = pst.executeQuery();
-            while(rs.next()){
-                System.out.println(rs.getString("GROUP_ASSC"));
-                if(rs.getString("GROUP_ASSC")!=null) {
-                    groups.add(rs.getString("GROUP_ASSC"));
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, credentials[0]);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                System.out.println(resultSet.getString("GROUP_ASSC"));
+                if(resultSet.getString("GROUP_ASSC")!=null) {
+                    groups.add(resultSet.getString("GROUP_ASSC"));
                 }
             }
             return groups;
