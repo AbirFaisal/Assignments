@@ -45,7 +45,7 @@ public class Main extends Application {
 
 
     public static Database database = Database.getDatabase();
-    public AnchorPane rightAnchorPane;
+    public static AnchorPane rightAnchorPane;
     public static int selectedIndex;
     public static String previousGroupUserWasOn;
     public Stage mainStage = new Stage(); //TODO needed for switching to the form
@@ -137,14 +137,8 @@ public class Main extends Application {
 
             //Search Box
             TextField searchTextField = MainWindow.searchTextField();
-            searchTextField.textProperty().addListener((v,oldValue,newValue)->{
-                Functions.searchByKey(oldValue,newValue);
-            });
 
             //Contact List
-            //ObservableList<String> contactObservableList = FXCollections.observableArrayList ();
-
-
             contactListView = MainWindow.contactListView(contactObservableList);
 
             for(int i = 0; i < contactInformationArrayList.size();i++){
@@ -155,16 +149,7 @@ public class Main extends Application {
             contactListView.setCellFactory(list -> new AttachmentListCell());
             contactListView.setFixedCellSize(40.0);
             contactListView.getSelectionModel().selectFirst();
-            contactListView.getSelectionModel().selectedIndexProperty().addListener((v,oldValue,newValue)->{
-                selectedIndex = 0;
-                //error checking necessary to avoid array Out Of Bounds.
-                if(newValue.intValue()!=-1)selectedIndex = newValue.intValue();
-                //TODO DEPRECIATED
-                AnchorPane newRightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView();
-                rightAnchorPane.getChildren().clear();
-                rightAnchorPane.getChildren().add(newRightAnchorPane);
-                        //contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView());
-            });
+
 
 
             //Left side Anchor Pane
@@ -187,6 +172,7 @@ public class Main extends Application {
             primaryStage.show();
 
         }
+
 
 
 
@@ -254,7 +240,7 @@ public class Main extends Application {
         Main.database = database;
     }
 
-    public AnchorPane getRightAnchorPane() {
+    public static AnchorPane getRightAnchorPane() {
         return rightAnchorPane;
     }
 

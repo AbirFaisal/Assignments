@@ -4,6 +4,7 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.ContactForms.FormFactory;
+import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -45,6 +46,22 @@ public class MainWindow {
         AnchorPane.setLeftAnchor(contactListView, 0.0);
         AnchorPane.setRightAnchor(contactListView, 0.0);
 
+
+
+        contactListView.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> {
+            int selectedIndex = 0;
+            //error checking necessary to avoid array Out Of Bounds.
+            if (newValue.intValue() != -1) selectedIndex = newValue.intValue();
+            //TODO DEPRECIATED
+            AnchorPane newRightAnchorPane = ContactViewFactory.contact(
+                    Main.getContactInformationArrayList().get(selectedIndex)).contactView();
+
+            Main.getRightAnchorPane().getChildren().clear();
+            Main.getRightAnchorPane().getChildren().add(newRightAnchorPane);
+            //contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView());
+        });
+
+
         return contactListView;
     }
 
@@ -73,8 +90,8 @@ public class MainWindow {
         AnchorPane.setRightAnchor(searchTextField, 8.0);
 
 
-        searchTextField.textProperty().addListener((v,oldValue,newValue)->{
-            Functions.searchByKey(oldValue,newValue);
+        searchTextField.textProperty().addListener((v, oldValue, newValue) -> {
+            Functions.searchByKey(oldValue, newValue);
         });
 
 
