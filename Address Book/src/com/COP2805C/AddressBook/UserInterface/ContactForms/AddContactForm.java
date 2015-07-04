@@ -318,7 +318,7 @@ public class AddContactForm implements Form {
         return button;
     }
 
-    //TODO fix buttons within pane. Super ratchet
+
     public Button saveButton(){
         Button button = new Button("Save");
 
@@ -333,35 +333,35 @@ public class AddContactForm implements Form {
             //save static data
             //First Name
             this.contactInformation.setFirstName(
-                    this.textFields.get(0).getText());
+                    this.labels.get(0).getText());
             //Middle Name
             this.contactInformation.setMiddleName(
-                    this.textFields.get(1).getText());
+                    this.labels.get(1).getText());
             //Last Name
             this.contactInformation.setLastName(
-                    this.textFields.get(2).getText());
+                    this.labels.get(2).getText());
 
             this.contactInformation.setNickname(
-                    this.textFields.get(3).getText());
+                    this.labels.get(3).getText());
 
             //Address
             this.contactInformation.setAddressLine1(
-                    this.textFields.get(4).getText());
+                    this.labels.get(4).getText());
 
             this.contactInformation.setAddressLine2(
-                    this.textFields.get(5).getText());
+                    this.labels.get(5).getText());
 
             this.contactInformation.setCity(
-                    this.textFields.get(6).getText());
+                    this.labels.get(6).getText());
 
             this.contactInformation.setState(
-                    this.textFields.get(7).getText());
+                    this.labels.get(7).getText());
 
             this.contactInformation.setZip(
-                    this.textFields.get(8).getText());
+                    this.labels.get(8).getText());
 
             this.contactInformation.setCountry(
-                    this.textFields.get(9).getText());
+                    this.labels.get(9).getText());
 
             //Notes
             this.contactInformation.setNotes(
@@ -371,10 +371,15 @@ public class AddContactForm implements Form {
             this.contactInformation.setBirthday(
                     this.birthDatePicker.getChronology());
 
+            this.contactInformation.setZip(
+                    this.labels.get(0).getText());
+
+            this.contactInformation.setZip(
+                    this.labels.get(0).getText());
+
+
             //save dynamic data
             //Phone Numbers
-            //TODO Abir this is throwing a null, we need to set the phoneNumbers etc into the contactObject first as there is nothing to retrieve
-            //at this point.
             for (int i = 0; i < this.phoneTextFields.size(); i++) {
                 this.contactInformation.getPhoneNumbers().add(
                         this.phoneTextFields.get(i).getText());
@@ -391,11 +396,13 @@ public class AddContactForm implements Form {
             }
 
             //add to database
-            //TODO chris???
+            //TODO chris is this correct???
             //Add key to contactInformation Object
-            Main.database.createContact(Main.getCredentials(), this.contactInformation);
+            this.contactInformation.setKey(
+                    Database.createContact(
+                            Main.getCredentials(), this.contactInformation));
 
-            //Main.getDatabase().addContact(dkfkaslkjdfanskjdfaslkdf) //TODO
+            Main.getDatabase().addContact(dkfkaslkjdfanskjdfaslkdf) //TODO
 
             //TODO update list view and stuff
         });

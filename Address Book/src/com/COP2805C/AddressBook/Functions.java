@@ -5,6 +5,8 @@ import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
 
+import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 import javafx.scene.text.Font;
@@ -17,6 +19,14 @@ import java.io.File;
  * Created by abirfaisal on 5/28/15.
  */
 public class Functions {
+
+
+    public static void zeroAnchor(Node node){
+        AnchorPane.setTopAnchor(node, 0.0);
+        AnchorPane.setBottomAnchor(node, 0.0);
+        AnchorPane.setLeftAnchor(node, 0.0);
+        AnchorPane.setRightAnchor(node, 0.0);
+    }
 
     public static String[] createAccount(Database database) {
         String[] credentials;
@@ -33,6 +43,7 @@ public class Functions {
             }
             //Keep asking if user inputs existing username
         } while (database.doesUserExist(credentials));
+        //return with credentials user and password
         return credentials;
     }
 

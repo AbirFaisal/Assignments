@@ -15,9 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.sqlite.Function;
 
 import javax.swing.*;
+import java.sql.SQLException;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
 import java.time.chrono.Era;
@@ -47,17 +50,12 @@ public class Main extends Application {
     public static String previousGroupUserWasOn;
     public Stage mainStage = new Stage(); //TODO needed for switching to the form
 
-    public static void main(String[] args) {
-
-        //TODO Chris can you make a database.addContact(credentials, contactInformation)?
-        //I'm not sure how to approach this matter.
-
+    public static void main(String[] args) throws SQLException {
 
         //Check if database exists if not create it
         database.initialize();
 
-
-        //Check if username column is empty
+        //Check if username column is empty in table accounts in column account
         if (database.isColumnEmpty("ACCOUNTS", "ACCOUNT")) {
             //Create Account
             credentials = Functions.createAccount(database);
@@ -76,16 +74,29 @@ public class Main extends Application {
             } while (!Crypto.authenticateUser(credentials));
         }
 
+
         if (Crypto.authenticateUser(credentials)) {
-
-            //TODO Load Contact List from database into FXcollections Observable list
-            //Launch main window
+            //Launch main window if user is authenticated
             launch(args);
-
-
-            //TODO save contactInformationArrayList to database
+        }else {
+            try {
+                throw new IllegalAccessException("Why u tryn ta hack brah");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }finally {
+                credentials[0] = null;
+                credentials[1] = null;
+                database.closeDB();
+            }
         }
+
+        //Close database and end program
+        credentials[0] = null;
+        credentials[1] = null;
+        database.closeDB();
     }
+
+
         @Override
         public void start(Stage primaryStage)throws Exception {
 
@@ -94,100 +105,7 @@ public class Main extends Application {
                 contactInformationArrayList = database.populateContactList(credentials, "Main");
             }
 
-            /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
-            Image testImage = new Image("/res/defaultProfileImage.png");
-            ArrayList<String> phone = new ArrayList<>();
-            ArrayList<String> email = new ArrayList<>();
-            ArrayList<String> work = new ArrayList<>();
-
-            for (int i = 0; i < 3; i++) {
-                phone.add("phone " + i);
-                email.add("email " + i);
-                work.add("work " + i);
-            }
-
-            Chronology testChronology = new Chronology() {
-                @Override
-                public String getId() {
-                    return null;
-                }
-
-                @Override
-                public String getCalendarType() {
-                    return null;
-                }
-
-                @Override
-                public ChronoLocalDate date(int prolepticYear, int month, int dayOfMonth) {
-                    return null;
-                }
-
-                @Override
-                public ChronoLocalDate dateYearDay(int prolepticYear, int dayOfYear) {
-                    return null;
-                }
-
-                @Override
-                public ChronoLocalDate dateEpochDay(long epochDay) {
-                    return null;
-                }
-
-                @Override
-                public ChronoLocalDate date(TemporalAccessor temporal) {
-                    return null;
-                }
-
-                @Override
-                public boolean isLeapYear(long prolepticYear) {
-                    return false;
-                }
-
-                @Override
-                public int prolepticYear(Era era, int yearOfEra) {
-                    return 0;
-                }
-
-                @Override
-                public Era eraOf(int eraValue) {
-                    return null;
-                }
-
-                @Override
-                public List<Era> eras() {
-                    return null;
-                }
-
-                @Override
-                public ValueRange range(ChronoField field) {
-                    return null;
-                }
-
-                @Override
-                public ChronoLocalDate resolveDate(Map<TemporalField, Long> fieldValues, ResolverStyle resolverStyle) {
-                    return null;
-                }
-
-                @Override
-                public int compareTo(Chronology other) {
-                    return 0;
-                }
-            };
-
-            ContactInformation contactInformation = new ContactInformation(
-                    1, "group",
-                    testImage,
-                    "First", "Middle", "Last", "Sample",
-                    "addr1", "addr2", "city", "state", "zip", "country",
-                    "notes",
-                    phone, email, work,
-                    testChronology);
-
-
             ContactViewFactory contactViewFactory = new ContactViewFactory();
-            //ContactAnchorPane contactAnchorPane = contactViewFactory.contact(contactInformation).contactView();
-            /**TEST DO NOT REMOVE ONLY COMMENT OUT**/
-
-
 
             //TODO the bleow code needs to go into MainWindow.java
             //Right side Anchor Pane
@@ -196,19 +114,9 @@ public class Main extends Application {
             if(database.numberOfContacts(credentials)>0) {
                 rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
             }else{//If the user has no contacts, it will load a sample contactView
-                rightAnchorPane = contactViewFactory.contact(contactInformation).contactView();
+                rightAnchorPane = new AnchorPane(new Text("No Contacts"));
             }
-            AnchorPane.setTopAnchor(rightAnchorPane, 0.0);
-            AnchorPane.setBottomAnchor(rightAnchorPane, 0.0);
-            AnchorPane.setLeftAnchor(rightAnchorPane, 0.0);
-            AnchorPane.setRightAnchor(rightAnchorPane, 0.0);
-            //rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
-
-
-            //TODO dynamicly generate the above
-
-            //Something like this then re add the nodes
-            //rightAnchorPane.getChildren().clear();
+            Functions.zeroAnchor(rightAnchorPane);
 
 
             SplitMenuButton editMenuButton = MainWindow.editMenuButton();
@@ -306,6 +214,7 @@ public class Main extends Application {
             primaryStage.show();
 
         }
+
     //TODO Optimize search so that it only shows relevant contacts in contactList
     private void searchByKey(String oldValue, String newValue) {
         //This method will search Googlishly for the contact typed in. When the searchfield is emptied it will return to the group the user was previously in.
@@ -341,15 +250,13 @@ public class Main extends Application {
     }
 
     public void refreshListView(){
+        //Clear GUI list
         contactObservableList.clear();
+
         for(int i = 0; i < contactInformationArrayList.size();i++){
-            //contactObservableList.add(contactInformationArrayList.get(i).getFirstName());
-
-            //TODO use function I built in contactAncorPane do do the below in a more proper way
-            //todo since it checks for null and everything
-
-            contactObservableList.add(contactInformationArrayList.get(i).getFirstName()+ " " + contactInformationArrayList.get(i).getMiddleName() + " " +
-                    contactInformationArrayList.get(i).getLastName());
+            contactObservableList.add(
+                    Functions.getFormattenNameFMLN(
+                            contactInformationArrayList.get(i)));
         }
         contactListView.getSelectionModel().selectFirst();
     }
