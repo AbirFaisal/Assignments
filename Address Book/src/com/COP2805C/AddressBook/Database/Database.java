@@ -24,20 +24,20 @@ public class Database {
     private Database() {
     }
 
-    private static Connection conn = null;
+    private static Connection connection = null;
 
     public static Database getDatabase() {
         return DATABASE;
     }
 
-    public void initialize() {
+    public void initialize() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
-            SQLiteConfig config = new SQLiteConfig();
-            config.enforceForeignKeys(true);
-            this.conn = DriverManager.getConnection("jdbc:sqlite:accounts.db", config.toProperties());
-            System.out.println("Connection successful");
-            Statement stat = conn.createStatement();
+            SQLiteConfig sqLiteConfig = new SQLiteConfig();
+            sqLiteConfig.enforceForeignKeys(true);
+            this.connection = DriverManager.getConnection("jdbc:sqlite:accounts.db", sqLiteConfig.toProperties());
+            System.out.println("DB Connection successful");
+            Statement stat = connection.createStatement();
             //Table to track user
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS ACCOUNTS(ACCOUNT VARCHAR," + "PASSWORD VARCHAR," + " PRIMARY KEY(ACCOUNT));");
             //Table for static data
@@ -55,17 +55,22 @@ public class Database {
     }
 
     public ArrayList<ContactInformation> populateContactList(String[] credentials, String group){
-        ArrayList<Integer> contactIDS = new ArrayList<>();
+
+        ArrayList<Integer> contactID = new ArrayList<>();
+
         ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<>();
-        if(group == "Main"){
-            contactIDS = getContactIDS(credentials);
-        }else {
-            contactIDS = getContactIDS(credentials, group);
+
+        if(group != null){
+            contactID = getContactIDS(credentials, group);
+        }else throw new NullPointerException("populateContactList in Database.java: null group string field");
+
+        
+        ContactInformationBuilder contactInformationBuilder = new ContactInformationBuilder();
+
+        for(int i = 0; i < contactID.size(); i++){
+            contactInformationArrayList.add(contactInformationBuilder.prepareContact(contactID.get(i)));
         }
-        ContactInformationBuilder cib = new ContactInformationBuilder();
-        for(int i = 0; i < contactIDS.size(); i++){
-            contactInformationArrayList.add(cib.prepareContact(contactIDS.get(i)));
-        }
+
         return contactInformationArrayList;
     }
 
@@ -75,7 +80,7 @@ public class Database {
     public int numberOfContacts(String[] credentials) {
         try {
             String query = "SELECT COUNT(ACCOUNT) AS NumberOfContacts FROM CONTACTS WHERE ACCOUNT=?";
-            PreparedStatement st = conn.prepareStatement(query);
+            PreparedStatement st = connection.prepareStatement(query);
             st.setString(1, credentials[0]);
             ResultSet rs = st.executeQuery();
             return rs.getInt("NumberOfContacts");
@@ -91,7 +96,7 @@ public class Database {
         try {
 
             String query = "SELECT " + COLUMN + " from " + TABLE;
-            PreparedStatement st = conn.prepareStatement(query);
+            PreparedStatement st = connection.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             if (rs.getString(COLUMN) == null) {
                 //testing
@@ -111,7 +116,7 @@ public class Database {
 
         try {
             String query = "SELECT ACCOUNT FROM ACCOUNTS WHERE ACCOUNT=?";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
             if (rs.getString("ACCOUNT") == null) {
@@ -130,7 +135,7 @@ public class Database {
         ArrayList<Integer> contactIDS = new ArrayList<>();
         try {
             String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=? AND GROUP_ASSC=?";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, credentials[0]);
             pst.setString(2,group);
             ResultSet rs = pst.executeQuery();
@@ -148,7 +153,7 @@ public class Database {
         ArrayList<Integer> contactIDS = new ArrayList<>();
         try {
             String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=?";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -166,7 +171,7 @@ public class Database {
         String password = new String();
         try {
             String query = "SELECT PASSWORD FROM ACCOUNTS WHERE ACCOUNT=?";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
             password = rs.getString("PASSWORD");
@@ -181,7 +186,7 @@ public class Database {
         ArrayList<String> groups = new ArrayList<String>();
         try{
             String query = "SELECT DISTINCT GROUP_ASSC FROM CONTACTS WHERE ACCOUNT=?";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, credentials[0]);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
@@ -203,7 +208,7 @@ public class Database {
     public void deleteCONTACTID(int CONTACT_ID) {
         try {
             String update = "DELETE FROM CONTACTS WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(update);
+            PreparedStatement pst = connection.prepareStatement(update);
             System.out.println(CONTACT_ID);
             pst.setInt(1, CONTACT_ID);
             pst.executeUpdate();
@@ -219,7 +224,7 @@ public class Database {
         try {
             String update = "INSERT INTO ACCOUNTS(ACCOUNT,PASSWORD) VALUES (?,?)";
             String encryptPassword = Crypto.stringSHA(credentials[1]);
-            PreparedStatement pst = conn.prepareStatement(update);
+            PreparedStatement pst = connection.prepareStatement(update);
             pst.setString(1, credentials[0]);
             pst.setString(2, encryptPassword);
             pst.executeUpdate();
@@ -232,7 +237,7 @@ public class Database {
     //This method adds a CONTACT_ID for the listed account and returns the key for this contact. This key can then be used in the other functions to add the required fields.
     public int createContactID(String ACCOUNT) throws SQLException {
         String update = "INSERT INTO CONTACTS(ACCOUNT) VALUES" + "(?);";
-        PreparedStatement pst = conn.prepareStatement(update);
+        PreparedStatement pst = connection.prepareStatement(update);
         pst.setString(1, ACCOUNT);
         pst.executeUpdate();
         int key = pst.getGeneratedKeys().getInt(1);
@@ -264,7 +269,7 @@ public class Database {
     public void addNames(int CONTACT_ID, String F_NAME, String M_NAME, String L_NAME, String N_NAME)  {
         try {
             String update = "UPDATE CONTACTS SET F_NAME =?," + "M_NAME =?," + "L_NAME =?," + "N_NAME =? WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(update);
+            PreparedStatement pst = connection.prepareStatement(update);
             pst.setString(1, F_NAME);
             pst.setString(2, M_NAME);
             pst.setString(3, L_NAME);
@@ -281,7 +286,7 @@ public class Database {
     public void addAddress(int CONTACT_ID, String ADDRESSLINE1, String ADDRESSLINE2, String CITY, String STATE, String ZIP, String COUNTRY) {
         try {
             String update = "UPDATE CONTACTS SET ADDRESSLINE1 =?," + "ADDRESSLINE2 = ?," + "CITY =?," + "STATE =?," + "ZIP =?," + "COUNTRY =? WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(update);
+            PreparedStatement pst = connection.prepareStatement(update);
             pst.setString(1, ADDRESSLINE1);
             pst.setString(2, ADDRESSLINE2);
             pst.setString(3, CITY);
@@ -308,7 +313,7 @@ public class Database {
             byte[] res = s.toByteArray();
             in = new ByteArrayInputStream(res);
             String update = "UPDATE CONTACTS SET PICTURE =? WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(update);
+            PreparedStatement pst = connection.prepareStatement(update);
             pst.setBinaryStream(1, in,res.length);
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
@@ -321,7 +326,7 @@ public class Database {
     public void addDate(int CONTACT_ID, Chronology chronology){
         try {
             String update = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(update);
+            PreparedStatement pst = connection.prepareStatement(update);
             //pst.setLong(1, chronology) //TODO adjust this thanks chris
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
@@ -334,7 +339,7 @@ public class Database {
     public void addGroup(int CONTACT_ID, String GROUP_ASSC) {
         try {
             String update = "UPDATE CONTACTS SET GROUP_ASSC=? WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(update);
+            PreparedStatement pst = connection.prepareStatement(update);
             pst.setString(1, GROUP_ASSC);
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
@@ -346,7 +351,7 @@ public class Database {
     public void addNotes(int CONTACT_ID, String NOTES){
         try {
             String update = "UPDATE CONTACTS SET NOTES=? WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(update);
+            PreparedStatement pst = connection.prepareStatement(update);
             pst.setString(1, NOTES);
             pst.setInt(2, CONTACT_ID);
             pst.executeUpdate();
@@ -422,7 +427,7 @@ public class Database {
     private String runContactStringQuery(int CONTACT_ID, String subject, String query) {
         try {
             String result;
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setInt(1, CONTACT_ID);
             ResultSet rs = pst.executeQuery();
             result = rs.getString(subject);
@@ -441,7 +446,7 @@ public class Database {
             ArrayList<String> list = new ArrayList<>();
 
             String result;
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setInt(1, CONTACT_ID);
             ResultSet rs = pst.executeQuery();
             while(rs.next()) {
@@ -464,7 +469,7 @@ public class Database {
         Calendar birthday = null;
         try {
             String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setInt(1, CONTACT_ID);
             ResultSet rs = pst.executeQuery();
             birthday.setTimeInMillis(rs.getLong("DOB"));
@@ -481,7 +486,7 @@ public class Database {
         InputStream inputStream = null;
         try {
             String query = "SELECT picture FROM CONTACTS WHERE CONTACT_ID =?";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = connection.prepareStatement(query);
             pst.setInt(1, CONTACT_ID);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -520,7 +525,7 @@ public class Database {
 
     public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER, String EMAIL, String WORK_PLACE) throws SQLException {
         String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,?,?,?);";
-        PreparedStatement pst = conn.prepareStatement(update);
+        PreparedStatement pst = connection.prepareStatement(update);
         pst.setInt(1, CONTACT_ID);
         pst.setLong(2, PHONE_NUMBER);
         pst.setString(3, EMAIL);
@@ -531,7 +536,7 @@ public class Database {
 
     public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER) throws SQLException {
         String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,?,NULL,NULL);";
-        PreparedStatement pst = conn.prepareStatement(update);
+        PreparedStatement pst = connection.prepareStatement(update);
         pst.setInt(1, CONTACT_ID);
         pst.setLong(2, PHONE_NUMBER);
         pst.executeUpdate();
@@ -540,7 +545,7 @@ public class Database {
 
     public void addDynamicData(int CONTACT_ID, String EMAIL) throws SQLException {
         String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,NULL,?,NULL);";
-        PreparedStatement pst = conn.prepareStatement(update);
+        PreparedStatement pst = connection.prepareStatement(update);
         pst.setInt(1, CONTACT_ID);
         pst.setString(2, EMAIL);
         pst.executeUpdate();
@@ -549,7 +554,7 @@ public class Database {
 
     public void addDynamicData(String WORK_PLACE, int CONTACT_ID) throws SQLException {
         String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,NULL,NULL,?);";
-        PreparedStatement pst = conn.prepareStatement(update);
+        PreparedStatement pst = connection.prepareStatement(update);
         pst.setInt(1, CONTACT_ID);
         pst.setString(2, WORK_PLACE);
         pst.executeUpdate();
@@ -557,7 +562,7 @@ public class Database {
     }
 
     public void closeDB() throws SQLException {
-        conn.close();
+        connection.close();
     }
 
 

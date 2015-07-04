@@ -67,8 +67,8 @@ public class Functions {
         Main.getContactObservableList().clear();
         //Populate FX Observable list
         for(int i = 0; i < Main.getContactInformationArrayList().size();i++){
-            Main.contactObservableList.add(
-                    Functions.getFormattenNameFMLN(
+            Main.getContactObservableList().add(
+                    getFormattedNameFMLN(
                             Main.getContactInformationArrayList().get(i)));
         }
         Main.getContactListView().getSelectionModel().selectFirst();
@@ -137,7 +137,7 @@ public class Functions {
 
 
     //get first, middle, last, and nickname as a single string
-    public static String getFormattenNameFMLN(ContactInformation contactInformation) {
+    public static String getFormattedNameFMLN(ContactInformation contactInformation) {
         String name = "";
 
         try {

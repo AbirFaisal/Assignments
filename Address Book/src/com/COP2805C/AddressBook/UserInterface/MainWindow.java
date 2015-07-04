@@ -46,13 +46,15 @@ public class MainWindow {
         AnchorPane.setLeftAnchor(contactListView, 0.0);
         AnchorPane.setRightAnchor(contactListView, 0.0);
 
-
+        contactListView.setCellFactory(list -> new AttachmentListCell());
+        contactListView.setFixedCellSize(40.0);
+        contactListView.getSelectionModel().selectFirst();
 
         contactListView.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> {
             int selectedIndex = 0;
             //error checking necessary to avoid array Out Of Bounds.
             if (newValue.intValue() != -1) selectedIndex = newValue.intValue();
-            //TODO DEPRECIATED
+
             AnchorPane newRightAnchorPane = ContactViewFactory.contact(
                     Main.getContactInformationArrayList().get(selectedIndex)).contactView();
 
