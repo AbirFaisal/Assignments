@@ -107,10 +107,10 @@ public class CreateContactWindow{
         createButton.setOnAction(e ->
         {
             try {
-                int key = Main.database.createContactID(credentials[0]);
-                Main.database.addNames(key, fnameText.getText(), null, lnameText.getText(), null);
-                Main.database.addDynamicData(key, emailText.getText());
-                Main.database.addPicture(key,test);
+                int key = Main.getDatabase().createContactID(credentials[0]);
+//                Main.database.addNames(key, fnameText.getText(), null, lnameText.getText(), null);
+//                Main.database.addDynamicData(key, emailText.getText());
+//                Main.database.addPicture(key,test);
                 //Main.database.addPicture(key, fileString);
                 window.close();
             } catch (SQLException e1) {

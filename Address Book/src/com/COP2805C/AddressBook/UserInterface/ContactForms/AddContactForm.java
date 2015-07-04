@@ -332,6 +332,8 @@ public class AddContactForm implements Form {
 
             //save static data
             //First Name
+            //TODO I fixed this in a earlier commit to master, but these need to be changed to the textFields not the labels as you would be submitting the labels to the database..
+
             this.contactInformation.setFirstName(
                     this.labels.get(0).getText());
             //Middle Name
@@ -373,7 +375,7 @@ public class AddContactForm implements Form {
 
             this.contactInformation.setZip(
                     this.labels.get(0).getText());
-
+            //TODO I think you pushed to master without pulling. I have fixed this before and now it is back..
             this.contactInformation.setZip(
                     this.labels.get(0).getText());
 
@@ -398,11 +400,7 @@ public class AddContactForm implements Form {
             //add to database
             //TODO chris is this correct???
             //Add key to contactInformation Object
-            this.contactInformation.setKey(
-                    Database.createContact(
-                            Main.getCredentials(), this.contactInformation));
-
-            Main.getDatabase().addContact(dkfkaslkjdfanskjdfaslkdf) //TODO
+            this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
 
             //TODO update list view and stuff
         });

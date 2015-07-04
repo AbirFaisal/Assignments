@@ -44,7 +44,6 @@ public class Main extends Application {
         contactInformationArrayList = new ArrayList<ContactInformation>();
         groupsArrayList = new ArrayList<>();
 
-        mainStage = new Stage();
 
         //Check if database exists if not create it
         database.initialize();
@@ -85,16 +84,16 @@ public class Main extends Application {
         }
 
         //Close database and end program
-        credentials[0] = null;
-        credentials[1] = null;
-        database.closeDB();
+//        credentials[0] = null;
+//        credentials[1] = null;
+        //database.closeDB();
     }
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ContactViewFactory contactViewFactory = new ContactViewFactory();
-
+        //TODO Don't move this stage has to be initialized within the start function or it will explode.
+        mainStage = new Stage();
 
         //Checks to see if user has contacts to load from the database.
         if (database.numberOfContacts(credentials) > 0) {
@@ -107,7 +106,7 @@ public class Main extends Application {
         //Initial contact load.
         //If the user has contacts to load from the database, this will load the first contact as an introduction
         if (database.numberOfContacts(credentials) > 0) {
-            rightAnchorPane = contactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
+            rightAnchorPane = ContactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
         } else {//If the user has no contacts, it will load a sample contactView
             rightAnchorPane = new AnchorPane(new Text("No Contacts"));
         }
