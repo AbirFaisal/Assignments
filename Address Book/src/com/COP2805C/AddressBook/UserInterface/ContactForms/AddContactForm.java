@@ -57,7 +57,6 @@ public class AddContactForm implements Form {
                 "Workplaces"
         };
 
-
         this.labels = new ArrayList<>();
         this.textFields = new ArrayList<>();
         this.phoneTextFields = new ArrayList<>();
@@ -78,22 +77,22 @@ public class AddContactForm implements Form {
         }
 
         //TODO simplify this
-        ArrayList<Label> phonelabel = new ArrayList<Label>();
-        phonelabel.add(new Label("Phone Numbers"));
+        ArrayList<Label> phoneLabel = new ArrayList<Label>();
+        phoneLabel.add(new Label("Phone Numbers"));
 
-        ArrayList<Label> emaillabel = new ArrayList<Label>();
-        emaillabel.add(new Label("Email"));
+        ArrayList<Label> emailLabel = new ArrayList<Label>();
+        emailLabel.add(new Label("Email"));
 
-        ArrayList<Label> workplacelabel = new ArrayList<Label>();
-        workplacelabel.add(new Label("Workplaces"));
+        ArrayList<Label> workplaceLabel = new ArrayList<Label>();
+        workplaceLabel.add(new Label("Workplaces"));
 
 
         //TODO Contact image view and selector
         //TODO simplify
         GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
-        GridPane phoneGridPane = gridPane(phonelabel, this.phoneTextFields);
-        GridPane emailGridPane = gridPane(emaillabel, this.emailTextFields);
-        GridPane workplaceGridPane = gridPane(workplacelabel, this.workplaceTextFields);
+        GridPane phoneGridPane = gridPane(phoneLabel, this.phoneTextFields);
+        GridPane emailGridPane = gridPane(emailLabel, this.emailTextFields);
+        GridPane workplaceGridPane = gridPane(workplaceLabel, this.workplaceTextFields);
 
 
         FlowPane buttonsFlowPane = new FlowPane(
@@ -285,10 +284,11 @@ public class AddContactForm implements Form {
 
 
         button.setOnMouseClicked(e -> {
-            TextField textField = new TextField();
-            textField.setPromptText(promptText);
+            TextField textField = new TextField(); //new textfield
 
+            textField.setPromptText(promptText);
             textFields.add(textField);
+
             gridPane.addRow(textFields.size(), textFields.get(textFields.size() - 1));
 
             gridPane.add(
@@ -334,35 +334,35 @@ public class AddContactForm implements Form {
             //TODO I fixed this in a earlier commit to master, but these need to be changed to the textFields not the labels as you would be submitting the labels to the database..
 
             this.contactInformation.setFirstName(
-                    this.labels.get(0).getText());
+                    this.textFields.get(0).getText());
             //Middle Name
             this.contactInformation.setMiddleName(
-                    this.labels.get(1).getText());
+                    this.textFields.get(1).getText());
             //Last Name
             this.contactInformation.setLastName(
-                    this.labels.get(2).getText());
+                    this.textFields.get(2).getText());
 
             this.contactInformation.setNickname(
-                    this.labels.get(3).getText());
+                    this.textFields.get(3).getText());
 
             //Address
             this.contactInformation.setAddressLine1(
-                    this.labels.get(4).getText());
+                    this.textFields.get(4).getText());
 
             this.contactInformation.setAddressLine2(
-                    this.labels.get(5).getText());
+                    this.textFields.get(5).getText());
 
             this.contactInformation.setCity(
-                    this.labels.get(6).getText());
+                    this.textFields.get(6).getText());
 
             this.contactInformation.setState(
-                    this.labels.get(7).getText());
+                    this.textFields.get(7).getText());
 
             this.contactInformation.setZip(
-                    this.labels.get(8).getText());
+                    this.textFields.get(8).getText());
 
             this.contactInformation.setCountry(
-                    this.labels.get(9).getText());
+                    this.textFields.get(9).getText());
 
             //Notes
             this.contactInformation.setNotes(
@@ -375,6 +375,9 @@ public class AddContactForm implements Form {
 
             //save dynamic data
             //Phone Numbers
+            System.out.println("phonetxtfields size" + this.phoneTextFields.size());
+            System.out.println("phonetxt fields text " + this.phoneTextFields.get(0).getText());
+
             for (int i = 0; i < this.phoneTextFields.size(); i++) {
                 this.contactInformation.getPhoneNumbers().add(
                         this.phoneTextFields.get(i).getText());
@@ -396,6 +399,7 @@ public class AddContactForm implements Form {
             this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
 
             //TODO update list view and stuff
+            Functions.refreshListView();
         });
 
         return button;
