@@ -1,4 +1,4 @@
-package com.COP2805C.AddressBook.UserInterface;
+package com.COP2805C.AddressBook;
 
 public final class OSUtils
 {
