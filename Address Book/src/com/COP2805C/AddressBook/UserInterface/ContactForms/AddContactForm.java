@@ -2,6 +2,7 @@ package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Database;
+import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.EventHandlers;
 import com.COP2805C.AddressBook.UserInterface.ImageButton;
@@ -41,7 +42,6 @@ public class AddContactForm implements Form {
     ArrayList<TextField> emailTextFields;
     ArrayList<TextField> workplaceTextFields;
 
-    ScrollPane scrollPane;
     FlowPane flowpane;
     TextArea notesTextArea;
     DatePicker birthDatePicker;
@@ -59,7 +59,6 @@ public class AddContactForm implements Form {
 
 
         this.labels = new ArrayList<>();
-
         this.textFields = new ArrayList<>();
         this.phoneTextFields = new ArrayList<>();
         this.emailTextFields = new ArrayList<>();
@@ -72,13 +71,11 @@ public class AddContactForm implements Form {
     @Override
     public Scene form() {
 
-        //TODO Use the functions below to generate these
+        //add static data labels and fields
         for (int i = 0; i < labelStrings.length; i++) {
             this.labels.add(label(this.labelStrings[i]));
-            this.textFields.add(textField());
+            this.textFields.add(textField(this.labelStrings[i]));
         }
-
-
 
         //TODO simplify this
         ArrayList<Label> phonelabel = new ArrayList<Label>();
@@ -91,7 +88,6 @@ public class AddContactForm implements Form {
         workplacelabel.add(new Label("Workplaces"));
 
 
-
         //TODO Contact image view and selector
         //TODO simplify
         GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
@@ -99,69 +95,40 @@ public class AddContactForm implements Form {
         GridPane emailGridPane = gridPane(emaillabel, this.emailTextFields);
         GridPane workplaceGridPane = gridPane(workplacelabel, this.workplaceTextFields);
 
+
+        FlowPane buttonsFlowPane = new FlowPane(
+                groupChoiceBox(Main.getGroupObservableList()),
+                saveButton(),
+                cancelButton());
+
+        buttonsFlowPane.setHgap(8.0);
+        buttonsFlowPane.setAlignment(Pos.TOP_LEFT);
+
+
         //flow pane
         this.flowpane = flowPane(
+                buttonsFlowPane,
                 contactImage(),
                 staticDataGridPane,
                 phoneGridPane,
-                addButton("Add Phone Number", phoneGridPane, this.phoneTextFields),
+                addButton("Add Phone Number", "Phone Number", phoneGridPane, this.phoneTextFields),
                 emailGridPane,
-                addButton("Add Email", emailGridPane, this.emailTextFields),
+                addButton("Add Email", "Email" , emailGridPane, this.emailTextFields),
                 workplaceGridPane,
-                addButton("Add Workplace", workplaceGridPane, this.workplaceTextFields),
+                addButton("Add Workplace", "Workplace", workplaceGridPane, this.workplaceTextFields),
                 this.birthDatePicker,
-                this.notesTextArea,
-                groupChoiceBox(Main.getGroupObservableList()));
+                this.notesTextArea);
 
-        //anchor pane put in scroll pane
-        AnchorPane scrollPaneAnchorPane = anchorPane(flowpane, saveButton(), cancelButton());
-
-
-
-        this.scrollPane = scrollPane(scrollPaneAnchorPane);
-
-
-        //AnchorPane anchorPane = anchorPane(scrollPane);
-        AnchorPane anchorPane = anchorPane(this.scrollPane);
-
-
-
-        Scene scene = new Scene(anchorPane, 400.0, 700.0);
-        return scene;
-    }
-
-    public ScrollPane scrollPane(Node... FXNode){
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
-        for (int i = 0; i < FXNode.length; i++) {
-            scrollPane = new ScrollPane(FXNode[i]);
-        }
-
-        AnchorPane.setTopAnchor(scrollPane, 10.0);
-        AnchorPane.setBottomAnchor(scrollPane, 40.0);
-        AnchorPane.setLeftAnchor(scrollPane, 0.0);
-        AnchorPane.setRightAnchor(scrollPane, 0.0);
-
-
-        //TODO stuff here
-        return scrollPane;
+        AnchorPane anchorPane = anchorPane(this.flowpane);
+        return new Scene(anchorPane, 800, 550);
     }
 
 
-    public AnchorPane anchorPane(Node... FXNode){
+    public AnchorPane anchorPane(Node FXNode){
 
         AnchorPane anchorPane = new AnchorPane();
-
-        for (int i = 0; i < FXNode.length; i++) {
-            AnchorPane.setTopAnchor(FXNode[i], 0.0);
-        }
-
+        Functions.zeroAnchor(anchorPane);
         anchorPane.getChildren().addAll(FXNode);
-
-        //TODO stuff here
-
 
         return anchorPane;
     }
@@ -171,20 +138,23 @@ public class AddContactForm implements Form {
 
         //TODO THIS LOOKS SUPER RATCHET IN THE GUI
         //Get default image from file
-        File file = new File("defaultProfileImage.jpg");
+        File file = new File("defaultProfileImage.png");
         FileChooser fileChooser = fileChooser();
         ImageButton imageButton = new ImageButton(file.toURI().toString());
 
-        Circle clip = new Circle(50, 50, 48);
+        System.out.print(file.toURI().toString());
 
-        imageButton.clipProperty().set(clip);
-
+        imageButton.clipProperty().set(new Circle(50, 50, 48));
 
         //TODO move to event handlers
         imageButton.setOnMouseClicked(event -> {
 
-            imageButton.setFileURL(
-                    fileChooser.showOpenDialog(new Stage()).getAbsolutePath());
+            try {
+                imageButton.setFileURL(
+                        fileChooser.showOpenDialog(new Stage()).getAbsolutePath());
+            } catch (Exception e) {
+                System.out.println("Image is: " + e);
+            }
 
             //TODO remove test
             System.out.println(imageButton.getFileURL());
@@ -227,7 +197,7 @@ public class AddContactForm implements Form {
         //TODO format this further
         flowPane.setAlignment(Pos.TOP_LEFT);
         flowPane.setOrientation(Orientation.VERTICAL);
-        flowPane.setPrefWrapLength(FXNode.length*128);//TODO umm... seriously?
+        flowPane.setPrefWrapLength(400);
         flowPane.setVgap(8.0);
 
         AnchorPane.setTopAnchor(flowPane, 20.0);
@@ -268,9 +238,10 @@ public class AddContactForm implements Form {
         return label;
     }
 
-    public TextField textField(){
+    public TextField textField(String promptText){
         TextField textField = new TextField();
-        //Format label if needed
+        textField.setPromptText(promptText);
+
         return textField;
     }
 
@@ -278,6 +249,7 @@ public class AddContactForm implements Form {
     public TextArea notesTextArea(){
         TextArea textArea = new TextArea();
         textArea.setMaxWidth(300.0);
+        textArea.setPromptText("Notes");
 
         return textArea;
     }
@@ -286,13 +258,12 @@ public class AddContactForm implements Form {
 
     public DatePicker birthDatePicker(){
         DatePicker datePicker = new DatePicker();
-        //TODO stuff here if needed
+        datePicker.setPromptText("Birthday");
+
         return datePicker;
     }
 
 
-
-    //TODO Anchor buttons into correct position
     public ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList){
         ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(observableList);
         groupChoiceBox.getSelectionModel().selectFirst();
@@ -300,19 +271,47 @@ public class AddContactForm implements Form {
         AnchorPane.setLeftAnchor(groupChoiceBox, 5.0);
         AnchorPane.setBottomAnchor(groupChoiceBox, 5.0);
 
+        groupChoiceBox.setOnInputMethodTextChanged(e -> {
+            contactInformation.setGroup( //set group
+                    observableList.get(  //using string from corresponding list
+                            groupChoiceBox.getSelectionModel().getSelectedIndex()));
+        });
+
         return groupChoiceBox;
     }
 
-    public Button addButton(String buttonText, GridPane gridPane, ArrayList<TextField> textFields){
+    public Button addButton(String buttonText, String promptText, GridPane gridPane, ArrayList<TextField> textFields){
         Button button = new Button(buttonText);
 
-        // AnchorPane.setRightAnchor(button, 35.0);
-        // AnchorPane.setBottomAnchor(button, 5.0);
 
         button.setOnMouseClicked(e -> {
-            textFields.add(new TextField());
+            TextField textField = new TextField();
+            textField.setPromptText(promptText);
+
+            textFields.add(textField);
             gridPane.addRow(textFields.size(), textFields.get(textFields.size() - 1));
 
+            gridPane.add(
+                    removeButton(gridPane, textFields, textFields.get(textFields.size()-1)),
+                    1,
+                    textFields.size());
+        });
+
+        return button;
+    }
+
+    public Button removeButton(GridPane gridPane, ArrayList<TextField> textFields, TextField textField){
+        Button button = new Button("-");
+
+        button.setOnAction(e ->{
+
+            gridPane.getChildren().remove(
+                    gridPane.getChildren().indexOf(textField));
+
+            gridPane.getChildren().remove(
+                    gridPane.getChildren().indexOf(button));
+
+            textFields.remove(textFields.indexOf(textField));
         });
 
         return button;
@@ -373,12 +372,6 @@ public class AddContactForm implements Form {
             this.contactInformation.setBirthday(
                     this.birthDatePicker.getChronology());
 
-            this.contactInformation.setZip(
-                    this.labels.get(0).getText());
-            //TODO I think you pushed to master without pulling. I have fixed this before and now it is back..
-            this.contactInformation.setZip(
-                    this.labels.get(0).getText());
-
 
             //save dynamic data
             //Phone Numbers
@@ -405,8 +398,6 @@ public class AddContactForm implements Form {
             //TODO update list view and stuff
         });
 
-
-
         return button;
     }
 
@@ -414,8 +405,9 @@ public class AddContactForm implements Form {
     public Button cancelButton(){
         Button button = new Button("Cancel");
 
-        AnchorPane.setRightAnchor(button, 5.0);
-        AnchorPane.setBottomAnchor(button, 5.0);
+        button.setOnMouseClicked(e ->{
+            Main.getMainStage().close();
+        });
 
         return button;
     }

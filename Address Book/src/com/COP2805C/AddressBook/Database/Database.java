@@ -2,7 +2,7 @@ package com.COP2805C.AddressBook.Database;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
-import com.COP2805C.AddressBook.UserInterface.OSUtils;
+import com.COP2805C.AddressBook.OSUtils;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import org.sqlite.SQLiteConfig;

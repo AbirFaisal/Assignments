@@ -83,10 +83,10 @@ public class Main extends Application {
             }
         }
 
-        //Close database and end program
-//        credentials[0] = null;
-//        credentials[1] = null;
-        //database.closeDB();
+        //Close database connection and end program
+        credentials[0] = null;
+        credentials[1] = null;
+        database.closeDB();
     }
 
 
@@ -94,6 +94,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //TODO Don't move this stage has to be initialized within the start function or it will explode.
         mainStage = new Stage();
+        SplitMenuButton editMenuButton;
+        TextField searchTextField;
+        AnchorPane leftAnchorPane;
+        SplitPane splitPane;
+        AnchorPane mainWindowAnchorPane;
+        Scene primaryScene;
+
 
         //Checks to see if user has contacts to load from the database.
         if (database.numberOfContacts(credentials) > 0) {
@@ -112,7 +119,7 @@ public class Main extends Application {
         }
         Functions.zeroAnchor(rightAnchorPane);
 
-        SplitMenuButton editMenuButton = MainWindow.editMenuButton();
+        editMenuButton = MainWindow.editMenuButton();
 
         //Add contact button
         //TODO move button to Mainwindow.java and put even handler inside before returning add button
@@ -129,7 +136,7 @@ public class Main extends Application {
         groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
 
         //Search Box
-        TextField searchTextField = MainWindow.searchTextField();
+        searchTextField = MainWindow.searchTextField();
 
         //Contact List
         contactListView = MainWindow.contactListView(contactObservableList);
@@ -140,7 +147,7 @@ public class Main extends Application {
 
 
         //Left side Anchor Pane
-        AnchorPane leftAnchorPane = MainWindow.leftAnchorPane(
+        leftAnchorPane = MainWindow.leftAnchorPane(
                 addButton,
                 searchTextField,
                 contactListView,
@@ -148,12 +155,12 @@ public class Main extends Application {
                 editMenuButton);
 
         //Split Pane
-        SplitPane splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
+        splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
 
         //Main Window Anchor Pane
-        AnchorPane mainWindowAnchorPane = new AnchorPane(splitPane);
+        mainWindowAnchorPane = new AnchorPane(splitPane);
         mainWindowAnchorPane.setPrefSize(800, 600);
-        Scene primaryScene = new Scene(mainWindowAnchorPane);
+        primaryScene = new Scene(mainWindowAnchorPane);
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
@@ -233,7 +240,7 @@ public class Main extends Application {
         this.rightAnchorPane = rightAnchorPane;
     }
 
-    public Stage getMainStage() {
+    public static Stage getMainStage() {
         return mainStage;
     }
 
