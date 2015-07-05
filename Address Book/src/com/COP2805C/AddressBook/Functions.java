@@ -74,6 +74,12 @@ public class Functions {
         Main.getContactListView().getSelectionModel().selectFirst();
     }
 
+    public static void refreshContactArray(){
+        Main.setContactInformationArrayList(
+                Main.getDatabase().populateContactList(
+                        Main.getCredentials(), "Main"));
+    }
+
     public static void refreshGroupList(){
         Main.getGroupObservableList().clear();
         Main.getGroupObservableList().add("Main");
