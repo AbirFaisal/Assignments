@@ -31,9 +31,9 @@ public class ContactInformation {
 
     private String notes;
 
-    private ArrayList<String> phoneNumbers;
-    private ArrayList<String> emails;
-    private ArrayList<String> workPlaces;
+    private ArrayList<String> phoneNumbers = new ArrayList<>();
+    private ArrayList<String> emails = new ArrayList<>();
+    private ArrayList<String> workPlaces = new ArrayList<>();
 
     private Chronology birthday;
 
@@ -216,11 +216,6 @@ public class ContactInformation {
         this.birthday = birthday;
     }
 
-    //TODO toString used for testing purposes.
-    public String toString(){
-        return getFirstName() + " " + getMiddleName() + " " + getLastName() + " " + getNickname()
-                + " " + getAddressLine1() + " " + getAddressLine2() + " " + getCity() + " " + getZip()
-                + " " + getState() + " " + getNotes() + getProfileImage().toString();
-    }
+    //TODO toString used for testing purpos
 
 }

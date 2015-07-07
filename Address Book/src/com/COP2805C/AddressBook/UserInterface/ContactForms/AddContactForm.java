@@ -137,7 +137,7 @@ public class AddContactForm implements Form {
 
 
     public ImageButton contactImage(){
-
+        //TODO fix setImage if user does not pick an Image.
         //TODO THIS LOOKS SUPER RATCHET IN THE GUI
         //Get default image from file
         File file = new File("defaultProfileImage.png");
@@ -243,7 +243,6 @@ public class AddContactForm implements Form {
     public TextField textField(String promptText){
         TextField textField = new TextField();
         textField.setPromptText(promptText);
-
         return textField;
     }
 
@@ -372,8 +371,8 @@ public class AddContactForm implements Form {
                     this.notesTextArea.getText());
 
             //Birth Date
-            this.contactInformation.setBirthday(
-                    this.birthDatePicker.getChronology());
+//            this.contactInformation.setBirthday(
+//                    this.birthDatePicker.getChronology());
 
 
             //save dynamic data
@@ -385,6 +384,7 @@ public class AddContactForm implements Form {
                 this.contactInformation.getPhoneNumbers().add(
                         this.phoneTextFields.get(i).getText());
             }
+
             //Emails
             for (int i = 0; i < this.emailTextFields.size(); i++) {
                 this.contactInformation.getEmails().add(

@@ -305,6 +305,9 @@ public class Database {
                     contactInformation.getZip(),
                     contactInformation.getCountry());
 
+            addDynamicData(key, contactInformation.getPhoneNumbers(),"PHONE_NUMBER");
+            addDynamicData(key, contactInformation.getEmails(),"EMAIL");
+            addDynamicData(key, contactInformation.getWorkPlaces(), "WORK_PLACE");
             //TODO fix addDate method to take in a chronological object.
             //addDate(key, contactInformation.getBirthday());
             //addGroup(key, contactInformation.getGroup());
@@ -613,32 +616,51 @@ public class Database {
         pst.close();
     }
 
-    public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER) throws SQLException {
-        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,?,NULL,NULL);";
-        PreparedStatement pst = connection.prepareStatement(update);
-        pst.setInt(1, CONTACT_ID);
-        pst.setLong(2, PHONE_NUMBER);
-        pst.executeUpdate();
-        pst.close();
+    public void addDynamicData(int CONTACT_ID, ArrayList<String> dynamicData, String subject){
+        PreparedStatement preparedStatement;
+        try {
+            for(int i = 0; i < dynamicData.size();i++) {
+                String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,"+subject+") VALUES (?,?);";
+                preparedStatement = connection.prepareStatement(update);
+                preparedStatement.setInt(1, CONTACT_ID);
+                preparedStatement.setString(2, dynamicData.get(i));
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
+            }
+        }catch(SQLException e){
+            System.out.println("Problem adding dynamic: "+ e);
+        }
+
     }
 
-    public void addDynamicData(int CONTACT_ID, String EMAIL) throws SQLException {
-        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,NULL,?,NULL);";
-        PreparedStatement pst = connection.prepareStatement(update);
-        pst.setInt(1, CONTACT_ID);
-        pst.setString(2, EMAIL);
-        pst.executeUpdate();
-        pst.close();
-    }
-
-    public void addDynamicData(String WORK_PLACE, int CONTACT_ID) throws SQLException {
-        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,NULL,NULL,?);";
-        PreparedStatement pst = connection.prepareStatement(update);
-        pst.setInt(1, CONTACT_ID);
-        pst.setString(2, WORK_PLACE);
-        pst.executeUpdate();
-        pst.close();
-    }
+//    public void addPhoneNumber(int CONTACT_ID, )
+//
+//    public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER) throws SQLException {
+//        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,?,NULL,NULL);";
+//        PreparedStatement pst = connection.prepareStatement(update);
+//        pst.setInt(1, CONTACT_ID);
+//        pst.setLong(2, PHONE_NUMBER);
+//        pst.executeUpdate();
+//        pst.close();
+//    }
+//
+//    public void addDynamicData(int CONTACT_ID, String EMAIL) throws SQLException {
+//        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,NULL,?,NULL);";
+//        PreparedStatement pst = connection.prepareStatement(update);
+//        pst.setInt(1, CONTACT_ID);
+//        pst.setString(2, EMAIL);
+//        pst.executeUpdate();
+//        pst.close();
+//    }
+//
+//    public void addDynamicData(String WORK_PLACE, int CONTACT_ID) throws SQLException {
+//        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,NULL,NULL,?);";
+//        PreparedStatement pst = connection.prepareStatement(update);
+//        pst.setInt(1, CONTACT_ID);
+//        pst.setString(2, WORK_PLACE);
+//        pst.executeUpdate();
+//        pst.close();
+//    }
 
     public void closeDB() throws SQLException {
         connection.close();
