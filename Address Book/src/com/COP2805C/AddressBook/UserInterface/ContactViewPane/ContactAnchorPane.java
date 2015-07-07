@@ -66,8 +66,6 @@ public class ContactAnchorPane implements ContactView {
 
         bannerFlowPane.setOrientation(Orientation.HORIZONTAL);
         bannerFlowPane.setAlignment(Pos.CENTER);
-        //bannerFlowPane.setColumnHalignment(HPos.CENTER);
-        //bannerFlowPane.setRowValignment(VPos.CENTER);
 
         return bannerFlowPane;
     }
@@ -78,10 +76,9 @@ public class ContactAnchorPane implements ContactView {
         try {
 
             ImageView contactImageView = new ImageView(contactInformation.getProfileImage());
-            System.out.println("LayoutBounds are: x:" + contactImageView.getLayoutX()+ ",y:"+ contactImageView.getLayoutY());
 
             //add clipping mask to makle image a circle
-            contactImageView.setClip(new Circle(50, 50, 49));
+            contactImageView.setClip(new Circle(50, 50, 48));
 
             contactImageView.fitHeightProperty().set(100.0);
             contactImageView.fitWidthProperty().set(100.0);
@@ -90,10 +87,9 @@ public class ContactAnchorPane implements ContactView {
 
         } catch (Exception e) {
             System.out.println("No Profile image");
-        } finally {
-            //TODO return default image
+            //TODO use default image
         }
-        //TODO return with default image
+
         return new ImageView();
     }
 
@@ -169,8 +165,6 @@ public class ContactAnchorPane implements ContactView {
         for (int i = 0; i < phoneNumberArrayList.size(); i++) {
             phoneNumbers = phoneNumbers + phoneNumberArrayList.get(i) + "\n";
         }
-        //TODO REMOVE
-        System.out.println(phoneNumbers);
         return phoneNumbers;
     }
 
@@ -181,8 +175,6 @@ public class ContactAnchorPane implements ContactView {
             emails = emails + emailsArrayList.get(i) + "\n";
         }
 
-        //TODO REMOVE
-        System.out.println(emails);
         return emails;
     }
 
@@ -193,8 +185,6 @@ public class ContactAnchorPane implements ContactView {
             workplaces = workplaces + workPlacesArrayList.get(i) + "\n";
         }
 
-        //TODO REMOVE
-        System.out.println(workplaces);
         return workplaces;
     }
 
@@ -208,11 +198,6 @@ public class ContactAnchorPane implements ContactView {
         addressString = addressString + contactInformation.getState() + " ";
         addressString = addressString + contactInformation.getZip() + " ";
         addressString = addressString + contactInformation.getCountry() + " ";
-
-
-
-        //TODO remove test
-        System.out.println(addressString);
 
         return addressString;
     }

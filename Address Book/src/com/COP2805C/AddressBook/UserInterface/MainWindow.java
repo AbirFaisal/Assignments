@@ -79,10 +79,10 @@ public class MainWindow {
         FormFactory formFactory = new FormFactory();
 
         button.setOnMouseClicked(e -> {
-            Stage addContactStage = new Stage();
-            addContactStage.setScene(formFactory.getForm(new ContactInformation(), "ADD",addContactStage).form());
-            addContactStage.initModality(Modality.APPLICATION_MODAL);
-            addContactStage.show();
+            Stage stage = new Stage();
+            stage.setScene(formFactory.getForm(new ContactInformation(), "ADD", stage).form());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
         });
 
         AnchorPane.setTopAnchor(button, 8.0);
