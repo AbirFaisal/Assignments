@@ -382,10 +382,10 @@ public class Database {
             preparedStatement.executeUpdate();
             preparedStatement.close();
 
-        }catch(SQLException|IOException e){
+        }catch(SQLException|IOException|NullPointerException e){
             System.out.println(e + "\nTesting addPicture");
         }
-        }
+    }
 
     public void addDate(int CONTACT_ID, Chronology chronology){
         String query = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";

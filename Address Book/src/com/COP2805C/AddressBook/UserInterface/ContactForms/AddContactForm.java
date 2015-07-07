@@ -1,11 +1,8 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
-import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
-import com.COP2805C.AddressBook.UserInterface.EventHandlers;
-import com.COP2805C.AddressBook.UserInterface.ImageButton;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -18,10 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,6 +32,7 @@ public class AddContactForm implements Form {
     //Static Data
     ArrayList<Label> labels;
     ArrayList<TextField> textFields;
+    Image contactImage; //TODO forgot what todo
 
     //Dynamic Data
     ArrayList<TextField> phoneTextFields;
@@ -110,7 +106,7 @@ public class AddContactForm implements Form {
         //flow pane
         this.flowpane = flowPane(
                 buttonsFlowPane,
-                contactImage(),
+                contactImageView(),
                 staticDataGridPane,
                 phoneGridPane,
                 addButton("Add Phone Number", "Phone Number", phoneGridPane, this.phoneTextFields),
@@ -136,46 +132,30 @@ public class AddContactForm implements Form {
     }
 
 
-    public ImageButton contactImage(){
-        //TODO fix setImage if user does not pick an Image.
-        //TODO THIS LOOKS SUPER RATCHET IN THE GUI
-        //Get default image from file
-        File file = new File("defaultProfileImage.png");
-        FileChooser fileChooser = fileChooser();
-        ImageButton imageButton = new ImageButton(file.toURI().toString());
+    public ImageView contactImageView(){
+        File file;
+        Image defaultImage;
+        ImageView imageView;
+        FileChooser fileChooser;
 
-        System.out.print(file.toURI().toString());
+        file = new File("defaultProfileImage.png");
+        defaultImage = new Image("file://" + file.getAbsolutePath(), 100.0, 100.0, true, true);
+        imageView = new ImageView(defaultImage);
+        imageView.clipProperty().set(new Circle(50, 50, 48));
+        fileChooser = fileChooser();
 
-        imageButton.clipProperty().set(new Circle(50, 50, 48));
-
-        //TODO move to event handlers
-        imageButton.setOnMouseClicked(event -> {
-
+        imageView.setOnMouseClicked(event -> {
             try {
-                imageButton.setFileURL(
-                        fileChooser.showOpenDialog(new Stage()).getAbsolutePath());
-            } catch (Exception e) {
-                System.out.println("Image is: " + e);
-            }
-
-            //TODO remove test
-            System.out.println(imageButton.getFileURL());
-
-            if (imageButton.getFileURL() != null) {
-
-                //TODO run image through image formatter
-                Image image = new Image("file://" + imageButton.getFileURL(),
-                        100.0, 100.0,   //Dimensions pixels
-                        true,           //Keep aspect ratio
-                        false);         //bool Smooth no idea what that means
-
-                //change image button image
-                imageButton.changePicture(image);
-                //set this contact image image
-                this.contactInformation.setProfileImage(image);
+                String filePath = "file://" + fileChooser.showOpenDialog(new Stage()).getAbsolutePath();
+                Image image = new Image(filePath, 100.0, 100.0, true, false);
+                imageView.setImage(image);
+            }catch (Exception e){
+                System.out.println("No File selected");
+                imageView.setImage(defaultImage);
             }
         });
-        return imageButton;
+
+        return imageView;
     }
 
 
