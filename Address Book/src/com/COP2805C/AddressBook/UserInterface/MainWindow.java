@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -51,6 +52,7 @@ public class MainWindow {
         contactListView.getSelectionModel().selectFirst();
 
         contactListView.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> {
+
             int selectedIndex = 0;
             //error checking necessary to avoid array Out Of Bounds.
             if (newValue.intValue() != -1) selectedIndex = newValue.intValue();
@@ -68,13 +70,19 @@ public class MainWindow {
     }
 
     //Add Contact Button
-    public static Button addButton(Stage mainStage){
+    //TODO Instead of passing mainStage, I opted to have it generate a stage within the button for its use.
+    //TODO I did this because mainStage was persisting in the memory and not allowing me to use modality.
+    //TODO I needed to use modality to prevent the user from messing with the Main window while in the addContact form and thus protecting our database from corruption.
+
+    public static Button addButton(){
         Button button = new Button("+");
         FormFactory formFactory = new FormFactory();
 
         button.setOnMouseClicked(e -> {
-            mainStage.setScene(formFactory.getForm(new ContactInformation(), "ADD").form());
-            mainStage.show();
+            Stage addContactStage = new Stage();
+            addContactStage.setScene(formFactory.getForm(new ContactInformation(), "ADD",addContactStage).form());
+            addContactStage.initModality(Modality.APPLICATION_MODAL);
+            addContactStage.show();
         });
 
         AnchorPane.setTopAnchor(button, 8.0);
@@ -132,22 +140,20 @@ public class MainWindow {
 
     public static SplitMenuButton editMenuButton() {
         SplitMenuButton menuButton = new SplitMenuButton();
-        int selectedIndex = 0;
 
 
         menuButton.setText("Edit");
-        menuButton.getItems().addAll(
-                new MenuItem("Delete"),
+        MenuItem delete = new MenuItem("Delete");
+
+        menuButton.getItems().addAll(delete,
                 new MenuItem("Import/Export"));
         AnchorPane.setBottomAnchor(menuButton, 8.0);
         AnchorPane.setRightAnchor(menuButton, 8.0);
 
-        menuButton.setOnAction(e -> {
-            System.out.println("Edit button pressed");
-        });
         //TODO This is the functionality for the delete Button. I did not know how to access the menuItem.
         //TODO COMMENT THIS
-        menuButton.setOnMouseClicked(e -> {
+        delete.setOnAction(e -> {
+            int selectedIndex = Main.getContactListView().getSelectionModel().getSelectedIndex();
             Main.getDatabase().deleteCONTACTID(
                     Main.getContactInformationArrayList().get(selectedIndex).getKey());
 
