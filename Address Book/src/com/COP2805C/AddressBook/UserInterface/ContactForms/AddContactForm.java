@@ -331,7 +331,7 @@ public class AddContactForm implements Form {
 
             //save static data
             //First Name
-            //TODO I fixed this in a earlier commit to master, but these need to be changed to the textFields not the labels as you would be submitting the labels to the database..
+
 
             this.contactInformation.setFirstName(
                     this.textFields.get(0).getText());
@@ -375,8 +375,8 @@ public class AddContactForm implements Form {
 
             //save dynamic data
             //Phone Numbers
-            System.out.println("phonetxtfields size" + this.phoneTextFields.size());
-            System.out.println("phonetxt fields text " + this.phoneTextFields.get(0).getText());
+            //System.out.println("phonetxtfields size" + this.phoneTextFields.size());
+            //.out.println("phonetxt fields text " + this.phoneTextFields.get(0).getText());
 
             for (int i = 0; i < this.phoneTextFields.size(); i++) {
                 this.contactInformation.getPhoneNumbers().add(
@@ -399,6 +399,7 @@ public class AddContactForm implements Form {
             this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
 
             //TODO update list view and stuff
+            Functions.refreshContactArray();
             Functions.refreshListView();
         });
 

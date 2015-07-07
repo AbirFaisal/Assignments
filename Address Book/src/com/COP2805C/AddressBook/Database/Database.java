@@ -307,7 +307,7 @@ public class Database {
 
             //TODO fix addDate method to take in a chronological object.
             //addDate(key, contactInformation.getBirthday());
-            addGroup(key, contactInformation.getGroup());
+            //addGroup(key, contactInformation.getGroup());
             addNotes(key, contactInformation.getNotes());
             addPicture(key, contactInformation.getProfileImage());
             return key;
