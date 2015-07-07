@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 public class AddContactForm implements Form {
 
+    Stage addContactStage;
     ContactInformation contactInformation;
     String[] labelStrings;
     String[] dynamicLabelStrings;
@@ -46,7 +47,7 @@ public class AddContactForm implements Form {
     TextArea notesTextArea;
     DatePicker birthDatePicker;
 
-    public AddContactForm(ContactInformation contactInformation) {
+    public AddContactForm(ContactInformation contactInformation, Stage formStage) {
         this.contactInformation = contactInformation;
         this.labelStrings = new String[]{
                 "First Name", "Middle Name", "Last Name", "Nickname",
@@ -64,6 +65,8 @@ public class AddContactForm implements Form {
         this.workplaceTextFields = new ArrayList<>();
         this.birthDatePicker = birthDatePicker();
         this.notesTextArea = notesTextArea();
+
+        this.addContactStage = formStage;
     }
 
 
@@ -134,7 +137,7 @@ public class AddContactForm implements Form {
 
 
     public ImageButton contactImage(){
-
+        //TODO fix setImage if user does not pick an Image.
         //TODO THIS LOOKS SUPER RATCHET IN THE GUI
         //Get default image from file
         File file = new File("defaultProfileImage.png");
@@ -240,7 +243,6 @@ public class AddContactForm implements Form {
     public TextField textField(String promptText){
         TextField textField = new TextField();
         textField.setPromptText(promptText);
-
         return textField;
     }
 
@@ -369,8 +371,8 @@ public class AddContactForm implements Form {
                     this.notesTextArea.getText());
 
             //Birth Date
-            this.contactInformation.setBirthday(
-                    this.birthDatePicker.getChronology());
+//            this.contactInformation.setBirthday(
+//                    this.birthDatePicker.getChronology());
 
 
             //save dynamic data
@@ -382,6 +384,7 @@ public class AddContactForm implements Form {
                 this.contactInformation.getPhoneNumbers().add(
                         this.phoneTextFields.get(i).getText());
             }
+
             //Emails
             for (int i = 0; i < this.emailTextFields.size(); i++) {
                 this.contactInformation.getEmails().add(
@@ -398,7 +401,9 @@ public class AddContactForm implements Form {
             //Add key to contactInformation Object
             this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
 
-            //TODO update list view and stuff
+            //TODO this below statement is so that when they click save it immediately closes the addContactWindow. It prevents duplicates.
+
+            addContactStage.close();
             Functions.refreshContactArray();
             Functions.refreshListView();
         });
@@ -411,7 +416,7 @@ public class AddContactForm implements Form {
         Button button = new Button("Cancel");
 
         button.setOnMouseClicked(e ->{
-            Main.getMainStage().close();
+            addContactStage.close();
         });
 
         return button;

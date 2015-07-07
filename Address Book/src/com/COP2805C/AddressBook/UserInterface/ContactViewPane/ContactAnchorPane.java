@@ -155,7 +155,7 @@ public class ContactAnchorPane implements ContactView {
     public static String getInformationString(ContactInformation contactInformation) {
 
         String phoneNumbers = getFormattedPhoneNumbers(contactInformation.getPhoneNumbers());
-        String emails = getFormattedEmails(contactInformation.getPhoneNumbers());
+        String emails = getFormattedEmails(contactInformation.getEmails());
         String workPlaces = getFormattedWorkPlaces(contactInformation.getWorkPlaces());
         String address = getFormattedAddress(contactInformation);
 

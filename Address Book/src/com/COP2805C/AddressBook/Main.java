@@ -123,7 +123,7 @@ public class Main extends Application {
 
         //Add contact button
         //TODO move button to Mainwindow.java and put even handler inside before returning add button
-        Button addButton = MainWindow.addButton(this.mainStage);
+        Button addButton = MainWindow.addButton();
 
         //TODO clear search bar button (Optional)
         Button clearSearchButton = new Button("X");
