@@ -306,8 +306,8 @@ public class Database {
                     contactInformation.getZip(),
                     contactInformation.getCountry());
 
-            addDynamicData(key, contactInformation.getPhoneNumbers(),"PHONE_NUMBER");
-            addDynamicData(key, contactInformation.getEmails(),"EMAIL");
+            addDynamicData(key, contactInformation.getPhoneNumbers(), "PHONE_NUMBER");
+            addDynamicData(key, contactInformation.getEmails(), "EMAIL");
             addDynamicData(key, contactInformation.getWorkPlaces(), "WORK_PLACE");
             addDOB(key, contactInformation.getBirthday());
             //addGroup(key, contactInformation.getGroup());
@@ -390,7 +390,12 @@ public class Database {
     public void addDOB(int CONTACT_ID, LocalDate birthday){
         String query = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
         PreparedStatement preparedStatement;
-        if(birthday.toString() == null) birthday = LocalDate.parse("00-00-00");
+
+
+        try {
+            if (birthday.toString() == null) birthday = LocalDate.parse("00-00-00");
+        }catch (Exception e){ System.out.println(e);}
+
         try {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, birthday.toString());    //TODO adjust this thanks chris

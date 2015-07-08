@@ -214,7 +214,14 @@ public class ContactInformation {
     }
 
     public void setBirthday(String birthday) {
-        this.birthday = LocalDate.parse(birthday);
+        try {
+            this.birthday = LocalDate.parse(birthday);
+        }catch (NullPointerException e){
+            System.out.println("No birthdate date set");
+        }finally {
+            this.birthday = null;
+        }
+
     }
 
 

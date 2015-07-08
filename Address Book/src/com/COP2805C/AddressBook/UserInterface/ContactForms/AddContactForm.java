@@ -304,6 +304,9 @@ public class AddContactForm implements Form {
         datePicker.setOnAction(e->{
             LocalDate birthday = datePicker.getValue();
             //this.contactInformation.setBirthday(birthday.toString());
+
+
+
         });
 
         return datePicker;
@@ -420,7 +423,7 @@ public class AddContactForm implements Form {
                 this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
             }catch(NullPointerException ex){//TODO setup a better NullValue for datePicker
                 System.out.println("No dob entered: " + ex);
-                this.contactInformation.setBirthday("2015-10-14");
+                //this.contactInformation.setBirthday("2015-10-14");
             }
             //save dynamic data
             //Phone Numbers
