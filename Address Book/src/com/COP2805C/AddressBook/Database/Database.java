@@ -574,7 +574,13 @@ public class Database {
             if (rs.next()) {
                 inputStream = rs.getBinaryStream("picture");
             }
-            outputStream = new FileOutputStream("src/res/profilePic"+CONTACT_ID+".png");
+            if(OSUtils.isWindows()){
+                String workingDir = System.getProperty("user.dir");
+                //TODO fix for windows.
+                //outputStream = new FileOutputStream("file://"+workingDir+"\\src\\res\\profilePic"+CONTACT_ID+".png");
+            }else{
+                outputStream = new FileOutputStream("src/res/profilePic"+CONTACT_ID+".png");
+            }
             byte[] content = new byte[1024];
             int size = 0;
             while ((size = inputStream.read(content)) != -1) {
@@ -596,7 +602,9 @@ public class Database {
         }
 
         if(OSUtils.isWindows()){
-            profilePic = new Image("c://Address Book/profilePic" + CONTACT_ID + ".png");
+            //TODO photo download takes too long to happen on windows.
+                profilePic = new Image("res/profilePic" + CONTACT_ID + ".png");
+                System.out.println("Test");
         }else {
             String workingDir = System.getProperty("user.dir");
             profilePic = new Image("file://"+workingDir+"/src/res/profilePic"+CONTACT_ID+".png");

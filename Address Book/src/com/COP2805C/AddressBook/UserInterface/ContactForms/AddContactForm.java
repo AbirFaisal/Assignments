@@ -3,6 +3,7 @@ package com.COP2805C.AddressBook.UserInterface.ContactForms;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
+import com.COP2805C.AddressBook.OSUtils;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -139,15 +140,28 @@ public class AddContactForm implements Form {
         FileChooser fileChooser;
 
         file = new File("defaultProfileImage.png");
-        defaultImage = new Image("file://" + file.getAbsolutePath(), 100.0, 100.0, true, true);
+        if(OSUtils.isWindows()) {
+            System.out.println(file.getAbsolutePath());
+            defaultImage = new Image("res/defaultProfileImage.png", 100.0, 100.0, true, true);
+        }else{
+            defaultImage = new Image("file://" + file.getAbsolutePath(), 100.0, 100.0, true, true);
+        }
         imageView = new ImageView(defaultImage);
         imageView.clipProperty().set(new Circle(50, 50, 48));
         fileChooser = fileChooser();
 
         imageView.setOnMouseClicked(event -> {
             try {
-                String filePath = "file://" + fileChooser.showOpenDialog(new Stage()).getAbsolutePath();
+                String filePath;
+                if(OSUtils.isWindows()){
+                    //filePath = fileChooser.showOpenDialog(new Stage()).getAbsolutePath();
+                    File tempFile = new File(fileChooser.showOpenDialog(new Stage()).getAbsolutePath());
+                    filePath = tempFile.toURI().toURL().toString();
+                }else{
+                    filePath = "file://" + fileChooser.showOpenDialog(new Stage()).getAbsolutePath();
+                }
                 Image image = new Image(filePath, 100.0, 100.0, true, false);
+                this.contactInformation.setProfileImage(image);
                 imageView.setImage(image);
             }catch (Exception e){
                 System.out.println("No File selected");

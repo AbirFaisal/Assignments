@@ -216,6 +216,5 @@ public class ContactInformation {
         this.birthday = birthday;
     }
 
-    //TODO toString used for testing purpos
 
 }
