@@ -2,6 +2,7 @@ package com.COP2805C.AddressBook.Contacts;
 
 import javafx.scene.image.Image;
 
+import java.time.LocalDate;
 import java.time.chrono.Chronology;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,7 +36,7 @@ public class ContactInformation {
     private ArrayList<String> emails = new ArrayList<>();
     private ArrayList<String> workPlaces = new ArrayList<>();
 
-    private Chronology birthday;
+    private LocalDate birthday;
 
 
     //TESTING Empty
@@ -53,7 +54,7 @@ public class ContactInformation {
             ArrayList<String> phoneNumbers,
             ArrayList<String> emails,
             ArrayList<String> workPlaces,
-            Chronology birthday) {
+            LocalDate birthday) {
 
         this.key = key;
         this.group = group;
@@ -208,14 +209,13 @@ public class ContactInformation {
         this.workPlaces = workPlaces;
     }
 
-    public Chronology getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Chronology birthday) {
-        this.birthday = birthday;
+    public void setBirthday(String birthday) {
+        this.birthday = LocalDate.parse(birthday);
     }
 
-    //TODO toString used for testing purpos
 
 }

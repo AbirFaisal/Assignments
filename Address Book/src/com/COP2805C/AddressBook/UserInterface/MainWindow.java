@@ -150,7 +150,6 @@ public class MainWindow {
         AnchorPane.setBottomAnchor(menuButton, 8.0);
         AnchorPane.setRightAnchor(menuButton, 8.0);
 
-        //TODO This is the functionality for the delete Button. I did not know how to access the menuItem.
         //TODO COMMENT THIS
         delete.setOnAction(e -> {
             int selectedIndex = Main.getContactListView().getSelectionModel().getSelectedIndex();

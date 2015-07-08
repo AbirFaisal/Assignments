@@ -22,7 +22,7 @@ public class ContactInformationBuilder {
         contact.setState(Main.getDatabase().getState(CONTACT_ID,"STATE"));
         contact.setCountry(Main.getDatabase().getCountry(CONTACT_ID,"COUNTRY"));
         contact.setNotes(Main.getDatabase().getNotes(CONTACT_ID,"NOTES"));
-        //contact.setBirthday(Main.database.getDOB(CONTACT_ID));
+        contact.setBirthday(Main.getDatabase().getDOB(CONTACT_ID));
         contact.setProfileImage(Main.getDatabase().getPicture(CONTACT_ID));
         contact.setEmails(Main.getDatabase().getDynamicData(CONTACT_ID,"EMAIL"));
         contact.setPhoneNumbers(Main.getDatabase().getDynamicData(CONTACT_ID,"PHONE_NUMBER"));
