@@ -14,6 +14,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -132,7 +134,7 @@ public class ContactAnchorPane implements ContactView {
 
         TextFlow informationTextFlow = new TextFlow(text);
 
-        AnchorPane.setTopAnchor(informationTextFlow, 150.0);
+        AnchorPane.setTopAnchor(informationTextFlow, 160.0);
         AnchorPane.setBottomAnchor(informationTextFlow, 20.0);
         AnchorPane.setLeftAnchor(informationTextFlow, 20.0);
         AnchorPane.setRightAnchor(informationTextFlow, 20.0);
@@ -154,9 +156,28 @@ public class ContactAnchorPane implements ContactView {
         String emails = getFormattedEmails(contactInformation.getEmails());
         String workPlaces = getFormattedWorkPlaces(contactInformation.getWorkPlaces());
         String address = getFormattedAddress(contactInformation);
+        String birthDate = getFormattedBirthdate(contactInformation.getBirthday());
 
-        return new String(phoneNumbers + emails + workPlaces + address);
+        return new String(phoneNumbers + emails + workPlaces + address + birthDate);
     }
+
+    public static String getFormattedBirthdate(LocalDate date){
+        String birthDate;
+
+        try {
+            birthDate = "\nBirthdate: " +
+                    date.getMonthValue() + " / " +
+                    date.getDayOfMonth() + " / " +
+                    date.getYear();
+
+        }catch (NullPointerException e){
+            System.out.println("No Birthdate");
+            return "";
+        }
+
+        return birthDate;
+    }
+
 
 
     public static String getFormattedPhoneNumbers(ArrayList<String> phoneNumberArrayList) {
