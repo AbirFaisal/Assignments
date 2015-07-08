@@ -165,6 +165,7 @@ public class Main extends Application {
         primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
 
+
     }
 
 
