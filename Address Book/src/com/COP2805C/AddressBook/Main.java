@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
+    //TODO test on windows virtual machine.
     private static String[] credentials; //Username and password
     private static ObservableList<String> groupObservableList;
     private static ChoiceBox<String> groupChoiceBox;

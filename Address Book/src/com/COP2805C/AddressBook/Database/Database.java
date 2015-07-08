@@ -201,6 +201,8 @@ public class Database {
             preparedStatement.setString(1, credentials[0]);
             resultSet = preparedStatement.executeQuery();
             password = resultSet.getString("PASSWORD");
+            preparedStatement.close();
+            resultSet.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -390,11 +392,6 @@ public class Database {
     public void addDOB(int CONTACT_ID, LocalDate birthday){
         String query = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
         PreparedStatement preparedStatement;
-
-
-        try {
-            if (birthday.toString() == null) birthday = LocalDate.parse("00-00-00");
-        }catch (Exception e){ System.out.println(e);}
 
         try {
             preparedStatement = connection.prepareStatement(query);
