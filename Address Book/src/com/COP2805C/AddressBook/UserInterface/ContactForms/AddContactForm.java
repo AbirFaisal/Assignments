@@ -4,9 +4,12 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.OSUtils;
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -135,20 +139,31 @@ public class AddContactForm implements Form {
 
 
     public ImageView contactImageView(){
-        File file;
-        Image defaultImage;
+        //TODO smoothout animation. To achieve the effect I desire, I may have to use two imageViews. We will discuss this in class.
+        //TODO since this ImageView is very custom, we should consider making it its own class similarly to how I made the imageButton class.
+        File file, editFile;
+        Image defaultImage, defaultEditImage;
         ImageView imageView;
+        final ImageView editImageView;
         FileChooser fileChooser;
 
-        file = new File("defaultProfileImage.png");
+        file = new File("src/res/defaultProfileImage.png");
+        editFile = new File("src/res/defaultProfileEditImage.png");
         if(OSUtils.isWindows()) {
             System.out.println(file.getAbsolutePath());
             defaultImage = new Image("res/defaultProfileImage.png", 100.0, 100.0, true, true);
+            defaultEditImage = new Image("res/defaultProfileEditImage.png", 100.0, 100.0, true, true);
         }else{
             defaultImage = new Image("file://" + file.getAbsolutePath(), 100.0, 100.0, true, true);
+            defaultEditImage = new Image("file://" + editFile.getAbsolutePath(), 100.0, 100.0, true, true);
         }
         imageView = new ImageView(defaultImage);
         imageView.clipProperty().set(new Circle(50, 50, 48));
+
+        editImageView = new ImageView(defaultEditImage);
+        editImageView.clipProperty().set(new Circle(50,50,48));
+        editImageView.setOpacity(0.2);
+        editImageView.setVisible(false);
         fileChooser = fileChooser();
 
         imageView.setOnMouseClicked(event -> {
@@ -164,10 +179,40 @@ public class AddContactForm implements Form {
                 Image image = new Image(filePath, 100.0, 100.0, true, false);
                 this.contactInformation.setProfileImage(image);
                 imageView.setImage(image);
+
             }catch (Exception e){
                 System.out.println("No File selected");
                 imageView.setImage(defaultImage);
             }
+        });
+        imageView.setOnMouseEntered(event -> {
+            imageView.setCursor(Cursor.HAND); //Change cursor to hand
+            FadeTransition ft = new FadeTransition(Duration.millis(2500), imageView);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.5);
+            ft.setCycleCount(1);
+
+            ft.setOnFinished(event1 -> imageView.setImage(defaultEditImage));
+            ft.setAutoReverse(false);
+            ft.play();
+        });
+
+        imageView.setOnMouseExited(event -> {
+            FadeTransition ft = new FadeTransition(Duration.millis(2500), imageView);
+            ft.setFromValue(0.5);
+            ft.setToValue(1.0);
+            ft.setCycleCount(1);
+
+            ft.setOnFinished(event1 -> {
+                if (this.contactInformation.getProfileImage() == null) {
+                    System.out.println("No picture selected");
+                    imageView.setImage(defaultImage);
+                }else {
+                    imageView.setImage(this.contactInformation.getProfileImage());
+                }
+            });
+            ft.setAutoReverse(false);
+            ft.play();
         });
 
         return imageView;
