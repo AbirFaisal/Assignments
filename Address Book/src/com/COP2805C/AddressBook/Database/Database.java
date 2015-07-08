@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.chrono.Chronology;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class Database {
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS CONTACTS(ACCOUNT VARCHAR ,"
                     + "CONTACT_ID INTEGER," + "F_NAME VARCHAR," + "M_NAME VARCHAR," + "L_NAME VARCHAR," + "N_NAME VARCHAR,"
                     + "ADDRESSLINE1 VARCHAR," + "ADDRESSLINE2 VARCHAR," + "CITY VARCHAR," + "STATE VARCHAR," + "ZIP VARCHAR," + "COUNTRY VARCHAR," + "NOTES VARCHAR,"
-                    + "GROUP_ASSC VARCHAR," + "DOB INTEGER," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
+                    + "GROUP_ASSC VARCHAR," + "DOB VARCHAR," + "PICTURE BLOB," + "PRIMARY KEY (CONTACT_ID), FOREIGN KEY(ACCOUNT) REFERENCES ACCOUNTS(ACCOUNT) ON DELETE CASCADE);");
             //Table for dynamic data
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS DYNAMIC_DATA(CONTACT_ID INTEGER NOT NULL ,"
                     + "PHONE_NUMBER VARCHAR," + "EMAIL VARCHAR," + "WORK_PLACE VARCHAR, " + "FOREIGN KEY(CONTACT_ID) "
@@ -308,8 +309,7 @@ public class Database {
             addDynamicData(key, contactInformation.getPhoneNumbers(),"PHONE_NUMBER");
             addDynamicData(key, contactInformation.getEmails(),"EMAIL");
             addDynamicData(key, contactInformation.getWorkPlaces(), "WORK_PLACE");
-            //TODO fix addDate method to take in a chronological object.
-            //addDate(key, contactInformation.getBirthday());
+            addDOB(key, contactInformation.getBirthday());
             //addGroup(key, contactInformation.getGroup());
             addNotes(key, contactInformation.getNotes());
             addPicture(key, contactInformation.getProfileImage());
@@ -387,17 +387,17 @@ public class Database {
         }
     }
 
-    public void addDate(int CONTACT_ID, Chronology chronology){
+    public void addDOB(int CONTACT_ID, LocalDate birthday){
         String query = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
         PreparedStatement preparedStatement;
-
+        if(birthday.toString() == null) birthday = LocalDate.parse("00-00-00");
         try {
             preparedStatement = connection.prepareStatement(query);
-            //preparedStatement.setLong(1, chronology) //TODO adjust this thanks chris
+            preparedStatement.setString(1, birthday.toString());    //TODO adjust this thanks chris
             preparedStatement.setInt(2, CONTACT_ID);
             preparedStatement.executeUpdate();
             preparedStatement.close();
-        }catch(SQLException e){
+        }catch(SQLException|NullPointerException e){
             System.out.println(e);
         }
     }
@@ -542,24 +542,40 @@ public class Database {
     }
 
 
-    public Calendar getDOB(int CONTACT_ID){
+
+    public String getDOB(int CONTACT_ID){
         String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
         PreparedStatement preparedStatement;
         ResultSet resultSet;
-        Calendar birthday;
-
-        try {
-            birthday = null;
+        try{
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, CONTACT_ID);
             resultSet = preparedStatement.executeQuery();
-            birthday.setTimeInMillis(resultSet.getLong("DOB"));
-            return birthday;
-        }catch(NullPointerException|SQLException e){
-            System.out.println(e+ " getBirthday");
-            return null;
+            return resultSet.getString("DOB");
+        }catch(SQLException|NullPointerException e){
+            System.out.println("No DOB saved");
+            return "00-00-00";
         }
     }
+
+//    public Calendar getDOB(int CONTACT_ID){
+//        String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
+//        PreparedStatement preparedStatement;
+//        ResultSet resultSet;
+//        Calendar birthday;
+//
+//        try {
+//            birthday = null;
+//            preparedStatement = connection.prepareStatement(query);
+//            preparedStatement.setInt(1, CONTACT_ID);
+//            resultSet = preparedStatement.executeQuery();
+//            birthday.setTimeInMillis(resultSet.getLong("DOB"));
+//            return birthday;
+//        }catch(NullPointerException|SQLException e){
+//            System.out.println(e+ " getBirthday");
+//            return null;
+//        }
+//    }
     //TODO test getPicture method.
     public Image getPicture(int CONTACT_ID) {
         Image profilePic;
@@ -612,18 +628,6 @@ public class Database {
          return profilePic;
     }
 
-
-    public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER, String EMAIL, String WORK_PLACE) throws SQLException {
-        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,?,?,?);";
-        PreparedStatement pst = connection.prepareStatement(update);
-        pst.setInt(1, CONTACT_ID);
-        pst.setLong(2, PHONE_NUMBER);
-        pst.setString(3, EMAIL);
-        pst.setString(4, WORK_PLACE);
-        pst.executeUpdate();
-        pst.close();
-    }
-
     public void addDynamicData(int CONTACT_ID, ArrayList<String> dynamicData, String subject){
         PreparedStatement preparedStatement;
         try {
@@ -640,35 +644,6 @@ public class Database {
         }
 
     }
-
-//    public void addPhoneNumber(int CONTACT_ID, )
-//
-//    public void addDynamicData(int CONTACT_ID, long PHONE_NUMBER) throws SQLException {
-//        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,?,NULL,NULL);";
-//        PreparedStatement pst = connection.prepareStatement(update);
-//        pst.setInt(1, CONTACT_ID);
-//        pst.setLong(2, PHONE_NUMBER);
-//        pst.executeUpdate();
-//        pst.close();
-//    }
-//
-//    public void addDynamicData(int CONTACT_ID, String EMAIL) throws SQLException {
-//        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,NULL,?,NULL);";
-//        PreparedStatement pst = connection.prepareStatement(update);
-//        pst.setInt(1, CONTACT_ID);
-//        pst.setString(2, EMAIL);
-//        pst.executeUpdate();
-//        pst.close();
-//    }
-//
-//    public void addDynamicData(String WORK_PLACE, int CONTACT_ID) throws SQLException {
-//        String update = "INSERT INTO DYNAMIC_DATA(CONTACT_ID,PHONE_NUMBER,EMAIL,WORK_PLACE) VALUES (?,NULL,NULL,?);";
-//        PreparedStatement pst = connection.prepareStatement(update);
-//        pst.setInt(1, CONTACT_ID);
-//        pst.setString(2, WORK_PLACE);
-//        pst.executeUpdate();
-//        pst.close();
-//    }
 
     public void closeDB() throws SQLException {
         connection.close();

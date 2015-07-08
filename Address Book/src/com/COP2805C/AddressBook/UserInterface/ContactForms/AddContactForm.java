@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -255,6 +256,11 @@ public class AddContactForm implements Form {
         DatePicker datePicker = new DatePicker();
         datePicker.setPromptText("Birthday");
 
+        datePicker.setOnAction(e->{
+            LocalDate birthday = datePicker.getValue();
+            //this.contactInformation.setBirthday(birthday.toString());
+        });
+
         return datePicker;
     }
 
@@ -364,11 +370,13 @@ public class AddContactForm implements Form {
             this.contactInformation.setNotes(
                     this.notesTextArea.getText());
 
-            //Birth Date
-//            this.contactInformation.setBirthday(
-//                    this.birthDatePicker.getChronology());
-
-
+            //Birth Date is set from input by the user.
+            try {
+                this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
+            }catch(NullPointerException ex){//TODO setup a better NullValue for datePicker
+                System.out.println("No dob entered: " + ex);
+                this.contactInformation.setBirthday("2015-10-14");
+            }
             //save dynamic data
             //Phone Numbers
             //System.out.println("phonetxtfields size" + this.phoneTextFields.size());
@@ -396,7 +404,6 @@ public class AddContactForm implements Form {
             this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
 
             //TODO this below statement is so that when they click save it immediately closes the addContactWindow. It prevents duplicates.
-
             addContactStage.close();
             Functions.refreshContactArray();
             Functions.refreshListView();
