@@ -187,7 +187,7 @@ public class AddContactForm implements Form {
         });
         imageView.setOnMouseEntered(event -> {
             imageView.setCursor(Cursor.HAND); //Change cursor to hand
-            FadeTransition ft = new FadeTransition(Duration.millis(2500), imageView);
+            FadeTransition ft = new FadeTransition(Duration.millis(500), imageView);
             ft.setFromValue(1.0);
             ft.setToValue(0.5);
             ft.setCycleCount(1);
@@ -198,7 +198,7 @@ public class AddContactForm implements Form {
         });
 
         imageView.setOnMouseExited(event -> {
-            FadeTransition ft = new FadeTransition(Duration.millis(2500), imageView);
+            FadeTransition ft = new FadeTransition(Duration.millis(500), imageView);
             ft.setFromValue(0.5);
             ft.setToValue(1.0);
             ft.setCycleCount(1);
