@@ -25,13 +25,14 @@ public class TransistionImageView extends ImageView {
     public TransistionImageView(ContactInformation contactInformation){
         this.contactInformation = contactInformation;
 
-        File file = new File("src/res/defaultProfileImage.png");
-        final Image defaultImage = new Image("src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
-        ImageView imageView;
-        FileChooser fileChooser = fileChooser();
+        File file = new File("/src/res/defaultProfileImage.png");
 
-        imageView = new ImageView(defaultImage);
-        imageView.clipProperty().set(new Circle(50, 50, 48));
+        String workingDir = System.getProperty("user.dir");
+        System.out.println(workingDir);
+        final Image defaultImage = new Image("file://"+ workingDir + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+        FileChooser fileChooser = fileChooser();
+        setImage(defaultImage);
+        clipProperty().set(new Circle(50,50,48));
 
         setOnMouseClicked(event -> {
             try {
@@ -55,7 +56,7 @@ public class TransistionImageView extends ImageView {
 
         setOnMouseEntered(event -> {
             setCursor(Cursor.HAND); //Change cursor to hand
-            FadeTransition ft = new FadeTransition(Duration.millis(400));
+            FadeTransition ft = new FadeTransition(Duration.millis(250),this);
             ft.setFromValue(1.0);
             ft.setToValue(0.5);
             ft.setCycleCount(1);
@@ -64,13 +65,14 @@ public class TransistionImageView extends ImageView {
         });
 
         setOnMouseExited(event -> {
-            FadeTransition ft = new FadeTransition(Duration.millis(400));
+            FadeTransition ft = new FadeTransition(Duration.millis(500),this);
             ft.setFromValue(0.5);
             ft.setToValue(1.0);
             ft.setCycleCount(1);
             ft.setAutoReverse(false);
             ft.play();
         });
+        System.out.println("Testing if this prints");
     }
 
     public FileChooser fileChooser(){
