@@ -4,6 +4,7 @@ import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.OSUtils;
+import com.COP2805C.AddressBook.UserInterface.TransistionImageView;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.collections.ObservableList;
@@ -137,8 +138,17 @@ public class AddContactForm implements Form {
         return anchorPane;
     }
 
+    public ImageView defaultImageView(){
+        ImageView imageView = new ImageView(new Image("defaultProfileEditImage.png"));
+        imageView.clipProperty().set(new Circle(50,50,48));
+        return imageView;
+    }
 
     public ImageView contactImageView(){
+
+
+        ImageView test = new TransistionImageView(this.contactInformation);
+
         //TODO smoothout animation. To achieve the effect I desire, I may have to use two imageViews. We will discuss this in class.
         //TODO since this ImageView is very custom, we should consider making it its own class similarly to how I made the imageButton class.
         File file, editFile;
