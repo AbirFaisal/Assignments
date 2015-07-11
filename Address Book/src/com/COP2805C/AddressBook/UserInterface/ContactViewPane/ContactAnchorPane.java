@@ -226,7 +226,7 @@ public class ContactAnchorPane implements ContactView {
         }
 
         if (contactInformation.getZip().length() > 0) {
-            addressString = addressString + contactInformation.getZip() + " ";
+            addressString = addressString + contactInformation.getZip() + "\n";
         }
 
         if (contactInformation.getCountry().length() > 0) {
