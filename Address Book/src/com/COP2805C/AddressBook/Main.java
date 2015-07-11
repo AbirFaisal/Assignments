@@ -159,6 +159,7 @@ public class Main extends Application {
                 searchTextField,
                 contactListView,
                 groupChoiceBox,
+                MainWindow.addGroupButton(),
                 editMenuButton);
 
         //Split Pane

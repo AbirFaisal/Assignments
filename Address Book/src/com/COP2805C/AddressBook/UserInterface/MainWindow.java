@@ -145,6 +145,22 @@ public class MainWindow {
     }
 
 
+    public static Button addGroupButton(){
+        Button button = new Button("+");
+
+        AnchorPane.setLeftAnchor(button, 50.0);
+        AnchorPane.setBottomAnchor(button, 8.0);
+
+
+        button.setOnMouseClicked(e ->{
+            GroupManagerWindow.groupManager();
+        });
+
+
+        return button;
+    }
+
+
     public static SplitMenuButton editMenuButton() {
         SplitMenuButton menuButton = new SplitMenuButton();
 
@@ -160,6 +176,7 @@ public class MainWindow {
         //TODO COMMENT THIS
         delete.setOnAction(e -> {
             int selectedIndex = Main.getContactListView().getSelectionModel().getSelectedIndex();
+
             Main.getDatabase().deleteCONTACTID(
                     Main.getContactInformationArrayList().get(selectedIndex).getKey());
 
