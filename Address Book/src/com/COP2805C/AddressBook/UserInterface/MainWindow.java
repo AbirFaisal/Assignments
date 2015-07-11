@@ -48,7 +48,11 @@ public class MainWindow {
         AnchorPane.setRightAnchor(contactListView, 0.0);
 
         contactListView.setCellFactory(list -> new AttachmentListCell());
+
         contactListView.setFixedCellSize(40.0);
+
+        //Functions.zeroAnchor(contactListView);
+
         contactListView.getSelectionModel().selectFirst();
 
         contactListView.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> {
@@ -59,6 +63,8 @@ public class MainWindow {
 
             AnchorPane newRightAnchorPane = ContactViewFactory.contact(
                     Main.getContactInformationArrayList().get(selectedIndex)).contactView();
+
+            Functions.zeroAnchor(newRightAnchorPane);
 
             Main.getRightAnchorPane().getChildren().clear();
             Main.getRightAnchorPane().getChildren().add(newRightAnchorPane);

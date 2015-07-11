@@ -144,35 +144,26 @@ public class Functions {
 
     //get first, middle, last, and nickname as a single string
     public static String getFormattedNameFMLN(ContactInformation contactInformation) {
+
         String name = "";
 
-        try {
+
+        if (contactInformation.getFirstName().length() > 0) {
             name = name + contactInformation.getFirstName();
-        } catch (Exception e) {
-            System.out.println("No First Name");
         }
 
-        try {
+        if (contactInformation.getMiddleName().length() > 0) {
             name = name + " " + contactInformation.getMiddleName();
-        } catch (Exception e) {
-            System.out.println("No Middle Name");
         }
 
-        try {
+        if (contactInformation.getLastName().length() > 0) {
             name = name + " " + contactInformation.getLastName();
-        } catch (Exception e) {
-            System.out.println("No Last Name");
         }
 
-        try {
+        if (contactInformation.getNickname().length() > 0) {
             name = name + " (" + contactInformation.getNickname() + ")";
-        } catch (Exception e) {
-            System.out.println("No Nickname");
         }
 
         return name;
     }
-
-
-
 }
