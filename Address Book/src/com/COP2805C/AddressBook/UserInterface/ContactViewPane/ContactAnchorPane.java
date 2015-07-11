@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface.ContactViewPane;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Functions;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -96,35 +97,12 @@ public class ContactAnchorPane implements ContactView {
     }
 
 
+    //TODO use method in functions java
     public static Text nameText(ContactInformation contactInformation) {
-        String name = "";
-
-        try {
-            name = name + contactInformation.getFirstName();
-        } catch (Exception e) {
-            System.out.println("No First Name");
-        }
-
-        try {
-            name = name + " " + contactInformation.getMiddleName();
-        } catch (Exception e) {
-            System.out.println("No Middle Name");
-        }
-
-        try {
-            name = name + " " + contactInformation.getLastName();
-        } catch (Exception e) {
-            System.out.println("No Last Name");
-        }
-
-        try {
-            name = name + " (" + contactInformation.getNickname() + ")";
-        } catch (Exception e) {
-            System.out.println("No Nickname");
-        }
-
+        String name = Functions.getFormattedNameFMLN(contactInformation);
 
         Text nameText = new Text(name);
+
         nameText.setFont(Font.font(24.0));
         return nameText;
     }
@@ -153,9 +131,13 @@ public class ContactAnchorPane implements ContactView {
     public static String getInformationString(ContactInformation contactInformation) {
 
         String phoneNumbers = getFormattedPhoneNumbers(contactInformation.getPhoneNumbers());
+
         String emails = getFormattedEmails(contactInformation.getEmails());
+
         String workPlaces = getFormattedWorkPlaces(contactInformation.getWorkPlaces());
+
         String address = getFormattedAddress(contactInformation);
+
         String birthDate = getFormattedBirthdate(contactInformation.getBirthday());
 
         return new String(phoneNumbers + emails + workPlaces + address + birthDate);
@@ -181,44 +163,79 @@ public class ContactAnchorPane implements ContactView {
 
 
     public static String getFormattedPhoneNumbers(ArrayList<String> phoneNumberArrayList) {
-        String phoneNumbers = "\nPhone Numbers: \n";
 
-        for (int i = 0; i < phoneNumberArrayList.size(); i++) {
-            phoneNumbers = phoneNumbers + phoneNumberArrayList.get(i) + "\n";
-        }
-        return phoneNumbers;
+        if (phoneNumberArrayList.size() > 0) {
+            String phoneNumbers = "\nPhone Numbers: \n";
+
+            for (int i = 0; i < phoneNumberArrayList.size(); i++) {
+                phoneNumbers = phoneNumbers + phoneNumberArrayList.get(i) + "\n";
+            }
+            return phoneNumbers;
+        }else return "";
     }
 
     public static String getFormattedEmails(ArrayList<String> emailsArrayList) {
-        String emails = "\nEmails: \n";
 
-        for (int i = 0; i < emailsArrayList.size(); i++) {
-            emails = emails + emailsArrayList.get(i) + "\n";
-        }
 
-        return emails;
+        if (emailsArrayList.size() > 0) {
+
+            String emails = "\nEmails: \n";
+
+            for (int i = 0; i < emailsArrayList.size(); i++) {
+                emails = emails + emailsArrayList.get(i) + "\n";
+            }
+            return emails;
+
+        }else return "";
+
     }
 
     public static String getFormattedWorkPlaces(ArrayList<String> workPlacesArrayList) {
-        String workplaces = "\nWorkplaces: \n";
 
-        for (int i = 0; i < workPlacesArrayList.size(); i++) {
-            workplaces = workplaces + workPlacesArrayList.get(i) + "\n";
-        }
+        if (workPlacesArrayList.size() > 0) {
 
-        return workplaces;
+            String workplaces = "\nWorkplaces: \n";
+
+            for (int i = 0; i < workPlacesArrayList.size(); i++) {
+                workplaces = workplaces + workPlacesArrayList.get(i) + "\n";
+            }
+
+            return workplaces;
+
+        }else return "";
     }
 
     public static String getFormattedAddress(ContactInformation contactInformation) {
-        String addressString = "\nAddress: \n";
 
-        addressString = addressString + contactInformation.getAddressLine1() + "\n";
-        addressString = addressString + contactInformation.getAddressLine2() + "\n";
+        String addressString = new String();
 
-        addressString = addressString + contactInformation.getCity() + ", ";
-        addressString = addressString + contactInformation.getState() + " ";
-        addressString = addressString + contactInformation.getZip() + " ";
-        addressString = addressString + contactInformation.getCountry() + " ";
+        if (contactInformation.getAddressLine1().length() > 0) {
+            addressString = addressString + contactInformation.getAddressLine1() + "\n";
+        }
+
+        if (contactInformation.getAddressLine2().length() > 0) {
+            addressString = addressString + contactInformation.getAddressLine2() + "\n";
+        }
+
+        if (contactInformation.getCity().length() > 0) {
+            addressString = addressString + contactInformation.getCity() + ", ";
+        }
+
+        if (contactInformation.getState().length() > 0) {
+            addressString = addressString + contactInformation.getState() + " ";
+        }
+
+        if (contactInformation.getZip().length() > 0) {
+            addressString = addressString + contactInformation.getZip() + "\n";
+        }
+
+        if (contactInformation.getCountry().length() > 0) {
+            addressString = addressString + contactInformation.getCountry() + " ";
+        }
+
+        if (addressString.length() > 0) {
+            addressString = "\nAddress: \n" + addressString;
+        }
 
         return addressString;
     }

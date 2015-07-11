@@ -93,7 +93,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //TODO Don't move this stage has to be initialized within the start function or it will explode.
+
         mainStage = new Stage();
         SplitMenuButton editMenuButton;
         TextField searchTextField;
@@ -114,17 +114,24 @@ public class Main extends Application {
         //Initial contact load.
         //If the user has contacts to load from the database, this will load the first contact as an introduction
         if (database.numberOfContacts(credentials) > 0) {
+
             rightAnchorPane = ContactViewFactory.contact(contactInformationArrayList.get(0)).contactView();
+
         } else {//If the user has no contacts, it will load a sample contactView
-            rightAnchorPane = new AnchorPane(new Text("No Contacts"));
+
+            Text text = new Text("No Contacts");
+            Functions.zeroAnchor(text);
+
+            rightAnchorPane = new AnchorPane(text);
         }
         Functions.zeroAnchor(rightAnchorPane);
 
+        //Edit Button
         editMenuButton = MainWindow.editMenuButton();
 
         //Add contact button
-        //TODO move button to Mainwindow.java and put even handler inside before returning add button
         Button addButton = MainWindow.addButton();
+
 
         //TODO clear search bar button (Optional)
         Button clearSearchButton = new Button("X");
@@ -133,7 +140,6 @@ public class Main extends Application {
 
 
         //Group selection
-        //ObservableList<String> groupObservableList = FXCollections.observableArrayList();
         groupChoiceBox = MainWindow.groupChoiceBox(groupObservableList);
 
         //Search Box
@@ -147,12 +153,13 @@ public class Main extends Application {
         }
 
 
-        //Left side Anchor Pane
+        //Left side Anchor Pane //TODO add group add button
         leftAnchorPane = MainWindow.leftAnchorPane(
                 addButton,
                 searchTextField,
                 contactListView,
                 groupChoiceBox,
+                MainWindow.addGroupButton(),
                 editMenuButton);
 
         //Split Pane
@@ -165,8 +172,6 @@ public class Main extends Application {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Contacts Manager");
         primaryStage.show();
-
-
     }
 
 

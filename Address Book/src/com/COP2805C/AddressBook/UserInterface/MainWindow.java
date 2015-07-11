@@ -48,7 +48,11 @@ public class MainWindow {
         AnchorPane.setRightAnchor(contactListView, 0.0);
 
         contactListView.setCellFactory(list -> new AttachmentListCell());
+
         contactListView.setFixedCellSize(40.0);
+
+        //Functions.zeroAnchor(contactListView);
+
         contactListView.getSelectionModel().selectFirst();
 
         contactListView.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> {
@@ -59,6 +63,8 @@ public class MainWindow {
 
             AnchorPane newRightAnchorPane = ContactViewFactory.contact(
                     Main.getContactInformationArrayList().get(selectedIndex)).contactView();
+
+            Functions.zeroAnchor(newRightAnchorPane);
 
             Main.getRightAnchorPane().getChildren().clear();
             Main.getRightAnchorPane().getChildren().add(newRightAnchorPane);
@@ -80,6 +86,7 @@ public class MainWindow {
 
         button.setOnMouseClicked(e -> {
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setScene(formFactory.getForm(new ContactInformation(), "ADD", stage).form());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
@@ -138,6 +145,22 @@ public class MainWindow {
     }
 
 
+    public static Button addGroupButton(){
+        Button button = new Button("+");
+
+        AnchorPane.setLeftAnchor(button, 50.0);
+        AnchorPane.setBottomAnchor(button, 8.0);
+
+
+        button.setOnMouseClicked(e ->{
+            GroupManagerWindow.groupManager();
+        });
+
+
+        return button;
+    }
+
+
     public static SplitMenuButton editMenuButton() {
         SplitMenuButton menuButton = new SplitMenuButton();
 
@@ -153,6 +176,7 @@ public class MainWindow {
         //TODO COMMENT THIS
         delete.setOnAction(e -> {
             int selectedIndex = Main.getContactListView().getSelectionModel().getSelectedIndex();
+
             Main.getDatabase().deleteCONTACTID(
                     Main.getContactInformationArrayList().get(selectedIndex).getKey());
 
