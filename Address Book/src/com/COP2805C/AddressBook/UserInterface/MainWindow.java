@@ -86,6 +86,7 @@ public class MainWindow {
 
         button.setOnMouseClicked(e -> {
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setScene(formFactory.getForm(new ContactInformation(), "ADD", stage).form());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();

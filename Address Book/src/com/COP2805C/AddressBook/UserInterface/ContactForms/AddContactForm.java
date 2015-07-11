@@ -100,30 +100,33 @@ public class AddContactForm implements Form {
                 saveButton(),
                 cancelButton());
 
+        AnchorPane.setBottomAnchor(buttonsFlowPane, 8.0);
+        AnchorPane.setRightAnchor(buttonsFlowPane, 8.0);
         buttonsFlowPane.setHgap(8.0);
-        buttonsFlowPane.setAlignment(Pos.TOP_LEFT);
+        buttonsFlowPane.setAlignment(Pos.BOTTOM_RIGHT);
 
 
         //flow pane
         this.flowpane = flowPane(
-                buttonsFlowPane,
-                new AnchorPane(grayEditText(), contactImageView()),
+                //buttonsFlowPane,
+                new AnchorPane(circleOverlay(), contactImageView()),
                 staticDataGridPane,
+                this.birthDatePicker,
+                this.notesTextArea,
                 phoneGridPane,
                 addButton("Add Phone Number", "Phone Number", phoneGridPane, this.phoneTextFields),
                 emailGridPane,
                 addButton("Add Email", "Email" , emailGridPane, this.emailTextFields),
                 workplaceGridPane,
-                addButton("Add Workplace", "Workplace", workplaceGridPane, this.workplaceTextFields),
-                this.birthDatePicker,
-                this.notesTextArea);
+                addButton("Add Workplace", "Workplace", workplaceGridPane, this.workplaceTextFields));
 
-        AnchorPane anchorPane = anchorPane(this.flowpane);
-        return new Scene(anchorPane, 800, 550);
+
+        AnchorPane anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
+        return new Scene(anchorPane, 800, 625);
     }
 
 
-    public AnchorPane anchorPane(Node FXNode){
+    public AnchorPane anchorPane(Node... FXNode){
 
         AnchorPane anchorPane = new AnchorPane();
         Functions.zeroAnchor(anchorPane);
@@ -132,7 +135,9 @@ public class AddContactForm implements Form {
         return anchorPane;
     }
 
-    public Circle grayEditText(){
+
+    //TODO move down a bit
+    public Circle circleOverlay(){
         Circle greyCircle = new Circle(50,50,50);
         greyCircle.setFill(Paint.valueOf("GRAY"));
         return greyCircle;
@@ -153,6 +158,7 @@ public class AddContactForm implements Form {
         flowPane.setOrientation(Orientation.VERTICAL);
         flowPane.setPrefWrapLength(400);
         flowPane.setVgap(8.0);
+        flowPane.setHgap(8.0);
 
         AnchorPane.setTopAnchor(flowPane, 20.0);
         AnchorPane.setBottomAnchor(flowPane, 20.0);
@@ -201,8 +207,16 @@ public class AddContactForm implements Form {
 
     public TextArea notesTextArea(){
         TextArea textArea = new TextArea();
-        textArea.setMaxWidth(300.0);
+
+        textArea.setMaxSize(250.0, 100.0);
+
         textArea.setPromptText("Notes");
+
+//        AnchorPane.setTopAnchor(textArea, 0.0);
+//        AnchorPane.setBottomAnchor(textArea, 0.0);
+//        AnchorPane.setRightAnchor(textArea, 0.0);
+//        AnchorPane.setLeftAnchor(textArea, 0.0);
+
 
         return textArea;
     }
