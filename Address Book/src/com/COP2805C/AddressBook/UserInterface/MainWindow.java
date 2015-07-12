@@ -80,7 +80,7 @@ public class MainWindow {
     //TODO I did this because mainStage was persisting in the memory and not allowing me to use modality.
     //TODO I needed to use modality to prevent the user from messing with the Main window while in the addContact form and thus protecting our database from corruption.
 
-    public static Button addButton(){
+    public static Button addButton() {
         Button button = new Button("+");
         FormFactory formFactory = new FormFactory();
 
@@ -110,9 +110,6 @@ public class MainWindow {
         searchTextField.textProperty().addListener((v, oldValue, newValue) -> {
             Functions.searchByKey(oldValue, newValue);
         });
-
-
-
 
 
         return searchTextField;
@@ -145,14 +142,14 @@ public class MainWindow {
     }
 
 
-    public static Button addGroupButton(){
+    public static Button addGroupButton() {
         Button button = new Button("+");
 
         AnchorPane.setLeftAnchor(button, 50.0);
         AnchorPane.setBottomAnchor(button, 8.0);
 
 
-        button.setOnMouseClicked(e ->{
+        button.setOnMouseClicked(e -> {
             GroupManagerWindow.groupManager();
         });
 
@@ -163,7 +160,7 @@ public class MainWindow {
 
     public static SplitMenuButton editMenuButton() {
         SplitMenuButton menuButton = new SplitMenuButton();
-
+        FormFactory formFactory = new FormFactory();
 
         menuButton.setText("Edit");
         MenuItem delete = new MenuItem("Delete");
@@ -173,13 +170,24 @@ public class MainWindow {
         AnchorPane.setBottomAnchor(menuButton, 8.0);
         AnchorPane.setRightAnchor(menuButton, 8.0);
 
+
+        menuButton.setOnMouseClicked(e -> {
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setScene(formFactory.getForm(Main.getContactInformationArrayList()
+                    .get(Main.getContactListView().getSelectionModel()
+                            .getSelectedIndex()), "EDIT", stage).form());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        });
+
         //TODO COMMENT THIS
         delete.setOnAction(e -> {
             int selectedIndex = Main.getContactListView().getSelectionModel().getSelectedIndex();
 
             Main.getDatabase().deleteCONTACTID(
                     Main.getContactInformationArrayList().get(selectedIndex).getKey());
-
+            Functions.deletePictureFile(Main.getContactInformationArrayList().get(selectedIndex).getKey());
             Main.getContactInformationArrayList().remove(selectedIndex);
             Functions.refreshListView();
             Main.setGroupsArrayList(
@@ -187,6 +195,8 @@ public class MainWindow {
                             Main.getCredentials()));
             Functions.refreshGroupList();
             Main.getGroupChoiceBox().getSelectionModel().selectFirst();
+
+
         });
 
         return menuButton;

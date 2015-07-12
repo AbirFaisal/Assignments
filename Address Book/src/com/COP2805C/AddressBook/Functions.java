@@ -1,22 +1,13 @@
 package com.COP2805C.AddressBook;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
-import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
-
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
-
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by abirfaisal on 5/28/15.
@@ -110,6 +101,19 @@ public class Functions {
         } while (database.doesUserExist(credentials));
         //return with credentials user and password
         return credentials;
+    }
+
+    public static void deletePictureFile(int key){
+        try {
+            File file = new File("src/res/profilePic"+key+".png");
+            if (file.delete()) {
+                System.out.println(file.getName() + " is deleted!");
+            } else {
+                System.out.println("Delete operation is failed.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

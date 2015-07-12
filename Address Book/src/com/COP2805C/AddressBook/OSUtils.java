@@ -14,4 +14,10 @@ public final class OSUtils
     {
         return getOsName().startsWith("Windows");
     }
+
+    public static String workingDirectory(){
+        String workingDir = System.getProperty("user.dir");
+
+        return workingDir;
+    }
 }

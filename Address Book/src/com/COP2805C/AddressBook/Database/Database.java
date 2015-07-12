@@ -364,10 +364,10 @@ public class Database {
     //Adds image to the selected CONTACT_ID
     public void addPicture(int CONTACT_ID, Image image) throws SQLException {
         String query = "UPDATE CONTACTS SET PICTURE =? WHERE CONTACT_ID =?";
-        PreparedStatement preparedStatement;
-        BufferedImage bufferedImage;
-        ByteArrayOutputStream byteArrayOutputStream;
-        ByteArrayInputStream byteArrayInputStream;
+        PreparedStatement preparedStatement = null;
+        BufferedImage bufferedImage = null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        ByteArrayInputStream byteArrayInputStream = null;
         byte[] bytes;
 
         try {
@@ -381,10 +381,18 @@ public class Database {
             preparedStatement.setBinaryStream(1, byteArrayInputStream, bytes.length);
             preparedStatement.setInt(2, CONTACT_ID);
             preparedStatement.executeUpdate();
-            preparedStatement.close();
+
 
         }catch(SQLException|IOException|NullPointerException e){
             System.out.println(e + "\nTesting addPicture");
+        }finally{
+            try {
+                byteArrayOutputStream.close();
+                byteArrayInputStream.close();
+                preparedStatement.close();
+            } catch (IOException|NullPointerException e) {
+                System.out.println("Ensuring resources are closed");
+            }
         }
     }
 
@@ -616,6 +624,15 @@ public class Database {
                 return new Image("res/defaultProfileImage.png");
             }
             return new Image("res/defaultProfileImage.png");
+        }finally{
+
+            try {
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException | NullPointerException e) {
+                System.out.println("Ensuring resources are closed");
+            }
+
         }
 
         if(OSUtils.isWindows()){

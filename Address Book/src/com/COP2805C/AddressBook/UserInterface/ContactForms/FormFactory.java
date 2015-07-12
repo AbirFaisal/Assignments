@@ -18,7 +18,7 @@ public class FormFactory {
         }
 
         if (formType.equalsIgnoreCase("EDIT")) {
-            return new EditContactForm(contactInformation);
+            return new EditContactForm(contactInformation, formStage);
         }
 
         return null;

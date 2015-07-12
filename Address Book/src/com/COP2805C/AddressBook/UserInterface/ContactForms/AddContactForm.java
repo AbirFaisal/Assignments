@@ -254,6 +254,7 @@ public class AddContactForm implements Form {
         ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(observableList);
         groupChoiceBox.getSelectionModel().selectFirst();
 
+
         AnchorPane.setLeftAnchor(groupChoiceBox, 5.0);
         AnchorPane.setBottomAnchor(groupChoiceBox, 5.0);
 
@@ -384,7 +385,6 @@ public class AddContactForm implements Form {
             }
 
             //add to database
-            //TODO chris is this correct???
             //Add key to contactInformation Object
             this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
 
