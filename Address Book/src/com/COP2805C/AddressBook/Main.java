@@ -153,6 +153,7 @@ public class Main extends Application {
         }
 
 
+
         //Left side Anchor Pane //TODO add group add button
         leftAnchorPane = MainWindow.leftAnchorPane(
                 addButton,

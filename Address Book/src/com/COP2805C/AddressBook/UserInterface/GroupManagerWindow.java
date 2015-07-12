@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class GroupManagerWindow {
 
 
-    Stage stage;
+    static Stage stage;
 
     public static void groupManager(){
 
@@ -25,7 +25,8 @@ public class GroupManagerWindow {
 
         AnchorPane anchorPane = new AnchorPane();
         Scene scene = new Scene(anchorPane);
-        this.stage.show();
+        stage.setScene(scene);
+        stage.show();
     }
 
 

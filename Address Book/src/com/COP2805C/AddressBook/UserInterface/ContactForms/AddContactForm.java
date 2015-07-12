@@ -17,6 +17,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -109,7 +111,7 @@ public class AddContactForm implements Form {
         //flow pane
         this.flowpane = flowPane(
                 //buttonsFlowPane,
-                new AnchorPane(circleOverlay(), contactImageView()),
+                new AnchorPane(circleOverlay(),editText(), contactImageView()),
                 staticDataGridPane,
                 this.birthDatePicker,
                 this.notesTextArea,
@@ -141,6 +143,15 @@ public class AddContactForm implements Form {
         Circle greyCircle = new Circle(50,50,50);
         greyCircle.setFill(Paint.valueOf("GRAY"));
         return greyCircle;
+    }
+
+    public Text editText(){
+        Text editText = new Text(30,80,"edit");
+        editText.setFill(Paint.valueOf("WHITE"));
+        editText.setFont(Font.font(25));
+
+
+        return editText;
     }
 
     public ImageView contactImageView(){

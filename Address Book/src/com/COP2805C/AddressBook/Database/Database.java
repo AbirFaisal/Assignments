@@ -271,7 +271,6 @@ public class Database {
             e.printStackTrace();
         }
     }
-    //TODO edit createContact method to submit a contactInformation object to the database.
     //This method adds a CONTACT_ID for the listed account and returns the key for this contact. This key can then be used in the other functions to add the required fields.
     public int createContactID(String ACCOUNT) throws SQLException {
         String update = "INSERT INTO CONTACTS(ACCOUNT) VALUES" + "(?);";
