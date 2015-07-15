@@ -150,6 +150,7 @@ public class EditContactForm extends AddContactForm implements Form {
 
     }
 
+    @Override
     public Button saveButton(){
         Button button = new Button("Save");
 
@@ -214,20 +215,41 @@ public class EditContactForm extends AddContactForm implements Form {
             //System.out.println("phonetxtfields size" + this.phoneTextFields.size());
             //.out.println("phonetxt fields text " + this.phoneTextFields.get(0).getText());
 
+
+            //Clear existing fields
+            this.contactInformation.getPhoneNumbers().clear();
+            this.contactInformation.getEmails().clear();
+            this.contactInformation.getWorkPlaces().clear();
+
+
             for (int i = 0; i < this.phoneTextFields.size(); i++) {
-                this.contactInformation.getPhoneNumbers().add(
-                        this.phoneTextFields.get(i).getText());
+                //Make sure field is not empty
+                if (this.phoneTextFields.get(i).getLength() > 0) {
+                    //Add to arrayList
+                    this.contactInformation.getPhoneNumbers().add(
+                            this.phoneTextFields.get(i).getText());
+                }
             }
 
             //Emails
             for (int i = 0; i < this.emailTextFields.size(); i++) {
-                this.contactInformation.getEmails().add(
-                        this.emailTextFields.get(i).getText());
+
+                //Make sure field is not empty
+                if (this.emailTextFields.get(i).getLength() > 0) {
+                    //Add to arrayList
+                    this.contactInformation.getEmails().add(
+                            this.emailTextFields.get(i).getText());
+                }
             }
+
             //Workplaces
             for (int i = 0; i < this.workplaceTextFields.size(); i++) {
-                this.contactInformation.getWorkPlaces().add(
-                        this.workplaceTextFields.get(i).getText());
+                //Make sure field is not empty
+                if (this.workplaceTextFields.get(i).getLength() > 0) {
+                    //Add to arrayList
+                    this.contactInformation.getWorkPlaces().add(
+                            this.workplaceTextFields.get(i).getText());
+                }
             }
 
             //add to database
