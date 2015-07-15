@@ -62,12 +62,15 @@ public class GroupManagerWindow {
             dialog.setGraphic(null);
 
             Optional<String> result = dialog.showAndWait();
-            String entered = "none.";
+            String entered = "";
 
             if (result.isPresent()) {
                 entered = result.get();
             }
-            Main.getGroupObservableList().add(entered);
+
+            if(entered.length()> 0) {
+                Main.getGroupObservableList().add(entered);
+            }
         });
 
         return button;

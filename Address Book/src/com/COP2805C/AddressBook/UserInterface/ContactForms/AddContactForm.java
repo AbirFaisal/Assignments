@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.FirstNameComparator;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.TransistionImageView;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class AddContactForm implements Form {
@@ -403,6 +405,7 @@ public class AddContactForm implements Form {
             //TODO this below statement is so that when they click save it immediately closes the addContactWindow. It prevents duplicates.
             addContactStage.close();
             Functions.refreshContactArray();
+            Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
             Functions.refreshListView();
         });
 

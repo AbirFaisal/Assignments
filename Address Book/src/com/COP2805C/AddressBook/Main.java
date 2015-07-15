@@ -18,11 +18,11 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Main extends Application {
 
-    //TODO test on windows virtual machine.
     private static String[] credentials; //Username and password
     private static ObservableList<String> groupObservableList;
     private static ChoiceBox<String> groupChoiceBox;
@@ -85,12 +85,8 @@ public class Main extends Application {
             }
         }
 
-        //Close database connection and end program
+        //Deletes Pictures, Nulls credentials, and closes Database
         Functions.deleteAllPictureFile("Main");
-//        contactInformationArrayList = database.populateContactList(credentials,"Main");
-//        for(int i = 0; i < contactInformationArrayList.size();i++){
-//            Functions.deletePictureFile(contactInformationArrayList.get(i).getKey());
-//        }
         credentials[0] = null;
         credentials[1] = null;
         database.closeDB();
@@ -180,6 +176,8 @@ public class Main extends Application {
         primaryScene = new Scene(mainWindowAnchorPane);
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Contacts Manager");
+        Collections.sort(contactInformationArrayList, new FirstNameComparator());
+        Functions.refreshListView();
         primaryStage.show();
     }
 

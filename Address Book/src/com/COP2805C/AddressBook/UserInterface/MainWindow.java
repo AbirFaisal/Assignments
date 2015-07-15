@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.FirstNameComparator;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.ContactForms.FormFactory;
@@ -14,6 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.plaf.basic.BasicToolTipUI;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -137,59 +140,17 @@ public class MainWindow {
         choiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) ->{
 
             if (newValue.contains("First")){
-
-                Main.getContactInformationArrayList().sort(ALPHABETICAL_ORDER.compare(
-                        Main.getContactInformationArrayList().,
-                ));
-
-
-//                int i;
-//                int j;
-//
-//                for (i = 0; i < Main.getContactInformationArrayList().size() - 1; i++) {
-//
-//                    for (j = 0; j < Main.getContactInformationArrayList().size() - 1; j++) {
-//
-//                        if (Main.getContactInformationArrayList().get(j).getFirstName().charAt(0) <
-//                                Main.getContactInformationArrayList().get(j+1).getFirstName().charAt(0)) {
-//
-//                            //Swap
-//                            ContactInformation temp = Main.getContactInformationArrayList().get(j);
-//                            Main.getContactInformationArrayList().set(j, Main.getContactInformationArrayList().get(j+1));
-//                            Main.getContactInformationArrayList().set(j+1, temp);
-//
-//                        }
-//                    }
-//                }
-
+                Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
                 Functions.refreshListView();
             }
 
             if (newValue.contains("Last")){
-
-
-
+                Collections.sort(Main.getContactInformationArrayList(), new LastNameComparator());
                 Functions.refreshListView();
             }
         });
         return choiceBox;
     }
-
-
-
-
-
-    public static Comparator<String> ALPHABETICAL_ORDER = new Comparator<String>() {
-        public int compare(String str1, String str2) {
-            int res = String.CASE_INSENSITIVE_ORDER.compare(str1, str2);
-            if (res == 0) {
-                res = str1.compareTo(str2);
-            }
-            return res;
-        }
-    };
-
-
 
     //Group Selection Choice Box
     public static ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList) {
@@ -207,6 +168,7 @@ public class MainWindow {
             Main.setContactInformationArrayList(
                     Main.getDatabase().populateContactList(
                             Main.getCredentials(), newValue));
+            Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
             Functions.refreshListView();
         });
 
@@ -296,4 +258,14 @@ public class MainWindow {
 
         return menuButton;
     }
+
+
+    static class LastNameComparator implements Comparator<ContactInformation>{
+        @Override
+        public int compare(ContactInformation o1, ContactInformation o2) {
+            return o1.getLastName().compareToIgnoreCase(o2.getLastName());
+        }
+    }
 }
+
+
