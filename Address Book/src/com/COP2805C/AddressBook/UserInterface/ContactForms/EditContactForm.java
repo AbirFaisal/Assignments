@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -79,6 +80,9 @@ public class EditContactForm extends AddContactForm implements Form {
 
         AnchorPane anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
 
+        addDynamicData(phoneGridPane, this.phoneTextFields, contactInformation.getPhoneNumbers());
+        addDynamicData(emailGridPane, this.emailTextFields, contactInformation.getEmails());
+        addDynamicData(workplaceGridPane, this.workplaceTextFields, contactInformation.getWorkPlaces());
         setContactFields();
         return new Scene(anchorPane, 800, 625);
     }
@@ -103,12 +107,26 @@ public class EditContactForm extends AddContactForm implements Form {
         return gridPane;
     }
 
+    private void addDynamicData(GridPane gridPane, ArrayList<TextField> textFields, ArrayList<String> contactData){
+
+        for(int i = 0; i < contactData.size(); i++) {
+            TextField textField = new TextField();
+            textField.setText(contactData.get(i));
+            textFields.add(textField);
+
+            gridPane.addRow(textFields.size(), textFields.get(textFields.size() - 1));
+            gridPane.add(
+                    removeButton(gridPane, textFields, textFields.get(textFields.size()-1)),
+                    1,
+                    textFields.size());
+        }
+    }
+
     private void setContactFields(){
        setTextFields();
        setNoteTextArea();
        setProfilePicture();
        setDOB();
-
     }
 
     private void setTextFields(){
@@ -131,6 +149,100 @@ public class EditContactForm extends AddContactForm implements Form {
     private void setProfilePicture(){
 
     }
+
+    public Button saveButton(){
+        Button button = new Button("Save");
+
+        AnchorPane.setBottomAnchor(button, 5.0);
+        AnchorPane.setLeftAnchor(button, 50.0);
+
+
+        button.setOnMouseClicked(e ->{
+            //Image already set by image button
+            //Group already set by group selection button
+
+            //save static data
+            //First Name
+
+            Main.getDatabase().deleteCONTACTID(this.contactInformation.getKey());
+            Functions.deletePictureFile(this.contactInformation.getKey());
+
+            this.contactInformation.setFirstName(
+                    this.textFields.get(0).getText());
+            //Middle Name
+            this.contactInformation.setMiddleName(
+                    this.textFields.get(1).getText());
+            //Last Name
+            this.contactInformation.setLastName(
+                    this.textFields.get(2).getText());
+
+            this.contactInformation.setNickname(
+                    this.textFields.get(3).getText());
+
+            //Address
+            this.contactInformation.setAddressLine1(
+                    this.textFields.get(4).getText());
+
+            this.contactInformation.setAddressLine2(
+                    this.textFields.get(5).getText());
+
+            this.contactInformation.setCity(
+                    this.textFields.get(6).getText());
+
+            this.contactInformation.setState(
+                    this.textFields.get(7).getText());
+
+            this.contactInformation.setZip(
+                    this.textFields.get(8).getText());
+
+            this.contactInformation.setCountry(
+                    this.textFields.get(9).getText());
+
+            //Notes
+            this.contactInformation.setNotes(
+                    this.notesTextArea.getText());
+
+            //Birth Date is set from input by the user.
+            try {
+                this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
+            }catch(NullPointerException ex){//TODO setup a better NullValue for datePicker
+                System.out.println("No dob entered: " + ex);
+                //this.contactInformation.setBirthday("2015-10-14");
+            }
+            //save dynamic data
+            //Phone Numbers
+            //System.out.println("phonetxtfields size" + this.phoneTextFields.size());
+            //.out.println("phonetxt fields text " + this.phoneTextFields.get(0).getText());
+
+            for (int i = 0; i < this.phoneTextFields.size(); i++) {
+                this.contactInformation.getPhoneNumbers().add(
+                        this.phoneTextFields.get(i).getText());
+            }
+
+            //Emails
+            for (int i = 0; i < this.emailTextFields.size(); i++) {
+                this.contactInformation.getEmails().add(
+                        this.emailTextFields.get(i).getText());
+            }
+            //Workplaces
+            for (int i = 0; i < this.workplaceTextFields.size(); i++) {
+                this.contactInformation.getWorkPlaces().add(
+                        this.workplaceTextFields.get(i).getText());
+            }
+
+            //add to database
+            //Add key to contactInformation Object
+            this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
+
+            //TODO this below statement is so that when they click save it immediately closes the addContactWindow. It prevents duplicates.
+            addContactStage.close();
+            Functions.refreshContactArray();
+            Functions.refreshListView();
+        });
+
+        return button;
+    }
+
 
     private void setDOB(){
         try {

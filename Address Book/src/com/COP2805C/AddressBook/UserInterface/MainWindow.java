@@ -114,6 +114,16 @@ public class MainWindow {
 
         return searchTextField;
     }
+    //Todo Work on sorting.
+//
+//    public static ChoiceBox<String> sortChoiceBox(){
+//        String[3] sortMethods = {"}
+//        ChoiceBox<String> sortChoiceBox = new ChoiceBox<>(observableList);
+//
+//
+//
+//        return sortChoiceBox;
+//    }
 
     //Group Selection Choice Box
     public static ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList) {
