@@ -36,6 +36,7 @@ public class Main extends Application {
     private static AnchorPane rightAnchorPane;
     private static Stage mainStage;
 
+
     public static void main(String[] args) throws SQLException {
         credentials = new String[2];
         database = Database.getDatabase();
@@ -159,8 +160,7 @@ public class Main extends Application {
                 addButton,
                 searchTextField,
                 contactListView,
-                groupChoiceBox,
-                MainWindow.addGroupButton(),
+                MainWindow.groupFlowPane(),
                 editMenuButton);
 
         //Split Pane

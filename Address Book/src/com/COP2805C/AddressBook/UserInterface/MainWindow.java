@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -71,7 +72,6 @@ public class MainWindow {
             //contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView());
         });
 
-
         return contactListView;
     }
 
@@ -86,6 +86,7 @@ public class MainWindow {
 
         button.setOnMouseClicked(e -> {
             Stage stage = new Stage();
+            stage.setTitle("Add Group");
             stage.setResizable(false);
             stage.setScene(formFactory.getForm(new ContactInformation(), "ADD", stage).form());
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -103,7 +104,7 @@ public class MainWindow {
         TextField searchTextField = new TextField();
         searchTextField.setPromptText("Search");
         AnchorPane.setTopAnchor(searchTextField, 8.0);
-        AnchorPane.setLeftAnchor(searchTextField, 36.0);
+        AnchorPane.setLeftAnchor(searchTextField, 38.0);
         AnchorPane.setRightAnchor(searchTextField, 8.0);
 
 
@@ -130,10 +131,6 @@ public class MainWindow {
 
         ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(observableList);
 
-        AnchorPane.setBottomAnchor(groupChoiceBox, 8.0);
-        AnchorPane.setLeftAnchor(groupChoiceBox, 8.0);
-
-
         Main.setGroupsArrayList(
                 Main.getDatabase().getGroups(
                         Main.getCredentials()));
@@ -152,19 +149,31 @@ public class MainWindow {
     }
 
 
-    public static Button addGroupButton() {
-        Button button = new Button("+");
-
-        AnchorPane.setLeftAnchor(button, 50.0);
-        AnchorPane.setBottomAnchor(button, 8.0);
-
+    public static Button manageGroupsButton() {
+        Button button = new Button("Manage");
 
         button.setOnMouseClicked(e -> {
-            GroupManagerWindow.groupManager();
+            Stage stage = new Stage();
+            stage.setTitle("Group Manager");
+            stage.setResizable(false);
+            stage.setScene(GroupManagerWindow.groupManager());
+            //stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
         });
 
-
         return button;
+    }
+
+    public static FlowPane groupFlowPane(){
+        FlowPane flowPane = new FlowPane(
+                Main.getGroupChoiceBox(),
+                manageGroupsButton());
+
+        flowPane.setHgap(8.0);
+        AnchorPane.setLeftAnchor(flowPane, 8.0);
+        AnchorPane.setBottomAnchor(flowPane, 8.0);
+
+        return flowPane;
     }
 
 
@@ -183,6 +192,13 @@ public class MainWindow {
 
         menuButton.setOnMouseClicked(e -> {
             Stage stage = new Stage();
+
+            stage.setTitle("Edit Contact - " +
+                    Functions.getFormattedNameFMLN(
+                            Main.getContactInformationArrayList().get(
+                                    Main.getContactListView().getSelectionModel().getSelectedIndex())));
+
+
             stage.setResizable(false);
             stage.setScene(formFactory.getForm(Main.getContactInformationArrayList()
                     .get(Main.getContactListView().getSelectionModel()
@@ -191,21 +207,25 @@ public class MainWindow {
             stage.show();
         });
 
-        //TODO COMMENT THIS
+        //TODO COMMENT THIS and move to another method
         delete.setOnAction(e -> {
             int selectedIndex = Main.getContactListView().getSelectionModel().getSelectedIndex();
 
             Main.getDatabase().deleteCONTACTID(
                     Main.getContactInformationArrayList().get(selectedIndex).getKey());
+
             Functions.deletePictureFile(Main.getContactInformationArrayList().get(selectedIndex).getKey());
+
             Main.getContactInformationArrayList().remove(selectedIndex);
+
             Functions.refreshListView();
             Main.setGroupsArrayList(
                     Main.getDatabase().getGroups(
                             Main.getCredentials()));
-            Functions.refreshGroupList();
-            Main.getGroupChoiceBox().getSelectionModel().selectFirst();
 
+            Functions.refreshGroupList();
+
+            Main.getGroupChoiceBox().getSelectionModel().selectFirst();
 
         });
 
