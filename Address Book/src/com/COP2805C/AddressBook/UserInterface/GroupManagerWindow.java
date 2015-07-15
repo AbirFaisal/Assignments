@@ -16,12 +16,7 @@ public class GroupManagerWindow {
 
     public static void groupManager(){
 
-
         ListView listView;
-
-
-
-
 
         AnchorPane anchorPane = new AnchorPane();
         Scene scene = new Scene(anchorPane);

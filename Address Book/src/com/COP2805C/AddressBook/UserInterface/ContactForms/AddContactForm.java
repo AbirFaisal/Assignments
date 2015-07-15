@@ -238,10 +238,9 @@ public class AddContactForm implements Form {
         DatePicker datePicker = new DatePicker();
         datePicker.setPromptText("Birthday");
 
-        datePicker.setOnAction(e->{
+        datePicker.setOnAction(e -> {
             LocalDate birthday = datePicker.getValue();
             //this.contactInformation.setBirthday(birthday.toString());
-
 
 
         });
@@ -280,7 +279,7 @@ public class AddContactForm implements Form {
             gridPane.addRow(textFields.size(), textFields.get(textFields.size() - 1));
 
             gridPane.add(
-                    removeButton(gridPane, textFields, textFields.get(textFields.size()-1)),
+                    removeButton(gridPane, textFields, textFields.get(textFields.size() - 1)),
                     1,
                     textFields.size());
         });
@@ -291,7 +290,7 @@ public class AddContactForm implements Form {
     public Button removeButton(GridPane gridPane, ArrayList<TextField> textFields, TextField textField){
         Button button = new Button("-");
 
-        button.setOnAction(e ->{
+        button.setOnAction(e -> {
 
             gridPane.getChildren().remove(
                     gridPane.getChildren().indexOf(textField));
@@ -363,25 +362,38 @@ public class AddContactForm implements Form {
                 System.out.println("No dob entered: " + ex);
                 //this.contactInformation.setBirthday("2015-10-14");
             }
-            //save dynamic data
-            //Phone Numbers
-            //System.out.println("phonetxtfields size" + this.phoneTextFields.size());
-            //.out.println("phonetxt fields text " + this.phoneTextFields.get(0).getText());
 
+            //Save dynamic data
+
+            //Phone Numbers
             for (int i = 0; i < this.phoneTextFields.size(); i++) {
-                this.contactInformation.getPhoneNumbers().add(
-                        this.phoneTextFields.get(i).getText());
+                //Make sure field is not empty
+                if (this.phoneTextFields.get(i).getLength() > 0) {
+                    //Add to arrayList
+                    this.contactInformation.getPhoneNumbers().add(
+                            this.phoneTextFields.get(i).getText());
+                }
             }
 
             //Emails
             for (int i = 0; i < this.emailTextFields.size(); i++) {
-                this.contactInformation.getEmails().add(
-                        this.emailTextFields.get(i).getText());
+                //Make sure field is not empty
+                if (this.emailTextFields.get(i).getLength() > 0) {
+                    //Add to arrayList
+                    this.contactInformation.getEmails().add(
+                            this.emailTextFields.get(i).getText());
+                }
             }
+
             //Workplaces
             for (int i = 0; i < this.workplaceTextFields.size(); i++) {
-                this.contactInformation.getWorkPlaces().add(
-                        this.workplaceTextFields.get(i).getText());
+                //Make sure field is not empty
+                if (this.workplaceTextFields.get(i).getLength() > 0) {
+                    //Add to arrayList
+                    this.contactInformation.getWorkPlaces().add(
+                            this.workplaceTextFields.get(i).getText());
+                }
+
             }
 
             //add to database
