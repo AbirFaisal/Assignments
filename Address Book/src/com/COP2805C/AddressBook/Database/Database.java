@@ -602,7 +602,7 @@ public class Database {
             if(OSUtils.isWindows()){
                 String workingDir = System.getProperty("user.dir");
                 //TODO fix for windows.
-                //outputStream = new FileOutputStream("file://"+workingDir+"\\src\\res\\profilePic"+CONTACT_ID+".png");
+                outputStream = new FileOutputStream("src\\res\\profilePic"+CONTACT_ID+".png");
             }else{
                 outputStream = new FileOutputStream("src/res/profilePic"+CONTACT_ID+".png");
             }
@@ -637,9 +637,9 @@ public class Database {
 
         if(OSUtils.isWindows()){
             //TODO photo download takes too long to happen on windows.
-                profilePic = new Image("res/profilePic" + CONTACT_ID + ".png");
+                profilePic = new Image("file:src/res/profilePic" + CONTACT_ID + ".png");
                 System.out.println("Test");
-        }else {
+        }else{
             String workingDir = System.getProperty("user.dir");
             profilePic = new Image("file://"+workingDir+"/src/res/profilePic"+CONTACT_ID+".png");
         }
