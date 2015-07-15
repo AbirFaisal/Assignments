@@ -28,13 +28,25 @@ public class TransistionImageView extends ImageView {
         this.contactInformation = contactInformation;
 
         if(contactInformation.getProfileImage()!=null) {
-                if(new File("src/res/profilePic" + contactInformation.getKey() + ".png").exists()) {
+            if(OSUtils.isWindows()){
+                if(new File("src\\res\\profilePic"+contactInformation.getKey()+".png").exists()){
+                    defaultImage = new Image("file:src/res/profilePic"+contactInformation.getKey()+".png", 100.0, 100.0, true, true);
+                }else{
+                    defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+                }
+            }else {
+                if (new File("src/res/profilePic" + contactInformation.getKey() + ".png").exists()) {
                     defaultImage = new Image("file://" + OSUtils.workingDirectory() + "/src/res/profilePic" + contactInformation.getKey() + ".png", 100.0, 100.0, true, true);
-                }else {
+                } else {
                     defaultImage = new Image("file://" + OSUtils.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
                 }
+            }
         }else{
-            defaultImage = new Image("file://" + OSUtils.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+            if(OSUtils.isWindows()){
+                defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+            }else {
+                defaultImage = new Image("file://" + OSUtils.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+            }
         }
         FileChooser fileChooser = fileChooser();
         setImage(defaultImage);

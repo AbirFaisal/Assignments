@@ -105,7 +105,11 @@ public class Functions {
 
     public static void deletePictureFile(int key){
         try {
+
             File file = new File("src/res/profilePic"+key+".png");
+            if(OSUtils.isWindows()){
+                file = new File("src\\res\\profilePic" + key + ".png");
+            }
             if (file.delete()) {
                 System.out.println(file.getName() + " is deleted!");
             } else {
