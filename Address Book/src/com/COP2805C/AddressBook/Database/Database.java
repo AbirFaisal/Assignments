@@ -566,25 +566,6 @@ public class Database {
             return "00-00-00";
         }
     }
-
-//    public Calendar getDOB(int CONTACT_ID){
-//        String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
-//        PreparedStatement preparedStatement;
-//        ResultSet resultSet;
-//        Calendar birthday;
-//
-//        try {
-//            birthday = null;
-//            preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setInt(1, CONTACT_ID);
-//            resultSet = preparedStatement.executeQuery();
-//            birthday.setTimeInMillis(resultSet.getLong("DOB"));
-//            return birthday;
-//        }catch(NullPointerException|SQLException e){
-//            System.out.println(e+ " getBirthday");
-//            return null;
-//        }
-//    }
     //TODO test getPicture method.
     public Image getPicture(int CONTACT_ID) {
         Image profilePic;
@@ -636,7 +617,6 @@ public class Database {
         }
 
         if(OSUtils.isWindows()){
-            //TODO photo download takes too long to happen on windows.
                 profilePic = new Image("file:src/res/profilePic" + CONTACT_ID + ".png");
                 System.out.println("Test");
         }else{
