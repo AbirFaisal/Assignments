@@ -36,7 +36,7 @@ public class Main extends Application {
     private static AnchorPane rightAnchorPane;
     private static Stage mainStage;
 
-
+    //Main
     public static void main(String[] args) throws SQLException {
         credentials = new String[2];
         database = Database.getDatabase();
@@ -92,12 +92,12 @@ public class Main extends Application {
     }
 
 
-    @Override
+    //Java FX
     public void start(Stage primaryStage) throws Exception {
-
         mainStage = new Stage();
         SplitMenuButton editMenuButton;
         TextField searchTextField;
+        ChoiceBox<String> sortButton;
         AnchorPane leftAnchorPane;
         SplitPane splitPane;
         AnchorPane mainWindowAnchorPane;
@@ -146,6 +146,8 @@ public class Main extends Application {
         //Search Box
         searchTextField = MainWindow.searchTextField();
 
+        sortButton = MainWindow.sortChoiceBox();
+
         //Contact List
         contactListView = MainWindow.contactListView(contactObservableList);
 
@@ -159,6 +161,7 @@ public class Main extends Application {
         leftAnchorPane = MainWindow.leftAnchorPane(
                 addButton,
                 searchTextField,
+                sortButton,
                 contactListView,
                 MainWindow.groupFlowPane(),
                 editMenuButton);

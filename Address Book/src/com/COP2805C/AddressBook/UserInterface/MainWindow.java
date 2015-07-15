@@ -13,6 +13,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.plaf.basic.BasicToolTipUI;
+import java.util.Comparator;
+
 /**
  * Created by abirfaisal on 6/8/15.
  */
@@ -105,7 +108,7 @@ public class MainWindow {
         searchTextField.setPromptText("Search");
         AnchorPane.setTopAnchor(searchTextField, 8.0);
         AnchorPane.setLeftAnchor(searchTextField, 38.0);
-        AnchorPane.setRightAnchor(searchTextField, 8.0);
+        AnchorPane.setRightAnchor(searchTextField, 68.0);
 
 
         searchTextField.textProperty().addListener((v, oldValue, newValue) -> {
@@ -115,16 +118,75 @@ public class MainWindow {
 
         return searchTextField;
     }
+
     //Todo Work on sorting.
+    public static ChoiceBox<String> sortChoiceBox(){
+        //String[] sortMethods = {""};
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+
+        choiceBox.getItems().addAll("First", "Last");
+        choiceBox.getSelectionModel().selectFirst();
+
+        AnchorPane.setTopAnchor(choiceBox, 8.0);
+        AnchorPane.setRightAnchor(choiceBox, 8.0);
+
+
+        choiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) ->{
+
+            if (newValue.contains("First")){
+
+                Main.getContactInformationArrayList().sort(ALPHABETICAL_ORDER.compare(
+                        Main.getContactInformationArrayList().,
+                ));
+
+
+//                int i;
+//                int j;
 //
-//    public static ChoiceBox<String> sortChoiceBox(){
-//        String[3] sortMethods = {"}
-//        ChoiceBox<String> sortChoiceBox = new ChoiceBox<>(observableList);
+//                for (i = 0; i < Main.getContactInformationArrayList().size() - 1; i++) {
 //
+//                    for (j = 0; j < Main.getContactInformationArrayList().size() - 1; j++) {
 //
+//                        if (Main.getContactInformationArrayList().get(j).getFirstName().charAt(0) <
+//                                Main.getContactInformationArrayList().get(j+1).getFirstName().charAt(0)) {
 //
-//        return sortChoiceBox;
-//    }
+//                            //Swap
+//                            ContactInformation temp = Main.getContactInformationArrayList().get(j);
+//                            Main.getContactInformationArrayList().set(j, Main.getContactInformationArrayList().get(j+1));
+//                            Main.getContactInformationArrayList().set(j+1, temp);
+//
+//                        }
+//                    }
+//                }
+
+                Functions.refreshListView();
+            }
+
+            if (newValue.contains("Last")){
+
+
+
+                Functions.refreshListView();
+            }
+        });
+        return choiceBox;
+    }
+
+
+
+
+
+    public static Comparator<String> ALPHABETICAL_ORDER = new Comparator<String>() {
+        public int compare(String str1, String str2) {
+            int res = String.CASE_INSENSITIVE_ORDER.compare(str1, str2);
+            if (res == 0) {
+                res = str1.compareTo(str2);
+            }
+            return res;
+        }
+    };
+
+
 
     //Group Selection Choice Box
     public static ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList) {
