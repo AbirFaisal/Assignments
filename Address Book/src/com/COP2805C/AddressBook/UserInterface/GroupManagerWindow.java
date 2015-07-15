@@ -1,26 +1,31 @@
 package com.COP2805C.AddressBook.UserInterface;
 
+import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import javax.swing.*;
+import java.util.Optional;
 
 
 public class GroupManagerWindow {
+
 
 
     public static Scene groupManager(){
 
         ListView listView = groupListView(Main.getGroupObservableList());
 
-        FlowPane buttonsFlowPane = new FlowPane(addButton(), deleteButton(), editButton(listView));
+        FlowPane buttonsFlowPane = new FlowPane(addButton(), deleteButton(listView));
         AnchorPane.setBottomAnchor(buttonsFlowPane, 8.0);
         AnchorPane.setLeftAnchor(buttonsFlowPane, 8.0);
         AnchorPane.setRightAnchor(buttonsFlowPane, 8.0);
@@ -38,7 +43,6 @@ public class GroupManagerWindow {
 
     public static ListView<String> groupListView(ObservableList<String> observableList) {
         ListView<String> groupListView = new ListView<String>(observableList);
-
         AnchorPane.setTopAnchor(groupListView, 0.0);
         AnchorPane.setBottomAnchor(groupListView, 40.0);
         AnchorPane.setLeftAnchor(groupListView, 0.0);
@@ -53,31 +57,35 @@ public class GroupManagerWindow {
 
         button.setOnMouseClicked(e -> {
 
-            //TODO wtf makes program freeze
-            String group = JOptionPane.showInputDialog("Enter Group Name");
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Group Creation");
+            dialog.setHeaderText("Enter Group Name");
+            dialog.setGraphic(null);
 
-            System.out.println(group);
+            Optional<String> result = dialog.showAndWait();
+            String entered = "none.";
 
-            Main.getGroupObservableList().add(group);
-
-            //TODO add group to DB
-
-            //TODO add group to list
+            if (result.isPresent()) {
+                entered = result.get();
+            }
+            Main.getGroupObservableList().add(entered);
         });
 
         return button;
     }
 
-    private static Button deleteButton(){
+    private static Button deleteButton(ListView<String> listView){
         Button button = new Button("Delete Group");
 
         //Delete all in group
         button.setOnMouseClicked(e ->{
-
-
-            //TODO delete group
-            //TODO delete all contacts in group
-
+            Functions.deleteAllPictureFile(listView.getSelectionModel().getSelectedItem());
+            Main.getDatabase().deleteGroup(Main.getCredentials(), listView.getSelectionModel().getSelectedItem());
+            Main.getGroupObservableList().remove(listView.getSelectionModel().getSelectedItem());
+            Functions.refreshGroupList();
+            Functions.refreshContactArray();
+            Functions.refreshListView();
+            Main.getGroupChoiceBox().getSelectionModel().selectFirst();
         });
 
         return button;

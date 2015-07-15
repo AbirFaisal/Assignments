@@ -254,6 +254,22 @@ public class Database {
         }
     }
 
+    public void deleteGroup(String[] credentials, String group){
+        String update = "DELETE FROM CONTACTS WHERE ACCOUNT = ? AND GROUP_ASSC = ?";
+        PreparedStatement preparedStatement;
+
+        try{
+            preparedStatement = connection.prepareStatement(update);
+
+            preparedStatement.setString(1,credentials[0]);
+            preparedStatement.setString(2, group);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+
     //ADDs A USER TO THE DATABASE
     public void addAccount(String[] credentials) {
         String update = "INSERT INTO ACCOUNTS(ACCOUNT,PASSWORD) VALUES (?,?)";
@@ -311,7 +327,7 @@ public class Database {
             addDynamicData(key, contactInformation.getEmails(), "EMAIL");
             addDynamicData(key, contactInformation.getWorkPlaces(), "WORK_PLACE");
             addDOB(key, contactInformation.getBirthday());
-            //addGroup(key, contactInformation.getGroup());
+            addGroup(key, contactInformation.getGroup());
             addNotes(key, contactInformation.getNotes());
             addPicture(key, contactInformation.getProfileImage());
             return key;
@@ -567,24 +583,6 @@ public class Database {
         }
     }
 
-//    public Calendar getDOB(int CONTACT_ID){
-//        String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
-//        PreparedStatement preparedStatement;
-//        ResultSet resultSet;
-//        Calendar birthday;
-//
-//        try {
-//            birthday = null;
-//            preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setInt(1, CONTACT_ID);
-//            resultSet = preparedStatement.executeQuery();
-//            birthday.setTimeInMillis(resultSet.getLong("DOB"));
-//            return birthday;
-//        }catch(NullPointerException|SQLException e){
-//            System.out.println(e+ " getBirthday");
-//            return null;
-//        }
-//    }
     //TODO test getPicture method.
     public Image getPicture(int CONTACT_ID) {
         Image profilePic;
@@ -666,22 +664,4 @@ public class Database {
     public void closeDB() throws SQLException {
         connection.close();
     }
-
-
-    private byte[] toBytes(Object object) throws IOException {
-        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
-             ObjectOutput out = new ObjectOutputStream(bos)) {
-            out.writeObject(object);
-            return bos.toByteArray();
-        }
-    }
-
-    private Object fromBytes(byte[] bytes) throws IOException, ClassNotFoundException {
-        try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-             ObjectInput in = new ObjectInputStream(bis)) {
-            return in.readObject();
-        }
-    }
-
-
 }

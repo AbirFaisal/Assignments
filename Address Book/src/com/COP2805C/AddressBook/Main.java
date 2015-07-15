@@ -86,6 +86,11 @@ public class Main extends Application {
         }
 
         //Close database connection and end program
+        Functions.deleteAllPictureFile("Main");
+//        contactInformationArrayList = database.populateContactList(credentials,"Main");
+//        for(int i = 0; i < contactInformationArrayList.size();i++){
+//            Functions.deletePictureFile(contactInformationArrayList.get(i).getKey());
+//        }
         credentials[0] = null;
         credentials[1] = null;
         database.closeDB();

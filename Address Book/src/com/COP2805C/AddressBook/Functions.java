@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javax.swing.*;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by abirfaisal on 5/28/15.
@@ -102,7 +103,7 @@ public class Functions {
         //return with credentials user and password
         return credentials;
     }
-
+    //Deletes individual contactPicture
     public static void deletePictureFile(int key){
         try {
 
@@ -117,6 +118,14 @@ public class Functions {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    //Deletes all pictureFiles of group
+    public static void deleteAllPictureFile(String group){
+        ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<>();
+        contactInformationArrayList = Main.getDatabase().populateContactList(Main.getCredentials(),group);
+        for(int i = 0; i < contactInformationArrayList.size();i++){
+            Functions.deletePictureFile(contactInformationArrayList.get(i).getKey());
         }
     }
 

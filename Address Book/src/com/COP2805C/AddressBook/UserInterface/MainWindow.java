@@ -62,14 +62,17 @@ public class MainWindow {
             //error checking necessary to avoid array Out Of Bounds.
             if (newValue.intValue() != -1) selectedIndex = newValue.intValue();
 
-            AnchorPane newRightAnchorPane = ContactViewFactory.contact(
-                    Main.getContactInformationArrayList().get(selectedIndex)).contactView();
+            if(Main.getContactInformationArrayList().size()!=0) {
+                AnchorPane newRightAnchorPane = ContactViewFactory.contact(
+                        Main.getContactInformationArrayList().get(selectedIndex)).contactView();
 
-            Functions.zeroAnchor(newRightAnchorPane);
 
-            Main.getRightAnchorPane().getChildren().clear();
-            Main.getRightAnchorPane().getChildren().add(newRightAnchorPane);
-            //contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView());
+                Functions.zeroAnchor(newRightAnchorPane);
+
+                Main.getRightAnchorPane().getChildren().clear();
+                Main.getRightAnchorPane().getChildren().add(newRightAnchorPane);
+                //contactViewFactory.contact(contactInformationArrayList.get(selectedIndex)).contactView());
+            }
         });
 
         return contactListView;
@@ -157,7 +160,7 @@ public class MainWindow {
             stage.setTitle("Group Manager");
             stage.setResizable(false);
             stage.setScene(GroupManagerWindow.groupManager());
-            //stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         });
 

@@ -257,10 +257,10 @@ public class AddContactForm implements Form {
         AnchorPane.setLeftAnchor(groupChoiceBox, 5.0);
         AnchorPane.setBottomAnchor(groupChoiceBox, 5.0);
 
-        groupChoiceBox.setOnInputMethodTextChanged(e -> {
-            contactInformation.setGroup( //set group
-                    observableList.get(  //using string from corresponding list
-                            groupChoiceBox.getSelectionModel().getSelectedIndex()));
+        groupChoiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            this.contactInformation.setGroup(newValue);
+            System.out.println(this.contactInformation.getGroup());
+            System.out.println();
         });
 
         return groupChoiceBox;
