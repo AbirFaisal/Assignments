@@ -153,7 +153,7 @@ public class Main extends Application {
         contactListView = MainWindow.contactListView(contactObservableList);
 
         for (int i = 0; i < contactInformationArrayList.size(); i++) {
-            contactObservableList.add(Functions.getFormattedNameFMLN(contactInformationArrayList.get(i)));
+            contactObservableList.add(Functions.getFormattedNameFMLNP(contactInformationArrayList.get(i)));
         }
 
 

@@ -130,7 +130,7 @@ public class MainWindow {
         //String[] sortMethods = {""};
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
 
-        choiceBox.getItems().addAll("First", "Last");
+        choiceBox.getItems().addAll("First", "Last","Phone #");
         choiceBox.getSelectionModel().selectFirst();
 
         AnchorPane.setTopAnchor(choiceBox, 8.0);
@@ -146,6 +146,11 @@ public class MainWindow {
 
             if (newValue.contains("Last")){
                 Collections.sort(Main.getContactInformationArrayList(), new LastNameComparator());
+                Functions.refreshListView();
+            }
+
+            if (newValue.contains("Phone #")){
+                Collections.sort(Main.getContactInformationArrayList(), new PhoneNumberComparator());
                 Functions.refreshListView();
             }
         });
@@ -259,11 +264,29 @@ public class MainWindow {
         return menuButton;
     }
 
-
+    //Sorting comparator by LastName
     static class LastNameComparator implements Comparator<ContactInformation>{
         @Override
         public int compare(ContactInformation o1, ContactInformation o2) {
             return o1.getLastName().compareToIgnoreCase(o2.getLastName());
+        }
+    }
+    //Sorting comparator by PhoneNumber
+    static class PhoneNumberComparator implements Comparator<ContactInformation>{
+        @Override
+        public int compare(ContactInformation o1, ContactInformation o2) {
+            Long contact1, contact2;
+                if(o1.getPhoneNumbers().size()==0){
+                    contact1 = 0L;
+                }else{
+                    contact1 = Long.parseLong(o1.getPhoneNumbers().get(0).replace("-",""));
+                }
+                if(o2.getPhoneNumbers().size()==0){
+                    contact2 = 0L;
+                }else{
+                    contact2 = Long.parseLong(o2.getPhoneNumbers().get(0).replace("-",""));
+                }
+                return Long.compare(contact1,contact2);
         }
     }
 }

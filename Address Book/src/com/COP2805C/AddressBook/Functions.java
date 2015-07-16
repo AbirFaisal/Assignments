@@ -60,7 +60,7 @@ public class Functions {
         //Populate FX Observable list
         for(int i = 0; i < Main.getContactInformationArrayList().size();i++){
             Main.getContactObservableList().add(
-                    getFormattedNameFMLN(
+                    getFormattedNameFMLNP(
                             Main.getContactInformationArrayList().get(i)));
         }
         Main.getContactListView().getSelectionModel().selectFirst();
@@ -181,6 +181,37 @@ public class Functions {
             name = name + " (" + contactInformation.getNickname() + ")";
         }
 
+        return name;
+    }
+
+    public static String getFormattedNameFMLNP(ContactInformation contactInformation) {
+
+        String name = "";
+
+
+        if (contactInformation.getFirstName().length() > 0) {
+            name = name + contactInformation.getFirstName();
+        }
+
+        if (contactInformation.getMiddleName().length() > 0) {
+            name = name + " " + contactInformation.getMiddleName();
+        }
+
+        if (contactInformation.getLastName().length() > 0) {
+            name = name + " " + contactInformation.getLastName();
+        }
+
+        if (contactInformation.getNickname().length() > 0) {
+            name = name + " (" + contactInformation.getNickname() + ")";
+        }
+
+        try{
+            if(contactInformation.getPhoneNumbers().get(0).length() > 0){
+                name = name + " " + contactInformation.getPhoneNumbers().get(0);
+            }
+        }catch(IndexOutOfBoundsException ex){
+            System.out.println("No numbers saved");
+        }
         return name;
     }
 }

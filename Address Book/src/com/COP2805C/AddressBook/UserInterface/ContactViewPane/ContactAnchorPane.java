@@ -140,7 +140,9 @@ public class ContactAnchorPane implements ContactView {
 
         String birthDate = getFormattedBirthdate(contactInformation.getBirthday());
 
-        return new String(phoneNumbers + emails + workPlaces + address + birthDate);
+        String notes = getFormattedNotes(contactInformation.getNotes());
+
+        return new String(phoneNumbers + emails + workPlaces + address + birthDate + notes);
     }
 
     public static String getFormattedBirthdate(LocalDate date){
@@ -188,6 +190,17 @@ public class ContactAnchorPane implements ContactView {
 
         }else return "";
 
+    }
+
+    public static String getFormattedNotes(String notes){
+        if(notes.length() > 0){
+            String notesLabel = "\n\nNotes: \n";
+
+            notesLabel = notesLabel + notes;
+            return notesLabel;
+        }
+
+        return "";
     }
 
     public static String getFormattedWorkPlaces(ArrayList<String> workPlacesArrayList) {

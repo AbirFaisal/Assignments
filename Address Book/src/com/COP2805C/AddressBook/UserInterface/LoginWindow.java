@@ -54,8 +54,8 @@ public class LoginWindow {
             //Return string array with username and password
 
             //TODO TEST re enable this and disable the next line!
-            //return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
-            return new String[]{"Chris_12456", "121212"};
+            return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
+            //return new String[]{"Chris_12456", "121212"};
 
 
         } else {
