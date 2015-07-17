@@ -52,7 +52,7 @@ public class MainWindow {
         AnchorPane.setRightAnchor(leftAnchorPane, 0.0);
 
         //TODO ???
-        leftAnchorPane.setStyle("-fx-background-color: deeppink");
+        leftAnchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
 
         return leftAnchorPane;
     }
@@ -88,6 +88,7 @@ public class MainWindow {
             }
         });
 
+        contactListView.getStylesheets().add("/listStyle.css");
         return contactListView;
     }
 

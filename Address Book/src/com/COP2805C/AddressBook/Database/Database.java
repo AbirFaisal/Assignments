@@ -626,7 +626,6 @@ public class Database {
         }
 
         if (Functions.isWindows()) {
-            //TODO photo download takes too long to happen on windows.
             profilePic = new Image("file:src/res/profilePic" + CONTACT_ID + ".png");
             System.out.println("Test");
         } else {
