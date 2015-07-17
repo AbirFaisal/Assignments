@@ -1,7 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
-import com.COP2805C.AddressBook.OSUtils;
+import com.COP2805C.AddressBook.Functions;
 import javafx.animation.FadeTransition;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 /**
  * Created by EpiphX on 7/8/15.
@@ -28,7 +27,7 @@ public class TransistionImageView extends ImageView {
         this.contactInformation = contactInformation;
 
         if(contactInformation.getProfileImage()!=null) {
-            if(OSUtils.isWindows()){
+            if(Functions.isWindows()){
                 if(new File("src\\res\\profilePic"+contactInformation.getKey()+".png").exists()){
                     defaultImage = new Image("file:src/res/profilePic"+contactInformation.getKey()+".png", 100.0, 100.0, true, true);
                 }else{
@@ -36,16 +35,16 @@ public class TransistionImageView extends ImageView {
                 }
             }else {
                 if (new File("src/res/profilePic" + contactInformation.getKey() + ".png").exists()) {
-                    defaultImage = new Image("file://" + OSUtils.workingDirectory() + "/src/res/profilePic" + contactInformation.getKey() + ".png", 100.0, 100.0, true, true);
+                    defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/profilePic" + contactInformation.getKey() + ".png", 100.0, 100.0, true, true);
                 } else {
-                    defaultImage = new Image("file://" + OSUtils.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+                    defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
                 }
             }
         }else{
-            if(OSUtils.isWindows()){
+            if(Functions.isWindows()){
                 defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
             }else {
-                defaultImage = new Image("file://" + OSUtils.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+                defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
             }
         }
         FileChooser fileChooser = fileChooser();
@@ -55,7 +54,7 @@ public class TransistionImageView extends ImageView {
         setOnMouseClicked(event -> {
             try {
                 String filePath;
-                if (OSUtils.isWindows()) {
+                if (Functions.isWindows()) {
                     //filePath = fileChooser.showOpenDialog(new Stage()).getAbsolutePath();
                     File tempFile = new File(fileChooser.showOpenDialog(new Stage()).getAbsolutePath());
                     filePath = tempFile.toURI().toURL().toString();

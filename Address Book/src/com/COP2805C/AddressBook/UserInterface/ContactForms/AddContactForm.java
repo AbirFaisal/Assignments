@@ -245,18 +245,6 @@ public class AddContactForm implements Form {
         DatePicker datePicker = new DatePicker();
         datePicker.setPromptText("Birthday");
 
-//        datePicker.setOnAction(e -> {
-//            LocalDate birthday = datePicker.getValue();
-//
-//
-//            //Birth Date is set from input by the user.
-//            try {
-//                this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
-//            } catch (NullPointerException ex) {//TODO setup a better NullValue for datePicker
-//                System.out.println("No dob entered: " + ex);
-//            }
-//        });
-
         return datePicker;
     }
 

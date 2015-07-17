@@ -3,16 +3,15 @@ package com.COP2805C.AddressBook;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
-import com.sun.deploy.uitoolkit.impl.fx.ui.FXMessageDialog;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by abirfaisal on 5/28/15.
@@ -112,7 +111,7 @@ public class Functions {
         try {
 
             File file = new File("src/res/profilePic"+key+".png");
-            if(OSUtils.isWindows()){
+            if(isWindows()){
                 file = new File("src\\res\\profilePic" + key + ".png");
             }
             if (file.delete()) {
@@ -204,24 +203,7 @@ public class Functions {
 
     public static String getFormattedNameFMLNP(ContactInformation contactInformation) {
 
-        String name = "";
-
-
-        if (contactInformation.getFirstName().length() > 0) {
-            name = name + contactInformation.getFirstName();
-        }
-
-        if (contactInformation.getMiddleName().length() > 0) {
-            name = name + " " + contactInformation.getMiddleName();
-        }
-
-        if (contactInformation.getLastName().length() > 0) {
-            name = name + " " + contactInformation.getLastName();
-        }
-
-        if (contactInformation.getNickname().length() > 0) {
-            name = name + " (" + contactInformation.getNickname() + ")";
-        }
+        String name = getFormattedNameFMLN(contactInformation);
 
         try{
             if(contactInformation.getPhoneNumbers().get(0).length() > 0){
@@ -230,6 +212,52 @@ public class Functions {
         }catch(IndexOutOfBoundsException ex){
             System.out.println("No numbers saved");
         }
+
         return name;
+    }
+
+    public static String getOsName() {
+        String OS = null;
+
+        if(OS == null) { OS = System.getProperty("os.name"); }
+        return OS;
+    }
+
+    public static boolean isWindows()
+    {
+        return getOsName().startsWith("Windows");
+    }
+
+    public static String workingDirectory(){
+        String workingDir = System.getProperty("user.dir");
+
+        return workingDir;
+    }
+
+    //Sorting comparator by LastName
+    public static class LastNameComparator implements Comparator<ContactInformation> {
+        @Override
+        public int compare(ContactInformation o1, ContactInformation o2) {
+            return o1.getLastName().compareToIgnoreCase(o2.getLastName());
+        }
+    }
+
+    //Sorting comparator by PhoneNumber
+    public static class PhoneNumberComparator implements Comparator<ContactInformation>{
+        @Override
+        public int compare(ContactInformation o1, ContactInformation o2) {
+            Long contact1, contact2;
+                if(o1.getPhoneNumbers().size()==0){
+                    contact1 = 0L;
+                }else{
+                    contact1 = Long.parseLong(o1.getPhoneNumbers().get(0).replace("-",""));
+                }
+                if(o2.getPhoneNumbers().size()==0){
+                    contact2 = 0L;
+                }else{
+                    contact2 = Long.parseLong(o2.getPhoneNumbers().get(0).replace("-",""));
+                }
+                return Long.compare(contact1,contact2);
+        }
     }
 }
