@@ -8,6 +8,11 @@
  * COP2805 Valencia College
  * Professor dsfasdfa
  */
+
+.label{
+    -fx-text-fill: white;
+}
+
 .split-pane > .split-pane-divider {
     -fx-padding: 0 0.3816em 0 0.3816em;
     -fx-background-color: #585858;
@@ -40,8 +45,26 @@
 }
 
 .text-field{
+    -fx-focus-color: transparent;
     -fx-background-color: #757575;
     -fx-text-fill: white;
+}
+
+.date-picker{
+    -fx-focus-color: transparent;
+}
+
+.date-picker-popup > .month-year-pane{
+    -fx-background-color: #757575;
+}
+.text-area{
+    -fx-focus-color: transparent;
+    -fx-text-fill: white;
+}
+
+.text-area .content{
+    -fx-focus-color: transparent;
+    -fx-background-color: #757575;
 }
 
 
@@ -116,3 +139,4 @@
     -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
     -fx-text-fill: white; /* 5 */
 }
+

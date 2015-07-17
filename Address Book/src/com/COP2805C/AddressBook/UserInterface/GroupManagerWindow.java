@@ -71,6 +71,7 @@ public class GroupManagerWindow {
             dialog.setTitle("Group Creation");
             dialog.setHeaderText("Enter Group Name");
             dialog.setGraphic(null);
+            dialog.getDialogPane().getStylesheets().add("/dialog.css");
 
             Optional<String> result = dialog.showAndWait();
             String entered = "";

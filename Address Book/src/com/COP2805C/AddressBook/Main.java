@@ -219,6 +219,7 @@ public class Main extends Application {
             Functions.zeroAnchor(text);
 
             rightAnchorPane = new AnchorPane(text);
+            rightAnchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
         }
         Functions.zeroAnchor(rightAnchorPane);
 
