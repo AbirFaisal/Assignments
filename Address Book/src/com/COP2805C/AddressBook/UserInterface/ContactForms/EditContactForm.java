@@ -82,7 +82,7 @@ public class EditContactForm extends AddContactForm implements Form {
     }
 
     private void setProfilePicture(){
-
+        //TODO Chris is this nessessary?
     }
 
     private void setDOB(){
