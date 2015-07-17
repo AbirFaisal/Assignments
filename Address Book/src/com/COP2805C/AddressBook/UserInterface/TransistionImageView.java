@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.naming.OperationNotSupportedException;
 import java.io.File;
 
 /**
@@ -26,30 +27,35 @@ public class TransistionImageView extends ImageView {
     public TransistionImageView(ContactInformation contactInformation){
         this.contactInformation = contactInformation;
 
-        if(contactInformation.getProfileImage()!=null) {
-            if(Functions.isWindows()){
+
+
+        //If windows
+        if (Functions.isWindows()){
+            if(contactInformation.getProfileImage() != null) {
                 if(new File("src\\res\\profilePic"+contactInformation.getKey()+".png").exists()){
                     defaultImage = new Image("file:src/res/profilePic"+contactInformation.getKey()+".png", 100.0, 100.0, true, true);
                 }else{
                     defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
                 }
-            }else {
+            } else defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+        }
+
+        //If not windows
+        if (!Functions.isWindows()){
+            if(contactInformation.getProfileImage() != null) {
                 if (new File("src/res/profilePic" + contactInformation.getKey() + ".png").exists()) {
                     defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/profilePic" + contactInformation.getKey() + ".png", 100.0, 100.0, true, true);
-                } else {
-                    defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
-                }
-            }
-        }else{
-            if(Functions.isWindows()){
-                defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
-            }else {
-                defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
-            }
+                } else defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+            }else defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
         }
+
+        
         FileChooser fileChooser = fileChooser();
         setImage(defaultImage);
         clipProperty().set(new Circle(50,50,48));
+
+
+
 
         setOnMouseClicked(event -> {
             try {

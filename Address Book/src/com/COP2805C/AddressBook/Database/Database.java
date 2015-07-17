@@ -528,11 +528,8 @@ public class Database {
             resultSet = preparedStatement.executeQuery();
             result = resultSet.getString(subject);
             return result;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            return "";
-        }catch(NullPointerException e){
-            System.out.println(e);
             return "";
         }
     }
@@ -555,11 +552,8 @@ public class Database {
                 if(result!=null)list.add(result);
             }
             return list;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            return null;
-        }catch(NullPointerException e){
-            System.out.println(e);
             return null;
         }
     }
@@ -607,28 +601,18 @@ public class Database {
             while ((size = inputStream.read(content)) != -1) {
                 outputStream.write(content, 0, size);
             }
-        } catch (ClassCastException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch(NullPointerException e){
+        }catch (Exception e){
             if(Functions.isWindows()){
                 return new Image("res/defaultProfileImage.png");
             }
             return new Image("res/defaultProfileImage.png");
-        }finally{
-
+        } finally{
             try {
                 inputStream.close();
                 outputStream.close();
             } catch (IOException | NullPointerException e) {
                 System.out.println("Ensuring resources are closed");
             }
-
         }
 
         if(Functions.isWindows()){
