@@ -55,11 +55,7 @@ public class MainWindow {
         AnchorPane.setRightAnchor(contactListView, 0.0);
 
         contactListView.setCellFactory(list -> new AttachmentListCell());
-
         contactListView.setFixedCellSize(40.0);
-
-        //Functions.zeroAnchor(contactListView);
-
         contactListView.getSelectionModel().selectFirst();
 
         contactListView.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> {
@@ -114,7 +110,7 @@ public class MainWindow {
         searchTextField.setPromptText("Search");
         AnchorPane.setTopAnchor(searchTextField, 8.0);
         AnchorPane.setLeftAnchor(searchTextField, 38.0);
-        AnchorPane.setRightAnchor(searchTextField, 68.0);
+        AnchorPane.setRightAnchor(searchTextField, 102.0);
 
 
         searchTextField.textProperty().addListener((v, oldValue, newValue) -> {
@@ -204,6 +200,7 @@ public class MainWindow {
         flowPane.setHgap(8.0);
         AnchorPane.setLeftAnchor(flowPane, 8.0);
         AnchorPane.setBottomAnchor(flowPane, 8.0);
+        flowPane.setMaxWidth(250.0);
 
         return flowPane;
     }
