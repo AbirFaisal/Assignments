@@ -8,6 +8,93 @@
  * COP2805 Valencia College
  * Professor dsfasdfa
  */
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 0.3816em 0 0.3816em;
+    -fx-background-color: #585858;
+}
+
+.button{
+    -fx-text-fill: white;
+    -fx-background-radius:45;
+    -fx-background-color:
+    linear-gradient(#454545 0%, #757575 100%);
+}
+
+.split-menu-button{
+    -fx-focus-color: transparent;
+    -fx-background-color:
+    linear-gradient(#454545 0%, #757575 100%);
+}
+
+.split-menu-button .button{
+    -fx-text-fill: white;
+    -fx-background-radius:45;
+
+}
+
+.split-menu-button .choice-box{
+    -fx-text-fill: white;
+    -fx-background-radius:45;
+    -fx-background-color:
+    linear-gradient(#454545 0%, #757575 100%);
+}
+
+.text-field{
+    -fx-background-color: #757575;
+    -fx-text-fill: white;
+}
+
+
+.split-menu-button .context-menu{
+    -fx-background-color: #4E4E4E;
+}
+
+.split-menu-button .menu-item:focused{
+    -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+    -fx-text-fill: white; /* 5 */
+}
+
+.split-menu-button .menu-item .label{
+    -fx-background-color: transparent;
+}
+
+.split-menu-button .label{
+    -fx-background-color:
+    linear-gradient(#454545 0%, #757575 100%);
+    -fx-text-fill: white;
+}
+
+.split-menu-button .arrow-button{
+    -fx-text-fill: white;
+    -fx-background-radius:45;
+    -fx-background-color:
+    linear-gradient(#454545 0%, #757575 100%);
+}
+
+
+.choice-box{
+    -fx-text-fill: white;
+    -fx-background-radius:45;
+    -fx-background-color:
+    linear-gradient(#454545 0%, #757575 100%);
+}
+
+.choice-box .label{
+    -fx-text-fill: white;
+}
+
+.choice-box .context-menu{
+    -fx-background-color: #4E4E4E;
+}
+
+.choice-box .menu-item:focused{
+    -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+    -fx-text-fill: white; /* 5 */
+}
+
+
+
+
 .list-cell {
     -fx-skin: "com.sun.javafx.scene.control.skin.ListCellSkin";
     -fx-background-color: -fx-control-inner-background;
@@ -17,7 +104,7 @@
 }
 
 .list-view {
-    -fx-background-color: black;
+    -fx-background-color: #4E4E4E;
     -fx-border-color: #4E4E4E;
 }
 

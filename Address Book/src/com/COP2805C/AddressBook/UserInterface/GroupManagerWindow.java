@@ -43,8 +43,11 @@ public class GroupManagerWindow {
                 listView,
                 buttonsFlowPane);
 
+        anchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
+        Scene scene = new Scene(anchorPane);
+        scene.getStylesheets().add("/listStyle.css");
 
-        return new Scene(anchorPane);
+        return scene;
     }
 
 
