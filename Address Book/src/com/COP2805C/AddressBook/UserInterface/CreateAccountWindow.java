@@ -1,10 +1,20 @@
 package com.COP2805C.AddressBook.UserInterface;
 
-import com.COP2805C.AddressBook.Database.Crypto;
 import com.COP2805C.AddressBook.Functions;
 
 import javax.swing.*;
 import java.util.Objects;
+
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
 
 /**
  * Created by abirfaisal on 6/18/15.
@@ -47,11 +57,13 @@ public class CreateAccountWindow {
         jPanel.add(passwordJpanel);
         jPanel.add(confirmPasswordJpanel);
 
+        int cancel;
 
         do {
             //JOptionPane
-            String[] buttons = {"Create Account"};
-            int test = JOptionPane.showOptionDialog(
+            String[] buttons = {"Create Account", "Cancel"};
+
+            cancel = JOptionPane.showOptionDialog(
                     null,
                     jPanel,
                     "Create an account",
@@ -60,6 +72,8 @@ public class CreateAccountWindow {
                     null,
                     buttons, buttons[0]);
 
+            //break loop if user wants to cancel
+            if (cancel == 1) break;
 
             //Prompt user that passwords don't match
             if (!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText())) {
@@ -68,9 +82,10 @@ public class CreateAccountWindow {
         } while (!Objects.equals(passwordJTextField.getText(), confirmPasswordJTextField.getText()) ||
                 !Functions.isPasswordStrong(usernameJTextField.getText(), passwordJTextField.getText()));
 
-        //TODO I did this to temporarily fix the login problem, so that I can test database. Password on database needed to be SHA
-        String encryptedPassword = passwordJTextField.getText();
-        return new String[]{usernameJTextField.getText(), encryptedPassword};
-    }
+        //return null if user canceled.
+        if (cancel == 1) return null;
 
+        //return new account credentials if not canceled.
+        return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
+    }
 }

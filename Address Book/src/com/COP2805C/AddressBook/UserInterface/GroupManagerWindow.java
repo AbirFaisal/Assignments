@@ -5,22 +5,30 @@ import com.COP2805C.AddressBook.Main;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
-import javax.swing.*;
 import java.util.Optional;
 
+
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
 
 public class GroupManagerWindow {
 
 
-
-    public static Scene groupManager(){
+    public static Scene groupManager() {
 
         ListView listView = groupListView(Main.getGroupObservableList());
 
@@ -51,7 +59,7 @@ public class GroupManagerWindow {
     }
 
 
-    public static Button addButton(){
+    public static Button addButton() {
         Button button = new Button("Add Group");
 
         button.setOnMouseClicked(e -> {
@@ -68,7 +76,7 @@ public class GroupManagerWindow {
                 entered = result.get();
             }
 
-            if(entered.length()> 0) {
+            if (entered.length() > 0) {
                 Main.getGroupObservableList().add(entered);
             }
         });
@@ -76,11 +84,11 @@ public class GroupManagerWindow {
         return button;
     }
 
-    private static Button deleteButton(ListView<String> listView){
+    private static Button deleteButton(ListView<String> listView) {
         Button button = new Button("Delete Group");
 
         //Delete all in group
-        button.setOnMouseClicked(e ->{
+        button.setOnMouseClicked(e -> {
             Functions.deleteAllPictureFile(listView.getSelectionModel().getSelectedItem());
             Main.getDatabase().deleteGroup(Main.getCredentials(), listView.getSelectionModel().getSelectedItem());
             Main.getGroupObservableList().remove(listView.getSelectionModel().getSelectedItem());
@@ -93,13 +101,12 @@ public class GroupManagerWindow {
         return button;
     }
 
-    private static Button editButton(ListView listView){
+    private static Button editButton(ListView listView) {
         Button button = new Button("Edit Group");
 
         button.setOnMouseClicked(e -> {
-            
-            listView.getSelectionModel().getSelectedIndex();
 
+            listView.getSelectionModel().getSelectedIndex();
 
 
             //TODO edit existing group

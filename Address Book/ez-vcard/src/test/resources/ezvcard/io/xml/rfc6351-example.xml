@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2015
+  ~ Abir Faisal
+  ~ Chris Buruchian
+  ~ Alex Truong-Mai
+  ~ Will Herrin
+  ~
+  ~ COP2805 Valencia College
+  ~ Professor dsfasdfa
+  -->
+
 <vcards xmlns="urn:ietf:params:xml:ns:vcard-4.0">
 	<vcard>
 		<fn>

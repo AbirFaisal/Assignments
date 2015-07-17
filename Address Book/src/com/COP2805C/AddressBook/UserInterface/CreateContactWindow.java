@@ -17,14 +17,32 @@ import java.io.File;
 import java.sql.SQLException;
 
 
-public class CreateContactWindow{
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
+
+public class CreateContactWindow {
     private Desktop desktop = Desktop.getDesktop();
     private String fileString;
     private int x = 0;
     private Pane pane = new Pane();
     private Image test;
 
-    public void display(String[] credentials){
+    private static void configureFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle("View Pictures");
+        fileChooser.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+    }
+
+    public void display(String[] credentials) {
         Stage window;
         Scene scene;
         window = new Stage();
@@ -32,7 +50,6 @@ public class CreateContactWindow{
         window.setMinWidth(379);
         window.setMinHeight(535);
         window.initModality(Modality.APPLICATION_MODAL);
-
 
 
         pane.setPrefHeight(535);
@@ -78,7 +95,7 @@ public class CreateContactWindow{
 
         TextField emailText = new TextField();
         emailText.setLayoutX(81);
-        emailText.setLayoutY(256+x);
+        emailText.setLayoutY(256 + x);
         emailText.setPrefHeight(26);
         emailText.setPrefWidth(244);
 
@@ -88,16 +105,16 @@ public class CreateContactWindow{
         addButton.setLayoutX(330);
         addButton.setLayoutY(227);
 
-        addButton.setOnAction(e->{
+        addButton.setOnAction(e -> {
             x += 29;
             TextField phoneText2 = new TextField();
             phoneText2.setLayoutX(81);
-            phoneText2.setLayoutY(227+x);
+            phoneText2.setLayoutY(227 + x);
             phoneText2.setPrefWidth(26);
             phoneText2.setPrefWidth(244);
-            emailText.setLayoutY(256+x);
+            emailText.setLayoutY(256 + x);
             pane.getChildren().add(phoneText2);
-            pane.getChildren().remove(0,pane.getChildren().size());
+            pane.getChildren().remove(0, pane.getChildren().size());
         });
 
         Button createButton = new Button("Create");
@@ -119,7 +136,7 @@ public class CreateContactWindow{
         });
 
         Button cancelButton = new Button("Cancel");
-        cancelButton.setOnAction(e-> {
+        cancelButton.setOnAction(e -> {
             window.setScene(null);
             window.close();
 
@@ -170,16 +187,9 @@ public class CreateContactWindow{
         //vb.setAlignment(Pos.CENTER);
 
 
-        pane.getChildren().addAll(fname, lname, phone, email, create, fnameText, lnameText, phoneText, emailText, createButton, cancelButton,addButton, vb);
+        pane.getChildren().addAll(fname, lname, phone, email, create, fnameText, lnameText, phoneText, emailText, createButton, cancelButton, addButton, vb);
         scene = new Scene(pane);
         window.setScene(scene);
         window.show();
-    }
-
-    private static void configureFileChooser(final FileChooser fileChooser) {
-        fileChooser.setTitle("View Pictures");
-        fileChooser.setInitialDirectory(
-                new File(System.getProperty("user.home"))
-        );
     }
 }

@@ -2,22 +2,31 @@ package com.COP2805C.AddressBook.UserInterface.ContactViewPane;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Functions;
-import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
 
 /**
  * Created by abirfaisal on 6/13/15.
@@ -30,32 +39,19 @@ public class ContactAnchorPane implements ContactView {
         this.contactInformation = contactInformation;
     }
 
-    public AnchorPane contactView() {
-
-
-        FlowPane bannerFlowPane = bannerFlowPane(
-                contactImageView(contactInformation),
-                nameText(contactInformation));
-
-        TextFlow informationTextFlow =
-                informationTextFlow(
-                        informationText(
-                                getInformationString(contactInformation)));
-
-
-        return contactViewAnchorPane(bannerFlowPane, informationTextFlow);
-    }
-
-
     public static AnchorPane contactViewAnchorPane(Node... FXNode) {
         AnchorPane contactViewAnchorPane = new AnchorPane(FXNode);
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
         AnchorPane.setTopAnchor(contactViewAnchorPane, 0.0);
+
+
+        //Add some color
+        contactViewAnchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
+
         return contactViewAnchorPane;
     }
-
 
     public static FlowPane bannerFlowPane(Node... FXNode) {
         FlowPane bannerFlowPane = new FlowPane(FXNode);
@@ -72,7 +68,6 @@ public class ContactAnchorPane implements ContactView {
 
         return bannerFlowPane;
     }
-
 
     public static ImageView contactImageView(ContactInformation contactInformation) {
 
@@ -96,17 +91,18 @@ public class ContactAnchorPane implements ContactView {
         return new ImageView();
     }
 
-
     //TODO use method in functions java
     public static Text nameText(ContactInformation contactInformation) {
         String name = Functions.getFormattedNameFMLN(contactInformation);
 
         Text nameText = new Text(name);
 
+        //Style
         nameText.setFont(Font.font(24.0));
+        nameText.setFill(Paint.valueOf("white"));
+
         return nameText;
     }
-
 
     public static TextFlow informationTextFlow(Text text) {
 
@@ -117,15 +113,17 @@ public class ContactAnchorPane implements ContactView {
         AnchorPane.setLeftAnchor(informationTextFlow, 20.0);
         AnchorPane.setRightAnchor(informationTextFlow, 20.0);
 
+
         return informationTextFlow;
     }
 
-
     public static Text informationText(String informationText) {
 
-        /** Do any text formatting here if needed **/
+        Text text = new Text(informationText);
 
-        return new Text(informationText);
+        text.setFill(Paint.valueOf("white"));
+
+        return text;
     }
 
     public static String getInformationString(ContactInformation contactInformation) {
@@ -145,7 +143,7 @@ public class ContactAnchorPane implements ContactView {
         return new String(phoneNumbers + emails + workPlaces + address + birthDate + notes);
     }
 
-    public static String getFormattedBirthdate(LocalDate date){
+    public static String getFormattedBirthdate(LocalDate date) {
         String birthDate;
 
         try {
@@ -154,15 +152,13 @@ public class ContactAnchorPane implements ContactView {
                     date.getDayOfMonth() + " / " +
                     date.getYear();
 
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("No Birthdate");
             return "";
         }
 
         return birthDate;
     }
-
-
 
     public static String getFormattedPhoneNumbers(ArrayList<String> phoneNumberArrayList) {
 
@@ -173,7 +169,7 @@ public class ContactAnchorPane implements ContactView {
                 phoneNumbers = phoneNumbers + phoneNumberArrayList.get(i) + "\n";
             }
             return phoneNumbers;
-        }else return "";
+        } else return "";
     }
 
     public static String getFormattedEmails(ArrayList<String> emailsArrayList) {
@@ -188,12 +184,12 @@ public class ContactAnchorPane implements ContactView {
             }
             return emails;
 
-        }else return "";
+        } else return "";
 
     }
 
-    public static String getFormattedNotes(String notes){
-        if(notes.length() > 0){
+    public static String getFormattedNotes(String notes) {
+        if (notes.length() > 0) {
             String notesLabel = "\n\nNotes: \n";
 
             notesLabel = notesLabel + notes;
@@ -215,7 +211,7 @@ public class ContactAnchorPane implements ContactView {
 
             return workplaces;
 
-        }else return "";
+        } else return "";
     }
 
     public static String getFormattedAddress(ContactInformation contactInformation) {
@@ -251,5 +247,21 @@ public class ContactAnchorPane implements ContactView {
         }
 
         return addressString;
+    }
+
+    public AnchorPane contactView() {
+
+
+        FlowPane bannerFlowPane = bannerFlowPane(
+                contactImageView(contactInformation),
+                nameText(contactInformation));
+
+        TextFlow informationTextFlow =
+                informationTextFlow(
+                        informationText(
+                                getInformationString(contactInformation)));
+
+
+        return contactViewAnchorPane(bannerFlowPane, informationTextFlow);
     }
 }

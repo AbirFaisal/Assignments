@@ -16,6 +16,17 @@ import javafx.stage.Stage;
 
 import java.util.Collections;
 
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
+
 /**
  * Created by abirfaisal on 6/8/15.
  */
@@ -40,6 +51,9 @@ public class MainWindow {
         AnchorPane.setLeftAnchor(leftAnchorPane, 0.0);
         AnchorPane.setRightAnchor(leftAnchorPane, 0.0);
 
+        //TODO ???
+        leftAnchorPane.setStyle("-fx-background-color: deeppink");
+
         return leftAnchorPane;
     }
 
@@ -61,7 +75,7 @@ public class MainWindow {
             //error checking necessary to avoid array Out Of Bounds.
             if (newValue.intValue() != -1) selectedIndex = newValue.intValue();
 
-            if(Main.getContactInformationArrayList().size()!=0) {
+            if (Main.getContactInformationArrayList().size() != 0) {
                 AnchorPane newRightAnchorPane = ContactViewFactory.contact(
                         Main.getContactInformationArrayList().get(selectedIndex)).contactView();
 
@@ -119,30 +133,30 @@ public class MainWindow {
     }
 
     //Todo Work on sorting.
-    public static ChoiceBox<String> sortChoiceBox(){
+    public static ChoiceBox<String> sortChoiceBox() {
         //String[] sortMethods = {""};
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
 
-        choiceBox.getItems().addAll("First", "Last","Phone #");
+        choiceBox.getItems().addAll("First", "Last", "Phone #");
         choiceBox.getSelectionModel().selectFirst();
 
         AnchorPane.setTopAnchor(choiceBox, 8.0);
         AnchorPane.setRightAnchor(choiceBox, 8.0);
 
 
-        choiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) ->{
+        choiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
 
-            if (newValue.contains("First")){
+            if (newValue.contains("First")) {
                 Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
                 Functions.refreshListView();
             }
 
-            if (newValue.contains("Last")){
+            if (newValue.contains("Last")) {
                 Collections.sort(Main.getContactInformationArrayList(), new Functions.LastNameComparator());
                 Functions.refreshListView();
             }
 
-            if (newValue.contains("Phone #")){
+            if (newValue.contains("Phone #")) {
                 Collections.sort(Main.getContactInformationArrayList(), new Functions.PhoneNumberComparator());
                 Functions.refreshListView();
             }
@@ -189,7 +203,7 @@ public class MainWindow {
         return button;
     }
 
-    public static FlowPane groupFlowPane(){
+    public static FlowPane groupFlowPane() {
         FlowPane flowPane = new FlowPane(
                 Main.getGroupChoiceBox(),
                 manageGroupsButton());

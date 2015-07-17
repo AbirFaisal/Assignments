@@ -13,6 +13,17 @@ import javafx.util.Duration;
 
 import java.io.File;
 
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
+
 /**
  * Created by EpiphX on 7/8/15.
  */
@@ -23,33 +34,38 @@ public class TransistionImageView extends ImageView {
 
     private Image defaultImage;
     private ContactInformation contactInformation;
-    public TransistionImageView(ContactInformation contactInformation){
+
+    public TransistionImageView(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
 
-        if(contactInformation.getProfileImage()!=null) {
-            if(Functions.isWindows()){
-                if(new File("src\\res\\profilePic"+contactInformation.getKey()+".png").exists()){
-                    defaultImage = new Image("file:src/res/profilePic"+contactInformation.getKey()+".png", 100.0, 100.0, true, true);
-                }else{
+
+        //If windows
+        if (Functions.isWindows()) {
+            if (contactInformation.getProfileImage() != null) {
+                if (new File("src\\res\\profilePic" + contactInformation.getKey() + ".png").exists()) {
+                    defaultImage = new Image("file:src/res/profilePic" + contactInformation.getKey() + ".png", 100.0, 100.0, true, true);
+                } else {
                     defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
                 }
-            }else {
+            } else defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
+        }
+
+        //If not windows
+        if (!Functions.isWindows()) {
+            if (contactInformation.getProfileImage() != null) {
                 if (new File("src/res/profilePic" + contactInformation.getKey() + ".png").exists()) {
                     defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/profilePic" + contactInformation.getKey() + ".png", 100.0, 100.0, true, true);
-                } else {
+                } else
                     defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
-                }
-            }
-        }else{
-            if(Functions.isWindows()){
-                defaultImage = new Image("file:src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
-            }else {
+            } else
                 defaultImage = new Image("file://" + Functions.workingDirectory() + "/src/res/defaultProfileImage.png", 100.0, 100.0, true, true);
-            }
         }
+
+
         FileChooser fileChooser = fileChooser();
         setImage(defaultImage);
-        clipProperty().set(new Circle(50,50,48));
+        clipProperty().set(new Circle(50, 50, 48));
+
 
         setOnMouseClicked(event -> {
             try {
@@ -65,7 +81,7 @@ public class TransistionImageView extends ImageView {
                 this.contactInformation.setProfileImage(newImage);
                 setImage(newImage);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("No File selected");
                 setImage(defaultImage);
             }
@@ -73,7 +89,7 @@ public class TransistionImageView extends ImageView {
 
         setOnMouseEntered(event -> {
             setCursor(Cursor.HAND); //Change cursor to hand
-            FadeTransition ft = new FadeTransition(Duration.millis(250),this);
+            FadeTransition ft = new FadeTransition(Duration.millis(225), this);
             ft.setFromValue(1.0);
             ft.setToValue(0.5);
             ft.setCycleCount(1);
@@ -82,7 +98,7 @@ public class TransistionImageView extends ImageView {
         });
 
         setOnMouseExited(event -> {
-            FadeTransition ft = new FadeTransition(Duration.millis(500),this);
+            FadeTransition ft = new FadeTransition(Duration.millis(450), this);
             ft.setFromValue(0.5);
             ft.setToValue(1.0);
             ft.setCycleCount(1);
@@ -92,7 +108,8 @@ public class TransistionImageView extends ImageView {
         System.out.println("Testing if this prints");
     }
 
-    public FileChooser fileChooser(){
+
+    public FileChooser fileChooser() {
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.setTitle("View Pictures");

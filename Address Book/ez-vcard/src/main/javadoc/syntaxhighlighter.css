@@ -1,3 +1,14 @@
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
+
 /* ====== my own styles ====== */
 
 table.simpleTable {
@@ -11,22 +22,6 @@ table.simpleTable td, table.simpleTable th {
 
 /* ====== shCore.css ====== */
 
-/**
- * SyntaxHighlighter
- * http://alexgorbatchev.com/SyntaxHighlighter
- *
- * SyntaxHighlighter is donationware. If you are using it, please donate.
- * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
- *
- * @version
- * 3.0.83 (July 02 2010)
- * 
- * @copyright
- * Copyright (C) 2004-2010 Alex Gorbatchev.
- *
- * @license
- * Dual licensed under the MIT and GPL licenses.
- */
 .syntaxhighlighter a,
 .syntaxhighlighter div,
 .syntaxhighlighter code,
@@ -240,22 +235,6 @@ table.simpleTable td, table.simpleTable th {
 
 /* ====== shThemeDefault.css ====== */
 
-/**
- * SyntaxHighlighter
- * http://alexgorbatchev.com/SyntaxHighlighter
- *
- * SyntaxHighlighter is donationware. If you are using it, please donate.
- * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
- *
- * @version
- * 3.0.83 (July 02 2010)
- * 
- * @copyright
- * Copyright (C) 2004-2010 Alex Gorbatchev.
- *
- * @license
- * Dual licensed under the MIT and GPL licenses.
- */
 .syntaxhighlighter {
   background-color: white !important;
   padding-left: 20px;
@@ -428,9 +407,6 @@ table tr td dt code {
 sup {
     font-size:.6em;
 }
-/*
-Document title and Copyright styles
-*/
 .clear {
     clear:both;
     height:0px;
