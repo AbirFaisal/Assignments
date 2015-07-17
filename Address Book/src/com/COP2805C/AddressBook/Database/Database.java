@@ -2,7 +2,7 @@ package com.COP2805C.AddressBook.Database;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
-import com.COP2805C.AddressBook.OSUtils;
+import com.COP2805C.AddressBook.Functions;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import org.sqlite.SQLiteConfig;
@@ -12,9 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.chrono.Chronology;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by abirfaisal on 6/10/15.
@@ -597,7 +595,7 @@ public class Database {
             if (rs.next()) {
                 inputStream = rs.getBinaryStream("picture");
             }
-            if(OSUtils.isWindows()){
+            if(Functions.isWindows()){
                 String workingDir = System.getProperty("user.dir");
                 //TODO fix for windows.
                 outputStream = new FileOutputStream("src\\res\\profilePic"+CONTACT_ID+".png");
@@ -618,7 +616,7 @@ public class Database {
         } catch (IOException e) {
             e.printStackTrace();
         } catch(NullPointerException e){
-            if(OSUtils.isWindows()){
+            if(Functions.isWindows()){
                 return new Image("res/defaultProfileImage.png");
             }
             return new Image("res/defaultProfileImage.png");
@@ -633,7 +631,7 @@ public class Database {
 
         }
 
-        if(OSUtils.isWindows()){
+        if(Functions.isWindows()){
             //TODO photo download takes too long to happen on windows.
                 profilePic = new Image("file:src/res/profilePic" + CONTACT_ID + ".png");
                 System.out.println("Test");

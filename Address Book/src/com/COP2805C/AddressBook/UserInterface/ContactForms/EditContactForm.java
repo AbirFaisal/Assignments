@@ -63,7 +63,6 @@ public class EditContactForm extends AddContactForm implements Form {
 
     private void setContactFields(){
        setTextFields();
-       setNoteTextArea();
        setProfilePicture();
        setDOB();
     }
@@ -79,9 +78,6 @@ public class EditContactForm extends AddContactForm implements Form {
         this.textFields.get(7).setText(contactInformation.getState());
         this.textFields.get(8).setText(contactInformation.getZip());
         this.textFields.get(9).setText(contactInformation.getCountry());
-    }
-
-    private void setNoteTextArea(){
         this.notesTextArea.setText(contactInformation.getNotes());
     }
 
