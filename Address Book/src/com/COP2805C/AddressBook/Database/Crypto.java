@@ -47,15 +47,11 @@ public class Crypto {
     }
 
 
-    public static void edfasdfas() {
-
-    }
-
-
     public static String encryptString(String string) {
         //TODO
         return string;
     }
+
 
     public static String decryptString(String string) {
         //TODO

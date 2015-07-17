@@ -21,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,12 +44,20 @@ public class AddContactForm implements Form {
     ArrayList<TextField> phoneTextFields;
     ArrayList<TextField> emailTextFields;
     ArrayList<TextField> workplaceTextFields;
+    GridPane staticDataGridPane;
+    GridPane phoneGridPane;
+    GridPane emailGridPane;
+    GridPane workplacesGridPane;
+
+
 
     FlowPane flowpane;
     TextArea notesTextArea;
     DatePicker birthDatePicker;
+    AnchorPane  anchorPane;
+    Scene scene;
 
-    public AddContactForm(ContactInformation contactInformation, Stage formStage) {
+    public AddContactForm(ContactInformation contactInformation, Stage stage) {
         this.contactInformation = contactInformation;
         this.labelStrings = new String[]{
                 "First Name", "Middle Name", "Last Name", "Nickname",
@@ -67,7 +76,7 @@ public class AddContactForm implements Form {
         this.birthDatePicker = birthDatePicker();
         this.notesTextArea = notesTextArea();
 
-        this.addContactStage = formStage;
+        this.addContactStage = stage;
     }
 
 
@@ -93,10 +102,10 @@ public class AddContactForm implements Form {
 
         //TODO Contact image view and selector
         //TODO simplify
-        GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
-        GridPane phoneGridPane = gridPane(phoneLabel, this.phoneTextFields);
-        GridPane emailGridPane = gridPane(emailLabel, this.emailTextFields);
-        GridPane workplaceGridPane = gridPane(workplaceLabel, this.workplaceTextFields);
+        this.staticDataGridPane = gridPane(this.labels, this.textFields);
+        this.phoneGridPane = gridPane(phoneLabel, this.phoneTextFields);
+        this.emailGridPane = gridPane(emailLabel, this.emailTextFields);
+        this.workplacesGridPane = gridPane(workplaceLabel, this.workplaceTextFields);
 
 
         FlowPane buttonsFlowPane = new FlowPane(
@@ -113,20 +122,22 @@ public class AddContactForm implements Form {
         //flow pane
         this.flowpane = flowPane(
                 //buttonsFlowPane,
-                new AnchorPane(circleOverlay(),editText(), contactImageView()),
+                new AnchorPane(circleOverlay(), editText(), contactImageView()),
                 staticDataGridPane,
                 this.birthDatePicker,
                 this.notesTextArea,
-                phoneGridPane,
-                addButton("Add Phone Number", "Phone Number", phoneGridPane, this.phoneTextFields),
-                emailGridPane,
-                addButton("Add Email", "Email" , emailGridPane, this.emailTextFields),
-                workplaceGridPane,
-                addButton("Add Workplace", "Workplace", workplaceGridPane, this.workplaceTextFields));
+                this.phoneGridPane,
+                addButton("Add Phone Number", "Phone Number", this.phoneGridPane, this.phoneTextFields),
+                this.emailGridPane,
+                addButton("Add Email", "Email", this.emailGridPane, this.emailTextFields),
+                this.workplacesGridPane,
+                addButton("Add Workplace", "Workplace", this.workplacesGridPane, this.workplaceTextFields));
 
+        this.anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
 
-        AnchorPane anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
-        return new Scene(anchorPane, 800, 625);
+        this.scene = new Scene(this.anchorPane, 800.0,625.0);
+
+        return this.scene; //new Scene(anchorPane, 800, 625);
     }
 
 
@@ -225,12 +236,6 @@ public class AddContactForm implements Form {
 
         textArea.setPromptText("Notes");
 
-//        AnchorPane.setTopAnchor(textArea, 0.0);
-//        AnchorPane.setBottomAnchor(textArea, 0.0);
-//        AnchorPane.setRightAnchor(textArea, 0.0);
-//        AnchorPane.setLeftAnchor(textArea, 0.0);
-
-
         return textArea;
     }
 
@@ -240,12 +245,17 @@ public class AddContactForm implements Form {
         DatePicker datePicker = new DatePicker();
         datePicker.setPromptText("Birthday");
 
-        datePicker.setOnAction(e -> {
-            LocalDate birthday = datePicker.getValue();
-            //this.contactInformation.setBirthday(birthday.toString());
-
-
-        });
+//        datePicker.setOnAction(e -> {
+//            LocalDate birthday = datePicker.getValue();
+//
+//
+//            //Birth Date is set from input by the user.
+//            try {
+//                this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
+//            } catch (NullPointerException ex) {//TODO setup a better NullValue for datePicker
+//                System.out.println("No dob entered: " + ex);
+//            }
+//        });
 
         return datePicker;
     }
@@ -313,90 +323,23 @@ public class AddContactForm implements Form {
         AnchorPane.setBottomAnchor(button, 5.0);
         AnchorPane.setLeftAnchor(button, 50.0);
 
+        //this.contactInformation.getKey();
 
-        button.setOnMouseClicked(e ->{
+        //If contact already exists then delete it
+        Main.getDatabase().deleteCONTACTID(this.contactInformation.getKey());
+        Functions.deletePictureFile(this.contactInformation.getKey());
+
+
+
+        button.setOnMouseClicked(e -> {
             //Image already set by image button
             //Group already set by group selection button
 
-            //save static data
-            //First Name
+            //Save Static Data
+            saveStaticData();
 
-
-            this.contactInformation.setFirstName(
-                    this.textFields.get(0).getText());
-            //Middle Name
-            this.contactInformation.setMiddleName(
-                    this.textFields.get(1).getText());
-            //Last Name
-            this.contactInformation.setLastName(
-                    this.textFields.get(2).getText());
-
-            this.contactInformation.setNickname(
-                    this.textFields.get(3).getText());
-
-            //Address
-            this.contactInformation.setAddressLine1(
-                    this.textFields.get(4).getText());
-
-            this.contactInformation.setAddressLine2(
-                    this.textFields.get(5).getText());
-
-            this.contactInformation.setCity(
-                    this.textFields.get(6).getText());
-
-            this.contactInformation.setState(
-                    this.textFields.get(7).getText());
-
-            this.contactInformation.setZip(
-                    this.textFields.get(8).getText());
-
-            this.contactInformation.setCountry(
-                    this.textFields.get(9).getText());
-
-            //Notes
-            this.contactInformation.setNotes(
-                    this.notesTextArea.getText());
-
-            //Birth Date is set from input by the user.
-            try {
-                this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
-            }catch(NullPointerException ex){//TODO setup a better NullValue for datePicker
-                System.out.println("No dob entered: " + ex);
-                //this.contactInformation.setBirthday("2015-10-14");
-            }
-
-            //Save dynamic data
-
-            //Phone Numbers
-            for (int i = 0; i < this.phoneTextFields.size(); i++) {
-                //Make sure field is not empty
-                if (this.phoneTextFields.get(i).getLength() > 0) {
-                    //Add to arrayList
-                    this.contactInformation.getPhoneNumbers().add(
-                            this.phoneTextFields.get(i).getText());
-                }
-            }
-
-            //Emails
-            for (int i = 0; i < this.emailTextFields.size(); i++) {
-                //Make sure field is not empty
-                if (this.emailTextFields.get(i).getLength() > 0) {
-                    //Add to arrayList
-                    this.contactInformation.getEmails().add(
-                            this.emailTextFields.get(i).getText());
-                }
-            }
-
-            //Workplaces
-            for (int i = 0; i < this.workplaceTextFields.size(); i++) {
-                //Make sure field is not empty
-                if (this.workplaceTextFields.get(i).getLength() > 0) {
-                    //Add to arrayList
-                    this.contactInformation.getWorkPlaces().add(
-                            this.workplaceTextFields.get(i).getText());
-                }
-
-            }
+            //Save Dynamic Data
+            saveDynamicData();
 
             //add to database
             //Add key to contactInformation Object
@@ -405,11 +348,98 @@ public class AddContactForm implements Form {
             //TODO this below statement is so that when they click save it immediately closes the addContactWindow. It prevents duplicates.
             addContactStage.close();
             Functions.refreshContactArray();
-            Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
+            //Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
             Functions.refreshListView();
         });
 
         return button;
+    }
+
+
+    public void saveStaticData(){
+
+        this.contactInformation.setFirstName(
+                this.textFields.get(0).getText());
+        //Middle Name
+        this.contactInformation.setMiddleName(
+                this.textFields.get(1).getText());
+        //Last Name
+        this.contactInformation.setLastName(
+                this.textFields.get(2).getText());
+
+        this.contactInformation.setNickname(
+                this.textFields.get(3).getText());
+
+        //Address
+        this.contactInformation.setAddressLine1(
+                this.textFields.get(4).getText());
+
+        this.contactInformation.setAddressLine2(
+                this.textFields.get(5).getText());
+
+        this.contactInformation.setCity(
+                this.textFields.get(6).getText());
+
+        this.contactInformation.setState(
+                this.textFields.get(7).getText());
+
+        this.contactInformation.setZip(
+                this.textFields.get(8).getText());
+
+        this.contactInformation.setCountry(
+                this.textFields.get(9).getText());
+
+        //Notes
+        this.contactInformation.setNotes(
+                this.notesTextArea.getText());
+
+        //Birth Date is set from input by the user.
+        try {
+            this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
+        } catch (NullPointerException ex) {//TODO setup a better NullValue for datePicker
+            System.out.println("No dob entered: " + ex);
+        }
+    }
+
+
+    public void saveDynamicData(){
+
+        //Save dynamic data
+
+        //Clear existing fields in object
+        this.contactInformation.getPhoneNumbers().clear();
+        this.contactInformation.getEmails().clear();
+        this.contactInformation.getWorkPlaces().clear();
+
+        //Phone Numbers
+        for (int i = 0; i < this.phoneTextFields.size(); i++) {
+            //Make sure field is not empty
+            if (this.phoneTextFields.get(i).getLength() > 0) {
+                //Add to arrayList
+                this.contactInformation.getPhoneNumbers().add(
+                        this.phoneTextFields.get(i).getText());
+            }
+        }
+
+        //Emails
+        for (int i = 0; i < this.emailTextFields.size(); i++) {
+            //Make sure field is not empty
+            if (this.emailTextFields.get(i).getLength() > 0) {
+                //Add to arrayList
+                this.contactInformation.getEmails().add(
+                        this.emailTextFields.get(i).getText());
+            }
+        }
+
+        //Workplaces
+        for (int i = 0; i < this.workplaceTextFields.size(); i++) {
+            //Make sure field is not empty
+            if (this.workplaceTextFields.get(i).getLength() > 0) {
+                //Add to arrayList
+                this.contactInformation.getWorkPlaces().add(
+                        this.workplaceTextFields.get(i).getText());
+            }
+        }
     }
 
 

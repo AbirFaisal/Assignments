@@ -8,17 +8,17 @@ import javafx.stage.Stage;
  */
 public class FormFactory {
 
-    public Form getForm(ContactInformation contactInformation, String formType, Stage formStage) {
+    public Form getForm(ContactInformation contactInformation, String formType, Stage stage) {
 
         if (contactInformation == null) return null;
         if (formType == null) return null;
 
         if (formType.equalsIgnoreCase("ADD")) {
-            return new AddContactForm(contactInformation, formStage);
+            return new AddContactForm(contactInformation, stage);
         }
 
         if (formType.equalsIgnoreCase("EDIT")) {
-            return new EditContactForm(contactInformation, formStage);
+            return new EditContactForm(contactInformation, stage);
         }
 
         return null;

@@ -3,7 +3,11 @@ package com.COP2805C.AddressBook;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
+import com.sun.deploy.uitoolkit.impl.fx.ui.FXMessageDialog;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import javax.swing.*;
@@ -155,6 +159,20 @@ public class Functions {
             return false;
         }
 
+        return true;
+    }
+
+    //Make sure fields with numbers only have numbers
+    public static boolean isTextFieldNumbers(TextField textField){
+
+        //Regex returns false if field does not have numbers.
+        if (textField.getText().matches("[a-zA-Z]+")){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Phone Fields cannot contain letters");
+
+            alert.showAndWait();
+
+            return false;
+        }
         return true;
     }
 

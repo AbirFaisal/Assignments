@@ -165,7 +165,8 @@ public class Main extends Application {
                 sortButton,
                 contactListView,
                 MainWindow.groupFlowPane(),
-                editMenuButton);
+                editMenuButton
+                );
 
         //Split Pane
         splitPane = MainWindow.splitPane(leftAnchorPane, rightAnchorPane);
