@@ -44,12 +44,20 @@ public class AddContactForm implements Form {
     ArrayList<TextField> phoneTextFields;
     ArrayList<TextField> emailTextFields;
     ArrayList<TextField> workplaceTextFields;
+    GridPane staticDataGridPane;
+    GridPane phoneGridPane;
+    GridPane emailGridPane;
+    GridPane workplacesGridPane;
+
+
 
     FlowPane flowpane;
     TextArea notesTextArea;
     DatePicker birthDatePicker;
+    AnchorPane  anchorPane;
+    Scene scene;
 
-    public AddContactForm(ContactInformation contactInformation, Stage formStage) {
+    public AddContactForm(ContactInformation contactInformation, Stage stage) {
         this.contactInformation = contactInformation;
         this.labelStrings = new String[]{
                 "First Name", "Middle Name", "Last Name", "Nickname",
@@ -68,7 +76,7 @@ public class AddContactForm implements Form {
         this.birthDatePicker = birthDatePicker();
         this.notesTextArea = notesTextArea();
 
-        this.addContactStage = formStage;
+        this.addContactStage = stage;
     }
 
 
@@ -94,10 +102,10 @@ public class AddContactForm implements Form {
 
         //TODO Contact image view and selector
         //TODO simplify
-        GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
-        GridPane phoneGridPane = gridPane(phoneLabel, this.phoneTextFields);
-        GridPane emailGridPane = gridPane(emailLabel, this.emailTextFields);
-        GridPane workplaceGridPane = gridPane(workplaceLabel, this.workplaceTextFields);
+        this.staticDataGridPane = gridPane(this.labels, this.textFields);
+        this.phoneGridPane = gridPane(phoneLabel, this.phoneTextFields);
+        this.emailGridPane = gridPane(emailLabel, this.emailTextFields);
+        this.workplacesGridPane = gridPane(workplaceLabel, this.workplaceTextFields);
 
 
         FlowPane buttonsFlowPane = new FlowPane(
@@ -114,20 +122,22 @@ public class AddContactForm implements Form {
         //flow pane
         this.flowpane = flowPane(
                 //buttonsFlowPane,
-                new AnchorPane(circleOverlay(),editText(), contactImageView()),
+                new AnchorPane(circleOverlay(), editText(), contactImageView()),
                 staticDataGridPane,
                 this.birthDatePicker,
                 this.notesTextArea,
-                phoneGridPane,
-                addButton("Add Phone Number", "Phone Number", phoneGridPane, this.phoneTextFields),
-                emailGridPane,
-                addButton("Add Email", "Email" , emailGridPane, this.emailTextFields),
-                workplaceGridPane,
-                addButton("Add Workplace", "Workplace", workplaceGridPane, this.workplaceTextFields));
+                this.phoneGridPane,
+                addButton("Add Phone Number", "Phone Number", this.phoneGridPane, this.phoneTextFields),
+                this.emailGridPane,
+                addButton("Add Email", "Email", this.emailGridPane, this.emailTextFields),
+                this.workplacesGridPane,
+                addButton("Add Workplace", "Workplace", this.workplacesGridPane, this.workplaceTextFields));
 
+        this.anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
 
-        AnchorPane anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
-        return new Scene(anchorPane, 800, 625);
+        this.scene = new Scene(this.anchorPane, 800.0,625.0);
+
+        return this.scene; //new Scene(anchorPane, 800, 625);
     }
 
 
@@ -312,7 +322,7 @@ public class AddContactForm implements Form {
 
         AnchorPane.setBottomAnchor(button, 5.0);
         AnchorPane.setLeftAnchor(button, 50.0);
-        
+
         //this.contactInformation.getKey();
 
         //If contact already exists then delete it

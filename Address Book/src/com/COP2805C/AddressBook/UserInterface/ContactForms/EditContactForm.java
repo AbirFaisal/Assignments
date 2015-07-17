@@ -24,96 +24,32 @@ import java.util.ArrayList;
 public class EditContactForm extends AddContactForm implements Form {
 
 
-    public EditContactForm(ContactInformation contactInformation, Stage formStage) {
-        super(contactInformation,formStage);
-
-
+    public EditContactForm(ContactInformation contactInformation, Stage stage) {
+        super(contactInformation, stage);
     }
+
     @Override
     public Scene form() {
+        super.form();
 
         //add static data labels and fields
         for (int i = 0; i < labelStrings.length; i++) {
             this.labels.add(label(this.labelStrings[i]));
             this.textFields.add(textField(this.labelStrings[i]));
         }
-        ArrayList<Label> phoneLabel = new ArrayList<Label>();
-        phoneLabel.add(new Label("Phone Numbers"));
 
-        ArrayList<Label> emailLabel = new ArrayList<Label>();
-        emailLabel.add(new Label("Email"));
-
-        ArrayList<Label> workplaceLabel = new ArrayList<Label>();
-        workplaceLabel.add(new Label("Workplaces"));
-
-        GridPane staticDataGridPane = gridPane(this.labels, this.textFields);
-        GridPane phoneGridPane = gridPane(phoneLabel, this.phoneTextFields);
-        GridPane emailGridPane = gridPane(emailLabel, this.emailTextFields);
-        GridPane workplaceGridPane = gridPane(workplaceLabel, this.workplaceTextFields);
-
-
-        FlowPane buttonsFlowPane = new FlowPane(
-                groupChoiceBox(Main.getGroupObservableList()),
-                saveButton(),
-                cancelButton());
-
-        AnchorPane.setBottomAnchor(buttonsFlowPane, 8.0);
-        AnchorPane.setRightAnchor(buttonsFlowPane, 8.0);
-        buttonsFlowPane.setHgap(8.0);
-        buttonsFlowPane.setAlignment(Pos.BOTTOM_RIGHT);
-
-
-        //flow pane
-        this.flowpane = flowPane(
-                //buttonsFlowPane,
-                new AnchorPane(circleOverlay(),editText(), contactImageView()),
-                staticDataGridPane,
-                this.birthDatePicker,
-                this.notesTextArea,
-                phoneGridPane,
-                addButton("Add Phone Number", "Phone Number", phoneGridPane, this.phoneTextFields),
-                emailGridPane,
-                addButton("Add Email", "Email" , emailGridPane, this.emailTextFields),
-                workplaceGridPane,
-                addButton("Add Workplace", "Workplace", workplaceGridPane, this.workplaceTextFields));
-
-
-        AnchorPane anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
-
-        addDynamicData(phoneGridPane, this.phoneTextFields, contactInformation.getPhoneNumbers());
-        addDynamicData(emailGridPane, this.emailTextFields, contactInformation.getEmails());
-        addDynamicData(workplaceGridPane, this.workplaceTextFields, contactInformation.getWorkPlaces());
+        addDynamicData(this.phoneGridPane, this.phoneTextFields, this.contactInformation.getPhoneNumbers());
+        addDynamicData(this.emailGridPane, this.emailTextFields, this.contactInformation.getEmails());
+        addDynamicData(this.workplacesGridPane, this.workplaceTextFields, this.contactInformation.getWorkPlaces());
         setContactFields();
-        return new Scene(anchorPane, 800, 625);
+
+        return this.scene;
     }
 
-    public GridPane gridPane(ArrayList<Label> labels, ArrayList<TextField> textFields){
-        GridPane gridPane = new GridPane();
-
-        //TODO change gaps
-        gridPane.setHgap(5.0);
-        gridPane.setVgap(8.0);
-
-        //Add labels in column 0 row i
-        for (int i = 0; i < labels.size(); i++) {
-            gridPane.add(labels.get(i), 0, i);
-        }
-
-        //Add texfields in column 1 row i
-        for (int i = 0; i < textFields.size(); i++) {
-            gridPane.add(textFields.get(i), 1, i);
-        }
-
-        return gridPane;
-    }
 
     private void addDynamicData(GridPane gridPane, ArrayList<TextField> textFields, ArrayList<String> field){
 
         for(int i = 0; i < field.size(); i++) {
-//            TextField textField = new TextField();
-//            textField.setText(field.get(i));
-//            textFields.add(textField);
-
             textFields.add(
                     new TextField(
                             field.get(i)));
