@@ -1,26 +1,30 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
-import com.COP2805C.AddressBook.Functions;
-import com.COP2805C.AddressBook.Main;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
 
 /**
  * Created by abirfaisal on 6/23/15.
  */
 
 //TODO have this extend ContactForm instead of AddContactForm. And have AddContactForm extend ContactForm as well.
-    //This is how I am thinking we should approach this.
+//This is how I am thinking we should approach this.
 public class EditContactForm extends AddContactForm implements Form {
 
 
@@ -47,9 +51,9 @@ public class EditContactForm extends AddContactForm implements Form {
     }
 
 
-    private void addDynamicData(GridPane gridPane, ArrayList<TextField> textFields, ArrayList<String> field){
+    private void addDynamicData(GridPane gridPane, ArrayList<TextField> textFields, ArrayList<String> field) {
 
-        for(int i = 0; i < field.size(); i++) {
+        for (int i = 0; i < field.size(); i++) {
             textFields.add(
                     new TextField(
                             field.get(i)));
@@ -57,17 +61,17 @@ public class EditContactForm extends AddContactForm implements Form {
             gridPane.addRow(textFields.size(), textFields.get(textFields.size() - 1));
             gridPane.add(
                     removeButton(
-                            gridPane, textFields, textFields.get(textFields.size()-1)), 1, textFields.size());
+                            gridPane, textFields, textFields.get(textFields.size() - 1)), 1, textFields.size());
         }
     }
 
-    private void setContactFields(){
-       setTextFields();
-       setProfilePicture();
-       setDOB();
+    private void setContactFields() {
+        setTextFields();
+        setProfilePicture();
+        setDOB();
     }
 
-    private void setTextFields(){
+    private void setTextFields() {
         this.textFields.get(0).setText(contactInformation.getFirstName());
         this.textFields.get(1).setText(contactInformation.getMiddleName());
         this.textFields.get(2).setText(contactInformation.getLastName());
@@ -81,14 +85,14 @@ public class EditContactForm extends AddContactForm implements Form {
         this.notesTextArea.setText(contactInformation.getNotes());
     }
 
-    private void setProfilePicture(){
+    private void setProfilePicture() {
         //TODO Chris is this nessessary?
     }
 
-    private void setDOB(){
+    private void setDOB() {
         try {
             this.birthDatePicker.setValue(contactInformation.getBirthday());
-        }catch(NullPointerException ex){
+        } catch (NullPointerException ex) {
             System.out.println("No dob entered: " + ex);
         }
     }

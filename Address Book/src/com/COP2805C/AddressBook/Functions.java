@@ -3,6 +3,7 @@ package com.COP2805C.AddressBook;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.CreateAccountWindow;
+import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -12,6 +13,17 @@ import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
+
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
 
 /**
  * Created by abirfaisal on 5/28/15.
@@ -24,31 +36,31 @@ public class Functions {
         String previousGroup = null;
 
         //This method will search Googlishly for the contact typed in. When the searchfield is emptied it will return to the group the user was previously in.
-        if(oldValue.length()==0){
+        if (oldValue.length() == 0) {
             previousGroup = Main.getGroupChoiceBox().getSelectionModel().getSelectedItem();
         }
 
-        if(newValue.length()==0) {
+        if (newValue.length() == 0) {
             Main.getGroupChoiceBox().getSelectionModel().select(previousGroup);
             Main.getContactListView().getSelectionModel().selectFirst();
-        }else{
+        } else {
             //When the user types, it will search through the main group because that contains all the contacts.
             Main.getGroupChoiceBox().getSelectionModel().select("Main");
             String[] parts = newValue.toUpperCase().split(" ");
             // Filter out the entries that don't contain the entered text
             String search = Main.getContactListView().getItems().get(0);
-            for ( Object entry: Main.getContactListView().getItems() ) {
+            for (Object entry : Main.getContactListView().getItems()) {
                 boolean match = true;
-                String entryText = (String)entry;
-                for ( String part: parts ) {
+                String entryText = (String) entry;
+                for (String part : parts) {
                     // The entry needs to contain all portions of the
                     // search string *but* in any order
-                    if ( ! entryText.toUpperCase().contains(part) ) {
+                    if (!entryText.toUpperCase().contains(part)) {
                         match = false;
                         break;
                     }
                 }
-                if ( match ) {
+                if (match) {
                     search = entryText;
                 }
             }
@@ -57,11 +69,11 @@ public class Functions {
     }
 
 
-    public static void refreshListView(){
+    public static void refreshListView() {
         //Clear GUI list
         Main.getContactObservableList().clear();
         //Populate FX Observable list
-        for(int i = 0; i < Main.getContactInformationArrayList().size();i++){
+        for (int i = 0; i < Main.getContactInformationArrayList().size(); i++) {
             Main.getContactObservableList().add(
                     getFormattedNameFMLNP(
                             Main.getContactInformationArrayList().get(i)));
@@ -69,19 +81,21 @@ public class Functions {
         Main.getContactListView().getSelectionModel().selectFirst();
     }
 
-    public static void refreshContactArray(){
+
+    public static void refreshContactArray() {
         Main.setContactInformationArrayList(
                 Main.getDatabase().populateContactList(
                         Main.getCredentials(), "Main"));
     }
 
-    public static void refreshGroupList(){
+
+    public static void refreshGroupList() {
         Main.getGroupObservableList().clear();
         Main.getGroupObservableList().add("Main");
         Main.getGroupObservableList().addAll(Main.getGroupsArrayList());
     }
 
-    public static void zeroAnchor(Node node){
+    public static void zeroAnchor(Node node) {
         AnchorPane.setTopAnchor(node, 0.0);
         AnchorPane.setBottomAnchor(node, 0.0);
         AnchorPane.setLeftAnchor(node, 0.0);
@@ -94,24 +108,30 @@ public class Functions {
             //Get new account information
             credentials = CreateAccountWindow.createAccount();
 
+            //break if credientals null
+            if (credentials == null) break;
+
             //Prompt user if account already exists
-            if (database.doesUserExist(credentials)) {
-                JOptionPane.showMessageDialog(null, "User already Exists");
-            } else { //create account and break the loop
+            if (database.doesUserExist(credentials)) JOptionPane.showMessageDialog(null, "User already Exists");
+            else { //create account and break the loop
                 database.addAccount(credentials);
                 break;
             }
             //Keep asking if user inputs existing username
         } while (database.doesUserExist(credentials));
         //return with credentials user and password
-        return credentials;
+
+        //return login window credentials if null
+        if (credentials == null) return LoginWindow.loginPrompt();
+        else return credentials; //return credentials from create account window.
     }
+
     //Deletes individual contactPicture
-    public static void deletePictureFile(int key){
+    public static void deletePictureFile(int key) {
         try {
 
-            File file = new File("src/res/profilePic"+key+".png");
-            if(isWindows()){
+            File file = new File("src/res/profilePic" + key + ".png");
+            if (isWindows()) {
                 file = new File("src\\res\\profilePic" + key + ".png");
             }
             if (file.delete()) {
@@ -123,11 +143,12 @@ public class Functions {
             e.printStackTrace();
         }
     }
+
     //Deletes all pictureFiles of group
-    public static void deleteAllPictureFile(String group){
+    public static void deleteAllPictureFile(String group) {
         ArrayList<ContactInformation> contactInformationArrayList = new ArrayList<>();
-        contactInformationArrayList = Main.getDatabase().populateContactList(Main.getCredentials(),group);
-        for(int i = 0; i < contactInformationArrayList.size();i++){
+        contactInformationArrayList = Main.getDatabase().populateContactList(Main.getCredentials(), group);
+        for (int i = 0; i < contactInformationArrayList.size(); i++) {
             Functions.deletePictureFile(contactInformationArrayList.get(i).getKey());
         }
     }
@@ -162,10 +183,10 @@ public class Functions {
     }
 
     //Make sure fields with numbers only have numbers
-    public static boolean isTextFieldNumbers(TextField textField){
+    public static boolean isTextFieldNumbers(TextField textField) {
 
         //Regex returns false if field does not have numbers.
-        if (textField.getText().matches("[a-zA-Z]+")){
+        if (textField.getText().matches("[a-zA-Z]+")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Phone Fields cannot contain letters");
 
             alert.showAndWait();
@@ -205,11 +226,11 @@ public class Functions {
 
         String name = getFormattedNameFMLN(contactInformation);
 
-        try{
-            if(contactInformation.getPhoneNumbers().get(0).length() > 0){
+        try {
+            if (contactInformation.getPhoneNumbers().get(0).length() > 0) {
                 name = name + " " + contactInformation.getPhoneNumbers().get(0);
             }
-        }catch(IndexOutOfBoundsException ex){
+        } catch (IndexOutOfBoundsException ex) {
             System.out.println("No numbers saved");
         }
 
@@ -219,16 +240,17 @@ public class Functions {
     public static String getOsName() {
         String OS = null;
 
-        if(OS == null) { OS = System.getProperty("os.name"); }
+        if (OS == null) {
+            OS = System.getProperty("os.name");
+        }
         return OS;
     }
 
-    public static boolean isWindows()
-    {
+    public static boolean isWindows() {
         return getOsName().startsWith("Windows");
     }
 
-    public static String workingDirectory(){
+    public static String workingDirectory() {
         String workingDir = System.getProperty("user.dir");
 
         return workingDir;
@@ -243,21 +265,21 @@ public class Functions {
     }
 
     //Sorting comparator by PhoneNumber
-    public static class PhoneNumberComparator implements Comparator<ContactInformation>{
+    public static class PhoneNumberComparator implements Comparator<ContactInformation> {
         @Override
         public int compare(ContactInformation o1, ContactInformation o2) {
             Long contact1, contact2;
-                if(o1.getPhoneNumbers().size()==0){
-                    contact1 = 0L;
-                }else{
-                    contact1 = Long.parseLong(o1.getPhoneNumbers().get(0).replace("-",""));
-                }
-                if(o2.getPhoneNumbers().size()==0){
-                    contact2 = 0L;
-                }else{
-                    contact2 = Long.parseLong(o2.getPhoneNumbers().get(0).replace("-",""));
-                }
-                return Long.compare(contact1,contact2);
+            if (o1.getPhoneNumbers().size() == 0) {
+                contact1 = 0L;
+            } else {
+                contact1 = Long.parseLong(o1.getPhoneNumbers().get(0).replace("-", ""));
+            }
+            if (o2.getPhoneNumbers().size() == 0) {
+                contact2 = 0L;
+            } else {
+                contact2 = Long.parseLong(o2.getPhoneNumbers().get(0).replace("-", ""));
+            }
+            return Long.compare(contact1, contact2);
         }
     }
 }

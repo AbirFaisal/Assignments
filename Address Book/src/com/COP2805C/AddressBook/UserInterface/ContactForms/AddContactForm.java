@@ -1,7 +1,6 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
-import com.COP2805C.AddressBook.FirstNameComparator;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.TransistionImageView;
@@ -21,12 +20,20 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 
+
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
 
 public class AddContactForm implements Form {
 
@@ -50,11 +57,10 @@ public class AddContactForm implements Form {
     GridPane workplacesGridPane;
 
 
-
     FlowPane flowpane;
     TextArea notesTextArea;
     DatePicker birthDatePicker;
-    AnchorPane  anchorPane;
+    AnchorPane anchorPane;
     Scene scene;
 
     public AddContactForm(ContactInformation contactInformation, Stage stage) {
@@ -135,13 +141,13 @@ public class AddContactForm implements Form {
 
         this.anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
 
-        this.scene = new Scene(this.anchorPane, 800.0,625.0);
+        this.scene = new Scene(this.anchorPane, 800.0, 625.0);
 
         return this.scene; //new Scene(anchorPane, 800, 625);
     }
 
 
-    public AnchorPane anchorPane(Node... FXNode){
+    public AnchorPane anchorPane(Node... FXNode) {
 
         AnchorPane anchorPane = new AnchorPane();
         Functions.zeroAnchor(anchorPane);
@@ -152,14 +158,14 @@ public class AddContactForm implements Form {
 
 
     //TODO move down a bit
-    public Circle circleOverlay(){
-        Circle greyCircle = new Circle(50,50,50);
+    public Circle circleOverlay() {
+        Circle greyCircle = new Circle(50, 50, 50);
         greyCircle.setFill(Paint.valueOf("GRAY"));
         return greyCircle;
     }
 
-    public Text editText(){
-        Text editText = new Text(30,80,"edit");
+    public Text editText() {
+        Text editText = new Text(30, 80, "edit");
         editText.setFill(Paint.valueOf("WHITE"));
         editText.setFont(Font.font(25));
 
@@ -167,12 +173,12 @@ public class AddContactForm implements Form {
         return editText;
     }
 
-    public ImageView contactImageView(){
+    public ImageView contactImageView() {
         ImageView imageView = new TransistionImageView(this.contactInformation);
         return imageView;
     }
 
-    public FlowPane flowPane(Node... FXNode){
+    public FlowPane flowPane(Node... FXNode) {
         FlowPane flowPane = new FlowPane();
 
         flowPane.getChildren().addAll(FXNode);
@@ -193,8 +199,7 @@ public class AddContactForm implements Form {
     }
 
 
-
-    public GridPane gridPane(ArrayList<Label> labels, ArrayList<TextField> textFields){
+    public GridPane gridPane(ArrayList<Label> labels, ArrayList<TextField> textFields) {
         GridPane gridPane = new GridPane();
 
         //TODO change gaps
@@ -215,21 +220,20 @@ public class AddContactForm implements Form {
     }
 
 
-
-    public Label label(String labelString){
+    public Label label(String labelString) {
         Label label = new Label(labelString);
         //Format label if needed
         return label;
     }
 
-    public TextField textField(String promptText){
+    public TextField textField(String promptText) {
         TextField textField = new TextField();
         textField.setPromptText(promptText);
         return textField;
     }
 
 
-    public TextArea notesTextArea(){
+    public TextArea notesTextArea() {
         TextArea textArea = new TextArea();
 
         textArea.setMaxSize(250.0, 100.0);
@@ -240,8 +244,7 @@ public class AddContactForm implements Form {
     }
 
 
-
-    public DatePicker birthDatePicker(){
+    public DatePicker birthDatePicker() {
         DatePicker datePicker = new DatePicker();
         datePicker.setPromptText("Birthday");
 
@@ -249,7 +252,7 @@ public class AddContactForm implements Form {
     }
 
 
-    public ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList){
+    public ChoiceBox<String> groupChoiceBox(ObservableList<String> observableList) {
         ChoiceBox<String> groupChoiceBox = new ChoiceBox<>(observableList);
         groupChoiceBox.getSelectionModel().selectFirst();
 
@@ -266,7 +269,7 @@ public class AddContactForm implements Form {
         return groupChoiceBox;
     }
 
-    public Button addButton(String buttonText, String promptText, GridPane gridPane, ArrayList<TextField> textFields){
+    public Button addButton(String buttonText, String promptText, GridPane gridPane, ArrayList<TextField> textFields) {
         Button button = new Button(buttonText);
 
 
@@ -287,7 +290,7 @@ public class AddContactForm implements Form {
         return button;
     }
 
-    public Button removeButton(GridPane gridPane, ArrayList<TextField> textFields, TextField textField){
+    public Button removeButton(GridPane gridPane, ArrayList<TextField> textFields, TextField textField) {
         Button button = new Button("-");
 
         button.setOnAction(e -> {
@@ -305,7 +308,7 @@ public class AddContactForm implements Form {
     }
 
 
-    public Button saveButton(){
+    public Button saveButton() {
         Button button = new Button("Save");
 
         AnchorPane.setBottomAnchor(button, 5.0);
@@ -316,7 +319,6 @@ public class AddContactForm implements Form {
         //If contact already exists then delete it
         Main.getDatabase().deleteCONTACTID(this.contactInformation.getKey());
         Functions.deletePictureFile(this.contactInformation.getKey());
-
 
 
         button.setOnMouseClicked(e -> {
@@ -344,7 +346,7 @@ public class AddContactForm implements Form {
     }
 
 
-    public void saveStaticData(){
+    public void saveStaticData() {
 
         this.contactInformation.setFirstName(
                 this.textFields.get(0).getText());
@@ -390,7 +392,7 @@ public class AddContactForm implements Form {
     }
 
 
-    public void saveDynamicData(){
+    public void saveDynamicData() {
 
         //Save dynamic data
 
@@ -431,10 +433,10 @@ public class AddContactForm implements Form {
     }
 
 
-    public Button cancelButton(){
+    public Button cancelButton() {
         Button button = new Button("Cancel");
 
-        button.setOnMouseClicked(e ->{
+        button.setOnMouseClicked(e -> {
             addContactStage.close();
         });
 

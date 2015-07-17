@@ -3,9 +3,18 @@ package com.COP2805C.AddressBook.Contacts;
 import javafx.scene.image.Image;
 
 import java.time.LocalDate;
-import java.time.chrono.Chronology;
 import java.util.ArrayList;
-import java.util.Calendar;
+
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
 
 /**
  * Created by abirfaisal on 6/13/15.
@@ -173,9 +182,13 @@ public class ContactInformation {
         this.zip = zip;
     }
 
-    public String getCountry() {return country;}
+    public String getCountry() {
+        return country;
+    }
 
-    public void setCountry(String country) {this.country = country;}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     public String getNotes() {
         return notes;
@@ -216,7 +229,7 @@ public class ContactInformation {
     public void setBirthday(String birthday) {
         try {
             this.birthday = LocalDate.parse(birthday);
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("No birthdate date set");
         }
 
