@@ -21,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -225,12 +226,6 @@ public class AddContactForm implements Form {
 
         textArea.setPromptText("Notes");
 
-//        AnchorPane.setTopAnchor(textArea, 0.0);
-//        AnchorPane.setBottomAnchor(textArea, 0.0);
-//        AnchorPane.setRightAnchor(textArea, 0.0);
-//        AnchorPane.setLeftAnchor(textArea, 0.0);
-
-
         return textArea;
     }
 
@@ -240,12 +235,17 @@ public class AddContactForm implements Form {
         DatePicker datePicker = new DatePicker();
         datePicker.setPromptText("Birthday");
 
-        datePicker.setOnAction(e -> {
-            LocalDate birthday = datePicker.getValue();
-            //this.contactInformation.setBirthday(birthday.toString());
-
-
-        });
+//        datePicker.setOnAction(e -> {
+//            LocalDate birthday = datePicker.getValue();
+//
+//
+//            //Birth Date is set from input by the user.
+//            try {
+//                this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
+//            } catch (NullPointerException ex) {//TODO setup a better NullValue for datePicker
+//                System.out.println("No dob entered: " + ex);
+//            }
+//        });
 
         return datePicker;
     }
@@ -312,15 +312,18 @@ public class AddContactForm implements Form {
 
         AnchorPane.setBottomAnchor(button, 5.0);
         AnchorPane.setLeftAnchor(button, 50.0);
+        
+        //this.contactInformation.getKey();
+
+        //If contact already exists then delete it
+        Main.getDatabase().deleteCONTACTID(this.contactInformation.getKey());
+        Functions.deletePictureFile(this.contactInformation.getKey());
+
 
 
         button.setOnMouseClicked(e -> {
             //Image already set by image button
             //Group already set by group selection button
-
-            //save static data
-            //First Name
-
 
             //Save Static Data
             saveStaticData();
@@ -335,7 +338,7 @@ public class AddContactForm implements Form {
             //TODO this below statement is so that when they click save it immediately closes the addContactWindow. It prevents duplicates.
             addContactStage.close();
             Functions.refreshContactArray();
-            Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
+            //Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
             Functions.refreshListView();
         });
 
@@ -385,7 +388,6 @@ public class AddContactForm implements Form {
             this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
         } catch (NullPointerException ex) {//TODO setup a better NullValue for datePicker
             System.out.println("No dob entered: " + ex);
-            //this.contactInformation.setBirthday("2015-10-14");
         }
     }
 

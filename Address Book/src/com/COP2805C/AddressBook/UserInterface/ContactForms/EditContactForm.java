@@ -118,7 +118,6 @@ public class EditContactForm extends AddContactForm implements Form {
                     new TextField(
                             field.get(i)));
 
-
             gridPane.addRow(textFields.size(), textFields.get(textFields.size() - 1));
             gridPane.add(
                     removeButton(
@@ -154,7 +153,6 @@ public class EditContactForm extends AddContactForm implements Form {
 
     }
 
-    
     private void setDOB(){
         try {
             this.birthDatePicker.setValue(contactInformation.getBirthday());
