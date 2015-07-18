@@ -29,8 +29,8 @@ import java.io.File;
  */
 public class TransistionImageView extends ImageView {
 
-    private final String STYLE_NORMAL = "-fx-background-color: transparent; -fx-padding: 5, 5, 5, 5;";
-    private final String STYLE_PRESSED = "-fx-background-color: transparent; -fx-padding: 6 4 4 6;";
+    private final String STYLE_NORMAL = "-fx-background-color: transparent; -fx-padding: 4, 6, 6, 4";
+    private final String STYLE_PRESSED = "-fx-background-color: transparent; -fx-padding: 6 4 4 6";
 
     private Image defaultImage;
     private ContactInformation contactInformation;

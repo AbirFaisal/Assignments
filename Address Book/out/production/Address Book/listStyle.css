@@ -136,7 +136,7 @@
 .list-cell:odd { -fx-background-color: dimgrey; /* 1 */ }
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     /* 3:, 4: */
-    -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+    -fx-background-color: linear-gradient(#ffffff 0%, #545454 25%, #5d5d5d 75%, #ffffff 100%);
     -fx-text-fill: white; /* 5 */
 }
 
