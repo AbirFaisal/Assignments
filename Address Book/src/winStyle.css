@@ -1,0 +1,170 @@
+/*
+ * Copyright (c) 2015
+ * Abir Faisal
+ * Chris Buruchian
+ * Alex Truong-Mai
+ * Will Herrin
+ *
+ * COP2805 Valencia College
+ * Professor dsfasdfa
+ */
+
+
+.label{
+    -fx-text-fill: white;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 0.0em 0 0.0em;
+    -fx-background-color: #000;
+}
+
+.button{
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-background-color: #2d89ef
+}
+
+.split-menu-button{
+    -fx-focus-color: transparent;
+    -fx-background-color: #2d89ef
+}
+
+.split-menu-button .button{
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+
+}
+
+.split-menu-button .choice-box{
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-background-color: #2d89ef;
+}
+
+.text-field{
+    -fx-focus-color: transparent;
+    -fx-background-color: #eff4ff;
+    -fx-text-fill: black;
+}
+
+.date-picker{
+    -fx-focus-color: transparent;
+}
+
+.date-picker-popup > .month-year-pane{
+    -fx-background-color: #757575;
+}
+
+.text-area{
+    -fx-focus-color: transparent;
+    -fx-text-fill: white;
+}
+
+.text-area .content{
+    -fx-focus-color: transparent;
+    -fx-background-color: #eff4ff;
+}
+
+
+.split-menu-button .context-menu{
+    -fx-background-color: #4E4E4E;
+}
+
+.split-menu-button .menu-item:focused{
+    -fx-background-color: #2d89ef;
+    -fx-text-fill: white; /* 5 */
+}
+
+.split-menu-button .menu-item .label{
+    -fx-background-color: transparent;
+}
+
+.split-menu-button .label{
+    -fx-background-color: #2d89ef;
+
+    -fx-text-fill: white;
+}
+
+.split-menu-button .arrow-button{
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-background-color: #2d89ef;
+}
+
+
+.choice-box{
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-background-color: #2d89ef;
+}
+
+.choice-box .label{
+    -fx-text-fill: white;
+}
+
+.choice-box .context-menu{
+    -fx-background-color: #4E4E4E;
+}
+
+.choice-box .menu-item:focused{
+    -fx-background-color: #2d89ef;
+    -fx-text-fill: white; /* 5 */
+}
+
+
+
+
+.list-cell {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ListCellSkin";
+    -fx-background-color: -fx-control-inner-background;
+    -fx-padding: 0.25em; /* 3 */
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-opacity: 1;
+}
+
+
+
+.list-view {
+    -fx-background-color: #2b5797;
+    -fx-border-color: #2b5797;
+}
+
+.list-cell { -fx-text-fill: black; /* 5 */ }
+.list-cell:even { -fx-background-color: #eff4ff; /* 1 */ }
+.list-cell:odd { -fx-background-color: #ffffff; /* 1 */ }
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    /* 3:, 4: */
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white; /* 5 */
+}
+
+
+
+
+.dialog-pane{
+    -fx-background-color: #4E4E4E;
+    -fx-border-color: #4E4E4E;
+}
+
+.dialog-pane > *.button-bar > *.container{
+    -fx-background-color: #4E4E4E;
+}
+
+.dialog-pane:header *.header-panel{
+    -fx-background-color: grey;
+}
+
+.dialog-pane:header *.header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-text-fill: white;
+}
+
+.dialog-pane > .button-bar > .container > .details-button {
+    -fx-text-fill: white;
+    -fx-background-radius:45;
+    -fx-background-color:
+    linear-gradient(#454545 0%, #757575 100%);
+}
+

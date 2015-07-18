@@ -45,7 +45,7 @@ public class GroupManagerWindow {
 
         anchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
         Scene scene = new Scene(anchorPane);
-        scene.getStylesheets().add("/listStyle.css");
+        scene.getStylesheets().add("/winStyle.css");
 
         return scene;
     }
@@ -71,7 +71,8 @@ public class GroupManagerWindow {
             dialog.setTitle("Group Creation");
             dialog.setHeaderText("Enter Group Name");
             dialog.setGraphic(null);
-            dialog.getDialogPane().getStylesheets().add("/dialog.css");
+
+            dialog.getDialogPane().getStylesheets().add("/winStyle.css"); //TODO
 
             Optional<String> result = dialog.showAndWait();
             String entered = "";

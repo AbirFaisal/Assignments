@@ -48,7 +48,7 @@ public class ContactAnchorPane implements ContactView {
 
 
         //Add some color
-        contactViewAnchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
+        contactViewAnchorPane.setStyle("-fx-background-color: #2b5797");
 
         return contactViewAnchorPane;
     }
@@ -80,6 +80,9 @@ public class ContactAnchorPane implements ContactView {
 
             contactImageView.fitHeightProperty().set(100.0);
             contactImageView.fitWidthProperty().set(100.0);
+
+            //TODO make it work
+            //contactImageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 20, 1.0, 200, 200)");
 
             return contactImageView;
 

@@ -185,7 +185,7 @@ public class Main extends Application {
 
     //Java FX
     public void start(Stage primaryStage) throws Exception {
-//        Application.setUserAgentStylesheet(getClass().getResource("/listStyle.css")
+//        Application.setUserAgentStylesheet(getClass().getResource("/winStyle.css")
 //                .toExternalForm());
         mainStage = new Stage();
 
@@ -219,7 +219,7 @@ public class Main extends Application {
             Functions.zeroAnchor(text);
 
             rightAnchorPane = new AnchorPane(text);
-            rightAnchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
+            rightAnchorPane.setStyle("-fx-background-color: #2d89ef");
         }
         Functions.zeroAnchor(rightAnchorPane);
 
@@ -268,7 +268,16 @@ public class Main extends Application {
         mainWindowAnchorPane = new AnchorPane(splitPane);
         mainWindowAnchorPane.setPrefSize(800, 600);
         primaryScene = new Scene(mainWindowAnchorPane);
-        primaryScene.getStylesheets().add("/listStyle.css");
+
+
+
+        //Windows Theme
+        if (Functions.isWindows()) primaryScene.getStylesheets().add("/winStyle.css");
+        //*nix Theme
+        if (!Functions.isWindows()) primaryScene.getStylesheets().add("/nixStyle.css");
+
+
+
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Contacts Manager");
         Collections.sort(contactInformationArrayList, new FirstNameComparator());
