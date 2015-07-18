@@ -6,6 +6,7 @@ import com.COP2805C.AddressBook.Database.Database;
 import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory;
 import com.COP2805C.AddressBook.UserInterface.LoginWindow;
 import com.COP2805C.AddressBook.UserInterface.MainWindow;
+import com.sun.javafx.css.StyleManager;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -184,7 +185,11 @@ public class Main extends Application {
 
     //Java FX
     public void start(Stage primaryStage) throws Exception {
+//        Application.setUserAgentStylesheet(getClass().getResource("/listStyle.css")
+//                .toExternalForm());
         mainStage = new Stage();
+
+
         SplitMenuButton editMenuButton;
         TextField searchTextField;
         ChoiceBox<String> sortButton;
@@ -214,6 +219,7 @@ public class Main extends Application {
             Functions.zeroAnchor(text);
 
             rightAnchorPane = new AnchorPane(text);
+            rightAnchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
         }
         Functions.zeroAnchor(rightAnchorPane);
 
@@ -262,6 +268,7 @@ public class Main extends Application {
         mainWindowAnchorPane = new AnchorPane(splitPane);
         mainWindowAnchorPane.setPrefSize(800, 600);
         primaryScene = new Scene(mainWindowAnchorPane);
+        primaryScene.getStylesheets().add("/listStyle.css");
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Contacts Manager");
         Collections.sort(contactInformationArrayList, new FirstNameComparator());

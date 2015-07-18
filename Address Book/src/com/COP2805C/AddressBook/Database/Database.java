@@ -585,7 +585,7 @@ public class Database {
         }
     }
 
-    //TODO test getPicture method.
+
     public Image getPicture(int CONTACT_ID) {
         Image profilePic;
         OutputStream outputStream = null;
