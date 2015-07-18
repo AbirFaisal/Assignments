@@ -51,7 +51,7 @@ public class MainWindow {
         AnchorPane.setLeftAnchor(leftAnchorPane, 0.0);
         AnchorPane.setRightAnchor(leftAnchorPane, 0.0);
 
-        leftAnchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
+        leftAnchorPane.setStyle("-fx-background-color: #2b5797");
 
         return leftAnchorPane;
     }
@@ -61,7 +61,7 @@ public class MainWindow {
         ListView<String> contactListView = new ListView<String>(observableList);
         AnchorPane.setTopAnchor(contactListView, 42.0);
         AnchorPane.setBottomAnchor(contactListView, 42.0);
-        AnchorPane.setLeftAnchor(contactListView, 0.0);
+        AnchorPane.setLeftAnchor(contactListView, 8.0);
         AnchorPane.setRightAnchor(contactListView, 0.0);
 
         contactListView.setCellFactory(list -> new AttachmentListCell());
@@ -119,7 +119,7 @@ public class MainWindow {
         TextField searchTextField = new TextField();
         searchTextField.setPromptText("Search");
         AnchorPane.setTopAnchor(searchTextField, 8.0);
-        AnchorPane.setLeftAnchor(searchTextField, 38.0);
+        AnchorPane.setLeftAnchor(searchTextField, 46.0);
         AnchorPane.setRightAnchor(searchTextField, 102.0);
 
 
@@ -140,7 +140,7 @@ public class MainWindow {
         choiceBox.getSelectionModel().selectFirst();
 
         AnchorPane.setTopAnchor(choiceBox, 8.0);
-        AnchorPane.setRightAnchor(choiceBox, 8.0);
+        AnchorPane.setRightAnchor(choiceBox, 0.0);
 
 
         choiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
