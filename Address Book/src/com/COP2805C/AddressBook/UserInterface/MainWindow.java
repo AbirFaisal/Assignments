@@ -51,7 +51,8 @@ public class MainWindow {
         AnchorPane.setLeftAnchor(leftAnchorPane, 0.0);
         AnchorPane.setRightAnchor(leftAnchorPane, 0.0);
 
-        leftAnchorPane.setStyle("-fx-background-color: #2b5797");
+        if (Functions.isWindows()) leftAnchorPane.setStyle("-fx-background-color: #2b5797");
+        else leftAnchorPane.setStyle("-fx-background-color: #e7e7e7");
 
         return leftAnchorPane;
     }
@@ -62,7 +63,7 @@ public class MainWindow {
         AnchorPane.setTopAnchor(contactListView, 42.0);
         AnchorPane.setBottomAnchor(contactListView, 42.0);
         AnchorPane.setLeftAnchor(contactListView, 8.0);
-        AnchorPane.setRightAnchor(contactListView, 0.0);
+        AnchorPane.setRightAnchor(contactListView, 8.0);
 
         contactListView.setCellFactory(list -> new AttachmentListCell());
         contactListView.setFixedCellSize(40.0);

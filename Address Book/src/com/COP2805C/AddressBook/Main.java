@@ -219,7 +219,12 @@ public class Main extends Application {
             Functions.zeroAnchor(text);
 
             rightAnchorPane = new AnchorPane(text);
+
+            if (Functions.isWindows())
             rightAnchorPane.setStyle("-fx-background-color: #2d89ef");
+            else rightAnchorPane.setStyle("-fx-background-color: #e7e7e7");
+
+
         }
         Functions.zeroAnchor(rightAnchorPane);
 
@@ -250,6 +255,7 @@ public class Main extends Application {
         for (int i = 0; i < contactInformationArrayList.size(); i++) {
             contactObservableList.add(Functions.getFormattedNameFMLNP(contactInformationArrayList.get(i)));
         }
+
 
 
         //Left side Anchor Pane //TODO add group add button

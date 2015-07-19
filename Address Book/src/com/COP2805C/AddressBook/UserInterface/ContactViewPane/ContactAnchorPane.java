@@ -48,7 +48,9 @@ public class ContactAnchorPane implements ContactView {
 
 
         //Add some color
-        contactViewAnchorPane.setStyle("-fx-background-color: #2b5797");
+        if (Functions.isWindows()) contactViewAnchorPane.setStyle("-fx-background-color: #2b5797");
+        else contactViewAnchorPane.setStyle("-fx-background-color: #e7e7e7");
+
 
         return contactViewAnchorPane;
     }
@@ -82,7 +84,12 @@ public class ContactAnchorPane implements ContactView {
             contactImageView.fitWidthProperty().set(100.0);
 
             //TODO make it work
-            //contactImageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 20, 1.0, 200, 200)");
+            //contactImageView.setStyle("-fx-effect: dropshadow(gaussian, black, 10, 1.0, 50, 50)");
+            contactImageView.setStyle(
+                    "-fx-background-color: palegreen; " +
+                    "-fx-background-insets: 10; " +
+                    "-fx-background-radius: 10; " +
+                    "-fx-effect: dropshadow(three-pass-box, purple, 10, 0, 0, 0)");
 
             return contactImageView;
 

@@ -45,7 +45,9 @@ public class GroupManagerWindow {
 
         anchorPane.setStyle("-fx-background-color: linear-gradient(#4A4A4A 0%, #2B2B2B 100%)");
         Scene scene = new Scene(anchorPane);
-        scene.getStylesheets().add("/winStyle.css");
+
+        if (Functions.isWindows()) scene.getStylesheets().add("/winStyle.css");
+        else scene.getStylesheets().add("/nixStyle.css");
 
         return scene;
     }
@@ -72,7 +74,8 @@ public class GroupManagerWindow {
             dialog.setHeaderText("Enter Group Name");
             dialog.setGraphic(null);
 
-            dialog.getDialogPane().getStylesheets().add("/winStyle.css"); //TODO
+            if (Functions.isWindows()) dialog.getDialogPane().getStylesheets().add("/winStyle.css"); //TODO
+            else dialog.getDialogPane().getStylesheets().add("/nixStyle.css"); //TODO
 
             Optional<String> result = dialog.showAndWait();
             String entered = "";

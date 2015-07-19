@@ -140,10 +140,16 @@ public class AddContactForm implements Form {
                 addButton("Add Workplace", "Workplace", this.workplacesGridPane, this.workplaceTextFields));
 
         this.anchorPane = anchorPane(this.flowpane, buttonsFlowPane);
-        this.anchorPane.setStyle("-fx-background-color: #2b5797");
+
+        if (Functions.isWindows()) this.anchorPane.setStyle("-fx-background-color: #2b5797");
+        //else this.anchorPane.setStyle("-fx-background-color: #e7e7e7");
+
 
         this.scene = new Scene(this.anchorPane, 800.0, 625.0);
-        this.scene.getStylesheets().add("winStyle.css");
+
+        if (Functions.isWindows()) this.scene.getStylesheets().add("winStyle.css");
+        else this.scene.getStylesheets().add("nixStyle.css");
+
         return this.scene; //new Scene(anchorPane, 800, 625);
     }
 
