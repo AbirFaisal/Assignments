@@ -13,7 +13,9 @@ import java.util.ArrayList;
  * Will Herrin
  *
  * COP2805 Valencia College
- * Professor dsfasdfa
+ * Professor Jeho Park
+ *
+ * Contact Information class contains member variables and getters/setters for contact object.
  */
 
 /**
@@ -21,8 +23,7 @@ import java.util.ArrayList;
  */
 public class ContactInformation {
 
-    //Key from the database
-
+    //Member variables
     private int key;
     private String group;
 
@@ -48,7 +49,7 @@ public class ContactInformation {
     private LocalDate birthday;
 
 
-    //TESTING Empty
+    //Constructors
     public ContactInformation() {
         this.key = 0;
     }
@@ -85,7 +86,7 @@ public class ContactInformation {
         this.birthday = birthday;
     }
 
-
+    //Getters/setters
     public int getKey() {
         return key;
     }

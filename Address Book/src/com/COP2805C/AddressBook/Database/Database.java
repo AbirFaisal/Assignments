@@ -1,5 +1,4 @@
 package com.COP2805C.AddressBook.Database;
-
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Contacts.ContactInformationBuilder;
 import com.COP2805C.AddressBook.Functions;
@@ -22,23 +21,24 @@ import java.util.ArrayList;
  * Will Herrin
  *
  * COP2805 Valencia College
- * Professor dsfasdfa
+ * Professor Jeho Park
+ *
+ * This class's purpose is to handle database interaction. It utilizes a singleton pattern, so that only one database object can be created and used.
  */
 
-/**
- * Created by abirfaisal on 6/10/15.
- */
 public class Database {
+    //Member variables
     private static final Database DATABASE = new Database();
     private static Connection connection = null;
-
+    //Private constructor
     private Database() {
     }
-
+    //Returns database object.
     public static Database getDatabase() {
         return DATABASE;
     }
 
+    //Returns the password of passed account in order to check for authentication see Crypto class.
     public static String getPassword(String[] credentials) {
         String query = "SELECT PASSWORD FROM ACCOUNTS WHERE ACCOUNT=?";
         PreparedStatement preparedStatement;
@@ -57,7 +57,7 @@ public class Database {
         }
         return password;
     }
-
+    //Initializes the database. Ignores if database exists.
     public void initialize() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -82,6 +82,7 @@ public class Database {
         }
     }
 
+    //Returns an ArrayList of contacts of the specified group.
     public ArrayList<ContactInformation> populateContactList(String[] credentials, String group) {
 
         ArrayList<Integer> contactID = new ArrayList<>();
@@ -100,7 +101,7 @@ public class Database {
 
         return contactInformationArrayList;
     }
-
+    //Returns the number of contacts for the passed account
     public int numberOfContacts(String[] credentials) {
         String query = "SELECT COUNT(ACCOUNT) AS NumberOfContacts FROM CONTACTS WHERE ACCOUNT=?";
         PreparedStatement preparedStatement;
@@ -143,7 +144,7 @@ public class Database {
             return true;
         }
     }
-
+    //Checks if the account exists on the database.
     public boolean doesUserExist(String[] credentials) {
         String query = "SELECT ACCOUNT FROM ACCOUNTS WHERE ACCOUNT=?";
         PreparedStatement preparedStatement;
@@ -165,7 +166,7 @@ public class Database {
             return false;
         }
     }
-
+    //Returns the contactIDS of contacts from the account and group that match the parameters.
     public ArrayList<Integer> getContactIDS(String[] credentials, String group) {
         String query = "SELECT CONTACT_ID FROM CONTACTS WHERE ACCOUNT=? AND GROUP_ASSC=?";
         PreparedStatement preparedStatement;
@@ -190,7 +191,7 @@ public class Database {
             return null;
         }
     }
-
+    //Returns an ArrayList of all the contactIDs of the specified account regardless of group
     public ArrayList<Integer> getContactIDS(String[] credentials) {
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -212,7 +213,7 @@ public class Database {
             return null;
         }
     }
-
+    //Returns an ArrayList of all distinct groups for the specified account.
     public ArrayList<String> getGroups(String[] credentials) {
         String query = "SELECT DISTINCT GROUP_ASSC FROM CONTACTS WHERE ACCOUNT=?";
         PreparedStatement preparedStatement;
@@ -256,7 +257,7 @@ public class Database {
             e.printStackTrace();
         }
     }
-
+    //Deletes all the contacts from an account that are part of the specified group.
     public void deleteGroup(String[] credentials, String group) {
         String update = "DELETE FROM CONTACTS WHERE ACCOUNT = ? AND GROUP_ASSC = ?";
         PreparedStatement preparedStatement;
@@ -306,7 +307,7 @@ public class Database {
         return key;
     }
 
-    //TODO Decide later if we want to return key in order to minimize resource overhead.
+    //createContact function takes in credentials and a passed contactInformation object and adds the contact to the database. Returns the key of the added contact.
     public int createContact(String[] credentials, ContactInformation contactInformation) {
         int key;
 
@@ -415,7 +416,7 @@ public class Database {
             }
         }
     }
-
+    //Adds birthday to database
     public void addDOB(int CONTACT_ID, LocalDate birthday) {
         String query = "UPDATE CONTACTS SET DOB =? WHERE CONTACT_ID =?";
         PreparedStatement preparedStatement;
@@ -430,7 +431,7 @@ public class Database {
             System.out.println(e);
         }
     }
-
+    //Adds group to the database.
     public void addGroup(int CONTACT_ID, String GROUP_ASSC) {
         String query = "UPDATE CONTACTS SET GROUP_ASSC=? WHERE CONTACT_ID =?";
         PreparedStatement preparedStatement;
@@ -445,7 +446,7 @@ public class Database {
             System.out.println(e);
         }
     }
-
+    //Adds contact notes to the database.
     public void addNotes(int CONTACT_ID, String NOTES) {
         String update = "UPDATE CONTACTS SET NOTES=? WHERE CONTACT_ID =?";
         PreparedStatement preparedStatement;
@@ -461,73 +462,73 @@ public class Database {
         }
     }
 
-
+    //Retrieves emails, phoneNumbers, or Workplaces depending on what is passed as the column parameter.
     public ArrayList<String> getDynamicData(int CONTACT_ID, String column) {
         String query = "SELECT * FROM DYNAMIC_DATA WHERE CONTACT_ID = ?";
         return runDynamicStringQuery(CONTACT_ID, column, query);
     }
-
+    //Retrieves group from database.
     public String getGroup(int CONTACT_ID, String GROUP_ASSC) {
         String query = "SELECT GROUP_ASSC FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, GROUP_ASSC, query);
     }
-
+    //Retrieves First name from database.
     public String getFName(int CONTACT_ID, String F_NAME) {
         String query = "SELECT F_NAME FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, F_NAME, query);
 
     }
-
+    //Retrieves middle name from database.
     public String getMName(int CONTACT_ID, String M_NAME) {
         String query = "SELECT M_NAME FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, M_NAME, query);
     }
-
+    //Retrieves last name from database.
     public String getLName(int CONTACT_ID, String L_NAME) {
         String query = "SELECT L_NAME FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, L_NAME, query);
     }
-
+    //Retrieves nick name from database.
     public String getNName(int CONTACT_ID, String N_NAME) {
         String query = "SELECT N_NAME FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, N_NAME, query);
     }
-
+    //Retrieves address line 1 from database.
     public String getAddress1(int CONTACT_ID, String ADDRESSLINE1) {
         String query = "SELECT ADDRESSLINE1 FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, ADDRESSLINE1, query);
     }
-
+    //Retrieves address line 2 from database.
     public String getAddress2(int CONTACT_ID, String ADDRESSLINE2) {
         String query = "SELECT ADDRESSLINE2 FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, ADDRESSLINE2, query);
     }
-
+    //Retrieves city from database.
     public String getCity(int CONTACT_ID, String CITY) {
         String query = "SELECT CITY FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, CITY, query);
     }
-
+    //Retrieves state from database.
     public String getState(int CONTACT_ID, String STATE) {
         String query = "SELECT STATE FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, STATE, query);
     }
-
+    //Retrieves country from database.
     public String getCountry(int CONTACT_ID, String COUNTRY) {
         String query = "SELECT COUNTRY FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, COUNTRY, query);
     }
-
+    //Retrieves zip from database.
     public String getZIP(int CONTACT_ID, String ZIP) {
         String query = "SELECT ZIP FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, ZIP, query);
     }
-
+    //Retrieves notes from database.
     public String getNotes(int CONTACT_ID, String NOTES) {
         String query = "SELECT NOTES FROM CONTACTS WHERE CONTACT_ID = ?";
         return runContactStringQuery(CONTACT_ID, NOTES, query);
     }
-
+    //General query method for static retrieval used for FirstName, LastName, MiddleName, etc.
     private String runContactStringQuery(int CONTACT_ID, String subject, String query) {
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -544,7 +545,7 @@ public class Database {
             return "";
         }
     }
-
+    //General query method for dynamic retrieval used for email, phone #, and workplace.
     private ArrayList<String> runDynamicStringQuery(int CONTACT_ID, String subject, String query) {
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -569,7 +570,7 @@ public class Database {
         }
     }
 
-
+    //Returns birthday from database.
     public String getDOB(int CONTACT_ID) {
         String query = "SELECT DOB FROM CONTACTS WHERE CONTACT_ID =?";
         PreparedStatement preparedStatement;
@@ -585,7 +586,7 @@ public class Database {
         }
     }
 
-
+    //Returns profileImage from database.
     public Image getPicture(int CONTACT_ID) {
         Image profilePic;
         OutputStream outputStream = null;
@@ -601,7 +602,6 @@ public class Database {
             }
             if (Functions.isWindows()) {
                 String workingDir = System.getProperty("user.dir");
-                //TODO fix for windows.
                 outputStream = new FileOutputStream("src\\res\\profilePic" + CONTACT_ID + ".png");
             } else {
                 outputStream = new FileOutputStream("src/res/profilePic" + CONTACT_ID + ".png");
@@ -634,7 +634,7 @@ public class Database {
         }
         return profilePic;
     }
-
+    //Adds dynamic data to database based on passed dynamicData parameter. Ex: email, phone#, and workplace.
     public void addDynamicData(int CONTACT_ID, ArrayList<String> dynamicData, String subject) {
         PreparedStatement preparedStatement;
         try {
@@ -651,7 +651,7 @@ public class Database {
         }
 
     }
-
+    //Method to close database connection.
     public void closeDB() throws SQLException {
         connection.close();
     }
