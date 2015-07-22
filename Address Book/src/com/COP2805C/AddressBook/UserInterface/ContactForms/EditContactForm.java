@@ -16,15 +16,9 @@ import java.util.ArrayList;
  * Will Herrin
  *
  * COP2805 Valencia College
- * Professor dsfasdfa
+ * Professor Jeho Park
  */
 
-/**
- * Created by abirfaisal on 6/23/15.
- */
-
-//TODO have this extend ContactForm instead of AddContactForm. And have AddContactForm extend ContactForm as well.
-//This is how I am thinking we should approach this.
 public class EditContactForm extends AddContactForm implements Form {
 
 
@@ -67,7 +61,6 @@ public class EditContactForm extends AddContactForm implements Form {
 
     private void setContactFields() {
         setTextFields();
-        setProfilePicture();
         setDOB();
     }
 
@@ -83,10 +76,6 @@ public class EditContactForm extends AddContactForm implements Form {
         this.textFields.get(8).setText(contactInformation.getZip());
         this.textFields.get(9).setText(contactInformation.getCountry());
         this.notesTextArea.setText(contactInformation.getNotes());
-    }
-
-    private void setProfilePicture() {
-        //TODO Chris is this nessessary?
     }
 
     private void setDOB() {

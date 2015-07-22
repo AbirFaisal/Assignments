@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /*
@@ -32,7 +33,7 @@ import java.util.ArrayList;
  * Will Herrin
  *
  * COP2805 Valencia College
- * Professor dsfasdfa
+ * Professor Jeho Park
  */
 
 public class AddContactForm implements Form {
@@ -339,7 +340,7 @@ public class AddContactForm implements Form {
             //TODO this below statement is so that when they click save it immediately closes the addContactWindow. It prevents duplicates.
             addContactStage.close();
             Functions.refreshContactArray();
-            //Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
+            Collections.sort(Main.getContactInformationArrayList(), new Functions.FirstNameComparator());
             Functions.refreshListView();
         });
 
@@ -387,7 +388,7 @@ public class AddContactForm implements Form {
         //Birth Date is set from input by the user.
         try {
             this.contactInformation.setBirthday(birthDatePicker.getValue().toString());
-        } catch (NullPointerException ex) {//TODO setup a better NullValue for datePicker
+        } catch (NullPointerException ex) {
             System.out.println("No dob entered: " + ex);
         }
     }

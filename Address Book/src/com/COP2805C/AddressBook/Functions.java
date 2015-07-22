@@ -22,7 +22,9 @@ import java.util.Comparator;
  * Will Herrin
  *
  * COP2805 Valencia College
- * Professor dsfasdfa
+ * Professor Jeho Park
+ *
+ * The purpose of this class is to contain all methods that are utilized throughout the application, but do not warrant a separate class.
  */
 
 /**
@@ -30,12 +32,12 @@ import java.util.Comparator;
  */
 public class Functions {
 
-    //TODO Optimize search so that it only shows relevant contacts in contactList
+    //Search mechanics.
     public static void searchByKey(String oldValue, String newValue) {
 
         String previousGroup = null;
 
-        //This method will search Googlishly for the contact typed in. When the searchfield is emptied it will return to the group the user was previously in.
+        //This method will search Googlish for contacts that match what is types in the search textField
         if (oldValue.length() == 0) {
             previousGroup = Main.getGroupChoiceBox().getSelectionModel().getSelectedItem();
         }
@@ -68,7 +70,7 @@ public class Functions {
         }
     }
 
-
+    //Refreshes the listView of the main window.
     public static void refreshListView() {
         //Clear GUI list
         Main.getContactObservableList().clear();
@@ -81,14 +83,14 @@ public class Functions {
         Main.getContactListView().getSelectionModel().selectFirst();
     }
 
-
+    //Refreshes contactInformationArrayList with contacts from the database.
     public static void refreshContactArray() {
         Main.setContactInformationArrayList(
                 Main.getDatabase().populateContactList(
                         Main.getCredentials(), "Main"));
     }
 
-
+    //Refreshes groups in the groupObservableList
     public static void refreshGroupList() {
         Main.getGroupObservableList().clear();
         Main.getGroupObservableList().add("Main");
@@ -101,7 +103,7 @@ public class Functions {
         AnchorPane.setLeftAnchor(node, 0.0);
         AnchorPane.setRightAnchor(node, 0.0);
     }
-
+    //Method to create an account on the database.
     public static String[] createAccount(Database database) {
         String[] credentials;
         do {
@@ -153,7 +155,7 @@ public class Functions {
         }
     }
 
-
+    //Method to check the strength of password.
     public static boolean isPasswordStrong(String username, String password) {
 
         if (password.contains(username)) {
@@ -236,7 +238,7 @@ public class Functions {
 
         return name;
     }
-
+    //Returns String of the operating system.
     public static String getOsName() {
         String OS = null;
 
@@ -250,6 +252,7 @@ public class Functions {
         return getOsName().startsWith("Windows");
     }
 
+    //Returns the working directory of the project.
     public static String workingDirectory() {
         String workingDir = System.getProperty("user.dir");
 
@@ -280,6 +283,13 @@ public class Functions {
                 contact2 = Long.parseLong(o2.getPhoneNumbers().get(0).replace("-", ""));
             }
             return Long.compare(contact1, contact2);
+        }
+    }
+    //Sorting comparator by FirstName
+    public static class FirstNameComparator implements Comparator<ContactInformation> {
+        @Override
+        public int compare(ContactInformation o1, ContactInformation o2) {
+            return o1.getFirstName().compareToIgnoreCase(o2.getFirstName());
         }
     }
 }

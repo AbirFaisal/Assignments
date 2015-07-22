@@ -1,7 +1,6 @@
 package com.COP2805C.AddressBook.UserInterface;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
-import com.COP2805C.AddressBook.FirstNameComparator;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
 import com.COP2805C.AddressBook.UserInterface.ContactForms.FormFactory;
@@ -24,7 +23,7 @@ import java.util.Collections;
  * Will Herrin
  *
  * COP2805 Valencia College
- * Professor dsfasdfa
+ * Professor Jeho Park
  */
 
 /**
@@ -146,7 +145,7 @@ public class MainWindow {
         choiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
 
             if (newValue.contains("First")) {
-                Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
+                Collections.sort(Main.getContactInformationArrayList(), new Functions.FirstNameComparator());
                 Functions.refreshListView();
             }
 
@@ -179,7 +178,7 @@ public class MainWindow {
             Main.setContactInformationArrayList(
                     Main.getDatabase().populateContactList(
                             Main.getCredentials(), newValue));
-            Collections.sort(Main.getContactInformationArrayList(), new FirstNameComparator());
+            Collections.sort(Main.getContactInformationArrayList(), new Functions.FirstNameComparator());
             Functions.refreshListView();
         });
 

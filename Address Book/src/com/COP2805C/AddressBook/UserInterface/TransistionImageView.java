@@ -21,16 +21,15 @@ import java.io.File;
  * Will Herrin
  *
  * COP2805 Valencia College
- * Professor dsfasdfa
+ * Professor Jeho Park
+ *
+ * This class extends ImageView in order to create a custom ImageView with transitions and fileChooser functionality
  */
 
 /**
  * Created by EpiphX on 7/8/15.
  */
 public class TransistionImageView extends ImageView {
-
-    private final String STYLE_NORMAL = "-fx-background-color: transparent; -fx-padding: 4, 6, 6, 4";
-    private final String STYLE_PRESSED = "-fx-background-color: transparent; -fx-padding: 6 4 4 6";
 
     private Image defaultImage;
     private ContactInformation contactInformation;
@@ -86,7 +85,7 @@ public class TransistionImageView extends ImageView {
                 setImage(defaultImage);
             }
         });
-
+        //While mouse is entered image will fade.
         setOnMouseEntered(event -> {
             setCursor(Cursor.HAND); //Change cursor to hand
             FadeTransition ft = new FadeTransition(Duration.millis(225), this);
@@ -96,7 +95,7 @@ public class TransistionImageView extends ImageView {
             ft.setAutoReverse(false);
             ft.play();
         });
-
+        //Once mouse exits image will return to full opacity.
         setOnMouseExited(event -> {
             FadeTransition ft = new FadeTransition(Duration.millis(450), this);
             ft.setFromValue(0.5);
@@ -105,16 +104,14 @@ public class TransistionImageView extends ImageView {
             ft.setAutoReverse(false);
             ft.play();
         });
-        System.out.println("Testing if this prints");
     }
 
-
+    //fileChooser methods. Creates a new fileChooser for the user to pick contactImage.
     public FileChooser fileChooser() {
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.setTitle("View Pictures");
 
-        //TODO make sure this works in windows
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
         return fileChooser;

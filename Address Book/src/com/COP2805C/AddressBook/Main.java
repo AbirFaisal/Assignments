@@ -280,7 +280,7 @@ public class Main extends Application {
 
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Contacts Manager");
-        Collections.sort(contactInformationArrayList, new FirstNameComparator());
+        Collections.sort(contactInformationArrayList, new Functions.FirstNameComparator());
         Functions.refreshListView();
         primaryStage.show();
     }
