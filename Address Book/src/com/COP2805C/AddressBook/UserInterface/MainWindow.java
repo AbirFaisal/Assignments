@@ -140,7 +140,7 @@ public class MainWindow {
         choiceBox.getSelectionModel().selectFirst();
 
         AnchorPane.setTopAnchor(choiceBox, 8.0);
-        AnchorPane.setRightAnchor(choiceBox, 0.0);
+        AnchorPane.setRightAnchor(choiceBox, 8.0);
 
 
         choiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {

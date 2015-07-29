@@ -10,6 +10,12 @@
  */
 
 
+/*
+ This theme is based on Windows 8/10
+ Using the Windows 8/10 color pallet
+*/
+
+
 .label{
     -fx-text-fill: white;
 }
@@ -58,7 +64,7 @@
 
 .text-area{
     -fx-focus-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .text-area .content{
