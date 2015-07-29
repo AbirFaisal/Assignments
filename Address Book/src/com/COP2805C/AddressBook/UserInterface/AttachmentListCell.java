@@ -8,18 +8,14 @@ import javafx.scene.shape.Circle;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
- * Professor dsfasdfa
+ * COP2805C Valencia College
+ * Professor Jeho Park
  */
-
-/**
- * Created by abirfaisal on 7/2/15.
- */ //TODO Chris does this add the images to the list view?
 
 //Custom ListCell for listView
 public class AttachmentListCell extends ListCell<String> {

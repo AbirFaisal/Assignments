@@ -20,13 +20,13 @@ import java.util.ArrayList;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
- * Professor dsfasdfa
+ * COP2805C Valencia College
+ * Professor Jeho Park
  */
 
 /**
@@ -93,7 +93,7 @@ public class ContactAnchorPane implements ContactView {
         return new ImageView();
     }
 
-    //TODO use method in functions java
+    //Name Label text
     public static Text nameText(ContactInformation contactInformation) {
         String name = Functions.getFormattedNameFMLN(contactInformation);
 
@@ -108,6 +108,7 @@ public class ContactAnchorPane implements ContactView {
         return nameText;
     }
 
+    //Contact Information Text Flow
     public static TextFlow informationTextFlow(Text text) {
 
         TextFlow informationTextFlow = new TextFlow(text);
@@ -121,6 +122,7 @@ public class ContactAnchorPane implements ContactView {
         return informationTextFlow;
     }
 
+    //Information Text, takes preformated string
     public static Text informationText(String informationText) {
 
         Text text = new Text(informationText);
@@ -131,6 +133,7 @@ public class ContactAnchorPane implements ContactView {
         return text;
     }
 
+    //Takes contactInformation Object and returns properly formatted string
     public static String getInformationString(ContactInformation contactInformation) {
 
         String phoneNumbers = getFormattedPhoneNumbers(contactInformation.getPhoneNumbers());
@@ -148,6 +151,7 @@ public class ContactAnchorPane implements ContactView {
         return new String(phoneNumbers + emails + workPlaces + address + birthDate + notes);
     }
 
+    //Returns formatted birthday string given LocalDate object
     public static String getFormattedBirthdate(LocalDate date) {
         String birthDate;
 
@@ -165,6 +169,7 @@ public class ContactAnchorPane implements ContactView {
         return birthDate;
     }
 
+    //Returns formatted phone numbers given a string array
     public static String getFormattedPhoneNumbers(ArrayList<String> phoneNumberArrayList) {
 
         if (phoneNumberArrayList.size() > 0) {

@@ -9,13 +9,13 @@ import java.security.NoSuchAlgorithmException;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
- * Professor dsfasdfa
+ * COP2805C Valencia College
+ * Professor Jeho Park
  */
 
 /**
@@ -23,8 +23,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Crypto {
 
-
-    //TODO decide string or bytes[]
+    //Takes string and returns string SHA value
     public static String stringSHA(String string) {
 
         byte[] digest = new byte[0];
@@ -37,9 +36,6 @@ public class Crypto {
             digest = messageDigest.digest();
             SHAkey = new HexBinaryAdapter().marshal(digest);
 
-            //TODO TEST REMOVE
-            //System.out.println("SHA256: " + SHAkey);
-
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -47,7 +43,7 @@ public class Crypto {
         return SHAkey;
     }
 
-
+    //takes string and SHA string and compares them
     public static boolean verifySHA(String input, String SHA) {
 
         //get SHA
@@ -57,19 +53,7 @@ public class Crypto {
         return inputSHA.equals(SHA);
     }
 
-
-    public static String encryptString(String string) {
-        //TODO
-        return string;
-    }
-
-
-    public static String decryptString(String string) {
-        //TODO
-        return string;
-    }
-
-
+    //Authenticates the user, takes 2 element string array
     public static boolean authenticateUser(String[] credentials) {
 
         //Check if user exsists

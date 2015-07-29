@@ -15,26 +15,24 @@ import java.io.File;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
+ * COP2805C Valencia College
  * Professor Jeho Park
- *
- * This class extends ImageView in order to create a custom ImageView with transitions and fileChooser functionality
  */
 
 /**
  * Created by EpiphX on 7/8/15.
  */
-public class TransistionImageView extends ImageView {
+public class TransitionImageView extends ImageView {
 
     private Image defaultImage;
     private ContactInformation contactInformation;
 
-    public TransistionImageView(ContactInformation contactInformation) {
+    public TransitionImageView(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
 
 
@@ -70,7 +68,7 @@ public class TransistionImageView extends ImageView {
             try {
                 String filePath;
                 if (Functions.isWindows()) {
-                    //filePath = fileChooser.showOpenDialog(new Stage()).getAbsolutePath();
+                    filePath = fileChooser.showOpenDialog(new Stage()).getAbsolutePath();
                     File tempFile = new File(fileChooser.showOpenDialog(new Stage()).getAbsolutePath());
                     filePath = tempFile.toURI().toURL().toString();
                 } else {

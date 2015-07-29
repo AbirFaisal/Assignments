@@ -1,13 +1,19 @@
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
- * Professor dsfasdfa
+ * COP2805C Valencia College
+ * Professor Jeho Park
  */
+
+
+/*
+ This theme is based on Windows 8/10
+ Using the Windows 8/10 color pallet
+*/
 
 
 .label{
@@ -58,7 +64,7 @@
 
 .text-area{
     -fx-focus-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .text-area .content{

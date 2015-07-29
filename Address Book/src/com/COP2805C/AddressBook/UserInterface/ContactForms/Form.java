@@ -4,13 +4,13 @@ import javafx.scene.Scene;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
- * Professor dsfasdfa
+ * COP2805C Valencia College
+ * Professor Jeho Park
  */
 
 /**

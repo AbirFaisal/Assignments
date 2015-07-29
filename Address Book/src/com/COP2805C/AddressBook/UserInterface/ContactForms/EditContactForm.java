@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Functions;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -10,12 +11,12 @@ import java.util.ArrayList;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
+ * COP2805C Valencia College
  * Professor Jeho Park
  */
 
@@ -28,6 +29,7 @@ public class EditContactForm extends AddContactForm implements Form {
 
     @Override
     public Scene form() {
+        //Use everything form add form
         super.form();
 
         //add static data labels and fields
@@ -36,15 +38,21 @@ public class EditContactForm extends AddContactForm implements Form {
             this.textFields.add(textField(this.labelStrings[i]));
         }
 
+        //set data for static fields
+        setTextFields();
+        setDOB();
+
+        //add dynamic data for each field in contactInformation Object
         addDynamicData(this.phoneGridPane, this.phoneTextFields, this.contactInformation.getPhoneNumbers());
         addDynamicData(this.emailGridPane, this.emailTextFields, this.contactInformation.getEmails());
         addDynamicData(this.workplacesGridPane, this.workplaceTextFields, this.contactInformation.getWorkPlaces());
-        setContactFields();
 
+        //Set title to contact name
+        this.addContactStage.setTitle("Edit Contact: " + Functions.getFormattedNameFMLN(this.contactInformation));
         return this.scene;
     }
 
-
+    //Add the dynamic data fields to the Edit form
     private void addDynamicData(GridPane gridPane, ArrayList<TextField> textFields, ArrayList<String> field) {
 
         for (int i = 0; i < field.size(); i++) {
@@ -57,11 +65,6 @@ public class EditContactForm extends AddContactForm implements Form {
                     removeButton(
                             gridPane, textFields, textFields.get(textFields.size() - 1)), 1, textFields.size());
         }
-    }
-
-    private void setContactFields() {
-        setTextFields();
-        setDOB();
     }
 
     private void setTextFields() {

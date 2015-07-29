@@ -4,13 +4,13 @@ import javax.swing.*;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
- * Professor dsfasdfa
+ * COP2805C Valencia College
+ * Professor Jeho Park
  */
 
 /**
@@ -18,6 +18,7 @@ import javax.swing.*;
  */
 public class LoginWindow {
 
+    //Login Dialuge
     public static String[] loginPrompt() {
 
         //Username
@@ -63,12 +64,7 @@ public class LoginWindow {
         //Login
         if (login == 0) {
             //Return string array with username and password
-
-            //TODO TEST re enable this and disable the next line!
             return new String[]{usernameJTextField.getText(), passwordJTextField.getText()};
-            //return new String[]{"Chris_12456", "121212"};
-
-
         } else {
             //if return null if create account
             return null;
