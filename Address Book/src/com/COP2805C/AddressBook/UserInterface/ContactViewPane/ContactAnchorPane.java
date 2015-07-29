@@ -5,6 +5,7 @@ import com.COP2805C.AddressBook.Functions;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -77,25 +78,16 @@ public class ContactAnchorPane implements ContactView {
 
             ImageView contactImageView = new ImageView(contactInformation.getProfileImage());
 
-            //add clipping mask to makle image a circle
-            contactImageView.setClip(new Circle(50, 50, 48));
+            Circle circle = new Circle(50,50,48);
+            contactImageView.setClip(circle);
 
             contactImageView.fitHeightProperty().set(100.0);
             contactImageView.fitWidthProperty().set(100.0);
-
-            //TODO make it work
-            //contactImageView.setStyle("-fx-effect: dropshadow(gaussian, black, 10, 1.0, 50, 50)");
-            contactImageView.setStyle(
-                    "-fx-background-color: palegreen; " +
-                    "-fx-background-insets: 10; " +
-                    "-fx-background-radius: 10; " +
-                    "-fx-effect: dropshadow(three-pass-box, purple, 10, 0, 0, 0)");
 
             return contactImageView;
 
         } catch (Exception e) {
             System.out.println("No Profile image");
-            //TODO use default image
         }
 
         return new ImageView();
@@ -109,7 +101,9 @@ public class ContactAnchorPane implements ContactView {
 
         //Style
         nameText.setFont(Font.font(24.0));
-        nameText.setFill(Paint.valueOf("white"));
+        if(Functions.isWindows()) {
+            nameText.setFill(Paint.valueOf("white"));
+        }
 
         return nameText;
     }
@@ -131,8 +125,9 @@ public class ContactAnchorPane implements ContactView {
 
         Text text = new Text(informationText);
 
-        text.setFill(Paint.valueOf("white"));
-
+        if(Functions.isWindows()) {
+            text.setFill(Paint.valueOf("white"));
+        }
         return text;
     }
 
