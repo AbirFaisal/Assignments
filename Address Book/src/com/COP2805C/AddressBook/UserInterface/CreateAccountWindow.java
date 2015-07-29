@@ -20,6 +20,7 @@ import java.util.Objects;
 public class CreateAccountWindow {
 
 
+    //Create Account dialog
     public static String[] createAccount() {
 
         //Username

@@ -162,8 +162,6 @@ public class Functions {
         }
 
         if (password.length() < 5) {
-            //TODO remove
-            System.out.println(password);
             JOptionPane.showMessageDialog(null, "Your password must be at least 6 characters long");
             return false;
         }
@@ -222,6 +220,7 @@ public class Functions {
         return name;
     }
 
+    //Formatted String First Middle Last Nickname and Main Phone number
     public static String getFormattedNameFMLNP(ContactInformation contactInformation) {
 
         String name = getFormattedNameFMLN(contactInformation);

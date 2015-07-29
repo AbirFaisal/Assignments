@@ -18,7 +18,9 @@ import javafx.scene.input.MouseEvent;
  * Professor Jeho Park
  */
 
+/**-------------**/
 /** DEPRECIATED **/
+/**-------------**/
 
 public class ImageButton extends Button {
 

@@ -244,8 +244,12 @@ public class ContactAnchorPane implements ContactView {
             addressString = addressString + contactInformation.getState() + " ";
         }
 
-        if (contactInformation.getZip().length() > 0) {
+        try{
+            if (contactInformation.getZip().length() > 0) {
             addressString = addressString + contactInformation.getZip() + "\n";
+            }
+        }catch(Exception e){
+            System.out.println("No Zip Code");
         }
 
         if (contactInformation.getCountry().length() > 0) {

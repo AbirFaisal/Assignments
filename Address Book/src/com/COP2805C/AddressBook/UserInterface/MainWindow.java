@@ -30,9 +30,7 @@ import java.util.Optional;
  * Professor Jeho Park
  */
 
-/**
- * Created by abirfaisal on 6/8/15.
- */
+
 public class MainWindow {
 
     public static SplitPane splitPane(Node... FXNode) {
@@ -95,10 +93,12 @@ public class MainWindow {
     }
 
     //Add Contact Button
-    //TODO Instead of passing mainStage, I opted to have it generate a stage within the button for its use.
-    //TODO I did this because mainStage was persisting in the memory and not allowing me to use modality.
-    //TODO I needed to use modality to prevent the user from messing with the Main window while in the addContact form and thus protecting our database from corruption.
-
+    /**
+     * Instead of passing mainStage, I opted to have it generate a stage within the button for its use.
+     * I did this because mainStage was persisting in the memory and not allowing me to use modality.
+     * I needed to use modality to prevent the user from messing with the Main window while in the addContact form.
+     * Thus protecting our database from corruption.
+     * **/
     public static Button addButton() {
         Button button = new Button("+");
         FormFactory formFactory = new FormFactory();

@@ -63,6 +63,7 @@ public class AddContactForm implements Form {
     DatePicker birthDatePicker;
     AnchorPane anchorPane;
     Scene scene;
+    Boolean errors;
 
     public AddContactForm(ContactInformation contactInformation, Stage stage) {
         this.contactInformation = contactInformation;
@@ -313,6 +314,8 @@ public class AddContactForm implements Form {
 
     public Button saveButton() {
         Button button = new Button("Save");
+        this.errors = false;
+
 
         AnchorPane.setBottomAnchor(button, 5.0);
         AnchorPane.setLeftAnchor(button, 50.0);
@@ -334,18 +337,20 @@ public class AddContactForm implements Form {
             //Save Dynamic Data
             saveDynamicData();
 
-            //add to database
-            //Add key to contactInformation Object
-            this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
+            //Save data and close window if there are no errors
+            if (this.errors = false) {
+                //add to database
+                //Add key to contactInformation Object
+                this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
 
-            //This below statement is so that when they click save it immediately closes the addContactWindow.
-            // It prevents duplicates.
-            addContactStage.close();
-            Functions.refreshContactArray();
-            Collections.sort(Main.getContactInformationArrayList(), new Functions.FirstNameComparator());
-            Functions.refreshListView();
+                //This below statement is so that when they click save it immediately closes the addContactWindow.
+                // It prevents duplicates.
+                addContactStage.close();
+                Functions.refreshContactArray();
+                Collections.sort(Main.getContactInformationArrayList(), new Functions.FirstNameComparator());
+                Functions.refreshListView();
+            }
         });
-
         return button;
     }
 
@@ -377,8 +382,12 @@ public class AddContactForm implements Form {
         this.contactInformation.setState(
                 this.textFields.get(7).getText());
 
-        this.contactInformation.setZip(
-                this.textFields.get(8).getText());
+        if (checkZip()) {
+            this.contactInformation.setZip(
+                    this.textFields.get(8).getText());
+        }else {
+            this.contactInformation.setZip("");
+        }
 
         this.contactInformation.setCountry(
                 this.textFields.get(9).getText());
@@ -406,6 +415,7 @@ public class AddContactForm implements Form {
         this.contactInformation.getWorkPlaces().clear();
 
         //Phone Numbers
+        //TODO error checking
         for (int i = 0; i < this.phoneTextFields.size(); i++) {
             //Make sure field is not empty
             if (this.phoneTextFields.get(i).getLength() > 0) {
@@ -445,5 +455,32 @@ public class AddContactForm implements Form {
         });
 
         return button;
+    }
+
+    public boolean checkZip(){
+        String string = this.textFields.get(8).getText();
+
+        if (string.length() > 5){
+            this.errors = true;
+            inputErrorDialog("Zipcode must be 5 digits", string);
+            return false;
+        }
+
+        if (!string.contains("^[0-9]+$")){
+            this.errors = true;
+            inputErrorDialog("Zip Code must contain only numbers", string);
+            return false;
+        }
+
+        this.errors = false;
+        return true;
+    }
+
+    public void inputErrorDialog(String message, String userInput){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Input Error");
+        alert.setHeaderText(message);
+        alert.setContentText("You entered: " + userInput);
+        alert.showAndWait();
     }
 }
