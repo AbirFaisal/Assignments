@@ -16,13 +16,13 @@ import java.util.Optional;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
- * Professor dsfasdfa
+ * COP2805C Valencia College
+ * Professor Jeho Park
  */
 
 public class GroupManagerWindow {
@@ -63,7 +63,7 @@ public class GroupManagerWindow {
         return groupListView;
     }
 
-
+    //Add Group Button
     public static Button addButton() {
         Button button = new Button("Add Group");
 
@@ -74,8 +74,8 @@ public class GroupManagerWindow {
             dialog.setHeaderText("Enter Group Name");
             dialog.setGraphic(null);
 
-            if (Functions.isWindows()) dialog.getDialogPane().getStylesheets().add("/winStyle.css"); //TODO
-            else dialog.getDialogPane().getStylesheets().add("/nixStyle.css"); //TODO
+            if (Functions.isWindows()) dialog.getDialogPane().getStylesheets().add("/winStyle.css");
+            else dialog.getDialogPane().getStylesheets().add("/nixStyle.css");
 
             Optional<String> result = dialog.showAndWait();
             String entered = "";
@@ -92,6 +92,7 @@ public class GroupManagerWindow {
         return button;
     }
 
+    //Delete Group button
     private static Button deleteButton(ListView<String> listView) {
         Button button = new Button("Delete Group");
 
@@ -115,7 +116,6 @@ public class GroupManagerWindow {
         button.setOnMouseClicked(e -> {
 
             listView.getSelectionModel().getSelectedIndex();
-
 
             //TODO edit existing group
             //TODO updated contacts in group using new group string

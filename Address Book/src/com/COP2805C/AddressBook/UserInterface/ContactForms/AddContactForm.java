@@ -3,7 +3,7 @@ package com.COP2805C.AddressBook.UserInterface.ContactForms;
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
 import com.COP2805C.AddressBook.Functions;
 import com.COP2805C.AddressBook.Main;
-import com.COP2805C.AddressBook.UserInterface.TransistionImageView;
+import com.COP2805C.AddressBook.UserInterface.TransitionImageView;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -27,12 +27,12 @@ import java.util.Collections;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
+ * COP2805C Valencia College
  * Professor Jeho Park
  */
 
@@ -46,7 +46,7 @@ public class AddContactForm implements Form {
     //Static Data
     ArrayList<Label> labels;
     ArrayList<TextField> textFields;
-    Image contactImage; //TODO forgot what todo
+    Image contactImage; //is this used?
 
     //Dynamic Data
     ArrayList<TextField> phoneTextFields;
@@ -97,7 +97,6 @@ public class AddContactForm implements Form {
             this.textFields.add(textField(this.labelStrings[i]));
         }
 
-        //TODO simplify this
         ArrayList<Label> phoneLabel = new ArrayList<Label>();
         phoneLabel.add(new Label("Phone Numbers"));
 
@@ -108,8 +107,7 @@ public class AddContactForm implements Form {
         workplaceLabel.add(new Label("Workplaces"));
 
 
-        //TODO Contact image view and selector
-        //TODO simplify
+
         this.staticDataGridPane = gridPane(this.labels, this.textFields);
         this.phoneGridPane = gridPane(phoneLabel, this.phoneTextFields);
         this.emailGridPane = gridPane(emailLabel, this.emailTextFields);
@@ -166,7 +164,6 @@ public class AddContactForm implements Form {
     }
 
 
-    //TODO move down a bit
     public Circle circleOverlay() {
         Circle greyCircle = new Circle(50, 50, 50);
         greyCircle.setFill(Paint.valueOf("GRAY"));
@@ -183,8 +180,7 @@ public class AddContactForm implements Form {
     }
 
     public ImageView contactImageView() {
-        ImageView imageView = new TransistionImageView(this.contactInformation);
-        return imageView;
+        return new TransitionImageView(this.contactInformation);
     }
 
     public FlowPane flowPane(Node... FXNode) {
@@ -192,7 +188,6 @@ public class AddContactForm implements Form {
 
         flowPane.getChildren().addAll(FXNode);
 
-        //TODO format this further
         flowPane.setAlignment(Pos.TOP_LEFT);
         flowPane.setOrientation(Orientation.VERTICAL);
         flowPane.setPrefWrapLength(400);
@@ -211,7 +206,6 @@ public class AddContactForm implements Form {
     public GridPane gridPane(ArrayList<Label> labels, ArrayList<TextField> textFields) {
         GridPane gridPane = new GridPane();
 
-        //TODO change gaps
         gridPane.setHgap(5.0);
         gridPane.setVgap(8.0);
 
@@ -344,7 +338,8 @@ public class AddContactForm implements Form {
             //Add key to contactInformation Object
             this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
 
-            //TODO this below statement is so that when they click save it immediately closes the addContactWindow. It prevents duplicates.
+            //This below statement is so that when they click save it immediately closes the addContactWindow.
+            // It prevents duplicates.
             addContactStage.close();
             Functions.refreshContactArray();
             Collections.sort(Main.getContactInformationArrayList(), new Functions.FirstNameComparator());

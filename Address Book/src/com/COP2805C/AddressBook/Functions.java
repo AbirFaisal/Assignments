@@ -16,15 +16,13 @@ import java.util.Comparator;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
+ * COP2805C Valencia College
  * Professor Jeho Park
- *
- * The purpose of this class is to contain all methods that are utilized throughout the application, but do not warrant a separate class.
  */
 
 /**

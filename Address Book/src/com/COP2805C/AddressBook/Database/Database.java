@@ -15,15 +15,13 @@ import java.util.ArrayList;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
+ * COP2805C Valencia College
  * Professor Jeho Park
- *
- * This class's purpose is to handle database interaction. It utilizes a singleton pattern, so that only one database object can be created and used.
  */
 
 public class Database {
@@ -423,7 +421,7 @@ public class Database {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, birthday.toString());    //TODO adjust this thanks chris
+            preparedStatement.setString(1, birthday.toString());
             preparedStatement.setInt(2, CONTACT_ID);
             preparedStatement.executeUpdate();
             preparedStatement.close();

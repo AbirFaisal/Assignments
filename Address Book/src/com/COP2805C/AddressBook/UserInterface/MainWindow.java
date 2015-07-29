@@ -8,21 +8,25 @@ import com.COP2805C.AddressBook.UserInterface.ContactViewPane.ContactViewFactory
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.sqlite.Function;
 
 import java.util.Collections;
+import java.util.Optional;
 
 /*
  * Copyright (c) 2015
- * Abir Faisal
- * Chris Buruchian
  * Alex Truong-Mai
  * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
  *
- * COP2805 Valencia College
+ * COP2805C Valencia College
  * Professor Jeho Park
  */
 
@@ -223,8 +227,7 @@ public class MainWindow {
         menuButton.setText("Edit");
         MenuItem delete = new MenuItem("Delete");
 
-        menuButton.getItems().addAll(delete,
-                new MenuItem("Import/Export"));
+        menuButton.getItems().addAll(delete);
         AnchorPane.setBottomAnchor(menuButton, 8.0);
         AnchorPane.setRightAnchor(menuButton, 8.0);
 
@@ -246,25 +249,51 @@ public class MainWindow {
             stage.show();
         });
 
-        //TODO COMMENT THIS and move to another method
+        //Delete contact button
         delete.setOnAction(e -> {
             int selectedIndex = Main.getContactListView().getSelectionModel().getSelectedIndex();
+            ContactInformation contactInformation = Main.getContactInformationArrayList().get(selectedIndex);
+            String contactNameFMLN = Functions.getFormattedNameFMLN(contactInformation);
 
-            Main.getDatabase().deleteCONTACTID(
-                    Main.getContactInformationArrayList().get(selectedIndex).getKey());
+            //Prompt user for delete confirmation
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Contact");
+            alert.setHeaderText(contactNameFMLN);
+            if (contactInformation.getProfileImage() != null) {
+                ImageView imageView = new ImageView(contactInformation.getProfileImage());
+                imageView.setImage(contactInformation.getProfileImage());
+                imageView.setClip(new Circle(50, 50, 48));
+                imageView.setFitHeight(100);
+                imageView.setFitWidth(100);
+                alert.setGraphic(imageView);
+            }
+            alert.setContentText("Are you sure you want to delete this contact?");
 
-            Functions.deletePictureFile(Main.getContactInformationArrayList().get(selectedIndex).getKey());
+            Optional<ButtonType> option = alert.showAndWait();
 
-            Main.getContactInformationArrayList().remove(selectedIndex);
+            //Delete the contact if user clicks ok
+            if (option.get() == ButtonType.OK) {
 
-            Functions.refreshListView();
-            Main.setGroupsArrayList(
-                    Main.getDatabase().getGroups(
-                            Main.getCredentials()));
+                //delete contact with contact ID from contactInformation Object at selectedIndex
+                Main.getDatabase().deleteCONTACTID(
+                        Main.getContactInformationArrayList().get(selectedIndex).getKey());
 
-            Functions.refreshGroupList();
+                //Delete picture file from filesystem
+                Functions.deletePictureFile(Main.getContactInformationArrayList().get(selectedIndex).getKey());
 
-            Main.getGroupChoiceBox().getSelectionModel().selectFirst();
+                //Remove from ContactInfor arrayList at selectedIndex
+                Main.getContactInformationArrayList().remove(selectedIndex);
+
+                //Refresh the GUI
+                Functions.refreshListView();
+                Main.setGroupsArrayList(
+                        Main.getDatabase().getGroups(
+                                Main.getCredentials()));
+
+                Functions.refreshGroupList();
+
+                Main.getGroupChoiceBox().getSelectionModel().selectFirst();
+            }
 
         });
 
