@@ -1,6 +1,7 @@
 package com.COP2805C.AddressBook.UserInterface.ContactForms;
 
 import com.COP2805C.AddressBook.Contacts.ContactInformation;
+import com.COP2805C.AddressBook.Functions;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -41,6 +42,8 @@ public class EditContactForm extends AddContactForm implements Form {
         addDynamicData(this.workplacesGridPane, this.workplaceTextFields, this.contactInformation.getWorkPlaces());
         setContactFields();
 
+        //Set title to contact name
+        this.addContactStage.setTitle("Edit Contact: " + Functions.getFormattedNameFMLN(this.contactInformation));
         return this.scene;
     }
 

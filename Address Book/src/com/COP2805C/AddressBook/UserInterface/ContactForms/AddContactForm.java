@@ -84,6 +84,7 @@ public class AddContactForm implements Form {
         this.notesTextArea = notesTextArea();
 
         this.addContactStage = stage;
+        this.addContactStage.setTitle("Add Contact Form");
     }
 
 
