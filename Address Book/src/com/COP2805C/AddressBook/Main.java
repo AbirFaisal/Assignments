@@ -103,6 +103,7 @@ public class Main extends Application {
         database.closeDB();
     }
 
+    //Setters and Getters
     public static String[] getCredentials() {
         return credentials;
     }
@@ -185,11 +186,9 @@ public class Main extends Application {
 
     //Java FX
     public void start(Stage primaryStage) throws Exception {
-//        Application.setUserAgentStylesheet(getClass().getResource("/winStyle.css")
-//                .toExternalForm());
         mainStage = new Stage();
 
-
+        //Declare JavaFX components
         SplitMenuButton editMenuButton;
         TextField searchTextField;
         ChoiceBox<String> sortButton;
@@ -276,13 +275,10 @@ public class Main extends Application {
         primaryScene = new Scene(mainWindowAnchorPane);
 
 
-
         //Windows Theme
         if (Functions.isWindows()) primaryScene.getStylesheets().add("/winStyle.css");
         //*nix Theme
         if (!Functions.isWindows()) primaryScene.getStylesheets().add("/nixStyle.css");
-
-
 
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle("Contacts Manager");

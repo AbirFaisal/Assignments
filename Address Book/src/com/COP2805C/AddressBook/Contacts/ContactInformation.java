@@ -16,9 +16,7 @@ import java.util.ArrayList;
  * Professor Jeho Park
  */
 
-/**
- * Created by abirfaisal on 6/13/15.
- */
+
 public class ContactInformation {
 
     //Member variables

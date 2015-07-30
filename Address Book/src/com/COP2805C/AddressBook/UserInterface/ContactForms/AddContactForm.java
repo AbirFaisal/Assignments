@@ -334,6 +334,8 @@ public class AddContactForm implements Form {
             //Save Dynamic Data
             saveDynamicData();
 
+            //Save data and close window if there are no errors
+
             //add to database
             //Add key to contactInformation Object
             this.contactInformation.setKey(Main.getDatabase().createContact(Main.getCredentials(), this.contactInformation));
@@ -344,8 +346,8 @@ public class AddContactForm implements Form {
             Functions.refreshContactArray();
             Collections.sort(Main.getContactInformationArrayList(), new Functions.FirstNameComparator());
             Functions.refreshListView();
-        });
 
+        });
         return button;
     }
 
@@ -378,7 +380,7 @@ public class AddContactForm implements Form {
                 this.textFields.get(7).getText());
 
         this.contactInformation.setZip(
-                this.textFields.get(8).getText());
+                    this.textFields.get(8).getText());
 
         this.contactInformation.setCountry(
                 this.textFields.get(9).getText());
@@ -406,6 +408,7 @@ public class AddContactForm implements Form {
         this.contactInformation.getWorkPlaces().clear();
 
         //Phone Numbers
+        //TODO error checking
         for (int i = 0; i < this.phoneTextFields.size(); i++) {
             //Make sure field is not empty
             if (this.phoneTextFields.get(i).getLength() > 0) {
