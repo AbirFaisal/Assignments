@@ -24,7 +24,7 @@ How to run in Eclipse:
 8. Within the libraries tab, check if the sqlite-jdbc-3.8.10.1.jar file is present.
 9. If the file does not exist, click Add Jars.
 10. Expand Address book and select the above-mentioned jar file.
-11. The project should not compile with no errors.
+11. The project should now compile with no errors.
 
 Open jar file in:
 COP2805C-Group-Work/Address Book/out/artifacts/Address_Book_jar/Address Book.jar
