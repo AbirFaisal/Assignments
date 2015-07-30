@@ -5,7 +5,6 @@ import com.COP2805C.AddressBook.Functions;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import org.sqlite.SQLiteConfig;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
