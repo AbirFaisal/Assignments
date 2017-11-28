@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<!--
+  ~ Copyright (c) 2015
+  ~ Alex Truong-Mai
+  ~ Will Herrin
+  ~ Chris Buruchian
+  ~ Abir Faisal
+  ~
+  ~ COP2805C Valencia College
+  ~ Professor Jeho Park
+  -->
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="200.0" layoutY="70.0" orientation="VERTICAL" prefHeight="230.0" prefWidth="600.0" vgap="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <PasswordField alignment="CENTER" />
+            <Button mnemonicParsing="false" text="Submit" />
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,126 @@
+/*
+ * Copyright (c) 2015
+ * Alex Truong-Mai
+ * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
+ *
+ * COP2805C Valencia College
+ * Professor Jeho Park
+ */
+
+.label{
+    -fx-text-fill: black;
+}
+
+
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 1.0px 0 1.0px;
+}
+
+.button{
+
+}
+
+.split-menu-button{
+
+}
+
+.split-menu-button .button{
+
+}
+
+.split-menu-button .choice-box{
+}
+
+.text-field{
+}
+
+.date-picker{
+}
+
+.date-picker-popup > .month-year-pane{
+
+}
+.text-area{
+
+}
+
+.text-area .content{
+
+}
+
+
+.split-menu-button .context-menu{
+}
+
+.split-menu-button .menu-item:focused{
+}
+
+.split-menu-button .menu-item .label{
+}
+
+.split-menu-button .label{
+}
+
+.split-menu-button .arrow-button{
+}
+
+
+.choice-box{
+}
+
+.choice-box .label{
+}
+
+.choice-box .context-menu{
+}
+
+.choice-box .menu-item:focused{
+}
+
+
+
+
+.list-cell {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ListCellSkin";
+    -fx-background-color: -fx-control-inner-background;
+    -fx-padding: 0.25em; /* 3 */
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-opacity: 1;
+}
+
+.list-view {
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+.list-cell {
+
+}
+.list-cell:even { -fx-background-color: white; /* 1 */ }
+.list-cell:odd { -fx-background-color: white; /* 1 */ }
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    /* 3:, 4: */
+    -fx-background-color: #0950d0;
+    -fx-text-fill: white; /* 5 */
+}
+
+
+
+
+.dialog-pane{
+}
+
+.dialog-pane > *.button-bar > *.container{
+}
+
+.dialog-pane:header *.header-panel{
+}
+
+.dialog-pane:header *.header-panel *.label{
+}
+
+.dialog-pane > .button-bar > .container > .details-button {
+}
+

@@ -1,0 +1,36 @@
+/*
+ * Copyright (c) 2015
+ * Alex Truong-Mai
+ * Will Herrin
+ * Chris Buruchian
+ * Abir Faisal
+ *
+ * COP2805C Valencia College
+ * Professor Jeho Park
+ */
+
+.dialog-pane{
+    -fx-background-color: #4E4E4E;
+    -fx-border-color: #4E4E4E;
+}
+
+.dialog-pane > *.button-bar > *.container{
+    -fx-background-color: #4E4E4E;
+}
+
+.dialog-pane:header *.header-panel{
+    -fx-background-color: grey;
+}
+
+.dialog-pane:header *.header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-text-fill: white;
+}
+
+.dialog-pane > .button-bar > .container > .details-button {
+    -fx-text-fill: white;
+    -fx-background-radius:45;
+    -fx-background-color:
+    linear-gradient(#454545 0%, #757575 100%);
+}
