@@ -1,0 +1,72 @@
+
+ You are to create a single class.  Within that class you are to
+ write the main method.
+ The main method will call all other methods, unless a
+ method is called by another method.
+
+ Page	 Problem
+ 238	 6.18
+ 239	 6.21
+ 240	 6.27
+ 240	 6.29
+
+ You will include a design tool representing each
+ of the problems above.  It can be one big thing
+ or individual tools for each problem.
+ Remember only a single main method…calling
+ all other method….
+ Each member of the team will submit the exact
+ same thing to BB.
+
+//////////////////////////////////////////////////////////////
+
+**6.18 (Check password) Some websites impose certain rules for passwords. Write a method that checks whether a string is a valid password.
+Suppose the password rules are as follows:
+
+■ A password must have at least eight characters.
+■ A password consists of only letters and digits.
+■ A password must contain at least two digits.
+
+Write a program that prompts the user to enter a password and displays Valid Password if the rules are followed or Invalid Password otherwise.
+
+//////////////////////////////////////////////////////////////
+
+6.21 (Phone keypads) The international standard letter/number mapping for telephones is shown in Programming Exercise 4.15.
+Write a method that returns a number, given an uppercase letter, as follows:
+int getNumber(char uppercaseLetter)
+
+Write a test program that prompts the user to enter a phone number as a string. The input number may contain letters.
+The program translates a letter (uppercase or lowercase) to a digit and leaves all other characters intact.
+
+
+Here is a sample run of the program:
+
+￼￼￼￼Enter a string: 1-800-Flowers
+
+1-800-3569377
+
+￼￼￼￼￼￼￼￼￼￼Enter a string: 1800flowers
+
+18003569377
+
+//////////////////////////////////////////////////////////////
+
+6.27 (Emirp) An emirp (prime spelled backward) is a nonpalindromic prime number whose reversal is also a prime.
+For example, 17 is a prime and 71 is a prime, so 17 and 71 are emirps. Write a program that displays the first 100 emirps.
+
+Display 10 numbers per line, separated by exactly one space, as follows:
+         13 17 31 37 71 73 79 97 107 113
+         149 157 167 179 199 311 337 347 359 389
+         ...
+
+//////////////////////////////////////////////////////////////
+
+6.29 (Twin primes) Twin primes are a pair of prime numbers that differ by 2.
+For exam- ple, 3 and 5 are twin primes, 5 and 7 are twin primes, and 11 and 13 are twin primes.
+Write a program to find all twin primes less than 1,000. Display the output as follows:
+
+         (3, 5)
+
+         (5, 7)
+
+         ...
