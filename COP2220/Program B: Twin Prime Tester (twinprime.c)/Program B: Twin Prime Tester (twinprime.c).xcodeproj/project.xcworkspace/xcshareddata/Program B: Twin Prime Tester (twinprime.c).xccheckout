@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FC26543A-B5EA-4F43-9AFE-D7C5CBA79987</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Program B: Twin Prime Tester (twinprime.c)</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5763564736B49828EC5328094CDFF931AE9BEE59</key>
+		<string>https://github.com/AbirFaisal/COP2220.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Program B: Twin Prime Tester (twinprime.c)/Program B: Twin Prime Tester (twinprime.c).xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5763564736B49828EC5328094CDFF931AE9BEE59</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AbirFaisal/COP2220.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5763564736B49828EC5328094CDFF931AE9BEE59</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5763564736B49828EC5328094CDFF931AE9BEE59</string>
+			<key>IDESourceControlWCCName</key>
+			<string>COP2220</string>
+		</dict>
+	</array>
+</dict>
+</plist>
